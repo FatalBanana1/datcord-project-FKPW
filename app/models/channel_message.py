@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class ChannelMessage(db.Model):
-    __tablename__ = "channel_messages"
+    __tablename__ = "channel_messages_table"
 
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}

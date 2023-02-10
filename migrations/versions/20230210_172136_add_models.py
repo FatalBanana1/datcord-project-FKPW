@@ -98,7 +98,7 @@ def upgrade():
         op.execute(f"ALTER TABLE server_members_table SET SCHEMA {SCHEMA};")
 
     op.create_table(
-        "channel_messages",
+        "channel_messages_table",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("sender_id", sa.Integer(), nullable=False),
         sa.Column("channel_id", sa.Integer(), nullable=False),

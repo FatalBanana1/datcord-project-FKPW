@@ -1,5 +1,4 @@
 from app.models import db, Channel, environment, SCHEMA
-from datetime import datetime
 
 
 def seed_channels():

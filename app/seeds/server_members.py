@@ -1,5 +1,4 @@
 from app.models import db, ServerMember, environment, SCHEMA
-from datetime import datetime
 
 
 def seed_server_members():
