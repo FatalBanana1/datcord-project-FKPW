@@ -1,6 +1,12 @@
-# Flask React Project
+# Datcord - by Fahd, Keenly, Peter, and Wasiq
 
-This is the starter for the Flask React project.
+## Database Schema Design
+
+![datcord-dbdiagram]
+
+[datcord-dbdiagram]: ./datcord-schema.png
+
+This is a clone for Discord.
 
 ## Getting started
 1. Clone this repository (only this branch)
