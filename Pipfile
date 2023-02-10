@@ -27,6 +27,7 @@ greenlet = "==2.0.1"
 Mako = "==1.2.4"
 eventlet = "==0.30.2"
 flask-socketio = "==5.3.2"
+boto3 = "==1.26.69"
 
 [dev-packages]
 

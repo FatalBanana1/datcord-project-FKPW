@@ -4,15 +4,42 @@ from app.models import db, User, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username="Legendairy",
+        email="gotmilk@gmail.com",
+        password="password",
+        display_pic="https://upload.wikimedia.org/wikipedia/commons/7/7e/Appacademylogo.png",
+        theme="dark",
+    )
+    Wasiq = User(
+        email="wasiq@gmail.com",
+        username="FatalBanana",
+        password="password",
+        display_pic="https://cdn.discordapp.com/attachments/1072278458589261954/1073677188693491762/fatalbanana_icon.png",
+        theme="dark",
+    )
+    Fahd = User(
+        email="fahd@gmail.com",
+        username="Dhaf",
+        password="password",
+        display_pic="https://i.kym-cdn.com/photos/images/newsfeed/001/141/172/ed1.jpg",
+        theme="dark",
+    )
+    Peter = User(
+        email="peter@gmail.com",
+        username="ipetpandas",
+        password="password",
+        display_pic="https://i.pinimg.com/originals/f9/8e/56/f98e56072c2b5126f3bdbe2670c94019.jpg",
+        theme="dark",
+    )
+    Keenly = User(
+        email="keenly@gmail.com",
+        username="Chanyeol",
+        password="password",
+        display_pic="https://www.gannett-cdn.com/-mm-/a28f7c422913d53666c847a3f95ced5d21cb7ce7/c=0-73-620-423/local/-/media/JacksonMS/TheBuzz/2014/06/12//1402610128000-Cows-in-Wigs.JPG",
+        theme="dark",
+    )
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add_all([demo, Wasiq, Fahd, Peter, Keenly])
     db.session.commit()
 
 
@@ -24,8 +51,10 @@ def seed_users():
 # it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.users_table RESTART IDENTITY CASCADE;"
+        )
     else:
-        db.session.execute("DELETE FROM users")
-        
+        db.session.execute("DELETE FROM users_table")
+
     db.session.commit()

@@ -23,6 +23,17 @@ export const actionResetServers = () => ({
 	type: RESET_SERVERS,
 });
 
+export const updateServerAction =  (serverId, server) => ({
+    type: UPDATE_SERVER,
+    serverId,
+    server
+})
+
+export const actionDeleteServer = (server) => ({
+    type: DELETE_SERVER,
+    server
+})
+
 //-------------------------------------------------------
 
 //thunk actions

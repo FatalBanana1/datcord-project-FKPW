@@ -1,25 +1,33 @@
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+from datetime import datetime
 
 
 class Server(db.Model):
-    __tablename__ = "servers"
+    __tablename__ = "servers_table"
 
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    owner_id = db.Column(db.Integer, nullable=False)
-    icon_url = db.Column(db.String, nullable=False)
+    owner_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("users_table.id")), nullable=False
+    )
+    icon_url = db.Column(db.String, default="https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png", nullable=False)
     description = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=True)
-    updated_at = db.Column(db.DateTime, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = db.Column(
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
+    )
 
-    # server_members = db.relationship(
-    #     "ServerMember", back_populates="server", cascade="all, delete-orphan"
-    # )
+    owner = db.relationship("User", back_populates="servers")
+    channels = db.relationship(
+        "Channel", back_populates="server", cascade="all, delete-orphan"
+    )
+    server_members = db.relationship(
+        "ServerMember", back_populates="server", cascade="all, delete-orphan"
+    )
 
-    # def to_dict(self, with_server_members=False):
     def to_dict(self):
         return {
             "id": self.id,
@@ -29,7 +37,4 @@ class Server(db.Model):
             "description": self.description,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            # "server_members": [sm.id for sm in self.server_members]
-            # if with_server_members
-            # else [],
         }
