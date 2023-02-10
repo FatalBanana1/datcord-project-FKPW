@@ -9,9 +9,9 @@ export const actionGetServerMembers = (serverMembers) => ({
 //Thunks
 export const thunkGetServerMembers = (serverId) => async (dispatch) => {
 	const res = await fetch(`/api/servers/${serverId}/serverMembers`);
-	if (response.ok) {
+	if (res.ok) {
 		const serverMembers = await res.json();
-		dispatch(actionGetServerMembers(serverUsersArr));
+		dispatch(actionGetServerMembers(serverMembers));
 		return serverMembers;
 	}
 };

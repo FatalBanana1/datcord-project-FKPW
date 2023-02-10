@@ -35,7 +35,7 @@ export const thunkGetChannels = (serverId) => async (dispatch) => {
   const res = await fetch(`/api/channels/${serverId}`);
   const data = await res.json();
   if (data.errors) return;
-  dispatch(getChannelsAction(data.channels));
+  dispatch(actionGetServerChannels(data.channels));
   return data.channels;
 };
 
@@ -56,7 +56,7 @@ const initialState = { channels: {} };
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_SERVER_CHANNELS:
-      newState = { ...state }
+      const newState = { ...state }
       newState.channels = normalize(action.channels);
       return newState;
     default:

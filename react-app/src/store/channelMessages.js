@@ -29,7 +29,7 @@ export const actionResetChannelMessages = () => ({
 // GET: Get All channel messages by channel id
 // Route: /api/channel/:channelId/cm
 export const thunkReadAllChannelMessages = () => async (dispatch) => {
-	let response = await fetch(`/api/cm/`);
+	let response = await fetch(`/api/cms/`);
 
 	if (response.ok) {
 		const data = await response.json();
