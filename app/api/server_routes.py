@@ -41,7 +41,7 @@ def create_server():
         )
         db.session.add(server)
         db.session.commit()
-        return {"server": server.to_dict()},
+        return {"server": server.to_dict()}, 201
 
 # UPDATE SERVER
 @server_routes.route("/<int:id>", methods=['PUT'])
