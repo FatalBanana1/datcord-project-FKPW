@@ -1,6 +1,7 @@
-from flask import Blueprint
-from flask_login import login_required
-from app.models import Server
+from flask import Flask, Blueprint, request
+from flask_login import login_required, current_user
+from app.models import db, Server
+from app.forms import ServerForm
 
 
 #  url_prefix="/api/servers
@@ -16,13 +17,29 @@ def servers():
     return {"servers": [server.to_dict() for server in servers]}
 
 # GET SERVERS BY USER ID
+@server_routes.route('/')
+@login_required
+def users_servers():
+    servers = Server.query.filter(Server.server_members.any(id=current_user.id)).all()
+    return {"servers": [server.to_dict() for server in servers]}
 
 
 # CREATE SERVER
 @server_routes.route("/", methods=['POST'])
 @login_required
 def create_server():
-    pass
+    form = ServerForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        server = Server(
+            name = form.data["name"],
+            owner_id = int(current_user.id),
+            icon_url = form.data["icon_url"],
+            description = form.data["description"]
+        )
+        db.session.add(server)
+        db.session.commit()
+        return {"server": server.to_dict()}
 
 # UPDATE SERVER
 @server_routes.route("/<int:id>", methods=['PUT'])
