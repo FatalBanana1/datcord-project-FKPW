@@ -13,9 +13,9 @@ export default function Channels({ isLoaded }) {
     const user = useSelector(state => state.session.user);
     const server = useSelector(state => state.servers)[+serverId]
     const channels = Object.values(useSelector(state => state.channels.channels))
-    console.log("SERVER", server);
-    console.log("SERVER_CHANNELS", channels);
-    console.log("USER", user);
+    // console.log("SERVER", server);
+    // console.log("SERVER_CHANNELS", channels);
+    // console.log("USER", user);
 
 
     useEffect(() => {
@@ -66,7 +66,7 @@ export default function Channels({ isLoaded }) {
         </>
     ))
 
-    console.log("CATEGORIES", categories)
+    // console.log("CATEGORIES", categories)
 
     if (!channels || !server) {
         return (
@@ -85,7 +85,7 @@ export default function Channels({ isLoaded }) {
                             <img src={logo} alt="User profile image" />
                         </div>
                         <div className="UserLanding-sidebar-channel-user-name">
-                            Username goes here
+                            { user && user.username }
                         </div>
                     </div>
                     <div className="UserLanding-sidebar-channel-user-actions">
