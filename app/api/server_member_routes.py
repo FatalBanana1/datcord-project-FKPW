@@ -3,15 +3,12 @@ from flask_login import login_required, current_user
 from .server_routes import server_routes
 from app.models import db, Server, ServerMember
 
-#  url_prefix="/api/sms
-
 server_member_routes = Blueprint("server_members", __name__)
 
 @server_routes.route("/<int:server_id>/members")
 @login_required
 def all_server_members(server_id):
     server = Server.query.get(server_id)
-    print("SERVER PRINT ------->",server)
     if (server):
         members = [member.to_dict() for member in server.server_members]
         if (len(members) > 0):
@@ -75,7 +72,6 @@ def edit_server_member(server_id, member_id):
 def delete_server_member(server_id, member_id):
     userId = int(current_user.id)
     server = Server.query.get(server_id)
-    print("PRIIIIIINT ------->", server)
     membership = ServerMember.query.get(member_id)
     if (membership == None):
         return {"errors": ["Membership does not exist"]}
