@@ -20,9 +20,11 @@ function App() {
 	const [isLoaded, setIsLoaded] = useState(false);
 	useEffect(() => {
 		dispatch(authenticate()).then(() => setIsLoaded(true));
-	}, [dispatch]);
+	}, [dispatch, authenticate]);
 
-	return (
+	if (!isLoaded) return null;
+
+	return isLoaded && (
 		<div className="App-container">
 			<Switch>
 				<Route exact path="/">
@@ -44,7 +46,7 @@ function App() {
 				<ProtectedRoute path="/channels/:serverId/:channelId" exact={true}>
 					<div className="MainPage-container">
 						<ServerNav />
-						<MainContent page="channel" />
+						<MainContent page="channel" isLoaded={isLoaded} />
 					</div>
 				</ProtectedRoute>
 			</Switch>

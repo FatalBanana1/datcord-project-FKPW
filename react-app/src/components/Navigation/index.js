@@ -7,6 +7,7 @@ import OpenModalButton from "../OpenModalButton";
 import "./Navigation.css";
 import Menu from "./Menu";
 import OpenMenuButton from "../OpenModalButton/OpenMenuButton";
+import { useSelector } from "react-redux";
 
 export default function Navigation() {
     const [ showMenu, setShowMenu ] = useState(false);
@@ -14,6 +15,8 @@ export default function Navigation() {
     const location = useLocation();
     console.log("location", location.pathname)
     const history = useHistory();
+    const user = useSelector(state => state.session.user);
+    console.log("Navigation - user:", user);
 
     const openMenu = () => {
         if (showMenu) return;
@@ -35,8 +38,6 @@ export default function Navigation() {
     }, [showMenu])
 
     const closeMenu = () => setShowMenu(false);
-
-    const drawerClassName = "Navigation-drawer" + (showMenu ? "" : " hidden");
 
     if (location.pathname && location.pathname === "/") {
         return (
@@ -78,11 +79,19 @@ export default function Navigation() {
                     </div>
                     <div className="Navigation-buttons-container">
                     <li>
+                        { user ? (
+                            <button className="Navigation-login"
+                                onClick={() => history.push("/channels/@me")}
+                            >
+                                    Open Datcord
+                            </button>
+                        ) : (
                             <button className="Navigation-login"
                                 onClick={() => history.push("/login")}
                             >
                                     Login
                             </button>
+                        )}
                     </li>
                     <li>
                         <OpenMenuButton

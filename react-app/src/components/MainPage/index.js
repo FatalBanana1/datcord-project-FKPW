@@ -5,7 +5,7 @@ import MainContent from "./MainContent";
 import "./MainPage.css";
 import ServerNav from "./ServerNav";
 
-export default function MainPage({ page }) {
+export default function MainPage({ page, isLoaded }) {
 
 
 

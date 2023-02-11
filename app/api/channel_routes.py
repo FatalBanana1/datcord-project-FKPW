@@ -21,9 +21,9 @@ def get_all_channels(serverId):
     channels = [ channel.to_dict() for channel in server.channels ]
 
     if len(channels) == 0:
-        return { "error": ["Server has no channels"] }, 404
+        return { "channels": "Server has no channels" }, 200
 
-    return { "channels": channels }, 200
+    return { "channels": channels, "server": server.to_dict() }, 200
 
 # get channel members
 # if role != pending, then can view private

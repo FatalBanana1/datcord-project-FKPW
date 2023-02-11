@@ -142,6 +142,11 @@ a.UserLanding-sidebar-channel-name {
     justify-content: center;
     align-items: center;
     padding-left: 2px;
+    overflow: hidden;
+}
+
+.UserLanding-sidebar-channel-user-icon > img {
+    object-fit: stretch;
 }
 
 .UserLanding-sidebar-channel-user-name {

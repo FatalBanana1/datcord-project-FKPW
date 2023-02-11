@@ -13,6 +13,7 @@
   box-sizing: border-box;
   overflow: hidden auto;
   background-color: #1f2225;
+  flex-shrink: 0;
 }
 
 .ServerNav-divider {
@@ -36,6 +37,7 @@
   box-sizing: border-box;
   margin-bottom: 8px;
   transition: 0.2s;
+  flex-shrink: 0;
 }
 
 .ServerNav-icons::before,
@@ -90,5 +92,8 @@
 .ServerNav-icon {
   width: 100%;
   border-radius: 50%;
-  padding-left: 5px;
+}
+
+.ServerNav-icon:hover {
+  border-radius: 16px;
 }
