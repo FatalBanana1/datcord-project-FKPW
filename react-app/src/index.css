@@ -2,7 +2,7 @@
 
 /* temp styles */
 
-.row {
+/* .row {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -17,4 +17,19 @@
 	height: 25px;
 	object-fit: cover;
 	border-radius: 999px;
+} */
+
+/* TODO Add site wide styles */
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto:wght@300;400&display=swap'); */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;900&family=Roboto:wght@300;400&display=swap");
+
+* {
+  font-family: "Noto Sans", sans-serif;
+}
+
+.App-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
