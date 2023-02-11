@@ -1,0 +1,162 @@
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(5vh);
+  visibility: hidden;
+  transition: opacity 0.6s ease-out, transform 1.2s ease-out;
+  will-change: opacity, visibility;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.splash-body-parent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.splash-body-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 120px 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.splash-body-img-container {
+  margin-right: 60px;
+}
+
+.body-img {
+  width: 678px;
+}
+
+.splash-body-description {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  width: 440px;
+}
+
+.splash-body-description > h2 {
+  font-size: 41px;
+  font-weight: 1000;
+  color: #23272a;
+}
+
+.splash-body-description-text {
+  margin-top: 24px;
+}
+
+.splash-body-2-parent {
+  background-color: #f6f6f6;
+  width: 100%;
+}
+
+.splash-body-2-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 120px 0px;
+}
+
+.splash-body-2-description > h2 {
+  font-size: 56px;
+  color: #23272a;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.splash-body-2-developers-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.developer-card {
+  margin: 20px 20px;
+  padding: 20px 0px;
+  border: 1px solid rgb(219, 219, 219);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.developer-card:hover {
+  border: 1px solid #b6b6b6;
+  filter: saturate(200%);
+}
+
+.developer-card-name {
+  font-size: 16px;
+  font-weight: 1000;
+}
+
+.developer-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.developer-card-info > span > a {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  color: rgb(46, 46, 46);
+  transition: 0.3s;
+}
+
+.developer-card-info > span > a:hover {
+  color: #5865f2;
+  text-decoration: underline;
+}
+
+.splash-body-footer-parent {
+  background-color: #23272a;
+  width: 100%;
+  height: 100%;
+}
+
+.splash-body-footer-container {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  /* justify-content: space-around; */
+  justify-content: center;
+  padding: 120px 0px;
+}
+
+.splash-body-footer-left {
+  line-height: 35px;
+  width: 304px;
+}
+
+.splash-body-footer-left > h1 {
+  color: #5865f2;
+  font-size: 41px;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+
+.splash-body-footer-techstack {
+  line-height: 28px;
+}
+
+.splash-body-footer-techstack > h2 {
+  color: #5865f2;
+  font-size: 16px;
+}
+
+.splash-body-footer-techstack > h3,
+li {
+  color: white;
+  font-size: 16px;
+}
