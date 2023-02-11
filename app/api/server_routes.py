@@ -77,7 +77,7 @@ def delete_server(id):
     if server:
         db.session.delete(server)
         db.session.commit()
-    return {"Response": "Successfully deleted server."}
+    return {"Response": ["Successfully deleted server."]}
 
 # @server_routes.route("/<int:id>")
 # @login_required
