@@ -5,10 +5,10 @@ const EDIT_CHANNEL = "channel/EDIT_CHANNEL";
 
 
 // Actions
-export const actionGetServerChannels = (serverId, channels) => ({
+export const actionGetServerChannels = (channels, server) => ({
   type: GET_SERVER_CHANNELS,
-  serverId,
   channels,
+  server
 })
 
 export const actionCreateChannel = (channel) => ({
@@ -32,10 +32,11 @@ export const actionEditChannel = (channelId, channel) => ({
 
 // Thunks
 export const thunkGetChannels = (serverId) => async (dispatch) => {
-  const res = await fetch(`/api/channels/${serverId}`);
+  const res = await fetch(`/api/servers/${serverId}/channels`);
   const data = await res.json();
   if (data.errors) return;
-  dispatch(actionGetServerChannels(data.channels));
+  dispatch(actionGetServerChannels(data.channels, data.server));
+  console.log("CHANNEL DATA", data)
   return data.channels;
 };
 
@@ -45,6 +46,7 @@ export const thunkGetChannels = (serverId) => async (dispatch) => {
 
 const normalize = (channels) => {
     const data = {};
+    console.log("channels", channels)
     if (channels) {
         channels.forEach(channel => data[channel.id] = channel);
         return data;
@@ -57,7 +59,13 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_SERVER_CHANNELS:
       const newState = { ...state }
+      newState.server = action.server;
+      if (action.channels === "Server has no channels") {
+        newState.channels = "";
+        return newState;
+      }
       newState.channels = normalize(action.channels);
+      console.log("NEW STATE", newState)
       return newState;
     default:
       return state;

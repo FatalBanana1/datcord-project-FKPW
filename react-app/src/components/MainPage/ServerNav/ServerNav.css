@@ -1,0 +1,99 @@
+.ServerNav-container {
+  /* position: fixed; */
+  /* left: 0; */
+  /* top: 0; */
+  width: 72px;
+  height: 100vh;
+  /* border: 5px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  padding: 12px 8px;
+  box-sizing: border-box;
+  overflow: hidden auto;
+  background-color: #1f2225;
+  flex-shrink: 0;
+}
+
+.ServerNav-divider {
+  height: 2px;
+  width: 32px;
+  border-radius: 1px;
+  background-color: #36393f;
+  margin-bottom: 8px;
+}
+
+.ServerNav-icons,
+.ServerNav-profile {
+  color: #3ba55d;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #34363e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.ServerNav-icons::before,
+.ServerNav-profile::before {
+  position: absolute;
+  background-color: white;
+  display: block;
+  width: 10px;
+  height: 40px;
+  left: -20px;
+  content: " ";
+  border-radius: 5px;
+  transition: 0.4s;
+}
+
+.ServerNav-icons:active,
+.ServerNav-profile:active {
+  background-color: #3ba55d;
+}
+
+.ServerNav-icons:active::before,
+.ServerNav-profile:active::before {
+  position: absolute;
+  background-color: white;
+  display: block;
+  width: 10px;
+  height: 25px;
+  left: -6px;
+  content: " ";
+}
+
+.ServerNav-icons:hover,
+.ServerNav-profile:hover {
+  cursor: pointer;
+  border-radius: 16px;
+  color: white;
+  background-color: #3ba55d;
+}
+
+.ServerNav-icons:hover::before,
+.ServerNav-profile:hover::before {
+  position: absolute;
+  background-color: white;
+  display: block;
+  width: 10px;
+  height: 25px;
+  left: -6px;
+  content: " ";
+  /* border-radius: 5px; */
+}
+
+.ServerNav-icon {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.ServerNav-icon:hover {
+  border-radius: 16px;
+}

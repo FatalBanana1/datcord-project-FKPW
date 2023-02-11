@@ -9,6 +9,8 @@ import * as sessionActions from "./store/session";
 import App from "./App";
 
 import "./index.css";
+import { MenuModalProvider } from "./context/MenuModal";
+import "./reset.css";
 
 const store = configureStore();
 
@@ -24,10 +26,12 @@ function Root() {
 	return (
 		<ModalProvider>
 			<Provider store={store}>
-				<BrowserRouter>
-					<App />
-					<Modal />
-				</BrowserRouter>
+				<MenuModalProvider>
+					<BrowserRouter>
+						<App />
+						<Modal />
+					</BrowserRouter>
+				</MenuModalProvider>
 			</Provider>
 		</ModalProvider>
 	);
