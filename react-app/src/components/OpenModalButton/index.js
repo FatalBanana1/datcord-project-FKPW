@@ -15,6 +15,17 @@ function OpenModalButton({
     if (onButtonClick) onButtonClick();
   };
 
+  if (buttonText === "Create-Channel") {
+    console.log("button text")
+    return (
+      <button onClick={onClick}
+        className={`OpenModalButton-button ${buttonText}`}
+      >
+        <i className="fa-solid fa-plus align-right"></i>
+      </button>
+    )
+  }
+
   return (
     <button onClick={onClick}>{buttonText}</button>
   );

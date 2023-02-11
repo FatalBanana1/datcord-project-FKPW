@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/datcord_logo_svg.svg";
 import { thunkGetChannels } from "../../store/channels";
+import OpenModalButton from "../OpenModalButton";
+import CreateChannelForm from "./CreateChannelForm";
 
 
 export default function Channels({ isLoaded }) {
@@ -16,7 +18,7 @@ export default function Channels({ isLoaded }) {
     // console.log("SERVER", server);
     // console.log("SERVER_CHANNELS", channels);
     // console.log("USER", user);
-
+    const [ showMenu, setShowMenu ] = useState(false);
 
     useEffect(() => {
         dispatch(thunkGetChannels(+serverId));
@@ -41,13 +43,18 @@ export default function Channels({ isLoaded }) {
         return names;
     }
 
+    const closeMenu = () => setShowMenu(false);
 
     const categoriesMap = Object.keys(categories).map((category) => (
         <>
         <div className="UserLanding-sidebar-channel-category-container">
             <i className="fa-solid fa-angle-down"></i>
             <span className="UserLanding-sidebar-channel-category-name">{truncateNames(category)}</span>
-            <i className="fa-solid fa-plus align-right"></i>
+            <OpenModalButton
+                buttonText="Create-Channel"
+                onButtonClick={closeMenu}
+                modalComponent={<CreateChannelForm categoryName={category} />}
+            />
         </div>
         <div className="UserLanding-sidebar-channel-list">
             {/* map out channels here */}
