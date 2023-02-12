@@ -77,8 +77,8 @@ export const thunkCreateServer = (server) => async (dispatch) => {
     const newServer = await response.json();
     dispatch(actionCreateServer(newServer.server));
     return newServer.server;
-  } else if (res.status < 500) {
-    const data = await res.json();
+  } else if (response.status < 500) {
+    const data = await response.json();
     if (data.errors) {
       return data.errors;
     }
@@ -99,8 +99,8 @@ export const thunkUpdateServer = (serverId, server) => async (dispatch) => {
     const updatedServer = await response.json();
     dispatch(actionUpdateServer(updatedServer.server));
     return updatedServer.server;
-  } else if (res.status < 500) {
-    const data = await res.json();
+  } else if (response.status < 500) {
+    const data = await response.json();
     if (data.errors) {
       return data.errors;
     }
@@ -120,8 +120,8 @@ export const thunkDeleteServer = (serverId) => async (dispatch) => {
     const deletedServer = await response.json();
     dispatch(actionDeleteServer(deletedServer(serverId)));
     return deletedServer;
-  } else if (res.status < 500) {
-    const data = await res.json();
+  } else if (response.status < 500) {
+    const data = await response.json();
     if (data.errors) {
       return data.errors;
     }
