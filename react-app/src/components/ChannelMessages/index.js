@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import {
 	actionResetChannelMessages,
+	thunkDeleteChannelMessage,
 	thunkReadAllChannelMessages,
 } from "../../store/channelMessages";
 import "./ChannelMessages.css";
@@ -13,6 +14,7 @@ let socket;
 
 const ChannelMessages = () => {
 	const dispatch = useDispatch();
+
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	// use state for controlled form input
@@ -22,19 +24,9 @@ const ChannelMessages = () => {
 
 	const allcms = useSelector((state) => state.channelMessages);
 	let cms = Object.values(allcms);
-
 	let { serverId, channelId } = useParams();
 	const channels = useSelector((state) => state.channels.channels);
-
 	const channel = channels[channelId];
-
-	// console.log(
-	// 	`chan mess CMS ____>>>>>>>>>`,
-	// 	channelId,
-	// 	serverId,
-	// 	channel,
-	// 	channels
-	// );
 
 	useEffect(() => {
 		dispatch(thunkReadAllChannelMessages(serverId, channelId)).then(() =>
@@ -44,7 +36,6 @@ const ChannelMessages = () => {
 		return () => {
 			setChatInput("");
 			dispatch(actionResetChannelMessages());
-			setIsLoaded(false);
 		};
 	}, [channelId, serverId]);
 
@@ -68,7 +59,32 @@ const ChannelMessages = () => {
 			socket.disconnect();
 			// dispatch(actionResetChannelMessages());
 		};
-	}, [messages]);
+	}, []);
+
+	// -------------
+
+	// handlers
+
+	// delete
+	const deleteHandler = (e) => {
+		setIsLoaded(false);
+		setMessages([]);
+		const payload = {
+			serverId,
+			channelId,
+			id: e.target.dataset.id,
+			sender_id: e.target.dataset.sender,
+		};
+
+		// return
+		return dispatch(thunkDeleteChannelMessage(payload)).then(() =>
+			setIsLoaded(true)
+		);
+	};
+
+	// edit
+
+	// -------------
 
 	if (isLoaded && channel) {
 		const updateChatInput = (e) => {
@@ -81,19 +97,14 @@ const ChannelMessages = () => {
 			if (chatInput.length < 1) return null;
 			socket.emit("channel_message", {
 				sender_id: user.id,
-				sender_nickname: user.username,
 				message: chatInput,
 				channelId,
 			});
 			setChatInput("");
 		};
-
-		// console.log(`MESSGS ===`, messages);
-
-		// if (!isLoaded) return null;
 		let date = new Date();
-
-		console.log(`date ---`, date.toUTCString().slice(0, 22));
+		// console.log(`MESSGS ===`, messages);
+		// if (!isLoaded) return null;
 
 		// print the username and message for each chat
 		return (
@@ -110,13 +121,34 @@ const ChannelMessages = () => {
 											key={message.id}
 										>
 											<div className="cms-msg-header">
-												<div className="cms-msg-name">{`${message.sender_nickname}: `}</div>
+												<div className="cms-msg-name">{`${message.sender_nickname}`}</div>
 												<div className="cms-msg-date">
 													{message.created_at.slice(
 														0,
 														22
 													)}
 												</div>
+
+												{user.id ==
+												message.sender_id ? (
+													<div className="cms-options">
+														<div className="cms-edit">
+															Edit
+														</div>
+														<div
+															className="cms-delete"
+															onClick={
+																deleteHandler
+															}
+															data-id={message.id}
+															data-sender={
+																message.sender_id
+															}
+														>
+															Delete
+														</div>
+													</div>
+												) : null}
 											</div>
 											<div className="cms-msg-detail">{`${message.message}`}</div>
 										</div>
@@ -129,7 +161,26 @@ const ChannelMessages = () => {
 										<div className="cms-msg-date">
 											{date.toUTCString().slice(0, 22)}
 										</div>
+
+										{user.id == message.sender_id ? (
+											<div className="cms-options">
+												<div className="cms-edit">
+													Edit
+												</div>
+												<div
+													className="cms-delete"
+													onClick={deleteHandler}
+													data-id={message.id}
+													data-sender={
+														message.sender_id
+													}
+												>
+													Delete
+												</div>
+											</div>
+										) : null}
 									</div>
+
 									<div className="cms-msg-detail">{`${message.message}`}</div>
 								</div>
 							))}

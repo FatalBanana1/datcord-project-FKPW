@@ -38,3 +38,12 @@ class ChannelMessage(db.Model):
             "updated_at": self.updated_at,
             "sender_nickname": self.sender.nickname,
         }
+
+    def to_dict2(self):
+        return {
+            "id": self.id,
+            "sender_id": self.sender_id,
+            "channel_id": self.channel_id,
+            "message": self.message,
+            "sender_nickname": self.sender.nickname,
+        }

@@ -17,6 +17,12 @@ const actionReadAllChannelMessages = (channelMessages) => ({
 	channelMessages,
 });
 
+//delete
+const actionDeleteChannelMessage = (channelMessages) => ({
+	type: DELETE_CHANNEL_MESSAGE,
+	channelMessages,
+});
+
 //reset
 export const actionResetChannelMessages = () => ({
 	type: RESET_CHANNEL_MESSAGES,
@@ -27,7 +33,7 @@ export const actionResetChannelMessages = () => ({
 //thunk actions
 
 // GET: Get All channel messages by channel id
-// Route: /api/channel/:channelId/cm
+// Route: /api/channel/:serverId/:channelId/cms
 export const thunkReadAllChannelMessages =
 	(serverId, channelId) => async (dispatch) => {
 		let response = await fetch(
@@ -47,6 +53,30 @@ export const thunkReadAllChannelMessages =
 			return ["An error occurred. Please try again."];
 		}
 	};
+
+// DELETE: Delete channel message by channel id
+// Route: /api/channel/:serverId/:channelId/cms
+export const thunkDeleteChannelMessage = (payload) => async (dispatch) => {
+	// console.log(`thunk delete ====`, payload);
+	let response = await fetch(`/api/cms/${payload.id}`, {
+		method: `DELETE`,
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(payload),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(actionDeleteChannelMessage(data));
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
 
 //-------------------------------------------------------
 
@@ -78,8 +108,9 @@ const cmReducer = (state = defaultState(), action) => {
 			return newState;
 
 		case DELETE_CHANNEL_MESSAGE:
+			// console.log(`reducer-----`, action.channelMessages.id);
 			newState = { ...state };
-			delete newState[action.id];
+			delete newState[action.channelMessages.id];
 			return newState;
 
 		case UPDATE_CHANNEL_MESSAGE:

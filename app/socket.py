@@ -50,8 +50,9 @@ def handle_channel_message(data):
         )
         db.session.add(message)
         db.session.commit()
-        # chat = message.to_dict()
-        emit("channel_message", data, broadcast=True)
+        temp = message.to_dict2()
+        # print("sockets--------=========-=-==-=-=", data, temp)
+        emit("channel_message", temp, broadcast=True)
 
 
 # ----------------------------------------------

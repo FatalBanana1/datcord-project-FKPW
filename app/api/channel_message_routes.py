@@ -9,11 +9,24 @@ channel_message_routes = Blueprint("channel_messages", __name__)
 # get all messages
 @channel_routes.route("/<int:serverId>/<int:channelId>/cms")
 @login_required
-def get_channel_messages(serverId, channelId):
+def get_cms(serverId, channelId):
     # print("DATA messages ======>>>>>>> ", channelId)
     # msg = ChannelMessage.query.all()
     messages = ChannelMessage.query.filter(ChannelMessage.channel_id == channelId).all()
     return {"channel_message": [el.to_dict() for el in messages]}
+
+
+# delete messages by channel id
+@channel_message_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_cms(id):
+    data = ChannelMessage.query.get(id)
+    temp = data.to_dict()
+    # print("DATA messages ======>>>>>>> ", data)
+    if data:
+        db.session.delete(data)
+        db.session.commit()
+    return temp
 
 
 # get messages by user id
