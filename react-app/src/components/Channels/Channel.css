@@ -1,0 +1,12 @@
+.UserLanding-sidebar-channel-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 34px;
+    color: #96989d;
+    cursor: pointer;
+    padding: 7px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
