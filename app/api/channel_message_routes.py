@@ -1,16 +1,19 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
 from app.models import ChannelMessage, db
+from .channel_routes import channel_routes
 
 #  url_prefix="/api/cms
 channel_message_routes = Blueprint("channel_messages", __name__)
 
 # get all messages
-@channel_message_routes.route("/")
+@channel_routes.route("/<int:serverId>/<int:channelId>/cms")
 @login_required
-def get_channel_messages():
-    data = ChannelMessage.query.all()
-    return {"channel_message": [el.to_dict() for el in data]}
+def get_channel_messages(serverId, channelId):
+    # print("DATA messages ======>>>>>>> ", channelId)
+    # msg = ChannelMessage.query.all()
+    messages = ChannelMessage.query.filter(ChannelMessage.channel_id == channelId).all()
+    return {"channel_message": [el.to_dict() for el in messages]}
 
 
 # get messages by user id

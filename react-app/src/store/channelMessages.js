@@ -28,22 +28,25 @@ export const actionResetChannelMessages = () => ({
 
 // GET: Get All channel messages by channel id
 // Route: /api/channel/:channelId/cm
-export const thunkReadAllChannelMessages = () => async (dispatch) => {
-	let response = await fetch(`/api/cms/`);
+export const thunkReadAllChannelMessages =
+	(serverId, channelId) => async (dispatch) => {
+		let response = await fetch(
+			`/api/channels/${serverId}/${channelId}/cms`
+		);
 
-	if (response.ok) {
-		const data = await response.json();
-		dispatch(actionReadAllChannelMessages(data));
-		return data;
-	} else if (response.status < 500) {
-		const data = await response.json();
-		if (data.errors) {
-			return data.errors;
+		if (response.ok) {
+			const data = await response.json();
+			dispatch(actionReadAllChannelMessages(data));
+			return data;
+		} else if (response.status < 500) {
+			const data = await response.json();
+			if (data.errors) {
+				return data.errors;
+			}
+		} else {
+			return ["An error occurred. Please try again."];
 		}
-	} else {
-		return ["An error occurred. Please try again."];
-	}
-};
+	};
 
 //-------------------------------------------------------
 

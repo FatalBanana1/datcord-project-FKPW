@@ -2,7 +2,7 @@
 
 /* temp styles */
 
-.row {
+/* .row {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -17,22 +17,40 @@
 	height: 25px;
 	object-fit: cover;
 	border-radius: 999px;
+} */
+
+/* TODO Add site wide styles */
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto:wght@300;400&display=swap'); */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;900&family=Roboto:wght@300;400&display=swap");
+
+* {
+	font-family: "Noto Sans", sans-serif;
 }
 
-.columns {
+.App-container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-.width {
-	width: inherit;
-	margin: auto;
-	height: auto;
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
 }
 
-.overflow {
-	/* overflow-y: scroll; */
-	/* overflow-y: auto; */
-	/* max-height: 500px; */
-	min-width: 500px;
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }

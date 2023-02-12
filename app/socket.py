@@ -38,7 +38,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 # handle chat messages
 @socketio.on("channel_message")
 def handle_channel_message(data):
-    print(f"backend socket . py RECEIVED msg >>>>> ----", data)
+    # print(f"backend socket . py RECEIVED msg >>>>> ----", data)
 
     if data != "User connected!":
         message = ChannelMessage(
