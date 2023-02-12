@@ -1,0 +1,28 @@
+.server-members-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.total-members {
+    font-size: 15px;
+    width: 100%;
+	color: rgba(211, 212, 214, 0.8);
+}
+
+h2 {
+    font-size: 12px;
+	color: rgb(211, 212, 214, 0.8);
+}
+
+p {
+    font-size: 15px;
+    color: rgb(25,188,155)
+}
+
+.section {
+    padding: 5px 0;
+}
+
+.individual-person {
+    padding: 2px
+}

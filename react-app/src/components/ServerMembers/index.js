@@ -39,6 +39,10 @@ const ServerMembers = () => {
     }
 
     // Split into categories
+    let owners
+    let admins
+    let members
+    let pending
     if (membersArray.length > 0) {
         owners = membersArray.filter(member => member.role === "owner")
         admins = membersArray.filter(member => member.role === "admin")
@@ -47,51 +51,52 @@ const ServerMembers = () => {
     }
 
     return (
-        user && (membersArray.length > 0) (
+        user && (membersArray.length > 0) && (
             <>
             <div className="server-members-div">
-                <h1>{`Total Members - ${membersArray.length}`}</h1>
-                <div className = "owner-div">
-                    <h2>Owner</h2>
-                    <p>{owners[0].nickname}</p>
-                </div>
-                admins.length && (
-                    <div className = "admin-div"></div>
-                    <h2>{`Admins - ${admins.length}`}</h2>
-                    {admins.map(admin => {
-                        <p className="admin-nicknames">{admin.nickname}</p>
-                    })}
-                )
-                members.length && (
-                    <div className = "regular-members-div">
-                        <h2>{`Members - ${member.length}`}</h2>
-                        {members.map(member => {
-                            <p className="regular-member-nicknames">{member.nickname}</p>
-                        })}
+                <h1 className="total-members">{`Total Members - ${membersArray.length}`}</h1>
+                {owners.length > 0 && (
+                    <div className = "owner-div section">
+                        <h2>Owner</h2>
+                        <div className="individual-person">
+                        <p className="owner-nickname">{owners[0].nickname}</p>
+                        </div>
                     </div>
-                )
-                pending.length && (
-                    <div className = "pending-div"></div>
-                    <h2>{`Pending - ${pending.length}`}</h2>
-                    {pending.map(pending => {
-                        <p className="pending-nicknames">{pending.nickname}</p>
-                    })}
-                )
+                )}
+                {admins.length > 0 && (
+                    <div className = "admin-div section">
+                        <h2>{`Admins`}</h2>
+                        {admins.map(admin =>
+                            <div className="individual-person">
+                            <p className="admin-nicknames">{admin.nickname}</p>
+                            </div>
+                        )}
+                    </div>
+                )}
+                {members.length > 0 && (
+                    <div className = "regular-members-div section">
+                        <h2>{`Members`}</h2>
+                        {members.map(member => 
+                            <div className="individual-person">
+                                <p className="regular-member-nicknames">{member.nickname}</p>
+                            </div>
+                        )}
+                    </div>
+                )}
+                {pending.length > 0 && (
+                    <div className = "pending-div section">
+                        <h2>{`Pending - ${pending.length}`}</h2>
+                        {pending.map(pending =>
+                            <div className="individual-person">
+                                <p className="pending-nicknames">{pending.nickname}</p>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
             </>
         )
     )
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+export default ServerMembers

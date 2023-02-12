@@ -143,25 +143,25 @@ const normalize = (serverMembers) => {
 
 const initialState = {};
 
-export default function serveruser(state = initialState, action) {
+export default function ServerMembers(state = initialState, action) {
 	switch (action.type) {
 		case GET_SERVERMEMBERS: {
-			const newState = { ...state }
+			let newState = { ...state }
 			newState = normalize(action.serverMembers)
 			return newState
 		}
 		case ADD_SERVERMEMBER: {
-			const newState = { ...state }
+			let newState = { ...state }
 			newState = { ...state.serverMembers, [action.serverMember.id]: action.serverMember}
             return newState
 		}
 		case EDIT_SERVERMEMBER: {
-			const newState = { ...state }
+			let newState = { ...state }
 			newState = { ...state.serverMembers, [action.serverMember.id]: action.serverMember}
             return newState
 		}
 		case DELETE_SERVERMEMBER: {
-			const newState = { ...state }
+			let newState = { ...state }
 			delete newState[action.memberId]
             return newState
 		}
