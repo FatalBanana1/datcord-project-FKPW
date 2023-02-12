@@ -50,7 +50,7 @@ def seed_channel_messages():
     cm10 = ChannelMessage(
         sender_id=1,
         channel_id=1,
-        message="The biggest one that comes to mind is if you minify it - something you'll do regularly for production - the code can become mangled if the minifier didn't guess properly where to insert your semicolons and you'll get to spend your weekend trying to figure out why your perfect code stops working on production.",
+        message="Something you'll do regularly for production - the code can become mangled if the minifier didn't guess properly where to insert your semicolons and you'll get to spend your weekend trying to figure out why your perfect code stops working on production.",
     )
     cm11 = ChannelMessage(
         sender_id=1,
