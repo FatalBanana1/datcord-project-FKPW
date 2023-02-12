@@ -42,6 +42,7 @@ const ChannelMessages = () => {
 		);
 
 		return () => {
+			setChatInput("");
 			dispatch(actionResetChannelMessages());
 			setIsLoaded(false);
 		};
@@ -63,6 +64,7 @@ const ChannelMessages = () => {
 
 		// when component unmounts, disconnect
 		return () => {
+			setChatInput("");
 			socket.disconnect();
 			// dispatch(actionResetChannelMessages());
 		};
@@ -93,30 +95,35 @@ const ChannelMessages = () => {
 		// print the username and message for each chat
 		return (
 			user && (
-				<div>
-					<div>{`# ${channel.name}`}</div>
-					<div className="cm-overflow">
-						{cms.length
-							? cms.map((message, ind) => (
-									<div
-										key={ind}
-									>{`${message.sender_nickname}: ${message.message}`}</div>
-							  ))
-							: null}
-						{messages.map((message, ind) => (
-							<div
-								key={ind}
-							>{`${message.sender_nickname}: ${message.message}`}</div>
-						))}
+				<>
+					<div className="cms-ch-name">{`# ${channel.name}`}</div>
+
+					<div className="cms-ct">
+						<div className="cm-overflow">
+							{cms.length
+								? cms.map((message, ind) => (
+										<div
+											className="clicker"
+											key={ind}
+										>{`${message.sender_nickname}: ${message.message}`}</div>
+								  ))
+								: null}
+							{messages.map((message, ind) => (
+								<div
+									className="clicker"
+									key={ind}
+								>{`${message.sender_nickname}: ${message.message}`}</div>
+							))}
+						</div>
+						<form onSubmit={sendChat} className="submit">
+							<input
+								value={chatInput}
+								onChange={updateChatInput}
+								className="cm-text-input"
+							/>
+						</form>
 					</div>
-					<form onSubmit={sendChat} className="submit">
-						<input
-							value={chatInput}
-							onChange={updateChatInput}
-							className="cm-text-input"
-						/>
-					</form>
-				</div>
+				</>
 			)
 		);
 	} else if (isLoaded && !channel) {

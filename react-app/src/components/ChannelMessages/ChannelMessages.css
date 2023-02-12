@@ -1,4 +1,46 @@
 .cm-text-input {
 	width: 100%;
-	max-width: 100%;
+	color: #96989d;
+	background-color: rgb(64, 68, 75);
+	border: 0;
+	border-radius: 5px;
+	text-decoration: none;
+	padding: 10px;
+}
+
+.cms-ch-name {
+	color: #96989d;
+	padding-bottom: 12px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #96989d5f;
+}
+
+.submit {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding-bottom: 25px;
+}
+
+.cm-overflow {
+	position: relative;
+	z-index: 0;
+	overflow-y: scroll;
+	height: inherit;
+	max-height: 100%;
+	color: #96989d;
+	padding: 7px;
+	box-sizing: border-box;
+	font-size: 16px;
+}
+
+.clicker {
+	padding: 0px 20px;
+	border-radius: 4px;
+}
+
+.clicker:hover {
+	cursor: pointer;
+	background-color: rgb(43, 45, 49);
+	border: 0;
 }
