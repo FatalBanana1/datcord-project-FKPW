@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Server
+from app.models import db, Server, ServerMember, Channel
 from app.forms import ServerForm
 
 
@@ -33,6 +33,7 @@ def users_servers():
 @server_routes.route("/", methods=['POST'])
 @login_required
 def create_server():
+    userId = int(current_user.id)
     form = ServerForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
@@ -42,7 +43,21 @@ def create_server():
             icon_url = form.data["icon_url"],
             description = form.data["description"]
         )
+        channel = Channel(
+            name = "general",
+            server_id = server.id,
+            category = "Main",
+            is_private = False
+        )
+        member = ServerMember(
+            user_id = userId,
+            server_id = server.id,
+            nickname = current_user.username,
+            role = "Owner"
+        )
         db.session.add(server)
+        db.session.add(channel)
+        db.session.add(member)
         db.session.commit()
         return {"server": server.to_dict()}, 201
     return {"errors": ["Could not complete request"]}

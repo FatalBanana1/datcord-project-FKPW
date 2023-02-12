@@ -2,31 +2,45 @@ const GET_SERVERMEMBERS = "server/GET_SERVERMEMBERS";
 const ADD_SERVERMEMBER = "server/ADD_SERVERMEMBERS";
 const EDIT_SERVERMEMBER = "server/EDIT_SERVERMEMBER";
 const DELETE_SERVERMEMBER = "server/DELETE_SERVERMEMBER"
+const RESET_SERVERMEMBER = "server/RESET_SEREVERMEMBER"
 
 // Actions
+
+// GET
 export const actionGetServerMembers = (serverMembers) => ({
 	type: GET_SERVERMEMBERS,
 	serverMembers,
 });
 
+// CREATE
 export const actionAddServerMember = (serverMember) => ({
 	type: ADD_SERVERMEMBER,
 	serverMember
 })
 
+// EDIT
 export const actionEditServerMember = (serverMember) => ({
 	type: EDIT_SERVERMEMBER,
 	serverMember
 })
 
+
+// DELETE
 export const actionDeleteServerMember = (memberId) => ({
 	type: DELETE_SERVERMEMBER,
 	memberId
 })
 
+// RESET
+export const actionResetServerMember = () => ({
+	type: RESET_SERVERMEMBER
+})
+
 
 
 //Thunks
+
+// GET
 export const thunkGetServerMembers = (serverId) => async (dispatch) => {
 	const res = await fetch(`/api/servers/${serverId}/members`);
 	if (res.ok) {
@@ -44,7 +58,7 @@ export const thunkGetServerMembers = (serverId) => async (dispatch) => {
 };
 
 
-
+// CREATE
 export const thunkAddServerMember = (serverId, role) => async (dispatch) => {
 	const res = await fetch(`/api/servers/${serverId}/members`, {
         method: 'POST',
@@ -69,7 +83,7 @@ export const thunkAddServerMember = (serverId, role) => async (dispatch) => {
 	}
 }
 
-
+// EDIT
 export const thunkEditServerMember = (serverId, serverMemberId, serverMember) => async (dispatch) => {
 	const res = await fetch(`/api/servers/${serverId}/membership/${serverMemberId}`, {
         method: 'PUT',
@@ -94,7 +108,7 @@ export const thunkEditServerMember = (serverId, serverMemberId, serverMember) =>
 	}
 }
 
-
+// DELETE
 export const thunkDeleteServerMember = (serverId, serverMemberId) => async (dispatch) => {
 	const res = await fetch(`/api/servers/${serverId}/membership/${serverMemberId}`, {
         method: 'DELETE',
@@ -150,6 +164,9 @@ export default function serveruser(state = initialState, action) {
 			const newState = { ...state }
 			delete newState.serverMembers[action.memberId]
             return newState
+		}
+		case RESET_SERVERMEMBER: {
+			return initialState
 		}
 		default:
 			return state;
