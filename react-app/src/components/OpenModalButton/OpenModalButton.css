@@ -6,6 +6,15 @@
     cursor: pointer;
 }
 
+.Create-Channel {
+    color: #ffffff;
+    background: none;
+    border: 0;
+    font-size: 14px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
 .Edit, .Delete {
     display: flex;
     gap: 8px;
@@ -13,4 +22,3 @@
     align-items: center;
     margin-left: 0;
 }
-
