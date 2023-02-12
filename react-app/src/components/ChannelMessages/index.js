@@ -91,6 +91,9 @@ const ChannelMessages = () => {
 		// console.log(`MESSGS ===`, messages);
 
 		// if (!isLoaded) return null;
+		let date = new Date();
+
+		console.log(`date ---`, date.toUTCString().slice(0, 22));
 
 		// print the username and message for each chat
 		return (
@@ -101,18 +104,34 @@ const ChannelMessages = () => {
 					<div className="cms-ct">
 						<div className="cm-overflow">
 							{cms.length
-								? cms.map((message, ind) => (
+								? cms.map((message) => (
 										<div
-											className="clicker"
-											key={ind}
-										>{`${message.sender_nickname}: ${message.message}`}</div>
+											className="msg-ct"
+											key={message.id}
+										>
+											<div className="cms-msg-header">
+												<div className="cms-msg-name">{`${message.sender_nickname}: `}</div>
+												<div className="cms-msg-date">
+													{message.created_at.slice(
+														0,
+														22
+													)}
+												</div>
+											</div>
+											<div className="cms-msg-detail">{`${message.message}`}</div>
+										</div>
 								  ))
 								: null}
 							{messages.map((message, ind) => (
-								<div
-									className="clicker"
-									key={ind}
-								>{`${message.sender_nickname}: ${message.message}`}</div>
+								<div className="msg-ct" key={ind}>
+									<div className="cms-msg-header">
+										<div className="cms-msg-name">{`${message.sender_nickname}: `}</div>
+										<div className="cms-msg-date">
+											{date.toUTCString().slice(0, 22)}
+										</div>
+									</div>
+									<div className="cms-msg-detail">{`${message.message}`}</div>
+								</div>
 							))}
 						</div>
 						<form onSubmit={sendChat} className="submit">

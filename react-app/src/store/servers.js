@@ -103,3 +103,6 @@ const serverReducer = (state = defaultState(), action) => {
 };
 
 export default serverReducer;
+
+
+// csrf_token=IjVkZjRlYzU2NmQxNzRiZGM4OTQ3MGRhZTY4MTkwZmFjNGFmZmFkYTgi.Y-hzpg.ctI5nOaFhjP6gSRDBvqjfqytRWQ; HttpOnly; Path

@@ -1,6 +1,13 @@
-.cm-text-input {
+.cms-ct {
+	height: 100%;
 	width: 100%;
-	color: #96989d;
+	overflow-y: scroll;
+}
+
+.cm-text-input {
+	width: 80%;
+	max-width: 90%;
+	color: rgb(211, 212, 214);
 	background-color: rgb(64, 68, 75);
 	border: 0;
 	border-radius: 5px;
@@ -9,38 +16,60 @@
 }
 
 .cms-ch-name {
-	color: #96989d;
+	color: rgb(211, 212, 214);
 	padding-bottom: 12px;
 	margin-bottom: 5px;
 	border-bottom: 1px solid #96989d5f;
 }
 
 .submit {
+	width: 100%;
 	position: absolute;
 	bottom: 0;
-	width: 100%;
+	padding-right: 0;
+	margin-right: 0;
 	padding-bottom: 25px;
+	outline: 0;
 }
 
 .cm-overflow {
 	position: relative;
 	z-index: 0;
-	overflow-y: scroll;
-	height: inherit;
-	max-height: 100%;
-	color: #96989d;
+	color: rgb(211, 212, 214);
 	padding: 7px;
 	box-sizing: border-box;
 	font-size: 16px;
+	padding-bottom: 100px;
+	font-size: 1rem;
+	white-space: break-spaces;
+	line-height: 1.375rem;
+	word-wrap: break-word;
 }
 
-.clicker {
-	padding: 0px 20px;
-	border-radius: 4px;
+.msg-ct {
+	display: flex;
+	flex-direction: column;
+	padding: 5px 20px;
+	border-radius: 6px;
+	margin: 10px 0px;
 }
 
-.clicker:hover {
+.msg-ct:hover {
 	cursor: pointer;
 	background-color: rgb(43, 45, 49);
 	border: 0;
+}
+
+.cms-msg-header {
+	display: flex;
+	flex-direction: row;
+}
+
+.cms-msg-date {
+	font-size: 0.8rem;
+	color: #96989d;
+}
+
+.cms-msg-name {
+	color: rgb(171, 105, 199);
 }
