@@ -1,23 +1,23 @@
-# """create_users_table
+"""create_users_table
 
-# Revision ID: ffdc0a98111c
-# Revises:
-# Create Date: 2020-11-20 15:06:02.230689
+Revision ID: ffdc0a98111c
+Revises:
+Create Date: 2020-11-20 15:06:02.230689
 
-# """
-# from alembic import op
-# import sqlalchemy as sa
+"""
+from alembic import op
+import sqlalchemy as sa
 
-# import os
-# environment = os.getenv("FLASK_ENV")
-# SCHEMA = os.environ.get("SCHEMA")
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 
-# # revision identifiers, used by Alembic.
-# revision = 'ffdc0a98111c'
-# down_revision = None
-# branch_labels = None
-# depends_on = None
+# revision identifiers, used by Alembic.
+revision = 'ffdc0a98111c'
+down_revision = None
+branch_labels = None
+depends_on = None
 
 
 # def upgrade():
@@ -45,27 +45,27 @@
 
 
 
-"""add-models
+# """add-models
 
-Revision ID: 9443a041d4b6
-Revises: ffdc0a98111c
-Create Date: 2023-02-10 17:21:36.460348
+# Revision ID: 9443a041d4b6
+# Revises: ffdc0a98111c
+# Create Date: 2023-02-10 17:21:36.460348
 
-"""
-from alembic import op
-import sqlalchemy as sa
-import os
+# """
+# from alembic import op
+# import sqlalchemy as sa
+# import os
 
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
+# environment = os.getenv("FLASK_ENV")
+# SCHEMA = os.environ.get("SCHEMA")
 
 
-# revision identifiers, used by Alembic.
-revision = "9443a041d4b6"
-# down_revision = "ffdc0a98111c"
-down_revision = None
-branch_labels = None
-depends_on = None
+# # revision identifiers, used by Alembic.
+# revision = "9443a041d4b6"
+# # down_revision = "ffdc0a98111c"
+# down_revision = None
+# branch_labels = None
+# depends_on = None
 
 
 def upgrade():
