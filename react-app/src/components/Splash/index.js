@@ -13,18 +13,20 @@ const Splash = () => {
 
 	//return
 	return (
-		<div>
-			<div>
+		<>
+			<div className="title">
 				<h1>Splash Page</h1>
 			</div>
-			<div>{`Hello ${user.username}! Welcome to Datcord!`}</div>
-			<div>
-				<ServerIndex />
+			<div className="title">{`Hello ${user.username}! Welcome to Datcord!`}</div>
+			<div className="columns">
+				<div className="width">
+					<ServerIndex />
+				</div>
+				<div className="width">
+					<ChannelMessages />
+				</div>
 			</div>
-			<div>
-				<ChannelMessages />
-			</div>
-		</div>
+		</>
 	);
 };
 

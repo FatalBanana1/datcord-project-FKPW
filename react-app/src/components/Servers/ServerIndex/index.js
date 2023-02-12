@@ -4,6 +4,7 @@ import { thunkReadAllServers } from "../../../store/servers";
 
 const ServerIndex = () => {
 	let dispatch = useDispatch();
+	// let [isLoaded, setIsLoaded] = useState(false);
 
 	useEffect(() => {
 		dispatch(thunkReadAllServers());

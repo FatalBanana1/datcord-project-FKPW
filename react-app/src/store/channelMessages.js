@@ -59,9 +59,9 @@ const cmReducer = (state = defaultState(), action) => {
 
 	switch (action.type) {
 		case READ_ALL_CHANNEL_MESSAGES:
-			// console.log(`reducer-----`, action.channelMessages.channel_messages);
+			// console.log(`reducer-----`, action.channelMessages.channel_message);
 			newState = {};
-			action.channelMessages.channel_messages.forEach(
+			action.channelMessages.channel_message.forEach(
 				(el) => (newState[el.id] = el)
 			);
 			return newState;

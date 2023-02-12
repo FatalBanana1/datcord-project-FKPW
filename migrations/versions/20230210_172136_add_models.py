@@ -16,6 +16,7 @@ SCHEMA = os.environ.get("SCHEMA")
 # revision identifiers, used by Alembic.
 revision = "9443a041d4b6"
 down_revision = "ffdc0a98111c"
+# down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -134,7 +135,7 @@ def downgrade():
         sa.UniqueConstraint("email"),
         sa.UniqueConstraint("username"),
     )
-    op.drop_table("channel_messages")
+    op.drop_table("channel_messages_table")
     op.drop_table("server_members_table")
     op.drop_table("channels_table")
     op.drop_table("servers_table")

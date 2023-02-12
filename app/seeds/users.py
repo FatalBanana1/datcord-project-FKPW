@@ -4,7 +4,7 @@ from app.models import db, User, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username="Legendairy",
+        username="Demo",
         email="gotmilk@gmail.com",
         password="password",
         display_pic="https://upload.wikimedia.org/wikipedia/commons/7/7e/Appacademylogo.png",

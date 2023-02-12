@@ -17,17 +17,41 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
+# # handle chat messages
+# @socketio.on("channel_message")
+# def handle_channel_message(data):
+#     print(f"backend socket . py RECEIVED msg >>>>> ----", data)
+#     # new_message = ChannelMessage(sender_id=data["sender_id"], message=data["message"])
+#     message = ChannelMessage(
+#         **{
+#             "sender_id": data["sender_id"],
+#             "message": data["message"],
+#             "channel_id": data["channelId"],
+#         }
+#     )
+#     db.session.add(message)
+#     db.session.commit()
+#     chat = message.to_dict()
+#     emit("channel_message", chat, broadcast=True)
+
+
 # handle chat messages
 @socketio.on("channel_message")
 def handle_channel_message(data):
-    print(f"backend socket . py ====== data >>>>> ----", data)
-    # new_message = ChannelMessage(sender_id=data["sender_id"], message=data["message"])
-    message = ChannelMessage(
-        {"sender_id": data["sender_id"], "message": data["message"]}
-    )
-    db.session.add(message)
-    db.session.commit()
-    emit("channel_messages", data, broadcast=True)
+    print(f"backend socket . py RECEIVED msg >>>>> ----", data)
+
+    if data != "User connected!":
+        message = ChannelMessage(
+            **{
+                "sender_id": data["sender_id"],
+                "message": data["message"],
+                "channel_id": data["channelId"],
+            }
+        )
+        db.session.add(message)
+        db.session.commit()
+        # chat = message.to_dict()
+        emit("channel_message", data, broadcast=True)
 
 
 # ----------------------------------------------

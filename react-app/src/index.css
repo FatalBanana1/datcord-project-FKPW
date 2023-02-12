@@ -18,3 +18,21 @@
 	object-fit: cover;
 	border-radius: 999px;
 }
+
+.columns {
+	display: flex;
+	flex-direction: row;
+}
+
+.width {
+	width: inherit;
+	margin: auto;
+	height: auto;
+}
+
+.overflow {
+	/* overflow-y: scroll; */
+	/* overflow-y: auto; */
+	/* max-height: 500px; */
+	min-width: 500px;
+}
