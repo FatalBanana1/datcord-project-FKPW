@@ -2,6 +2,7 @@
 
 //types crud - posts
 const READ_ALL_SERVERS = `servers/READ_ALL`;
+const READ_USER_SERVERS = `servers/READ_USER_SERVERS`;
 // const READ_SERVER_DETAILS = `server/READ_DETAILS`;
 const CREATE_SERVER = `server/CREATE`;
 const UPDATE_SERVER = `server/UPDATE`;
@@ -15,6 +16,12 @@ const RESET_SERVERS = "servers/RESET_SERVERS";
 // GET
 const actionReadAllServers = (servers) => ({
   type: READ_ALL_SERVERS,
+  servers,
+});
+
+// GET SERVERS BY USERS
+const actionReadUserServers = (servers) => ({
+  type: READ_USER_SERVERS,
   servers,
 });
 
@@ -46,7 +53,7 @@ export const actionResetServers = () => ({
 
 //thunk actions
 
-// GET: Get All Servers by user id
+// GET: Get All Servers
 // Route: /api/servers
 export const thunkReadAllServers = () => async (dispatch) => {
   let response = await fetch(`/api/servers/`);
@@ -55,6 +62,24 @@ export const thunkReadAllServers = () => async (dispatch) => {
     const data = await response.json();
     dispatch(actionReadAllServers(data));
     return data;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
+
+// GET: Get ALL Servers by user id
+export const thunkReadUserServers = () => async (dispatch) => {
+  let response = await fetch(`/api/servers/user`);
+
+  if (response.ok) {
+    const servers = await response.json();
+    dispatch(actionReadUserServers(servers.servers));
+    return servers.servers;
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
@@ -147,6 +172,11 @@ const serverReducer = (state = defaultState(), action) => {
       // console.log(`reducer-----`, action);
       newState = {};
       action.servers.servers.forEach((el) => (newState[el.id] = el));
+      return newState;
+
+    case READ_USER_SERVERS:
+      newState = { ...state };
+      newState.userServers = action.servers;
       return newState;
 
     case CREATE_SERVER:
