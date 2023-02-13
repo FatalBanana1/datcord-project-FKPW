@@ -7,7 +7,7 @@ const CMEdit = ({ message, onChange }) => {
 
 	let [mval, setMval] = useState(message.message);
 	const onCancel = () => {
-		onChange(0);
+		onChange(999999999);
 	};
 
 	// edit
@@ -16,8 +16,10 @@ const CMEdit = ({ message, onChange }) => {
 		if (message.message !== mval) {
 			let payload = { id: message.id, message: mval };
 			dispatch(thunkEditChannelMessage(payload));
+			onChange(0);
+		} else {
+			onChange(999999999);
 		}
-		onCancel();
 	};
 
 	let date = new Date();

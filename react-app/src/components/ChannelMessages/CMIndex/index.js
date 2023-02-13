@@ -60,7 +60,7 @@ const CMIndex = () => {
 		return () => {
 			setChatInput("");
 			socket.disconnect();
-			// dispatch(actionResetChannelMessages());
+			dispatch(actionResetChannelMessages());
 		};
 	}, [user.id, serverId, channelId]);
 
@@ -114,7 +114,9 @@ const CMIndex = () => {
 	// edit child change
 	const handleEditChange = (e) => {
 		setEdit(e);
-		setMessages([]);
+		if (e === 0) {
+			setMessages([]);
+		}
 	};
 
 	// -------------
