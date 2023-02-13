@@ -157,7 +157,7 @@ export default function Channels() {
     return isLoaded && (
         <div className="UserLanding-sidebar">
             <div className="UserLanding-sidebar-header">
-                <p>{server.name}</p>
+                <p>{server[0].name}</p>
                 <i className="fa-solid fa-angle-down big-angle-down"></i>
             </div>
             <div className="UserLanding-sidebar-channel-content">
