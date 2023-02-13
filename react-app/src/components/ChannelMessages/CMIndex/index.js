@@ -6,13 +6,13 @@ import {
 	actionResetChannelMessages,
 	thunkDeleteChannelMessage,
 	thunkReadAllChannelMessages,
-} from "../../store/channelMessages";
-import "./ChannelMessages.css";
+} from "../../../store/channelMessages";
+import "./CMIndex.css";
 
 // leave this OUT
 let socket;
 
-const ChannelMessages = () => {
+const CMIndex = () => {
 	const dispatch = useDispatch();
 
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -22,6 +22,7 @@ const ChannelMessages = () => {
 	const [messages, setMessages] = useState([]);
 	const user = useSelector((state) => state.session.user);
 
+	const allMembers = useSelector((state) => state.serverMembers);
 	const allcms = useSelector((state) => state.channelMessages);
 	let cms = Object.values(allcms);
 	let { serverId, channelId } = useParams();
@@ -35,9 +36,10 @@ const ChannelMessages = () => {
 
 		return () => {
 			setChatInput("");
+			setMessages([]);
 			dispatch(actionResetChannelMessages());
 		};
-	}, [channelId, serverId]);
+	}, [channelId, serverId, user.id]);
 
 	useEffect(() => {
 		// open socket connection
@@ -59,7 +61,7 @@ const ChannelMessages = () => {
 			socket.disconnect();
 			// dispatch(actionResetChannelMessages());
 		};
-	}, []);
+	}, [user.id, serverId, channelId]);
 
 	// -------------
 
@@ -68,19 +70,40 @@ const ChannelMessages = () => {
 	// delete
 	const deleteHandler = (e) => {
 		setIsLoaded(false);
-		setMessages([]);
 		const payload = {
 			serverId,
 			channelId,
 			id: e.target.dataset.id,
 			sender_id: e.target.dataset.sender,
 		};
+		// return
+		return dispatch(thunkDeleteChannelMessage(payload)).then(() =>
+			setIsLoaded(true)
+		);
+	};
+
+	// delete
+	const deleteHandlerCurr = (e) => {
+		setIsLoaded(false);
+		const payload = {
+			serverId,
+			channelId,
+			id: e.target.dataset.id,
+			sender_id: e.target.dataset.sender,
+		};
+		const msg = messages.filter(
+			(el) => el.message !== e.target.dataset.msg
+		);
+		setMessages(msg);
+		console.log(`find message in delete`, msg);
 
 		// return
 		return dispatch(thunkDeleteChannelMessage(payload)).then(() =>
 			setIsLoaded(true)
 		);
 	};
+
+	// -------------
 
 	// edit
 
@@ -103,8 +126,16 @@ const ChannelMessages = () => {
 			setChatInput("");
 		};
 		let date = new Date();
-		// console.log(`MESSGS ===`, messages);
-		// if (!isLoaded) return null;
+		let role;
+		const currMbr = Object.values(allMembers).find(
+			(el) => el.user_id === user.id
+		);
+
+		if (currMbr) {
+			console.log(`currM ===`, currMbr);
+			role = currMbr.role;
+		}
+		console.log(`role ===`, role);
 
 		// print the username and message for each chat
 		return (
@@ -129,8 +160,9 @@ const ChannelMessages = () => {
 													)}
 												</div>
 
-												{user.id ==
-												message.sender_id ? (
+												{user.id == message.sender_id ||
+												role === "admin" ||
+												role === "owner" ? (
 													<div className="cms-options">
 														<div className="cms-edit">
 															Edit
@@ -162,15 +194,18 @@ const ChannelMessages = () => {
 											{date.toUTCString().slice(0, 22)}
 										</div>
 
-										{user.id == message.sender_id ? (
+										{user.id == message.sender_id ||
+										role === "admin" ||
+										role === "owner" ? (
 											<div className="cms-options">
 												<div className="cms-edit">
 													Edit
 												</div>
 												<div
 													className="cms-delete"
-													onClick={deleteHandler}
+													onClick={deleteHandlerCurr}
 													data-id={message.id}
+													data-msg={message.message}
 													data-sender={
 														message.sender_id
 													}
@@ -185,13 +220,17 @@ const ChannelMessages = () => {
 								</div>
 							))}
 						</div>
-						<form onSubmit={sendChat} className="submit">
-							<input
-								value={chatInput}
-								onChange={updateChatInput}
-								className="cm-text-input"
-							/>
-						</form>
+						{role === "member" ||
+						role === "owner" ||
+						role === "admin" ? (
+							<form onSubmit={sendChat} className="submit">
+								<input
+									value={chatInput}
+									onChange={updateChatInput}
+									className="cm-text-input"
+								/>
+							</form>
+						) : null}
 					</div>
 				</>
 			)
@@ -203,6 +242,6 @@ const ChannelMessages = () => {
 	}
 };
 
-export default ChannelMessages;
+export default CMIndex;
 
 // {/* <button type="submit">Send</button> */}
