@@ -17,7 +17,7 @@ class ServerMember(db.Model):
 
     user = db.relationship('User', back_populates='server_memberships')
     server = db.relationship('Server', back_populates='server_members')
-    channel_messages = db.relationship("ChannelMessage", back_populates="sender")
+    channel_messages = db.relationship("ChannelMessage", back_populates="sender", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

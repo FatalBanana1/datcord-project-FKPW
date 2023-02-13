@@ -135,6 +135,9 @@ export const thunkDeleteServerMember = (serverId, serverMemberId) => async (disp
 
 const normalize = (serverMembers) => {
 	const data = {};
+	if (serverMembers === "No current members in this server") {
+		return {}
+	}
 	if (serverMembers) {
 		serverMembers.forEach((member) => (data[member.id] = member));
 		return data;
