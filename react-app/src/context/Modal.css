@@ -39,14 +39,15 @@
 #modal-content {
     border-radius: 4px;
     position: absolute;
-    background-color:#ffffff;
+    background-color: #35393e;
     overflow-y: auto;
     max-height: 90%;
     height: max-content;
-    padding-bottom: 24px;
+    /* padding-bottom: 24px; */
     display: flex;
     justify-content: center;
     z-index: 99999;
+    border-radius: 12px;
 }
 
 

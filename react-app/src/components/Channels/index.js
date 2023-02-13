@@ -8,7 +8,7 @@ import OpenModalButton from "../OpenModalButton";
 import CreateChannelForm from "./CreateChannelForm";
 import "./Channel.css";
 
-export default function Channels({ isLoaded }) {
+export default function Channels() {
     const { serverId, channelId } = useParams();
     console.log("Channels - serverId, channelId:", serverId, channelId);
     const dispatch = useDispatch();
@@ -19,21 +19,29 @@ export default function Channels({ isLoaded }) {
     // console.log("SERVER_CHANNELS", channels);
     // console.log("USER", user);
     const [ showMenu, setShowMenu ] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-		dispatch(thunkGetChannels(+serverId));
+		dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true))
 	}, [dispatch, serverId]);
 
 	const categories = {};
-	for (let i = 0; i < channels.length; i++) {
-		const channel = channels[i];
 
-		if (!categories[channel.category]) {
-			categories[channel.category] = [channel];
-		} else {
-			categories[channel.category].push(channel);
-		}
-	}
+    if (!channels) return null;
+
+    if (!server) return null;
+
+    if (channels.length > 0) {
+        for (let i = 0; i < channels.length; i++) {
+            const channel = channels[i];
+
+            if (!categories[channel.category]) {
+                categories[channel.category] = [channel];
+            } else {
+                categories[channel.category].push(channel);
+            }
+        }
+    }
 
 	const truncateNames = (names) => {
 		if (names.length > 18) {
@@ -78,6 +86,9 @@ export default function Channels({ isLoaded }) {
 
     const closeMenu = () => setShowMenu(false);
 
+    console.log("channels", channels)
+    console.log("categories", categories.category)
+
     const categoriesMap = Object.keys(categories).map((category) => (
         <>
         <div className="UserLanding-sidebar-channel-category-container">
@@ -86,12 +97,12 @@ export default function Channels({ isLoaded }) {
             <OpenModalButton
                 buttonText="Create-Channel"
                 onButtonClick={closeMenu}
-                modalComponent={<CreateChannelForm categoryName={category} />}
+                modalComponent={<CreateChannelForm categoryName={category} serverId={serverId} />}
             />
         </div>
         <div className="UserLanding-sidebar-channel-list">
             {/* map out channels here */}
-            { category && categories[category].map((channel) => (
+            { category && channels.length > 0 && categories[category].map((channel) => (
                 <NavLink to={`/channels/${server.id}/${channel.id}`} className="UserLanding-sidebar-channel-name" key={channel.id}>
                     <div className="UserLanding-sidebar-channel-name-label">
                         <span className="hash">#</span> {channel.name && truncateNames(channel.name)}</div>
@@ -108,7 +119,8 @@ export default function Channels({ isLoaded }) {
 
     // console.log("CATEGORIES", categories)
 
-    if (!channels || !server) {
+
+    if (!channels.length || !server) {
         return (
             <div className="UserLanding-sidebar">
             <div className="UserLanding-sidebar-header">
@@ -141,7 +153,7 @@ export default function Channels({ isLoaded }) {
 
 
 
-    return server && (
+    return isLoaded && (
         <div className="UserLanding-sidebar">
             <div className="UserLanding-sidebar-header">
                 <p>{server.name}</p>
@@ -149,7 +161,7 @@ export default function Channels({ isLoaded }) {
             </div>
             <div className="UserLanding-sidebar-channel-content">
 
-                { categoriesMap.length ? categoriesMap : (
+                { channels.length > 0 && categoriesMap.length ? categoriesMap : (
                     <div className="UserLanding-sidebar-channel-category-container">
                     </div>
                 )}
