@@ -67,6 +67,9 @@ export default function ServerNav() {
       <div className="ServerNav-icons">
         <i className="fa-solid fa-plus"></i>
       </div>
+      <div className="ServerNav-icons">
+        <i class="fa-solid fa-compass fa-lg"></i>
+      </div>
     </div>
   );
 }
