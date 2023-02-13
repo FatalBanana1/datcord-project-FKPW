@@ -7,7 +7,7 @@ import {
 	thunkDeleteChannelMessage,
 	thunkReadAllChannelMessages,
 } from "../../../store/channelMessages";
-import "./ChannelMessages.css";
+import "./CMIndex.css";
 
 // leave this OUT
 let socket;
@@ -36,6 +36,7 @@ const CMIndex = () => {
 
 		return () => {
 			setChatInput("");
+			setMessages([]);
 			dispatch(actionResetChannelMessages());
 		};
 	}, [channelId, serverId, user.id]);
@@ -60,7 +61,7 @@ const CMIndex = () => {
 			socket.disconnect();
 			// dispatch(actionResetChannelMessages());
 		};
-	}, [user.id]);
+	}, [user.id, serverId, channelId]);
 
 	// -------------
 
@@ -126,11 +127,15 @@ const CMIndex = () => {
 		};
 		let date = new Date();
 		let role;
-		const currMbr = allMembers[user.id];
+		const currMbr = Object.values(allMembers).find(
+			(el) => el.user_id === user.id
+		);
+
 		if (currMbr) {
+			console.log(`currM ===`, currMbr);
 			role = currMbr.role;
 		}
-		console.log(`currM ===`, role);
+		console.log(`role ===`, role);
 
 		// print the username and message for each chat
 		return (
@@ -215,13 +220,17 @@ const CMIndex = () => {
 								</div>
 							))}
 						</div>
-						<form onSubmit={sendChat} className="submit">
-							<input
-								value={chatInput}
-								onChange={updateChatInput}
-								className="cm-text-input"
-							/>
-						</form>
+						{role === "member" ||
+						role === "owner" ||
+						role === "admin" ? (
+							<form onSubmit={sendChat} className="submit">
+								<input
+									value={chatInput}
+									onChange={updateChatInput}
+									className="cm-text-input"
+								/>
+							</form>
+						) : null}
 					</div>
 				</>
 			)

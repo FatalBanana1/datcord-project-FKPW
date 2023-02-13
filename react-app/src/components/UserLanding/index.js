@@ -1,17 +1,17 @@
 import CMIndex from "../ChannelMessages/CMIndex";
-import ServerMembers from "../ServerMembers"
+import ServerMembers from "../ServerMembers";
 import "./UserLanding.css";
 
 export default function UserLanding({ page }) {
 	switch (page) {
 		case "channel": {
 			return (
-				<div className="UserLanding-container">
-					<div className="UserLanding-main-content">
-						<CMIndex />
-					</div>
+				<div className="UserLanding-container reverse">
 					<div className="UserLanding-server-members">
 						<ServerMembers />
+					</div>
+					<div className="UserLanding-main-content">
+						<CMIndex />
 					</div>
 				</div>
 			);

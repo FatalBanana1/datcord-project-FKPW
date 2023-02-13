@@ -5,6 +5,10 @@
 	flex-direction: row;
 }
 
+.reverse {
+	flex-direction: row-reverse;
+}
+
 .UserLanding-main-content {
 	display: flex;
 	flex-direction: column;
@@ -18,7 +22,7 @@
 .UserLanding-server-members {
 	display: flex;
 	flex-direction: column;
-	width: 20%
+	width: 20%;
 }
 
 .UserLanding-status {
