@@ -40,10 +40,6 @@ export const thunkGetChannels = (serverId) => async (dispatch) => {
   return data.channels;
 };
 
-<<<<<<< HEAD
-export const thunkCreateChannel = (serverId) => async (dispatch) => {
-  const res = await fetch(`/api/servers/${serverId}/channels`);
-=======
 export const thunkCreateChannel = (serverId, newChannel) => async (dispatch) => {
   const res = await fetch(`/api/servers/${serverId}/channels`, {
     method: "POST",
@@ -53,16 +49,11 @@ export const thunkCreateChannel = (serverId, newChannel) => async (dispatch) => 
     },
     body: JSON.stringify(newChannel)
   });
->>>>>>> create-channel-form
 
   if (res.ok) {
 		const data = await res.json();
     console.log("thunkCreateChannel - data:", data);
-<<<<<<< HEAD
-		dispatch(actionCreateChannel(data));
-=======
 		dispatch(actionCreateChannel(data.channel));
->>>>>>> create-channel-form
 		return null;
 	} else if (res.status < 500) {
 		const data = await res.json();

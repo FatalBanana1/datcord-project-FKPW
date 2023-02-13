@@ -39,16 +39,6 @@
 #modal-content {
     border-radius: 4px;
     position: absolute;
-<<<<<<< HEAD
-    background-color:#ffffff;
-    overflow-y: auto;
-    max-height: 90%;
-    height: max-content;
-    padding-bottom: 24px;
-    display: flex;
-    justify-content: center;
-    z-index: 99999;
-=======
     background-color: #35393e;
     overflow-y: auto;
     max-height: 90%;
@@ -58,7 +48,6 @@
     justify-content: center;
     z-index: 99999;
     border-radius: 12px;
->>>>>>> create-channel-form
 }
 
 
