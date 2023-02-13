@@ -9,6 +9,7 @@ import {
 } from "../../../store/channelMessages";
 import CMEdit from "../CMEdit/index.";
 import "./CMIndex.css";
+import crown from "../../../assets/crown.png";
 
 // leave this OUT
 let socket;
@@ -167,7 +168,27 @@ const CMIndex = () => {
 											) : (
 												<div className="msg-ct">
 													<div className="cms-msg-header">
-														<div className="cms-msg-name">{`${message.sender_nickname}`}</div>
+														{message.role ===
+														"owner" ? (
+															<>
+																<div className="cms-admin">{`${message.sender_nickname}`}</div>
+																<img
+																	src={crown}
+																	alt="crown"
+																	className="icon"
+																/>
+															</>
+														) : message.role ===
+														  "admin" ? (
+															<div className="cms-admin">{`${message.sender_nickname}`}</div>
+														) : message.role ===
+														  "member" ? (
+															<div className="cms-member">
+																{`${message.sender_nickname}`}{" "}
+															</div>
+														) : (
+															<div className="cms-pending">{`${message.sender_nickname}`}</div>
+														)}
 														<div className="cms-msg-date">
 															{message.created_at.slice(
 																0,
@@ -233,13 +254,30 @@ const CMIndex = () => {
 									) : (
 										<div className="msg-ct">
 											<div className="cms-msg-header">
-												<div className="cms-msg-name">{`${message.sender_nickname}: `}</div>
+												{message.role === "owner" ? (
+													<>
+														<div className="cms-admin">{`${message.sender_nickname}`}</div>
+														<img
+															src={crown}
+															alt="crown"
+															className="icon"
+														/>
+													</>
+												) : message.role === "admin" ? (
+													<div className="cms-admin">{`${message.sender_nickname}`}</div>
+												) : message.role ===
+												  "member" ? (
+													<div className="cms-member">
+														{`${message.sender_nickname}`}{" "}
+													</div>
+												) : (
+													<div className="cms-pending">{`${message.sender_nickname}`}</div>
+												)}{" "}
 												<div className="cms-msg-date">
 													{date
 														.toUTCString()
 														.slice(0, 22)}
 												</div>
-
 												{user.id == message.sender_id ||
 												role === "admin" ||
 												role === "owner" ? (
