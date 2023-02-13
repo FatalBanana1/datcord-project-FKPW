@@ -68,7 +68,7 @@ const ServerMembers = () => {
                     <div className = "admin-div section">
                         <h2>{`Admins`}</h2>
                         {admins.map(admin =>
-                            <div className="individual-person">
+                            <div key={admin.id} className="individual-person">
                                 <img className="member-img" src={admin.display_pic}></img>
                                 <p className="admin-nicknames">{admin.nickname}</p>
                             </div>
@@ -79,7 +79,7 @@ const ServerMembers = () => {
                     <div className = "regular-members-div section">
                         <h2>{`Members`}</h2>
                         {members.map(member => 
-                            <div className="individual-person">
+                            <div key={member.id} className="individual-person">
                                 <img className="member-img" src={member.display_pic}></img>
                                 <p className="regular-member-nicknames">{member.nickname}</p>
                             </div>
@@ -90,7 +90,7 @@ const ServerMembers = () => {
                     <div className = "pending-div section">
                         <h2>{`Pending - ${pending.length}`}</h2>
                         {pending.map(pending =>
-                            <div className="individual-person pending">
+                            <div key={pending.id} className="individual-person pending">
                                 <img className="member-img" src={pending.display_pic}></img>
                                 <p className="pending-nicknames">{pending.nickname}</p>
                             </div>
