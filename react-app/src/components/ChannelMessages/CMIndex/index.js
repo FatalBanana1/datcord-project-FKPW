@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
@@ -7,6 +7,7 @@ import {
 	thunkDeleteChannelMessage,
 	thunkReadAllChannelMessages,
 } from "../../../store/channelMessages";
+import CMEdit from "../CMEdit/index.";
 import "./CMIndex.css";
 
 // leave this OUT
@@ -16,6 +17,7 @@ const CMIndex = () => {
 	const dispatch = useDispatch();
 
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [edit, setEdit] = useState(0);
 
 	// use state for controlled form input
 	const [chatInput, setChatInput] = useState("");
@@ -37,7 +39,6 @@ const CMIndex = () => {
 		return () => {
 			setChatInput("");
 			setMessages([]);
-			dispatch(actionResetChannelMessages());
 		};
 	}, [channelId, serverId, user.id]);
 
@@ -59,7 +60,7 @@ const CMIndex = () => {
 		return () => {
 			setChatInput("");
 			socket.disconnect();
-			// dispatch(actionResetChannelMessages());
+			dispatch(actionResetChannelMessages());
 		};
 	}, [user.id, serverId, channelId]);
 
@@ -95,7 +96,7 @@ const CMIndex = () => {
 			(el) => el.message !== e.target.dataset.msg
 		);
 		setMessages(msg);
-		console.log(`find message in delete`, msg);
+		// console.log(`find message in delete`, msg);
 
 		// return
 		return dispatch(thunkDeleteChannelMessage(payload)).then(() =>
@@ -106,6 +107,17 @@ const CMIndex = () => {
 	// -------------
 
 	// edit
+	const handleEdit = (e) => {
+		setEdit(e.target.dataset.id);
+	};
+
+	// edit child change
+	const handleEditChange = (e) => {
+		setEdit(e);
+		if (e === 0) {
+			setMessages([]);
+		}
+	};
 
 	// -------------
 
@@ -132,10 +144,9 @@ const CMIndex = () => {
 		);
 
 		if (currMbr) {
-			console.log(`currM ===`, currMbr);
 			role = currMbr.role;
 		}
-		console.log(`role ===`, role);
+		// console.log(`edit ===`, edit);
 
 		// print the username and message for each chat
 		return (
@@ -147,32 +158,111 @@ const CMIndex = () => {
 						<div className="cm-overflow">
 							{cms.length
 								? cms.map((message) => (
-										<div
-											className="msg-ct"
-											key={message.id}
-										>
-											<div className="cms-msg-header">
-												<div className="cms-msg-name">{`${message.sender_nickname}`}</div>
-												<div className="cms-msg-date">
-													{message.created_at.slice(
-														0,
-														22
+										<div key={message.id}>
+											{message.id == edit ? (
+												<CMEdit
+													message={message}
+													onChange={handleEditChange}
+												/>
+											) : (
+												<div className="msg-ct">
+													<div className="cms-msg-header">
+														<div className="cms-msg-name">{`${message.sender_nickname}`}</div>
+														<div className="cms-msg-date">
+															{message.created_at.slice(
+																0,
+																22
+															)}
+														</div>
+
+														{user.id ==
+															message.sender_id ||
+														role === "admin" ||
+														role === "owner" ? (
+															<div className="cms-options">
+																<div
+																	className="cms-edit"
+																	data-id={
+																		message.id
+																	}
+																	onClick={
+																		handleEdit
+																	}
+																>
+																	Edit
+																</div>
+																<div
+																	className="cms-delete"
+																	onClick={
+																		deleteHandler
+																	}
+																	data-id={
+																		message.id
+																	}
+																	data-sender={
+																		message.sender_id
+																	}
+																>
+																	Delete
+																</div>
+															</div>
+														) : null}
+													</div>
+
+													{message.created_at ==
+													message.updated_at ? (
+														<div className="cms-msg-detail">{`${message.message}`}</div>
+													) : (
+														<div className="row">
+															<div className="cms-msg-detail">{`${message.message}`}</div>
+															<div className="cms-msg-detail edited">{`(edited)`}</div>
+														</div>
 													)}
+												</div>
+											)}
+										</div>
+								  ))
+								: null}
+							{messages.map((message, i) => (
+								<div key={`s_${i}`}>
+									{message.id == edit ? (
+										<CMEdit
+											message={message}
+											onChange={handleEditChange}
+										/>
+									) : (
+										<div className="msg-ct">
+											<div className="cms-msg-header">
+												<div className="cms-msg-name">{`${message.sender_nickname}: `}</div>
+												<div className="cms-msg-date">
+													{date
+														.toUTCString()
+														.slice(0, 22)}
 												</div>
 
 												{user.id == message.sender_id ||
 												role === "admin" ||
 												role === "owner" ? (
 													<div className="cms-options">
-														<div className="cms-edit">
+														<div
+															className="cms-edit"
+															data-id={message.id}
+															data-sender={
+																message.sender_id
+															}
+															onClick={handleEdit}
+														>
 															Edit
 														</div>
 														<div
 															className="cms-delete"
 															onClick={
-																deleteHandler
+																deleteHandlerCurr
 															}
 															data-id={message.id}
+															data-msg={
+																message.message
+															}
 															data-sender={
 																message.sender_id
 															}
@@ -182,41 +272,10 @@ const CMIndex = () => {
 													</div>
 												) : null}
 											</div>
+
 											<div className="cms-msg-detail">{`${message.message}`}</div>
 										</div>
-								  ))
-								: null}
-							{messages.map((message, ind) => (
-								<div className="msg-ct" key={ind}>
-									<div className="cms-msg-header">
-										<div className="cms-msg-name">{`${message.sender_nickname}: `}</div>
-										<div className="cms-msg-date">
-											{date.toUTCString().slice(0, 22)}
-										</div>
-
-										{user.id == message.sender_id ||
-										role === "admin" ||
-										role === "owner" ? (
-											<div className="cms-options">
-												<div className="cms-edit">
-													Edit
-												</div>
-												<div
-													className="cms-delete"
-													onClick={deleteHandlerCurr}
-													data-id={message.id}
-													data-msg={message.message}
-													data-sender={
-														message.sender_id
-													}
-												>
-													Delete
-												</div>
-											</div>
-										) : null}
-									</div>
-
-									<div className="cms-msg-detail">{`${message.message}`}</div>
+									)}
 								</div>
 							))}
 						</div>
