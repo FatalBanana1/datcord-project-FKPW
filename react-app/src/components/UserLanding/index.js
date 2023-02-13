@@ -1,4 +1,4 @@
-import ChannelMessages from "../ChannelMessages";
+import CMIndex from "../ChannelMessages/CMIndex";
 import ServerMembers from "../ServerMembers"
 import "./UserLanding.css";
 
@@ -8,7 +8,7 @@ export default function UserLanding({ page }) {
 			return (
 				<div className="UserLanding-container">
 					<div className="UserLanding-main-content">
-						<ChannelMessages />
+						<CMIndex />
 					</div>
 					<div className="UserLanding-server-members">
 						<ServerMembers />

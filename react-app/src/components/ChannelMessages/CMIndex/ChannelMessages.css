@@ -56,7 +56,7 @@
 }
 
 .msg-ct:hover {
-	background-color: rgb(43, 45, 49);
+	background-color: rgba(43, 45, 49, 0.781);
 	border: 0;
 }
 

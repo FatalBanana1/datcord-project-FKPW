@@ -78,7 +78,7 @@ const ServerMembers = () => {
                 {members.length > 0 && (
                     <div className = "regular-members-div section">
                         <h2>{`Members`}</h2>
-                        {members.map(member => 
+                        {members.map(member =>
                             <div className="individual-person">
                                 <img className="member-img" src={member.display_pic}></img>
                                 <p className="regular-member-nicknames">{member.nickname}</p>
