@@ -7,6 +7,8 @@ import { thunkGetChannels } from "../../store/channels";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelForm from "./CreateChannelForm";
 
+import "./Channel.css";
+
 export default function Channels({ isLoaded }) {
     const { serverId, channelId } = useParams();
     console.log("Channels - serverId, channelId:", serverId, channelId);
@@ -87,7 +89,7 @@ export default function Channels({ isLoaded }) {
         <div className="UserLanding-sidebar-channel-list">
             {/* map out channels here */}
             { category && categories[category].map((channel) => (
-                <NavLink to={`/channels/2/3`} className="UserLanding-sidebar-channel-name" key={channel.id}>
+                <NavLink to={`/channels/${server.id}/${channel.id}`} className="UserLanding-sidebar-channel-name" key={channel.id}>
                     <div className="UserLanding-sidebar-channel-name-label">
                         <span className="hash">#</span> {channel.name && truncateNames(channel.name)}</div>
                         {/* if admin, then show these buttons v */}
