@@ -59,7 +59,8 @@ const ServerMembers = () => {
                     <div className = "owner-div section">
                         <h2>Owner</h2>
                         <div className="individual-person">
-                        <p className="owner-nickname">{owners[0].nickname}</p>
+                            <img className="member-img" src={owners[0].display_pic}></img>
+                            <p className="owner-nickname">{owners[0].nickname}</p>
                         </div>
                     </div>
                 )}
@@ -68,7 +69,8 @@ const ServerMembers = () => {
                         <h2>{`Admins`}</h2>
                         {admins.map(admin =>
                             <div className="individual-person">
-                            <p className="admin-nicknames">{admin.nickname}</p>
+                                <img className="member-img" src={admin.display_pic}></img>
+                                <p className="admin-nicknames">{admin.nickname}</p>
                             </div>
                         )}
                     </div>
@@ -78,6 +80,7 @@ const ServerMembers = () => {
                         <h2>{`Members`}</h2>
                         {members.map(member => 
                             <div className="individual-person">
+                                <img className="member-img" src={member.display_pic}></img>
                                 <p className="regular-member-nicknames">{member.nickname}</p>
                             </div>
                         )}
@@ -87,7 +90,8 @@ const ServerMembers = () => {
                     <div className = "pending-div section">
                         <h2>{`Pending - ${pending.length}`}</h2>
                         {pending.map(pending =>
-                            <div className="individual-person">
+                            <div className="individual-person pending">
+                                <img className="member-img" src={pending.display_pic}></img>
                                 <p className="pending-nicknames">{pending.nickname}</p>
                             </div>
                         )}

@@ -26,6 +26,7 @@ class ServerMember(db.Model):
             "server_id": self.server_id,
             "nickname": self.nickname,
             "role": self.role,
+            "display_pic": self.user.display_pic,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
