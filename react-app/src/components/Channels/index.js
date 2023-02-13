@@ -13,11 +13,12 @@ export default function Channels() {
     console.log("Channels - serverId, channelId:", serverId, channelId);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
-    const server = useSelector(state => state.servers)[+serverId]
+    // const server = useSelector(state => state.servers)[+serverId]
+    const server = useSelector(state => state.servers.userServers);
     const channels = Object.values(useSelector(state => state.channels.channels))
-    // console.log("SERVER", server);
-    // console.log("SERVER_CHANNELS", channels);
-    // console.log("USER", user);
+    console.log("SERVER", server);
+    console.log("SERVER_CHANNELS", channels);
+    console.log("USER", user);
     const [ showMenu, setShowMenu ] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
