@@ -1,7 +1,5 @@
 .CreateChannelForm-container {
     width: 460px;
-<<<<<<< HEAD
-=======
     color: #ffffff;
     /* padding: 0px 16px; */
     box-sizing: border-box;
@@ -170,5 +168,4 @@ input:checked + .CreateChannelForm-private-slider-round:before {
     background-color: #5865f2;
     padding: 11px 16px;
     border-radius: 4px;
->>>>>>> create-channel-form
 }

@@ -6,16 +6,9 @@ import logo from "../../assets/datcord_logo_svg.svg";
 import { thunkGetChannels } from "../../store/channels";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelForm from "./CreateChannelForm";
-<<<<<<< HEAD
-
-import "./Channel.css";
-
-export default function Channels({ isLoaded }) {
-=======
 import "./Channel.css";
 
 export default function Channels() {
->>>>>>> create-channel-form
     const { serverId, channelId } = useParams();
     console.log("Channels - serverId, channelId:", serverId, channelId);
     const dispatch = useDispatch();
@@ -26,14 +19,11 @@ export default function Channels() {
     // console.log("SERVER_CHANNELS", channels);
     // console.log("USER", user);
     const [ showMenu, setShowMenu ] = useState(false);
-<<<<<<< HEAD
-=======
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
 		dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true))
 	}, [dispatch, serverId]);
->>>>>>> create-channel-form
 
 	const categories = {};
 
@@ -96,38 +86,8 @@ export default function Channels() {
 
     const closeMenu = () => setShowMenu(false);
 
-<<<<<<< HEAD
-    const categoriesMap = Object.keys(categories).map((category) => (
-        <>
-        <div className="UserLanding-sidebar-channel-category-container">
-            <i className="fa-solid fa-angle-down"></i>
-            <span className="UserLanding-sidebar-channel-category-name">{truncateNames(category)}</span>
-            <OpenModalButton
-                buttonText="Create-Channel"
-                onButtonClick={closeMenu}
-                modalComponent={<CreateChannelForm categoryName={category} />}
-            />
-        </div>
-        <div className="UserLanding-sidebar-channel-list">
-            {/* map out channels here */}
-            { category && categories[category].map((channel) => (
-                <NavLink to={`/channels/${server.id}/${channel.id}`} className="UserLanding-sidebar-channel-name" key={channel.id}>
-                    <div className="UserLanding-sidebar-channel-name-label">
-                        <span className="hash">#</span> {channel.name && truncateNames(channel.name)}</div>
-                        {/* if admin, then show these buttons v */}
-                    <div className="UserLanding-sidebar-channel-buttons">
-                        <i className="fa-solid fa-user-plus"></i>
-                        <i className="fa-solid fa-gear"></i>
-                    </div>
-                </NavLink>
-            ))}
-        </div>
-        </>
-    ))
-=======
     console.log("channels", channels)
     console.log("categories", categories.category)
->>>>>>> create-channel-form
 
     const categoriesMap = Object.keys(categories).map((category) => (
         <>
