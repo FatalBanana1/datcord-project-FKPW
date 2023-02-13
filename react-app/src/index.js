@@ -9,7 +9,7 @@ import * as sessionActions from "./store/session";
 import App from "./App";
 
 import "./index.css";
-import { MenuModalProvider } from "./context/MenuModal";
+import { MenuModalProvider, MenuModal } from "./context/MenuModal";
 import "./reset.css";
 
 const store = configureStore();
@@ -25,14 +25,15 @@ if (process.env.NODE_ENV !== "production") {
 function Root() {
 	return (
 		<ModalProvider>
-			<Provider store={store}>
+		<Provider store={store}>
 				<MenuModalProvider>
 					<BrowserRouter>
 						<App />
 						<Modal />
+						<MenuModal />
 					</BrowserRouter>
 				</MenuModalProvider>
-			</Provider>
+		</Provider>
 		</ModalProvider>
 	);
 }
