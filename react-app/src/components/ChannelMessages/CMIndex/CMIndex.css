@@ -97,3 +97,14 @@
 	cursor: pointer;
 	text-decoration: underline;
 }
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.edited {
+	color: rgb(172, 163, 150);
+	font-size: 0.7rem;
+	margin-left: 10px;
+}

@@ -17,6 +17,12 @@ const actionReadAllChannelMessages = (channelMessages) => ({
 	channelMessages,
 });
 
+//edit
+const actionEditChannelMessage = (channelMessages) => ({
+	type: UPDATE_CHANNEL_MESSAGE,
+	channelMessages,
+});
+
 //delete
 const actionDeleteChannelMessage = (channelMessages) => ({
 	type: DELETE_CHANNEL_MESSAGE,
@@ -53,6 +59,30 @@ export const thunkReadAllChannelMessages =
 			return ["An error occurred. Please try again."];
 		}
 	};
+
+// EDIT: Edit channel messages
+// Route: /api/channel/:serverId/:channelId/cms
+export const thunkEditChannelMessage = (payload) => async (dispatch) => {
+	// console.log(`thunk edit ====`, payload);
+	let response = await fetch(`/api/cms/${payload.id}`, {
+		method: `PUT`,
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(payload),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(actionEditChannelMessage(data));
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
 
 // DELETE: Delete channel message by channel id
 // Route: /api/channel/:serverId/:channelId/cms
@@ -93,7 +123,7 @@ const cmReducer = (state = defaultState(), action) => {
 	switch (action.type) {
 		case READ_ALL_CHANNEL_MESSAGES:
 			// console.log(`reducer-----`, action.channelMessages.channel_message);
-			newState = {};
+			newState = { ...state };
 			action.channelMessages.channel_message.forEach(
 				(el) => (newState[el.id] = el)
 			);
@@ -101,10 +131,10 @@ const cmReducer = (state = defaultState(), action) => {
 
 		case CREATE_CHANNEL_MESSAGE:
 			newState = { ...state };
-			// newState[action.userId] = {
-			// 	...state[action.userId],
-			// 	[action.server.id]: action.server,
-			// };
+			newState[action.userId] = {
+				...state[action.userId],
+				[action.server.id]: action.server,
+			};
 			return newState;
 
 		case DELETE_CHANNEL_MESSAGE:
@@ -114,8 +144,9 @@ const cmReducer = (state = defaultState(), action) => {
 			return newState;
 
 		case UPDATE_CHANNEL_MESSAGE:
+			// console.log(`RED -- update cms ======?>>>>>>>>`, action);
 			newState = { ...state };
-			newState[action.serverId] = action.server;
+			newState[action.channelMessages.id] = action.channelMessages;
 			return newState;
 
 		case RESET_CHANNEL_MESSAGES:
