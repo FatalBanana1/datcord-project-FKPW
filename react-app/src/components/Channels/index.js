@@ -17,9 +17,12 @@ export default function Channels() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
     // const server = useSelector(state => state.servers)[+serverId]
-    const server = useSelector((state) => state.servers.userServers);
+    // const server = useSelector((state) => state.servers.userServers);
+    const server = useSelector((state) => state.channels.server);
+    console.log("userServers", server)
+    // console.log("server we want:", server.find((thing) => thing.id === +serverId))
     const channels = Object.values(useSelector((state) => state.channels.channels));
-    console.log("SERVER", server);
+    // console.log("SERVER", server);
     console.log(
         "SERVER_CHANNELS",
         channels.filter((channel) => channel.id === 1)
@@ -103,8 +106,8 @@ export default function Channels() {
     console.log("channels", channels);
     console.log("categories", categories.category);
 
-    const categoriesMap = Object.keys(categories).map((category) => (
-        <>
+    const categoriesMap = Object.keys(categories).map((category,idx) => (
+        <div className="UserLanding-Sidebar-category-container" key={idx}>
             <div className="UserLanding-sidebar-channel-category-container">
                 <i className="fa-solid fa-angle-down"></i>
                 <span className="UserLanding-sidebar-channel-category-name">{truncateNames(category)}</span>
@@ -144,7 +147,7 @@ export default function Channels() {
                         </NavLink>
                     ))}
             </div>
-        </>
+        </div>
     ));
 
     // console.log("CATEGORIES", categories)
@@ -179,7 +182,7 @@ export default function Channels() {
         isLoaded && (
             <div className="UserLanding-sidebar">
                 <div className="UserLanding-sidebar-header">
-                    <p>{server[0].name}</p>
+                    <p>{server.name}</p>
                     <i className="fa-solid fa-angle-down big-angle-down"></i>
                 </div>
                 <div className="UserLanding-sidebar-channel-content">
