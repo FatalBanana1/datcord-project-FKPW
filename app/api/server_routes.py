@@ -19,40 +19,13 @@ def servers():
 # GET SERVERS BY USER ID
 @server_routes.route('/user')
 @login_required
-# def users_servers():
-#      # get list of all the server memberships to the current user
-#     user_memberships = current_user.server_memberships
-#     if (len(user_memberships) > 0):
-#         # looping through user_memberships to get that membership.server
-#         servers = [membership.server for membership in user_memberships]
-#         return {"servers": [server.to_dict() for server in servers]}, 200
-#     else:
-#         return {"errors": ["User has no servers"]}
 def users_servers():
      # get list of all the server memberships to the current user
     user_memberships = current_user.server_memberships
-    # print("Current User Memberships,", current_user.to_dict())
-    # getting servers that the user owns
-    user_owned_servers = Server.query.filter(Server.owner_id == current_user.id).all()
-    # converting each server to dictionary
-    user_servers = [server.to_dict() for server in user_owned_servers]
-    # print('USER SERVERS', user_servers)
-    # print("HELLO,", [membership.server.to_dict() for membership in user_memberships])
-    # set and empty list
-    servers = []
-    # if the user owns server/s, then push to the servers list
-    if (len(user_servers)):
-        servers += user_servers
-    # print("CONCAT", servers)
-    # if the user is a member of any server, then also push to servers list
-    if (len(user_memberships)):
-        servers += [membership.server.to_dict() for membership in user_memberships]
-    # print("CONCAT 2", servers)
-    # if there are user servers, then return their servers
-    if (len(servers)):
+    if (len(user_memberships) > 0):
         # looping through user_memberships to get that membership.server
-        # servers = [membership.server for membership in user_memberships]
-        return {"servers": servers}, 200
+        servers = [membership.server for membership in user_memberships]
+        return {"servers": [server.to_dict() for server in servers]}, 200
     else:
         return {"errors": ["User has no servers"]}
 
