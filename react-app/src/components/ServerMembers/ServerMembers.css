@@ -8,6 +8,33 @@
     overflow: hidden;
 }
 
+.join-server-div {
+    background-color: rgb(60,68,165);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.join-text {
+    color: white;
+    font-size: 12px;
+    padding-right: 5px;
+}
+
+.join-server-button {
+    background-color: rgb(60,68,165);
+    color: white;
+    border: 1.5px solid white;
+    font-size: 12px;
+    padding: 3px 7px;
+    margin: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
 .total-members {
     font-size: 15px;
     width: 100%;
@@ -24,7 +51,7 @@ h2 {
 	color: rgb(211, 212, 214, 0.8);
 }
 
-p {
+.nicknames {
     font-size: 15px;
     color: rgb(25,188,155)
 }
