@@ -49,8 +49,8 @@ export default function Splash() {
                   ></input>
                 </div>
                 <div className="form-button">
-                  <button type="submit" class="btn">
-                    <i class="fa-solid fa-arrow-right"></i>
+                  <button type="submit" className="btn">
+                    <i className="fa-solid fa-arrow-right"></i>
                   </button>
                 </div>
               </form>

@@ -56,10 +56,10 @@ export default function UserLanding({ page }) {
 									{/* this holds the message and vertical ellipsis icons for actions */}
 									<div className="UserLanding-user-actions-container">
 										<div className="UserLanding-user-actions">
-											<i class="fa-solid fa-message fa-xs"></i>
+											<i className="fa-solid fa-message fa-xs"></i>
 										</div>
 										<div className="UserLanding-user-actions">
-											<i class="fa-solid fa-ellipsis-vertical"></i>
+											<i className="fa-solid fa-ellipsis-vertical"></i>
 										</div>
 									</div>
 								</div>
@@ -83,10 +83,10 @@ export default function UserLanding({ page }) {
 									</div>
 									<div className="UserLanding-user-actions-container">
 										<div className="UserLanding-user-actions">
-											<i class="fa-solid fa-message fa-xs"></i>
+											<i className="fa-solid fa-message fa-xs"></i>
 										</div>
 										<div className="UserLanding-user-actions">
-											<i class="fa-solid fa-ellipsis-vertical"></i>
+											<i className="fa-solid fa-ellipsis-vertical"></i>
 										</div>
 									</div>
 								</div>
@@ -142,10 +142,10 @@ export default function UserLanding({ page }) {
 							{/* this holds the message and vertical ellipsis icons for actions */}
 							<div className="UserLanding-user-actions-container">
 								<div className="UserLanding-user-actions">
-									<i class="fa-solid fa-message fa-xs"></i>
+									<i className="fa-solid fa-message fa-xs"></i>
 								</div>
 								<div className="UserLanding-user-actions">
-									<i class="fa-solid fa-ellipsis-vertical"></i>
+									<i className="fa-solid fa-ellipsis-vertical"></i>
 								</div>
 							</div>
 						</div>
@@ -166,10 +166,10 @@ export default function UserLanding({ page }) {
 							</div>
 							<div className="UserLanding-user-actions-container">
 								<div className="UserLanding-user-actions">
-									<i class="fa-solid fa-message fa-xs"></i>
+									<i className="fa-solid fa-message fa-xs"></i>
 								</div>
 								<div className="UserLanding-user-actions">
-									<i class="fa-solid fa-ellipsis-vertical"></i>
+									<i className="fa-solid fa-ellipsis-vertical"></i>
 								</div>
 							</div>
 						</div>

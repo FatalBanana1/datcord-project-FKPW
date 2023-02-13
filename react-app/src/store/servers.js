@@ -15,38 +15,38 @@ const RESET_SERVERS = "servers/RESET_SERVERS";
 
 // GET
 const actionReadAllServers = (servers) => ({
-  type: READ_ALL_SERVERS,
-  servers,
+	type: READ_ALL_SERVERS,
+	servers,
 });
 
 // GET SERVERS BY USERS
 const actionReadUserServers = (servers) => ({
-  type: READ_USER_SERVERS,
-  servers,
+	type: READ_USER_SERVERS,
+	servers,
 });
 
 // CREATE
 const actionCreateServer = (server) => ({
-  type: CREATE_SERVER,
-  server,
+	type: CREATE_SERVER,
+	server,
 });
 
 // EDIT
 export const actionUpdateServer = (serverId, server) => ({
-  type: UPDATE_SERVER,
-  serverId,
-  server,
+	type: UPDATE_SERVER,
+	serverId,
+	server,
 });
 
 // DELETE
 export const actionDeleteServer = (server) => ({
-  type: DELETE_SERVER,
-  server,
+	type: DELETE_SERVER,
+	server,
 });
 
 // RESET
 export const actionResetServers = () => ({
-  type: RESET_SERVERS,
+	type: RESET_SERVERS,
 });
 
 //-------------------------------------------------------
@@ -56,106 +56,106 @@ export const actionResetServers = () => ({
 // GET: Get All Servers
 // Route: /api/servers
 export const thunkReadAllServers = () => async (dispatch) => {
-  let response = await fetch(`/api/servers/`);
+	let response = await fetch(`/api/servers/`);
 
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(actionReadAllServers(data));
-    return data;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ["An error occurred. Please try again."];
-  }
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(actionReadAllServers(data));
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 };
 
 // GET: Get ALL Servers by user id
 export const thunkReadUserServers = () => async (dispatch) => {
-  let response = await fetch(`/api/servers/user`);
+	let response = await fetch(`/api/servers/user`);
 
-  if (response.ok) {
-    const servers = await response.json();
-    dispatch(actionReadUserServers(servers.servers));
-    return servers.servers;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ["An error occurred. Please try again."];
-  }
+	if (response.ok) {
+		const servers = await response.json();
+		dispatch(actionReadUserServers(servers.servers));
+		return servers.servers;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 };
 
 // CREATE
 export const thunkCreateServer = (server) => async (dispatch) => {
-  const response = await fetch(`/api/servers/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(server),
-  });
+	const response = await fetch(`/api/servers/`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(server),
+	});
 
-  console.log("RESPONSE", response);
-  if (response.ok) {
-    console.log("INSIDE resOK");
-    const newServer = await response.json();
-    console.log("NEW SERVER", newServer);
-    dispatch(actionCreateServer(newServer.server));
-    return newServer.server;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ["An error occurred. Please try again."];
-  }
+	console.log("RESPONSE", response);
+	if (response.ok) {
+		console.log("INSIDE resOK");
+		const newServer = await response.json();
+		console.log("NEW SERVER", newServer);
+		dispatch(actionCreateServer(newServer.server));
+		return newServer.server;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 };
 
 // EDIT
 export const thunkUpdateServer = (serverId, server) => async (dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(server),
-  });
+	const response = await fetch(`/api/servers/${serverId}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(server),
+	});
 
-  if (response.ok) {
-    const updatedServer = await response.json();
-    dispatch(actionUpdateServer(updatedServer.server));
-    return updatedServer.server;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ["An error occurred. Please try again."];
-  }
+	if (response.ok) {
+		const updatedServer = await response.json();
+		dispatch(actionUpdateServer(updatedServer.server));
+		return updatedServer.server;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 };
 
 // DELETE
 export const thunkDeleteServer = (serverId) => async (dispatch) => {
-  const response = await fetch(`api/servers/${serverId}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-  });
+	const response = await fetch(`api/servers/${serverId}`, {
+		method: "DELETE",
+		headers: { "Content-Type": "application/json" },
+	});
 
-  if (response.ok) {
-    const deletedServer = await response.json();
-    dispatch(actionDeleteServer(deletedServer(serverId)));
-    return deletedServer;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ["An error occurred. Please try again."];
-  }
+	if (response.ok) {
+		const deletedServer = await response.json();
+		dispatch(actionDeleteServer(deletedServer(serverId)));
+		return deletedServer;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 };
 
 //-------------------------------------------------------
@@ -163,51 +163,53 @@ export const thunkDeleteServer = (serverId) => async (dispatch) => {
 //reducer
 
 function defaultState() {
-  const initialState = { userServers: [] };
-  return initialState;
+	const initialState = { userServers: [] };
+	return initialState;
 }
 
 const serverReducer = (state = defaultState(), action) => {
-  let newState;
+	let newState;
 
-  switch (action.type) {
-    case READ_ALL_SERVERS:
-      // console.log(`reducer-----`, action);
-      newState = {};
-      action.servers.servers.forEach((el) => (newState[el.id] = el));
-      return newState;
+	switch (action.type) {
+		case READ_ALL_SERVERS:
+			// console.log(`reducer-----`, action);
+			newState = {};
+			action.servers.servers.forEach((el) => (newState[el.id] = el));
+			return newState;
 
-    case READ_USER_SERVERS:
-      newState = { ...state };
-      newState.userServers = action.servers;
-      return newState;
+		case READ_USER_SERVERS:
+			// console.log(`REDUCER - user  servers >>>>>>>>>`, action);
+			newState = { ...state };
+			action.servers.forEach((el) => (newState[el.id] = el));
+			// newState.userServers = action.servers;
+			return newState;
 
-    case CREATE_SERVER:
-      newState = { ...state };
-      // newState[action.userId] = {
-      //   ...state[action.userId],
-      //   [action.server.id]: action.server,
-      // };
-      console.log("CREATE THUNK", newState);
-      newState.userServers = [...state.userServers, action.server];
-      return newState;
+		case CREATE_SERVER:
+			newState = { ...state };
+			// newState[action.userId] = {
+			//   ...state[action.userId],
+			//   [action.server.id]: action.server,
+			// };
+			console.log("CREATE THUNK", newState);
+			newState.userServers = [...state.userServers, action.server];
+			return newState;
 
-    case DELETE_SERVER:
-      newState = { ...state };
-      delete newState[action.id];
-      return newState;
+		case DELETE_SERVER:
+			newState = { ...state };
+			delete newState[action.id];
+			return newState;
 
-    case UPDATE_SERVER:
-      newState = { ...state };
-      newState[action.serverId] = action.server;
-      return newState;
+		case UPDATE_SERVER:
+			newState = { ...state };
+			newState[action.serverId] = action.server;
+			return newState;
 
-    case RESET_SERVERS:
-      return defaultState();
+		case RESET_SERVERS:
+			return defaultState();
 
-    default:
-      return state;
-  }
+		default:
+			return state;
+	}
 };
 
 export default serverReducer;
