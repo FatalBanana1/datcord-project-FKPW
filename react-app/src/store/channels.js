@@ -40,7 +40,30 @@ export const thunkGetChannels = (serverId) => async (dispatch) => {
   return data.channels;
 };
 
+export const thunkCreateChannel = (serverId, newChannel) => async (dispatch) => {
+  const res = await fetch(`/api/servers/${serverId}/channels`, {
+    method: "POST",
+    headers: {
+        "Content-Type":
+        "application/json"
+    },
+    body: JSON.stringify(newChannel)
+  });
 
+  if (res.ok) {
+		const data = await res.json();
+    console.log("thunkCreateChannel - data:", data);
+		dispatch(actionCreateChannel(data.channel));
+		return null;
+	} else if (res.status < 500) {
+		const data = await res.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+}
 
 
 
@@ -58,15 +81,22 @@ const initialState = { channels: {} };
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_SERVER_CHANNELS:
-      const newState = { ...state }
-      newState.server = action.server;
+      const getChannelsState = { ...state };
+      getChannelsState.server = action.server;
       if (action.channels === "Server has no channels") {
-        newState.channels = "";
-        return newState;
+        getChannelsState.channels = "";
+        return getChannelsState;
       }
-      newState.channels = normalize(action.channels);
-      console.log("NEW STATE", newState)
-      return newState;
+      getChannelsState.channels = normalize(action.channels);
+      console.log("NEW STATE", getChannelsState)
+      return getChannelsState;
+    case CREATE_CHANNEL: {
+      const createChannelState = { ...state };
+      createChannelState.channels = { ...state.channels, [action.channel.id]: action.channel };
+      console.log("CREATE_CHANNEL - createChannelState:", createChannelState);
+      return createChannelState;
+
+    }
     default:
       return state;
   }

@@ -24,6 +24,11 @@
     box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),0 1.5px 0 hsl(240 7.7% 2.5%/0.05),0 2px 0 hsl(240 11.1% 1.8%/0.05);
 }
 
+.UserLanding-sidebar-channel-content {
+    height: calc(100% - 98px);
+    overflow-y: auto;
+}
+
 .UserLanding-sidebar-channel-category-container {
     padding-top: 16px;
     color: #96989d;
@@ -59,6 +64,7 @@
     display: flex;
     flex-direction: column;
     padding: 8px;
+    overflow-y: auto;
 }
 
 .hash {
