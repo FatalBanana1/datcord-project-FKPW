@@ -1,12 +1,17 @@
 .server-members-div {
     display: flex;
     flex-direction: column;
+    background-color: rgb(48,49,54);
+    height: 100%;
+    width: 230px;
 }
 
 .total-members {
     font-size: 15px;
     width: 100%;
 	color: rgba(211, 212, 214, 0.8);
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
 
 h2 {
@@ -24,5 +29,9 @@ p {
 }
 
 .individual-person {
-    padding: 2px
+    padding: 2px;
+}
+
+.individual-person:hover{
+    background-color: #3f434a;
 }
