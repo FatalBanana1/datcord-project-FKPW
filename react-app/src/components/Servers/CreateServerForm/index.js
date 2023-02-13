@@ -40,7 +40,7 @@ const CreateServerForm = () => {
   return (
     <div className="create-server-container">
       <div className="create-server-header-container">
-        <h1 className="create-server-title">Create Server</h1>
+        <h1 className="create-server-title">Create Your Server</h1>
         <div className="create-server-subtext">
           Your server is where you and your friends hang out. Make yours and
           start talking.
@@ -70,6 +70,7 @@ const CreateServerForm = () => {
         <div className="create-server-form-title">Description</div>
         <div className="create-server-text-area">
           <textarea
+            rows="5"
             className="input-fields"
             type="text"
             value={description}

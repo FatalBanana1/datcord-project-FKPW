@@ -55,7 +55,7 @@ export default function ServerNav() {
         loaded &&
         servers.map((server) => (
           <div
-            className="ServerNav-icons"
+            className="ServerNav-server-icons"
             key={server.id}
             onClick={() => handleClick(server.id)}
           >

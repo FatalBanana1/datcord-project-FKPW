@@ -40,8 +40,24 @@
   flex-shrink: 0;
 }
 
+.ServerNav-server-icons {
+  color: #3ba55d;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #34363e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
 .ServerNav-icons::before,
-.ServerNav-profile::before {
+.ServerNav-profile::before,
+.ServerNav-server-icons::before {
   position: absolute;
   background-color: white;
   display: block;
@@ -54,12 +70,14 @@
 }
 
 .ServerNav-icons:active,
-.ServerNav-profile:active {
+.ServerNav-profile:active,
+.ServerNav-server-icons:active {
   background-color: #3ba55d;
 }
 
 .ServerNav-icons:active::before,
-.ServerNav-profile:active::before {
+.ServerNav-profile:active::before,
+.ServerNav-server-icons:active::before {
   position: absolute;
   background-color: white;
   display: block;
@@ -70,7 +88,8 @@
 }
 
 .ServerNav-icons:hover,
-.ServerNav-profile:hover {
+.ServerNav-profile:hover,
+.ServerNav-server-icons:hover {
   cursor: pointer;
   border-radius: 16px;
   color: white;
@@ -78,7 +97,8 @@
 }
 
 .ServerNav-icons:hover::before,
-.ServerNav-profile:hover::before {
+.ServerNav-profile:hover::before,
+.ServerNav-server-icons:hover::before {
   position: absolute;
   background-color: white;
   display: block;
