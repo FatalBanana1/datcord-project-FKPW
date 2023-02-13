@@ -9,25 +9,28 @@ import {
   thunkReadUserServers,
 } from "../../../store/servers";
 import { thunkGetChannels } from "../../../store/channels";
+import CreateServerForm from "../../Servers/CreateServerForm";
+import OpenModalButton from "../../OpenModalButton";
+
 export default function ServerNav() {
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
   // const allServers = useSelector((state) => state.servers);
-  const userServers = useSelector((state) => state.servers);
+  const servers = useSelector((state) => state.servers.userServers);
   // console.log("User Servers 1", userServers);
   // console.log("ServerNav - servers:", allServers);
   // const servers = Object.values(allServers);
   // const servers = Object.values(userServers);
-  const [servers, setServers] = useState([]);
+  // const [servers, setServers] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
     // dispatch(thunkReadAllServers());
     dispatch(thunkReadUserServers())
-      .then((res) => {
-        // console.log("USERSERVERS, ", servers);
-        setServers(res);
-      })
+      // .then((res) => {
+      //   // console.log("USERSERVERS, ", servers);
+      //   // setServers(res);
+      // })
       .then(() => setLoaded(true));
   }, [dispatch]);
 
@@ -64,9 +67,14 @@ export default function ServerNav() {
           </div>
         ))}
       <div className="ServerNav-divider"></div>
-      <div className="ServerNav-icons">
-        <i className="fa-solid fa-plus"></i>
-      </div>
+
+      {/* <i className="fa-solid fa-plus"></i> */}
+      <OpenModalButton
+        buttonText="Create-Server"
+        modalComponent={<CreateServerForm />}
+        // onButtonClick={closeMenu}
+      />
+
       <div className="ServerNav-icons">
         <i class="fa-solid fa-compass fa-lg"></i>
       </div>
