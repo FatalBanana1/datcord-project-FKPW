@@ -43,21 +43,26 @@ def create_server():
             icon_url = form.data["icon_url"],
             description = form.data["description"]
         )
+        print("SERVER", server, server.to_dict())
         channel = Channel(
             name = "general",
-            server_id = server.id,
+            # server_id = server.id,
             category = "Main",
             is_private = False
         )
         member = ServerMember(
             user_id = userId,
-            server_id = server.id,
+            # server_id = server.id,
             nickname = current_user.username,
-            role = "Owner"
+            role = "owner"
         )
         db.session.add(server)
         db.session.add(channel)
         db.session.add(member)
+
+        server.channels.append(channel)
+        server.server_members.append(member)
+
         db.session.commit()
         return {"server": server.to_dict()}, 201
     return {"errors": ["Could not complete request"]}

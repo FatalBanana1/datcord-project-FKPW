@@ -169,3 +169,13 @@ input:checked + .CreateChannelForm-private-slider-round:before {
     padding: 11px 16px;
     border-radius: 4px;
 }
+
+.CreateChannelForm-button-delete {
+    color: red;
+    font-weight: 600;
+    font-size: 13px;
+    border: 0;
+    background-color: transparent;
+    padding: 11px 16px;
+    border-radius: 4px;
+}

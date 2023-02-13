@@ -65,7 +65,50 @@ export const thunkCreateChannel = (serverId, newChannel) => async (dispatch) => 
 	}
 }
 
+export const thunkDeleteChannel = (serverId, channelId) => async (dispatch) => {
+  const res = await fetch(`/api/servers/${serverId}/channels/${channelId}`, {
+    method: "DELETE"
+  })
 
+  if (res.ok) {
+    const data = await res.json();
+    console.log("thunkDeleteChannel - data:", data);
+    dispatch(actionDeleteChannel(channelId))
+    return data;
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occured. Please try again."]
+  }
+}
+
+export const thunkEditChannel = (serverId, channelId, editedChannel) => async (dispatch) => {
+  const res = await fetch(`/api/servers/${serverId}/channels/${channelId}`, {
+    method: "PUT",
+    headers: {
+        "Content-Type":
+        "application/json"
+    },
+    body: JSON.stringify(editedChannel)
+  });
+
+  if (res.ok) {
+		const data = await res.json();
+    console.log("thunkEditChannel - data:", data);
+		dispatch(actionEditChannel(channelId, data.channel));
+		return null;
+	} else if (res.status < 500) {
+		const data = await res.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+}
 
 const normalize = (channels) => {
     const data = {};
@@ -96,6 +139,19 @@ export default function reducer(state = initialState, action) {
       console.log("CREATE_CHANNEL - createChannelState:", createChannelState);
       return createChannelState;
 
+    }
+    case DELETE_CHANNEL: {
+      const deleteChannelState = { ...state };
+      console.log("DELETE_CHANNEL - before delete:", action);
+      delete deleteChannelState.channels[action.channelId];
+      console.log("DELETE_CHANNEL - deleteChannelState:", deleteChannelState);
+      return deleteChannelState;
+    }
+    case EDIT_CHANNEL: {
+      const editChannelState = { ...state };
+      editChannelState.channels = { ...state.channels, [ action.channelId ]: action.channel};
+      console.log("EDIT_CHANNEL - editChannelState:", editChannelState);
+      return editChannelState;
     }
     default:
       return state;
