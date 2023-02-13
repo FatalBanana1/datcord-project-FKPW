@@ -1,5 +1,6 @@
-import React from "react";
-import { useModal } from "../../context/Modal";
+import React from 'react';
+import { useModal } from '../../context/Modal';
+import "./OpenModalButton.css";
 
 function OpenModalButton({
   modalComponent, // component to render inside the modal
@@ -41,7 +42,19 @@ function OpenModalButton({
     );
   }
 
-  return <button onClick={onClick}>{buttonText}</button>;
+  if (buttonText === "Edit-Channel") {
+    return (
+      <button onClick={onClick}
+        className={`OpenModalButton-button ${buttonText}`}
+      >
+        <i className="fa-solid fa-gear"></i>
+      </button>
+    )
+  }
+
+  return (
+    <button onClick={onClick}>{buttonText}</button>
+  );
 }
 
 export default OpenModalButton;

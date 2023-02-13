@@ -22,3 +22,11 @@
     align-items: center;
     margin-left: 0;
 }
+
+.Edit-Channel {
+    font-size: 12px;
+    color: #96989d;
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+}

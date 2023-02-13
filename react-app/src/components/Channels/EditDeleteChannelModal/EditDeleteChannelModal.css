@@ -1,0 +1,61 @@
+#modal-content {
+    border-radius: 12px;
+}
+
+.EditDeleteChannelModal-container {
+    position: absolute;
+    width: calc(100vw + 72px);
+    height: 100vh;
+    z-index: 99999999999;
+    background-color:#36393f;
+    margin-left: -72px;
+    padding-left: 10px;
+    display: flex;
+    color: #96989d;
+}
+
+.hidden {
+    display: none;
+}
+
+.EditDeleteChannelModal-left {
+    display: flex;
+    justify-content: flex-end;
+    width: 35%;
+    padding-top: 72px;
+}
+
+.EditDeleteChannelModal-nav {
+    display: flex;
+    flex-direction: column;
+    width: 218px;
+}
+
+.EditDeleteChannelModal-nav-headers {
+    display: flex;
+    gap: 8px;
+}
+
+.EditDeleteChannelModal-nav-header {
+    font-size: 11px;
+    color: #96989d;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.EditDeleteChannelModal-right {
+    padding-top: 72px;
+}
+
+.EditDeleteChannelModal-nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 34px;
+    color: #96989d;
+    cursor: pointer;
+    padding: 7px;
+    box-sizing: border-box;
+    font-size: 16px;
+}

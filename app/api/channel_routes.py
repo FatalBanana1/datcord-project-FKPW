@@ -112,6 +112,7 @@ def create_channel(serverId):
 def edit_channel(serverId, channel_id):
     user = current_user
     channel = Channel.query.filter(Channel.server_id == serverId, Channel.id == channel_id).first()
+    print("### CHANNEL:", channel)
 
     res = request.get_json()
     form = ChannelForm()

@@ -110,7 +110,7 @@ a.UserLanding-sidebar-channel-name {
 
 .UserLanding-sidebar-channel-buttons {
     display: flex;
-    gap: 8px;
+    /* gap: 8px; */
 }
 
 .fa-user-plus, .fa-gear {
