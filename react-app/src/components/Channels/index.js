@@ -10,6 +10,7 @@ import EditDeleteChannelModal from "./EditDeleteChannelModal/dp-index";
 import "./Channel.css";
 import { Modal } from "../../context/Modal";
 import EditChannelForm from "./EditDeleteChannelModal";
+import { thunkGetServerMembers } from "../../store/serverMembers";
 
 export default function Channels() {
     const { serverId, channelId } = useParams();
@@ -24,8 +25,9 @@ export default function Channels() {
     // console.log("server we want:", server.find((thing) => thing.id === +serverId))
     const channels = Object.values(useSelector((state) => state.channels.channels));
     // console.log("SERVER", server);
-    const serverMember = useSelector((state) => state.serverMembers[user.id]);
-    console.log("channels - serverMember:", serverMember);
+    const serverMembers = Object.values(useSelector((state) => state.serverMembers));
+    const serverMember = serverMembers.filter(member => member.user_id === user.id);
+    console.log("channels - serverMember:", serverMembers);
 
     let serverMemberRole;
 
@@ -45,6 +47,7 @@ export default function Channels() {
     console.log("show edit", showEdit);
 
     useEffect(() => {
+        dispatch(thunkGetServerMembers(+serverId));
         dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
     }, [dispatch, serverId]);
 
