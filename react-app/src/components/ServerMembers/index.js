@@ -9,6 +9,9 @@ import {
     thunkDeleteServerMember
 } from "../../store/serverMembers"
 import "./ServerMembers.css"
+import crown from "../../assets/crown.png";
+import OpenModalButton from "../OpenModalButton";
+import MemberPage from "./MemberPage";
 
 const ServerMembers = () => {
     const dispatch = useDispatch();
@@ -18,10 +21,12 @@ const ServerMembers = () => {
     const user = useSelector((state) => state.session.user);
     let {serverId} = useParams();
     const servers = useSelector((state) =>state.servers)
-    const server = servers[serverId]
+    // const server = servers[serverId]
     const serverMembers = useSelector((state) => state.serverMembers)
     const membersArray = Object.values(serverMembers)
-    console.log("membersArray ------->", membersArray)
+    const [ showMenu, setShowMenu ] = useState(false);
+
+    // console.log("membersArray ------->", membersArray)
 
     useEffect(() => {
 		dispatch(thunkGetServerMembers(serverId)).then(() =>
@@ -33,11 +38,21 @@ const ServerMembers = () => {
 		};
 	}, [serverId, isLoaded]);
 
+
+    console.log("SERVERS --->", servers)
+    // const server = servers.userServers[+serverId]
+    // GET SERVER
+    // if (!servers.values) return null
+    // const server = servers.userServers[serverId]
+    // console.log(".values ------>", servers.values)
+    // console.log("bang ------->", !server.values)
+
+
     // Check to see if User owns the server
     let owner = null
-    if (user && server) {
-        owner = (user.id === server.owner_id)
-    }
+    // if (user && server) {
+    //     owner = (user.id == server.owner_id)
+    // }
 
     // Split into categories
     let owners
@@ -56,22 +71,41 @@ const ServerMembers = () => {
         if (user.id == member.user_id) isMember = true
     }
 
-    const join = (e) => {
-        e.preventDefault();
-        const serverId = server.id;
-        const role = "member"
-        dispatch(thunkAddServerMember(serverId, role))
-        setIsLoaded(false);
+    // const join = (e) => {
+    //     e.preventDefault();
+    //     const serverId = server.id;
+    //     const role = "member"
+    //     dispatch(thunkAddServerMember(serverId, role))
+    //     setIsLoaded(false);
+    // }
+
+    let admin
+    if (isMember && !owner) {
+        const membership = membersArray.filter(member => {
+            return member.user_id === user.id
+        })
+        if (membership[0].role === "admin") admin = true
     }
+
+
+
+    // const openMember = (e) => {
+    //     e.preventDefault();
+    //     const isOwner = owner
+    //     const isAdmin = admin
+    // }
+
+    const closeMenu = () => setShowMenu(false);
 
     return (
         user && (membersArray.length > 0) && (
             <>
             {!isMember && (
-                <div className="join-server-div">
-                    {/* <div className="join-text">Preview mode</div> */}
-                    <button type="submit" onClick={join} className='join-server-button'>Join {server.name}</button>
-                </div>
+                <></>
+                // <div className="join-server-div">
+                //     {/* <div className="join-text">Preview mode</div> */}
+                //     <button type="submit" onClick={join} className='join-server-button'>Join {server.name}</button>
+                // </div>
                 )}
             <div className="server-members-div">
                 <h1 className="total-members">{`Total Members - ${membersArray.length}`}</h1>
@@ -80,7 +114,19 @@ const ServerMembers = () => {
                         <h2>Owner</h2>
                         <div className="individual-person">
                             <img className="member-img" src={owners[0].display_pic}></img>
-                            <p className="owner nicknames">{owners[0].nickname}</p>
+                            {/* <p className="owner nicknames">{owners[0].nickname}</p> */}
+                            <OpenModalButton
+                                id = "memberModalButton"
+                                className="owner nicknames"
+                                buttonText={owners[0].nickname}
+                                onButtonClick={closeMenu}
+                                modalComponent={<MemberPage member={owners[0]} isOwner={owner} isAdmin={admin} />}
+                            />
+                            <img
+								src={crown}
+								alt="crown"
+								className="server-owner-crown"
+							/>
                         </div>
                     </div>
                 )}
