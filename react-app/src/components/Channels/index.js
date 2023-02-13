@@ -6,10 +6,16 @@ import logo from "../../assets/datcord_logo_svg.svg";
 import { thunkGetChannels } from "../../store/channels";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelForm from "./CreateChannelForm";
+<<<<<<< HEAD
 
 import "./Channel.css";
 
 export default function Channels({ isLoaded }) {
+=======
+import "./Channel.css";
+
+export default function Channels() {
+>>>>>>> create-channel-form
     const { serverId, channelId } = useParams();
     console.log("Channels - serverId, channelId:", serverId, channelId);
     const dispatch = useDispatch();
@@ -20,17 +26,32 @@ export default function Channels({ isLoaded }) {
     // console.log("SERVER_CHANNELS", channels);
     // console.log("USER", user);
     const [ showMenu, setShowMenu ] = useState(false);
+<<<<<<< HEAD
+=======
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+		dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true))
+	}, [dispatch, serverId]);
+>>>>>>> create-channel-form
 
 	const categories = {};
-	for (let i = 0; i < channels.length; i++) {
-		const channel = channels[i];
 
-		if (!categories[channel.category]) {
-			categories[channel.category] = [channel];
-		} else {
-			categories[channel.category].push(channel);
-		}
-	}
+    if (!channels) return null;
+
+    if (!server) return null;
+
+    if (channels.length > 0) {
+        for (let i = 0; i < channels.length; i++) {
+            const channel = channels[i];
+
+            if (!categories[channel.category]) {
+                categories[channel.category] = [channel];
+            } else {
+                categories[channel.category].push(channel);
+            }
+        }
+    }
 
 	const truncateNames = (names) => {
 		if (names.length > 18) {
@@ -75,6 +96,7 @@ export default function Channels({ isLoaded }) {
 
     const closeMenu = () => setShowMenu(false);
 
+<<<<<<< HEAD
     const categoriesMap = Object.keys(categories).map((category) => (
         <>
         <div className="UserLanding-sidebar-channel-category-container">
@@ -102,20 +124,87 @@ export default function Channels({ isLoaded }) {
         </div>
         </>
     ))
+=======
+    console.log("channels", channels)
+    console.log("categories", categories.category)
+>>>>>>> create-channel-form
 
-	return (
-		server && (
-			<div className="UserLanding-sidebar">
-				<div className="UserLanding-sidebar-header">
-					<p>{server.name}</p>
-					<i className="fa-solid fa-angle-down big-angle-down"></i>
-				</div>
-				<div className="UserLanding-sidebar-channel-content">
-					{categoriesMap.length ? (
-						categoriesMap
-					) : (
-						<div className="UserLanding-sidebar-channel-category-container"></div>
-					)}
+    const categoriesMap = Object.keys(categories).map((category) => (
+        <>
+        <div className="UserLanding-sidebar-channel-category-container">
+            <i className="fa-solid fa-angle-down"></i>
+            <span className="UserLanding-sidebar-channel-category-name">{truncateNames(category)}</span>
+            <OpenModalButton
+                buttonText="Create-Channel"
+                onButtonClick={closeMenu}
+                modalComponent={<CreateChannelForm categoryName={category} serverId={serverId} />}
+            />
+        </div>
+        <div className="UserLanding-sidebar-channel-list">
+            {/* map out channels here */}
+            { category && channels.length > 0 && categories[category].map((channel) => (
+                <NavLink to={`/channels/${server.id}/${channel.id}`} className="UserLanding-sidebar-channel-name" key={channel.id}>
+                    <div className="UserLanding-sidebar-channel-name-label">
+                        <span className="hash">#</span> {channel.name && truncateNames(channel.name)}</div>
+                        {/* if admin, then show these buttons v */}
+                    <div className="UserLanding-sidebar-channel-buttons">
+                        <i className="fa-solid fa-user-plus"></i>
+                        <i className="fa-solid fa-gear"></i>
+                    </div>
+                </NavLink>
+            ))}
+        </div>
+        </>
+    ))
+
+    // console.log("CATEGORIES", categories)
+
+
+    if (!channels.length || !server) {
+        return (
+            <div className="UserLanding-sidebar">
+            <div className="UserLanding-sidebar-header">
+                {/* <p>{server.name}</p> */}
+                <i className="fa-solid fa-angle-down big-angle-down"></i>
+            </div>
+            <div className="UserLanding-sidebar-channel-content">
+
+
+
+                <div className="UserLanding-sidebar-channel-user-info">
+                    <div className="UserLanding-sidebar-channel-user-container">
+                        <div className="UserLanding-sidebar-channel-user-icon">
+                            <img src={logo} alt="User profile image" />
+                        </div>
+                        <div className="UserLanding-sidebar-channel-user-name">
+                            { user && user.username }
+                        </div>
+                    </div>
+                    <div className="UserLanding-sidebar-channel-user-actions">
+                        <i className="fa-solid fa-microphone"></i>
+                        <i className="fa-solid fa-headphones"></i>
+                        <i className="fa-solid fa-gear user-gear"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        )
+    }
+
+
+
+    return isLoaded && (
+        <div className="UserLanding-sidebar">
+            <div className="UserLanding-sidebar-header">
+                <p>{server.name}</p>
+                <i className="fa-solid fa-angle-down big-angle-down"></i>
+            </div>
+            <div className="UserLanding-sidebar-channel-content">
+
+                { channels.length > 0 && categoriesMap.length ? categoriesMap : (
+                    <div className="UserLanding-sidebar-channel-category-container">
+                    </div>
+                )}
 
 					<div className="UserLanding-sidebar-channel-user-info">
 						<div className="UserLanding-sidebar-channel-user-container">
@@ -138,5 +227,4 @@ export default function Channels({ isLoaded }) {
 				</div>
 			</div>
 		)
-	);
 }
