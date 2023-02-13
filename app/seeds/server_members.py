@@ -6,7 +6,7 @@ def seed_server_members():
         user_id = 1,
         server_id = 1,
         nickname = "Sir Demolition",
-        role = "admin"
+        role = "owner"
     )
 
     member2 = ServerMember(
@@ -19,8 +19,8 @@ def seed_server_members():
     member3 = ServerMember(
         user_id = 3,
         server_id = 1,
-        nickname = "Pasture-ized",
-        role = "member"
+        nickname = "Dragon-Lord",
+        role = "admin"
     )
 
     member4 = ServerMember(
@@ -37,7 +37,65 @@ def seed_server_members():
         role = "pending"
     )
 
-    db.session.add_all([member1, member2, member3, member4, member5])
+    member6 = ServerMember(
+        user_id = 3,
+        server_id = 2,
+        nickname = "Dhaaaaf",
+        role = "owner"
+    )
+
+    member7 = ServerMember(
+        user_id = 2,
+        server_id = 3,
+        nickname = "FatalBanana",
+        role = "owner"
+    )
+
+    member8 = ServerMember(
+        user_id = 4,
+        server_id = 4,
+        nickname = "Meow Meow",
+        role = "owner"
+    )
+
+    member9 = ServerMember(
+        user_id = 5,
+        server_id = 5,
+        nickname = "Boba",
+        role = "owner"
+    )
+
+    member10 = ServerMember(
+        user_id = 1,
+        server_id = 7,
+        nickname = "Demo",
+        role = "owner"
+    )
+
+    member11 = ServerMember(
+        user_id = 1,
+        server_id = 2,
+        nickname = "Sir Demolition",
+        role = "member"
+    )
+
+    member12 = ServerMember(
+        user_id = 2,
+        server_id = 2,
+        nickname = "Fatal",
+        role = "member"
+    )
+
+    member13 = ServerMember(
+        user_id = 1,
+        server_id = 6,
+        nickname = "Demo",
+        role = "owner"
+    )
+
+    
+
+    db.session.add_all([member1, member2, member3, member4, member5, member6, member7, member8, member9, member10, member11, member12, member13])
     db.session.commit()
 
 

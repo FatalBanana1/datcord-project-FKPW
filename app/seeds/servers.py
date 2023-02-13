@@ -32,7 +32,7 @@ def seed_servers():
 
     server3 = Server(
         name="FatalBanana's server",
-        owner_id=3,
+        owner_id=2,
         icon_url="https://media.discordapp.net/attachments/1072278458589261954/1073677188693491762/fatalbanana_icon.png",
         description="WE GONNA GO BANANA'S IN HERE",
     )
