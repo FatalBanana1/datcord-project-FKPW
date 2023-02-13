@@ -21,6 +21,7 @@ const ServerMembers = () => {
     const server = servers[serverId]
     const serverMembers = useSelector((state) => state.serverMembers)
     const membersArray = Object.values(serverMembers)
+    console.log("membersArray ------->", membersArray)
 
     useEffect(() => {
 		dispatch(thunkGetServerMembers(serverId)).then(() =>
@@ -30,7 +31,7 @@ const ServerMembers = () => {
 		return () => {
 			dispatch(actionResetServerMember());
 		};
-	}, [serverId]);
+	}, [serverId, isLoaded]);
 
     // Check to see if User owns the server
     let owner = null
@@ -50,9 +51,28 @@ const ServerMembers = () => {
         pending = membersArray.filter(member => member.role === "pending")
     }
 
+    let isMember = false
+    for (let member of membersArray) {
+        if (user.id == member.user_id) isMember = true
+    }
+
+    const join = (e) => {
+        e.preventDefault();
+        const serverId = server.id;
+        const role = "member"
+        dispatch(thunkAddServerMember(serverId, role))
+        setIsLoaded(false);
+    }
+
     return (
         user && (membersArray.length > 0) && (
             <>
+            {!isMember && (
+                <div className="join-server-div">
+                    {/* <div className="join-text">Preview mode</div> */}
+                    <button type="submit" onClick={join} className='join-server-button'>Join {server.name}</button>
+                </div>
+                )}
             <div className="server-members-div">
                 <h1 className="total-members">{`Total Members - ${membersArray.length}`}</h1>
                 {owners.length > 0 && (
@@ -60,7 +80,7 @@ const ServerMembers = () => {
                         <h2>Owner</h2>
                         <div className="individual-person">
                             <img className="member-img" src={owners[0].display_pic}></img>
-                            <p className="owner-nickname">{owners[0].nickname}</p>
+                            <p className="owner nicknames">{owners[0].nickname}</p>
                         </div>
                     </div>
                 )}
@@ -70,7 +90,7 @@ const ServerMembers = () => {
                         {admins.map(admin =>
                             <div key={admin.id} className="individual-person">
                                 <img className="member-img" src={admin.display_pic}></img>
-                                <p className="admin-nicknames">{admin.nickname}</p>
+                                <p className="admin nicknames">{admin.nickname}</p>
                             </div>
                         )}
                     </div>
@@ -81,7 +101,7 @@ const ServerMembers = () => {
                         {members.map(member => 
                             <div key={member.id} className="individual-person">
                                 <img className="member-img" src={member.display_pic}></img>
-                                <p className="regular-member-nicknames">{member.nickname}</p>
+                                <p className="regular-member nicknames">{member.nickname}</p>
                             </div>
                         )}
                     </div>
@@ -92,7 +112,7 @@ const ServerMembers = () => {
                         {pending.map(pending =>
                             <div key={pending.id} className="individual-person pending">
                                 <img className="member-img" src={pending.display_pic}></img>
-                                <p className="pending-nicknames">{pending.nickname}</p>
+                                <p className="pending nicknames">{pending.nickname}</p>
                             </div>
                         )}
                     </div>

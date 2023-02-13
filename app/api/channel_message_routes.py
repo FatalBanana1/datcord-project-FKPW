@@ -2,6 +2,8 @@ from flask import Blueprint, request
 from flask_login import current_user, login_required
 from app.models import ChannelMessage, db
 from .channel_routes import channel_routes
+from datetime import datetime
+
 
 #  url_prefix="/api/cms
 channel_message_routes = Blueprint("channel_messages", __name__)
@@ -29,6 +31,19 @@ def delete_cms(id):
     return temp
 
 
+# edit channel message
+@channel_message_routes.route("/<int:id>", methods=["PUT"])
+@login_required
+def update_cms(id):
+    res = request.get_json()
+    data = ChannelMessage.query.get(id)
+    if data:
+        data.message = res["message"]
+        db.session.add(data)
+        db.session.commit()
+        return data.to_dict()
+
+
 # get messages by user id
 # @channel_message_routes.route("/<int:id>")
 # @login_required
@@ -47,15 +62,3 @@ def delete_cms(id):
 #     db.session.commit()
 #     print("BACKEND----->>>> post for CM====", data)
 #     return data.to_dict()
-
-
-# -------------------------------------------------------
-# -------------------------------------------------------
-# -------------------------------------------------------
-# -------------------------------------------------------
-
-# @message_routes.route('/<int:id>', methods=['GET'])
-# def get_messages(id):
-#     messages = db.session.query(Message).filter(Message.channel_id == id).all()
-#     result = [message.to_dict() for message in messages]
-#     return {'messages':result}
