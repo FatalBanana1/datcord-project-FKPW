@@ -4,11 +4,11 @@ import { Redirect, useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal.js";
 import { thunkCreateChannel, thunkDeleteChannel, thunkEditChannel, thunkGetChannels } from "../../../store/channels";
 
-export default function EditChannelForm({ categoryName, prevName, serverId, channelId })  {
+export default function EditChannelForm({ categoryName, prevName, serverId, channelId, priv })  {
     const dispatch = useDispatch();
     const [ category, setCategory ] = useState(categoryName ? categoryName : "");
     const [ channelName, setChannelName ] = useState(prevName ? prevName : "");
-    const [ isPrivate, setIsPrivate ] = useState(false);
+    const [ isPrivate, setIsPrivate ] = useState(priv);
     const [ errors, setErrors ] = useState([]);
     const { closeModal } = useModal();
     const history = useHistory();
@@ -29,17 +29,11 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
     //     console.log("disabled?", isDisabled);
     // }
 
-    // useEffect(() => {
-    //     // JUST FOR TESTING
-    //     console.log("isPrivate ? :", isPrivate);
-
-    // }, [isPrivate])
-
     if (!channels) return null;
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        console.log("***** HIT HANDLE SUBMIT ****")
+        // console.log("***** HIT HANDLE SUBMIT ****")
 
         const editChannel = {
             category,
@@ -47,7 +41,7 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
             "is_private": isPrivate
         }
 
-        console.log("editChannel", editChannel);
+        // console.log("editChannel", editChannel);
 
         // const data = dispatch(thunkCreateChannel(+serverId, editChannel))
         // if (data) {
@@ -63,7 +57,7 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
             // .then(dispatch(thunkGetChannels(+serverId)))
             .then(closeModal)
             .catch(async (res) => {
-                console.log("EDIT CH hit error")
+                // console.log("EDIT CH hit error")
                 const data = await res;
                 if (data && data.errors) setErrors(data.errors);
             });
@@ -71,7 +65,7 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
 
     const deleteChannel = (e) => {
         e.preventDefault();
-        console.log("hit delete channel");
+        // console.log("hit delete channel");
         return dispatch(thunkDeleteChannel(+serverId, +channelId))
             .then(dispatch(thunkGetChannels(+serverId)).then(
                 (res) => res === "Server has no channels" ? history.push(`/channels/${serverId}/0`) : history.push(`/channels/${serverId}/${res[0].id}`)
@@ -86,7 +80,7 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
             .catch(async (res) => {
                 const data = await res;
                 if (data && data.errors) setErrors(data.errors);
-                console.log("data", data)
+                // console.log("data", data)
             });
     }
 
@@ -134,8 +128,8 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
                             <input
                                 className="CreateChannelForm-checkbox"
                                 type="checkbox"
-                                value={isPrivate}
-                                onChange={e => setIsPrivate(!e.target.value)}
+                                checked={isPrivate}
+                                onChange={() => setIsPrivate(!isPrivate)}
                             />
                             <div className="CreateChannelForm-switch">
                                 <div></div>
@@ -206,8 +200,8 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
                         <input
                             id="is-private"
                             type="checkbox"
-                            value={isPrivate}
-                            onChange={(e) => setIsPrivate(e.target.value)}
+                            checked={isPrivate}
+                            onChange={() => setIsPrivate(!isPrivate)}
                             required
                         />
                         <span className="CreateChannelForm-private-slider"></span>

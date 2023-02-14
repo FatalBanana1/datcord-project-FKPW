@@ -12,22 +12,29 @@ export default function Login() {
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState([]);
-    const [errorsObj, setErrorsObj] = useState({});
+    const [errors, setErrors] = useState({});
     const history = useHistory();
 
     // if (sessionUser) return <Redirect to="/channels/@me" />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors([]);
+        setErrors({});
         return dispatch(login(email, password))
-            .then(history.push("/channels/@me"))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            });
+            .then((res) => {
+                    // console.log("res", res)
+                    if (res.errors) {
+                        // console.log("res.errors", res);
+                        return setErrors(res);
+                    } else {
+                        history.push("/channels/@me")
+                    }
+                })
     };
+
+    const goRegister = () => {
+      history.push("/register");
+    }
 
     return (
         <div className="Form-wrapper">
@@ -69,9 +76,9 @@ export default function Login() {
                                 required
                             />
                             <div className="Form-error-container">
-                              { errors.length ? (
+                              { errors && (
                                   <p className="Form-error">Email or password is incorrect</p>
-                              ) : "" }
+                              )}
                             </div>
                         </div>
                         <div className="Form-button-container">
@@ -79,7 +86,7 @@ export default function Login() {
                         </div>
                         <div className="Form-small-text">
                             Need an account?
-                            <span className="Form-link">Register</span>
+                            <span className="Form-link" onClick={() => goRegister()}>Register</span>
                         </div>
                     </form>
                 </div>

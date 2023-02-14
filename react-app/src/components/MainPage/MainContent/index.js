@@ -8,7 +8,7 @@ import "./MainContent.css";
 export default function MainContent({ page, isLoaded }) {
     switch(page) {
         case "channel":
-            console.log("hit switch case in MainContent - channel")
+            // console.log("hit switch case in MainContent - channel")
             return (
                 <div className="MainContent-container">
                     <div className="UserLanding-container">

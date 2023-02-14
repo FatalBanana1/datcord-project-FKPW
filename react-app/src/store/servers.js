@@ -167,6 +167,7 @@ function defaultState() {
 }
 
 const serverReducer = (state = defaultState(), action) => {
+<<<<<<< HEAD
   let newState;
 
   switch (action.type) {
@@ -210,6 +211,48 @@ const serverReducer = (state = defaultState(), action) => {
     default:
       return state;
   }
+=======
+	let newState;
+
+	switch (action.type) {
+		case READ_ALL_SERVERS:
+			// console.log(`reducer-----`, action);
+			newState = {};
+			action.servers.servers.forEach((el) => (newState[el.id] = el));
+			return newState;
+
+		case READ_USER_SERVERS:
+			// console.log(`REDUCER - user  servers >>>>>>>>>`, action);
+			newState = { ...state };
+			action.servers.forEach((el) => (newState[el.id] = el));
+			// newState.userServers = action.servers;
+			return newState;
+
+		case CREATE_SERVER:
+			// console.log("CREATE THUNK++++++++++++++>>>>>>>>>>>>", action);
+			newState = { ...state };
+			newState[action.server.id] = action.server;
+			return newState;
+
+		case DELETE_SERVER:
+			// console.log(`DELETE reducer====>>>>>`);
+			newState = { ...state };
+			delete newState[action.server.server.id];
+			return newState;
+
+		case UPDATE_SERVER:
+			// console.log(`UPDATE reducer====>>>>>`);
+			newState = { ...state };
+			newState[action.server.id] = action.server.server;
+			return newState;
+
+		case RESET_SERVERS:
+			return defaultState();
+
+		default:
+			return state;
+	}
+>>>>>>> dev
 };
 
 export default serverReducer;

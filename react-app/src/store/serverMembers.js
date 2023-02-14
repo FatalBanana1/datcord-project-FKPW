@@ -96,7 +96,7 @@ export const thunkEditServerMember = (serverId, serverMemberId, serverMember) =>
     });
 	if (res.ok) {
 		const serverMember = await res.json();
-		dispatch(actionAddServerMember(serverMember.server_member));
+		dispatch(actionEditServerMember(serverMember.server_member));
 		return serverMember.server_member;
 	} else if (res.status < 500) {
 		const data = await res.json();
@@ -109,16 +109,21 @@ export const thunkEditServerMember = (serverId, serverMemberId, serverMember) =>
 }
 
 // DELETE
-export const thunkDeleteServerMember = (serverId, serverMemberId) => async (dispatch) => {
+export const thunkDeleteServerMember = (serverId, serverMemberId, permission) => async (dispatch) => {
+	console.log("Pre-Fetch ------>", serverId, serverMemberId, permission)
 	const res = await fetch(`/api/servers/${serverId}/membership/${serverMemberId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
+		body: JSON.stringify({
+			permission: permission
+        })
     });
+	console.log("Post-Fetch ------>", res)
 	if (res.ok) {
 		const serverMember = await res.json();
-		dispatch(actionAddServerMember(serverMember.server_member));
+		dispatch(actionDeleteServerMember(serverMemberId));
 		return serverMember.server_member;
 	} else if (res.status < 500) {
 		const data = await res.json();

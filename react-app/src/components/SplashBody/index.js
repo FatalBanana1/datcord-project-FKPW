@@ -56,7 +56,7 @@ export default function SplashBody() {
         <FadeInSection>
           <div className="splash-body-2-container">
             <div className="splash-body-2-description">
-              <h2>Meet The Developers</h2>
+              <h2 id="meet-devs">Meet The Developers</h2>
             </div>
             <div className="splash-body-2-developers-container">
               <div className="developer-card">

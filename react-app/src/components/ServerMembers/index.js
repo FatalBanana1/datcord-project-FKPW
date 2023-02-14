@@ -19,7 +19,7 @@ const ServerMembers = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const user = useSelector((state) => state.session.user);
-    let {serverId} = useParams();
+    let {serverId, channelId} = useParams();
     const servers = useSelector((state) =>state.servers)
     const server = servers[serverId]
     const serverMembers = useSelector((state) => state.serverMembers)
@@ -35,7 +35,7 @@ const ServerMembers = () => {
 		);
 
 		return () => {
-			dispatch(actionResetServerMember());
+		    dispatch(actionResetServerMember());
 		};
 	}, [serverId, isLoaded]);
 
@@ -92,8 +92,12 @@ const ServerMembers = () => {
 
     const closeMenu = () => setShowMenu(false);
 
+    const handleOnChange = (e) => {
+        setIsLoaded(e)
+    }
+
     return (
-        user && (membersArray.length > 0) && (
+        isLoaded && user && (membersArray.length > 0) && (
             <>
             {!isMember && (
                 <></>
@@ -115,7 +119,7 @@ const ServerMembers = () => {
                                 className="owner nicknames"
                                 buttonText={owners[0].nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={owners[0]} isOwner={owner} isAdmin={admin} />}
+                                modalComponent={<MemberPage member={owners[0]} isOwner={owner} isAdmin={admin} serverId={serverId} channelId={channelId} onChange={handleOnChange} />}
                             />
                             <img
 								src={crown}
@@ -137,7 +141,7 @@ const ServerMembers = () => {
                                 className="admin nicknames"
                                 buttonText={admin.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={admin} isOwner={owner} isAdmin={admin} />}
+                                modalComponent={<MemberPage member={admin} isOwner={owner} isAdmin={admin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
                                 />
                             </div>
                         )}
@@ -155,7 +159,7 @@ const ServerMembers = () => {
                                 className="member nicknames"
                                 buttonText={member.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={member} isOwner={owner} isAdmin={admin} />}
+                                modalComponent={<MemberPage member={member} isOwner={owner} isAdmin={admin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
                                 />
                             </div>
                         )}
@@ -173,7 +177,7 @@ const ServerMembers = () => {
                                 className="admin nicknames"
                                 buttonText={pending.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={pending} isOwner={owner} isAdmin={admin} />}
+                                modalComponent={<MemberPage member={pending} isOwner={owner} isAdmin={admin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
                                 />
                             </div>
                         )}

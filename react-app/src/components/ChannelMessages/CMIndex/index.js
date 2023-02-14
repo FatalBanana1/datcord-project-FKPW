@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import {
 	actionResetChannelMessages,
@@ -19,7 +19,7 @@ const CMIndex = () => {
 
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [loadBottom, setLoadBottom] = useState(false);
-	const [edit, setEdit] = useState(0);
+	const [edit, setEdit] = useState(999999990);
 
 	// use state for controlled form input
 	const [chatInput, setChatInput] = useState("");
@@ -35,14 +35,18 @@ const CMIndex = () => {
 
 	const endMsgRef = useRef(null);
 
+	// console.log(`edit ----cms >>>>>>`, edit);
 	const scrollToBottom = () => {
-		if (!endMsgRef.current) return;
-		endMsgRef.current.scrollIntoView({ behavior: "smooth" });
+		if (!endMsgRef.current) {
+			return;
+		} else if (edit === 999999999 || edit === 999999990) {
+			endMsgRef.current.scrollIntoView({ behavior: "smooth" });
+		}
 	};
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [loadBottom, messages]);
+	}, [loadBottom, messages, cms]);
 
 	useEffect(() => {
 		scrollToBottom();
@@ -54,6 +58,7 @@ const CMIndex = () => {
 		return () => {
 			setChatInput("");
 			setMessages([]);
+			setEdit(999999990);
 		};
 	}, [channelId, serverId, user.id]);
 
@@ -157,14 +162,14 @@ const CMIndex = () => {
 		};
 		let date = new Date();
 		let role;
-		const currMbr = Object.values(allMembers).find(
-			(el) => el.user_id === user.id
+		const currMbr = user.server_members.find(
+			(el) => +el.server_id === +serverId
 		);
 
 		if (currMbr) {
 			role = currMbr.role;
 		}
-		// console.log(`edit ===`, edit);
+		// console.log(`role ===`, user.server_members, role, serverId);
 
 		// print the username and message for each chat
 		return (
@@ -176,7 +181,21 @@ const CMIndex = () => {
 						<div className="cm-overflow">
 							{cms.length
 								? cms.map((message) => (
-										<div key={message.id}>
+										<div
+											className="row justify"
+											key={message.id}
+										>
+											<NavLink
+												to="#"
+												className="img-link"
+											>
+												<img
+													src={message.display_pic}
+													alt="crown"
+													className="pic-icon"
+												/>
+											</NavLink>
+
 											{message.id == edit ? (
 												<CMEdit
 													message={message}
@@ -187,14 +206,14 @@ const CMIndex = () => {
 													<div className="cms-msg-header">
 														{message.role ===
 														"owner" ? (
-															<>
+															<div className="row">
 																<div className="cms-admin">{`${message.sender_nickname}`}</div>
 																<img
 																	src={crown}
 																	alt="crown"
 																	className="icon"
 																/>
-															</>
+															</div>
 														) : message.role ===
 														  "admin" ? (
 															<div className="cms-admin">{`${message.sender_nickname}`}</div>
@@ -213,8 +232,7 @@ const CMIndex = () => {
 															)}
 														</div>
 
-														{user.id ==
-															message.sender_id ||
+														{currMbr ||
 														role === "admin" ||
 														role === "owner" ? (
 															<div className="cms-options">
@@ -262,7 +280,15 @@ const CMIndex = () => {
 								  ))
 								: null}
 							{messages.map((message, i) => (
-								<div key={`s_${i}`}>
+								<div key={`s_${i}`} className="row justify">
+									<NavLink to="#" className="img-link">
+										<img
+											src={message.display_pic}
+											alt="crown"
+											className="pic-icon"
+										/>
+									</NavLink>
+
 									{message.id == edit ? (
 										<CMEdit
 											message={message}
@@ -295,7 +321,7 @@ const CMIndex = () => {
 														.toUTCString()
 														.slice(0, 22)}
 												</div>
-												{user.id == message.sender_id ||
+												{currMbr ||
 												role === "admin" ||
 												role === "owner" ? (
 													<div className="cms-options">
