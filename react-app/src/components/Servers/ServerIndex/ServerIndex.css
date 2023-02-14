@@ -1,5 +1,6 @@
 .exp-ct {
-	margin: 0px auto auto auto;
+	margin: 0px;
+	/* margin: 0px auto auto auto; */
 }
 
 .servers-icon {
@@ -22,7 +23,7 @@
 }
 
 .exp-link {
-	margin: auto;
+	/* margin: auto; */
 	cursor: pointer;
 }
 
@@ -32,7 +33,7 @@
 
 .exp-bk {
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
 	background-color: rgba(0, 0, 0, 0.866);
 	color: white;
 	display: flex;
@@ -48,4 +49,5 @@
 .exp-serv {
 	width: inherit;
 	max-width: 300px;
+	height: max-content;
 }

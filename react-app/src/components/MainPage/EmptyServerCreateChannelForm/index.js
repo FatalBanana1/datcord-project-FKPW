@@ -48,6 +48,10 @@ export default function EmptyServerCreateChannelForm({
 			});
 	};
 
+	const closeHandle = () => {
+		history.push("/channels/@me");
+	};
+
 	// console.log(`front end channels create form >>>>>>>>>>>>>>>>>>>>>`, params);
 
 	if (categoryName || params.channelId) {
@@ -64,7 +68,7 @@ export default function EmptyServerCreateChannelForm({
 					</div>
 					<div
 						className="CreateChannelForm-close"
-						onClick={closeModal}
+						onClick={closeHandle}
 					>
 						<i className="fa-solid fa-xmark"></i>
 					</div>
@@ -117,7 +121,7 @@ export default function EmptyServerCreateChannelForm({
 					<div className="CreateChannelForm-buttons-container">
 						<button
 							className="CreateChannelForm-button-cancel"
-							onClick={closeModal}
+							onClick={closeHandle}
 						>
 							Cancel
 						</button>
