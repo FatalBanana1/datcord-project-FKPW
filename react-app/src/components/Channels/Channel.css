@@ -1,12 +1,33 @@
 .UserLanding-sidebar-channel-name {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 34px;
-    color: #96989d;
-    cursor: pointer;
-    padding: 7px;
-    box-sizing: border-box;
-    font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 34px;
+  color: #96989d;
+  cursor: pointer;
+  padding: 7px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.server-dropdown-button {
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.server-menu-dropdown {
+  z-index: 1;
+  background-color: black;
+  position: absolute;
+  top: 50px;
+  left: 80px;
+  box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
+  border-radius: 10px;
+  width: 216px;
 }
