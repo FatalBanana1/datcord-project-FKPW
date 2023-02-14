@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal.js";
 import { thunkDeleteServer } from "../../../store/servers.js";
+import "./DeleteServer.css";
 
 const DeleteServer = ({ server }) => {
   const history = useHistory();
@@ -24,10 +25,18 @@ const DeleteServer = ({ server }) => {
 
   return (
     <div className="delete-container">
-      <div className="delete-header">Are you sure you want to delete?</div>
+      <div className="delete-header">Delete '{server.name}'</div>
+      <div className="delete-subtext">
+        Are you sure you want to delete <span>{server.name}</span>? This action
+        cannot be undone.
+      </div>
       <div className="delete-buttons">
-        <button onClick={closeModal}>Cancel</button>
-        <button onClick={handleDelete}>Delete</button>
+        <button className="delete-cancel-button" onClick={closeModal}>
+          Cancel
+        </button>
+        <button className="delete-delete-button" onClick={handleDelete}>
+          Delete Server
+        </button>
       </div>
     </div>
   );
