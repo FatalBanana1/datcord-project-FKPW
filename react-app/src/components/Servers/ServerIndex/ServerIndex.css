@@ -1,6 +1,51 @@
+.exp-ct {
+	margin: 0px auto auto auto;
+}
+
 .servers-icon {
 	height: 150px;
 	width: 180px;
 	border-radius: 7px;
 	object-fit: cover;
+}
+
+.exp-img {
+	height: auto;
+	max-height: 400px;
+	width: 100%;
+	object-fit: cover;
+	border-radius: 9px;
+}
+
+.mtop-15 {
+	margin-top: 15px;
+}
+
+.exp-link {
+	margin: auto;
+	cursor: pointer;
+}
+
+.exp-link:hover {
+	color: rgb(255, 121, 121);
+}
+
+.exp-bk {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.866);
+	color: white;
+	display: flex;
+	flex-direction: row;
+}
+
+.exp-servers-ct {
+	display: flex;
+	flex-direction: row;
+	word-wrap: break-word;
+}
+
+.exp-serv {
+	width: inherit;
+	max-width: 300px;
 }
