@@ -152,7 +152,7 @@ const CMIndex = () => {
 		// print the username and message for each chat
 		return (
 			user && (
-				<>
+				<div className="cms-container">
 					<div className="cms-ch-name">{`# ${channel.name}`}</div>
 
 					<div className="cms-ct">
@@ -320,16 +320,18 @@ const CMIndex = () => {
 						{role === "member" ||
 						role === "owner" ||
 						role === "admin" ? (
-							<form onSubmit={sendChat} className="submit">
+							<div className="cm-form-container">
+							<form onSubmit={sendChat} className="submit-cm">
 								<input
 									value={chatInput}
 									onChange={updateChatInput}
 									className="cm-text-input"
 								/>
 							</form>
+							</div>
 						) : null}
 					</div>
-				</>
+				</div>
 			)
 		);
 	} else if (isLoaded && !channel) {
