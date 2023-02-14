@@ -35,7 +35,7 @@ const CMIndex = () => {
 
 	const endMsgRef = useRef(null);
 
-	console.log(`edit ----cms >>>>>>`, edit);
+	// console.log(`edit ----cms >>>>>>`, edit);
 	const scrollToBottom = () => {
 		if (!endMsgRef.current) {
 			return;
@@ -46,8 +46,7 @@ const CMIndex = () => {
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [loadBottom, messages, channelId, cms]);
-	// }, [loadBottom, messages, channels, cms, channelId]);
+	}, [loadBottom, messages, cms]);
 
 	useEffect(() => {
 		scrollToBottom();
@@ -163,14 +162,14 @@ const CMIndex = () => {
 		};
 		let date = new Date();
 		let role;
-		const currMbr = Object.values(allMembers).find(
-			(el) => el.user_id === user.id
+		const currMbr = user.server_members.find(
+			(el) => +el.server_id === +serverId
 		);
 
 		if (currMbr) {
 			role = currMbr.role;
 		}
-		// console.log(`edit ===`, edit);
+		console.log(`role ===`, user.server_members, role, serverId);
 
 		// print the username and message for each chat
 		return (
@@ -233,8 +232,7 @@ const CMIndex = () => {
 															)}
 														</div>
 
-														{user.id ==
-															message.sender_id ||
+														{currMbr ||
 														role === "admin" ||
 														role === "owner" ? (
 															<div className="cms-options">
@@ -323,7 +321,7 @@ const CMIndex = () => {
 														.toUTCString()
 														.slice(0, 22)}
 												</div>
-												{user.id == message.sender_id ||
+												{currMbr ||
 												role === "admin" ||
 												role === "owner" ? (
 													<div className="cms-options">
