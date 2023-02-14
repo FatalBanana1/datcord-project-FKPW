@@ -75,7 +75,7 @@ def seed_server_members():
     member11 = ServerMember(
         user_id = 1,
         server_id = 2,
-        nickname = "Sir Demolition",
+        nickname = "Demo King",
         role = "member"
     )
 
@@ -93,7 +93,7 @@ def seed_server_members():
         role = "owner"
     )
 
-    
+
 
     db.session.add_all([member1, member2, member3, member4, member5, member6, member7, member8, member9, member10, member11, member12, member13])
     db.session.commit()
