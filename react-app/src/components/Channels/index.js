@@ -8,7 +8,7 @@ import OpenModalButton from "../OpenModalButton";
 import CreateChannelForm from "./CreateChannelForm";
 import EditDeleteChannelModal from "./EditDeleteChannelModal/dp-index";
 import "./Channel.css";
-import { Modal } from "../../context/Modal";
+import { Modal, useModal } from "../../context/Modal";
 import EditChannelForm from "./EditDeleteChannelModal";
 import EditServer from "../Servers/EditServer";
 import DeleteServer from "../Servers/DeleteServer";
@@ -42,6 +42,7 @@ export default function Channels() {
   const [showMenu, setShowMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
+
   const openUserMenu = () => {
     if (showUserMenu) return;
     setShowUserMenu(true);
@@ -51,8 +52,10 @@ export default function Channels() {
     if (!showUserMenu) return;
 
     const closeMenu = (e) => {
-      if (!userSettingsRef.current.contains(e.target)) {
-        setShowUserMenu(false);
+      if (userSettingsRef.current) {
+        if (!userSettingsRef.current.contains(e.target)) {
+            setShowUserMenu(false);
+        }
       }
     };
 
@@ -150,11 +153,12 @@ export default function Channels() {
     return names;
   };
 
-  const closeMenu = () => setShowMenu(false);
+  const closeMenu = () => setShowUserMenu(false);
 
   const goLogout = (e) => {
     e.preventDefault();
 
+    closeMenu();
     dispatch(logout());
     history.push("/");
   }

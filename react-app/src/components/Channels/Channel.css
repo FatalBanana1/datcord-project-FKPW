@@ -73,11 +73,10 @@
   background-color: black;
   position: absolute;
   top: -60px;
-  left: 142px;
+  left: 158px;
   box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
   border-radius: 3px;
   width: 120px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;

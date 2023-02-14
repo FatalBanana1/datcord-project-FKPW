@@ -27,10 +27,12 @@ export default function UserLandingSideBar({ page, isLoaded }) {
 		if (!showUserMenu) return;
 
 		const closeMenu = (e) => {
-		if (!userSettingsRef.current.contains(e.target)) {
-			setShowUserMenu(false);
+		if (userSettingsRef.current) {
+			if (!userSettingsRef.current.contains(e.target)) {
+				setShowUserMenu(false);
+			}
+			};
 		}
-		};
 
 		document.addEventListener("click", closeMenu);
 
@@ -80,8 +82,8 @@ export default function UserLandingSideBar({ page, isLoaded }) {
               <i className="fa-solid fa-gear user-gear" onClick={openUserMenu}></i>
               <div className={userSettingsClass} ref={userSettingsRef}>
                 <div className="dropdown-wrapper">
-                    <NavLink to="/" className="UserLanding-sidebar-channel-user-home">Home</NavLink>
-                    <p className="UserLanding-sidebar-channel-user-logout" onClick={goLogout}>Logout</p>
+                    <button className="UserLanding-sidebar-channel-user-home" onClick={() => history("/")}>Home</button>
+                    <button className="UserLanding-sidebar-channel-user-logout" onClick={goLogout}>Logout</button>
                 </div>
               </div>
             </div>

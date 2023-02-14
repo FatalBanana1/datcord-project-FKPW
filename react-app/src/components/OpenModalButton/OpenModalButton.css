@@ -30,3 +30,11 @@
     align-items: center;
     margin-left: 0;
 }
+
+.DeleteChannel {
+    color: #ffffff;
+    background: none;
+    border: 0;
+    font-size: 13px;
+    margin-left: 8px;
+}
