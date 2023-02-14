@@ -130,18 +130,17 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
                             <i className="fa-solid fa-lock"></i>
                             Private channel
                         </span>
-                        <label
-                            // htmlFor="is-private"
-                            className="CreateChannelForm-private-switch"
-                        >
+                        <div className="CreateChannelForm-checkbox-container">
                             <input
-                                // id="is-private"
+                                className="CreateChannelForm-checkbox"
                                 type="checkbox"
                                 value={isPrivate}
-                                onChange={(e) => setIsPrivate(!e.target.value)}
+                                onChange={e => setIsPrivate(!e.target.value)}
                             />
-                            <span className="CreateChannelForm-private-slider-round"></span>
-                        </label>
+                            <div className="CreateChannelForm-switch">
+                                <div></div>
+                            </div>
+                        </div>
                     </div>
                         <p className="CreateChannelForm-private-text">
                             Only selected members and roles will be able to view this channel.
