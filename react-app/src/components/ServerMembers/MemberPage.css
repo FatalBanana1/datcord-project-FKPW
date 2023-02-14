@@ -46,14 +46,24 @@
     padding: 12px
   }
 
+  .member-nickName-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #292b2f;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    color: white;
+  }
+
+  .nickname-edit-button {
+    cursor: pointer;
+  }
 
   .member-nickname {
     font-weight: 700;
     font-size: 21px;
     color: #fff;
-    border-bottom: 1px solid #292b2f;
-    padding-top: 5px;
-    padding-bottom: 10px;
   }
 
   .card-section{

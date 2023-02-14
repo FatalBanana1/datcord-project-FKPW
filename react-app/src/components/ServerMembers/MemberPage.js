@@ -5,12 +5,12 @@ import { useModal } from "../../context/Modal.js";
 import {
     actionResetServerMember,
     thunkGetServerMembers,
-    thunkEditServerMember,
     thunkDeleteServerMember
 } from "../../store/serverMembers"
 import {
     thunkReadUserServers
 } from "../../store/servers"
+import NickNameEdit from "./NickNameForm.js";
 
 import "./MemberPage.css"
 
@@ -25,13 +25,16 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
     const [isLoaded, setIsLoaded] = useState(false);
     // let {serverId} = useParams();
     const user = useSelector((state) => state.session.user);
+    const [editNickName, setEditNickName] = useState(false)
 
     let userId = user.id
 
     // console.log("PAGE INCOMING --------->",member, isOwner, isAdmin, serverId)
 
+    // Conditionals
     let permission = (isOwner || isAdmin)
     let isUser = (userId == member.user_id)
+    let isNotOwner = (member.role !== "owner")
 
     serverId = +serverId
     channelId = +channelId
@@ -73,6 +76,14 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
         onChange(false)
     }
 
+    const startEditNickName = (e) => {
+        setEditNickName(true)
+    }
+
+    const endEditNickName = (e) => {
+        setEditNickName(false)
+    }
+
     return (
         <>
         <div className="member-card">
@@ -81,7 +92,23 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
                 <img className="card-img" src={member.display_pic}></img>
                 <div className="card-member-info">
                     <div className="card-member-inner-div">
+                        <div className="member-nickName-div">
+                        {(permission || isUser) && isNotOwner ? (
+                            <>
+                            {editNickName ? (
+                                <NickNameEdit member={member} onChange={onChange} serverId={serverId} endEditNickName = {endEditNickName}/>
+                            ):(
+                                <>
+                                <h4 className="member-nickname">{member.nickname}</h4>
+                                <h4 className="nickname-edit-button" onClick={startEditNickName}>Edit</h4>
+                                </>
+                            )}
+                            </>
+                        ) : (
                         <h4 className="member-nickname">{member.nickname}</h4>
+                        )
+                    }
+                        </div>
                         <div className="card-section">
                             <h4 className="member-h4">Member Since</h4>
                             <p className="card-text">{date}</p>
@@ -91,10 +118,10 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
                             <p className="card-text">{member.role}</p>
                         </div>
                         <div className="leave-server-div">
-                            {permission && (
+                            {permission && isNotOwner && (
                                 <button type="submit" className="delete-membership-button" onClick={submitDelete}>Got Beef?</button>
                             )}
-                            {isUser && (
+                            {isUser && isNotOwner && (
                                 <button type="submit" className="delete-membership-button" onClick={leaveServer}>Leave Server</button>
                             )}
                         </div>
