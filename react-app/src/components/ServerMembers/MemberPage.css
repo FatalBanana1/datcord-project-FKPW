@@ -71,3 +71,14 @@
     color: white;
     font-size: 13px;
   }
+
+  .leave-server-div {
+    padding: 20px 0;
+  }
+
+  .delete-membership-button {
+    border: none;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+  }

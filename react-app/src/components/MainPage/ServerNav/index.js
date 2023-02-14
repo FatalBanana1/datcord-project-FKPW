@@ -1,6 +1,6 @@
 import "./ServerNav.css";
 import avatar from "../../../assets/datcord_logo_svg.svg";
-import { NavLink, Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { NavLink, Redirect, Route, Switch, useHistory, useParams } from "react-router-dom";
 import MainContent from "../MainContent";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,11 +19,12 @@ export default function ServerNav() {
 	const servers = Object.values(allServers);
 	const history = useHistory();
 	const user = useSelector((state) => state.session.user);
+	const {serverId} = useParams()
 
 	useEffect(() => {
 		dispatch(thunkReadUserServers()).then(() => setLoaded(true));
 		return () => dispatch(actionResetServers());
-	}, [user.id, loaded]);
+	}, [user.id, loaded, serverId]);
 
 	const handleClick = async (serverId) => {
 		dispatch(thunkGetChannels(serverId)).then(setLoaded(true));
