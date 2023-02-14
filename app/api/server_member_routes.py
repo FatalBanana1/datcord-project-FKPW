@@ -50,8 +50,9 @@ def add_server_member(server_id):
 @server_routes.route("/<int:server_id>/membership/<int:member_id>", methods=['PUT'])
 @login_required
 def edit_server_member(server_id, member_id):
-    nickname = request.json['nickname']
-    role = request.json['role']
+    print("PRIIIIIIIINT", request.json)
+    nickname = request.json["serverMember"]['nickname']
+    role = request.json["serverMember"]['role']
     userId = int(current_user.id)
     server = Server.query.get(server_id)
     membership = ServerMember.query.get(member_id)
@@ -64,8 +65,8 @@ def edit_server_member(server_id, member_id):
     if membership not in server.server_members:
         return {"errors": ["This membership doesn't belong to this server"]}, 403
 
-    if userId != server.owner_id and userId != membership.user_id:
-        return {"errors": ["User doesn't have the required permissions"]}, 403
+    # if userId != server.owner_id and userId != membership.user_id:
+    #     return {"errors": ["User doesn't have the required permissions"]}, 403
 
     else:
         membership.nickname = nickname

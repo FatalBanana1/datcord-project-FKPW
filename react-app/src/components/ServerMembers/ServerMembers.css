@@ -51,9 +51,24 @@ h2 {
 	color: rgb(211, 212, 214, 0.8);
 }
 
+.owner.nicknames {
+	color: rgb(103, 223, 147);
+}
+
+.admin.nicknames {
+	color: rgb(103, 223, 147);
+}
+
+.member.nicknames {
+	color: rgb(196, 122, 228);
+}
+
+.pending.nicknames {
+	color: white;
+}
+
 .nicknames {
-	font-size: 15px;
-	color: rgb(25, 188, 155);
+    font-size: 15px;
 }
 
 .individual-person button {
