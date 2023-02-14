@@ -92,10 +92,64 @@ def seed_server_members():
         nickname = "Demo",
         role = "owner"
     )
+    m14 = ServerMember(
+        user_id = 1,
+        server_id = 8,
+        nickname = "Sir Demo",
+        role = "member"
+    )
+    m15 = ServerMember(
+        user_id = 2,
+        server_id = 8,
+        nickname = "Fatality",
+        role = "member"
+    )
+    m16 = ServerMember(
+        user_id = 3,
+        server_id = 8,
+        nickname = "FDA",
+        role = "member"
+    )
+    m17 = ServerMember(
+        user_id = 4,
+        server_id = 8,
+        nickname = "SadPanda",
+        role = "member"
+    )
+    m18 = ServerMember(
+        user_id = 5,
+        server_id = 8,
+        nickname = "K",
+        role = "member"
+    )
+    m19 = ServerMember(
+        user_id = 6,
+        server_id = 8,
+        nickname = "Jimothy",
+        role = "member"
+    )
+    m20 = ServerMember(
+        user_id = 7,
+        server_id = 8,
+        nickname = "Dwigt",
+        role = "admin"
+    )
+    m21 = ServerMember(
+        user_id = 8,
+        server_id = 8,
+        nickname = "thefireguy",
+        role = "member"
+    )
+    m22 = ServerMember(
+        user_id = 9,
+        server_id = 8,
+        nickname = "AgentScarn",
+        role = "owner"
+    )
 
 
 
-    db.session.add_all([member1, member2, member3, member4, member5, member6, member7, member8, member9, member10, member11, member12, member13])
+    db.session.add_all([member1, member2, member3, member4, member5, member6, member7, member8, member9, member10, member11, member12, member13, m14, m15, m16, m17, m18, m19, m20, m21, m22])
     db.session.commit()
 
 

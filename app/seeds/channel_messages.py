@@ -87,6 +87,151 @@ def seed_channel_messages():
         channel_id=2,
         message="How is everyone doing?",
     )
+    cm18 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="ok lets run through this...",
+    )
+    cm19 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="Delivery guy comes in and says: I got a delivery for ya'.",
+    )
+    cm20 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="Leave it at reception",
+    )
+    cm21 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="Delivery guy: I'm supposed to deliver this one in person. [pulls out a gun and starts shooting at Scarn, who dodges dramatically]",
+    )
+    cm22 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="[pulls out two handguns and kills the man with an unnecessarily large amount of bullets] Clean up on aisle five. [Threat Level: Midnight titlescreen appears]",
+    )
+    cm23 = ChannelMessage(
+        sender_id=21,
+        channel_id=14,
+        message="Michael Scarn, well that's an interesting story. He was once the best secret agent in the business. That was years ago.",
+    )
+    cm24 = ChannelMessage(
+        sender_id=21,
+        channel_id=14,
+        message="Where is he now? Well, that's also an interesting story.",
+    )
+    cm25 = ChannelMessage(
+        sender_id=20,
+        channel_id=14,
+        message="[enter dressed as a butler. Speak in slow, deep voice] Master Scarn",
+    )
+    cm26 = ChannelMessage(
+        sender_id=20,
+        channel_id=14,
+        message=" [crashes cymbals by Scarn's ear]",
+    )
+    cm27 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="I'm up.",
+    )
+    cm28 = ChannelMessage(
+        sender_id=20,
+        channel_id=14,
+        message="It's the president. He needs you for a mission.",
+    )
+    cm29 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="Tell him I'm retired.",
+    )
+    cm30 = ChannelMessage(
+        sender_id=20,
+        channel_id=14,
+        message="It's Goldenface.",
+    )
+    cm31 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="Goldenface, this makes it personal.",
+    )
+    cm32 = ChannelMessage(
+        sender_id=21,
+        channel_id=14,
+        message="It's your old enemy, Goldenface. He's after the NHL All Star Game.",
+    )
+    cm33 = ChannelMessage(
+        sender_id=21,
+        channel_id=14,
+        message="He's hidden a bomb somewhere in the stadium. Scarn, this one is personal for me. I own the stadium. I can't see it blown up. It's my retirement plan.",
+    )
+    cm34 = ChannelMessage(
+        sender_id=20,
+        channel_id=14,
+        message="We have to search the stadium.",
+    )
+    cm35 = ChannelMessage(
+        sender_id=21,
+        channel_id=14,
+        message="Not so fast, Goldenface has taken all the concession stand workers hostage. Scarn, will you find these hostages, and save the game?",
+    )
+    cm36 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="[holding a quarter up] Heads I do it, tails I don't. Best out of seven. [flips the coin] Heads. [flips it again] Tails.",
+    )
+    cm37 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="...Heads...Tails...Heads...Tails. ",
+    )
+    cm38 = ChannelMessage(
+        sender_id=22,
+        channel_id=14,
+        message="[flips one more time and the quarter spins around on the table. Scarn looks at it] Well, it looks like there's going to be a clean-up on aisle five.",
+    )
+    cm39 = ChannelMessage(
+        sender_id=22,
+        channel_id=13,
+        message="Ryan the fire guy",
+    )
+    cm40 = ChannelMessage(
+        sender_id=21,
+        channel_id=15,
+        message="Are we downsizing?",
+    )
+    cm41 = ChannelMessage(
+        sender_id=21,
+        channel_id=15,
+        message="figures we would get downsized right before I ordered a stack of 100 personalized business cards...",
+    )
+    cm42 = ChannelMessage(
+        sender_id=22,
+        channel_id=15,
+        message="We're a family, families don't downsize, but yes we are getting downsized...",
+    )
+    cm43 = ChannelMessage(
+        sender_id=20,
+        channel_id=13,
+        message="I want to lodge a formal complaint against Jim. Where do I do this?",
+    )
+    cm44 = ChannelMessage(
+        sender_id=19,
+        channel_id=13,
+        message="you would submit a report and send it to the manager, well the assistant to the manager",
+    )
+    cm45 = ChannelMessage(
+        sender_id=20,
+        channel_id=13,
+        message="thats me!",
+    )
+    cm46 = ChannelMessage(
+        sender_id=19,
+        channel_id=13,
+        message="yes you would need to submit that complaint asap, takes 2-3 weeks for it process",
+    )
 
     db.session.add_all(
         [
@@ -107,6 +252,35 @@ def seed_channel_messages():
             cm15,
             cm16,
             cm17,
+            cm18,
+            cm19,
+            cm20,
+            cm21,
+            cm22,
+            cm23,
+            cm24,
+            cm25,
+            cm26,
+            cm27,
+            cm28,
+            cm29,
+            cm30,
+            cm31,
+            cm32,
+            cm33,
+            cm34,
+            cm35,
+            cm36,
+            cm37,
+            cm38,
+            cm39,
+            cm40,
+            cm41,
+            cm42,
+            cm43,
+            cm44,
+            cm45,
+            cm46,
         ]
     )
     db.session.commit()

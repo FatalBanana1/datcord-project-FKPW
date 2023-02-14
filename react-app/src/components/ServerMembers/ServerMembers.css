@@ -1,114 +1,115 @@
 .server-members-div {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(48,49,54);
-    height: 100%;
-    width: 230px;
-    padding: 0 5px;
-    overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(48, 49, 54);
+	height: 100%;
+	width: 230px;
+	padding: 0 5px;
+	overflow: hidden;
 }
 
 .join-server-div {
-    background-color: rgb(60,68,165);
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 0;
+	background-color: rgb(60, 68, 165);
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 0;
 }
 
 .join-text {
-    color: white;
-    font-size: 12px;
-    padding-right: 5px;
+	color: white;
+	font-size: 12px;
+	padding-right: 5px;
 }
 
 .join-server-button {
-    background-color: rgb(60,68,165);
-    color: white;
-    border: 1.5px solid white;
-    font-size: 12px;
-    padding: 3px 7px;
-    margin: 3px;
-    border-radius: 3px;
-    overflow: hidden;
+	background-color: rgb(60, 68, 165);
+	color: white;
+	border: 1.5px solid white;
+	font-size: 12px;
+	padding: 3px 7px;
+	margin: 3px;
+	border-radius: 3px;
+	overflow: hidden;
 }
 
 .total-members {
-    font-size: 15px;
-    width: 100%;
+	font-size: 15px;
+	width: 100%;
 	color: rgba(211, 212, 214, 0.8);
-    padding-top: 15px;
-    padding-bottom: 10px;
-    padding-left: 5px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	padding-left: 5px;
 }
 
 h2 {
-    padding-left: 5px;
-    padding-bottom: 3px;
-    font-size: 12px;
+	padding-left: 5px;
+	padding-bottom: 3px;
+	font-size: 12px;
 	color: rgb(211, 212, 214, 0.8);
 }
 
 .nicknames {
-    font-size: 15px;
-    color: rgb(25,188,155)
+	font-size: 15px;
+	color: rgb(25, 188, 155);
 }
 
-.individual-person button{
-    font-size: 15px;
-    color: rgb(25,188,155);
-    background-color: rgb(48,49,54);
-    border: none;
+.individual-person button {
+	font-size: 15px;
+	color: rgb(25, 188, 155);
+	background-color: rgb(48, 49, 54);
+	border: none;
 }
 
-.individual-person button:hover{
-    background-color: #3f434a;
-    filter: brightness(1);
-    cursor: pointer;
+.individual-person button:hover {
+	background-color: #3f434a;
+	filter: brightness(1);
+	cursor: pointer;
 }
 
 .visible {
-    position: absolute;
-    right: 100px;
+	position: absolute;
+	right: 100px;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 .section {
-    padding: 5px 0;
+	padding: 5px 0;
 }
 
 .individual-person {
-    padding: 5px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 5px;
+	padding: 5px 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-radius: 5px;
 }
 
-.individual-person:hover{
-    background-color: #3f434a;
-    filter: brightness(1);
-    cursor: pointer;
+.individual-person:hover {
+	background-color: #3f434a;
+	filter: brightness(1);
+	cursor: pointer;
 }
 
 .member-img {
-    border-radius: 50%;
-    height: 35px;
-    width: 35px;
-    padding: 0 5px;
+	border-radius: 50%;
+	height: 35px;
+	width: 35px;
+	padding: 0 5px;
+	object-fit: cover;
 }
 
-.pending{
-    filter: brightness(0.5)
+.pending {
+	filter: brightness(0.5);
 }
 
 .server-owner-crown {
-    height: 12px;
-    padding-top: 2px;
-    padding-left: 5px;
+	height: 12px;
+	padding-top: 2px;
+	padding-left: 5px;
 }

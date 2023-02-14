@@ -1,84 +1,84 @@
 .member-card {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background: #292b2f;
-    border-radius: 10px;
-    height: 450px;
-    width: 350px;
-  }
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	background: #292b2f;
+	border-radius: 10px;
+	height: 450px;
+	width: 350px;
+}
 
-  #card-header {
-    margin: 0;
-    background: #000;
-    border-radius: 10px 10px 0 0;
-    height: 65px;
-    width: 100%;
-  }
+#card-header {
+	margin: 0;
+	background: #000;
+	border-radius: 10px 10px 0 0;
+	height: 65px;
+	width: 100%;
+}
 
-  .card-img {
-    width: 90px;
-    height: 90px;
-    /* border: 5px solid #292b2f; */
-  }
+.card-img {
+	width: 90px;
+	height: 90px;
+	/* border: 5px solid #292b2f; */
+}
 
-  .card-img{
-    border-radius: 50%;
-    border: 5px solid #292b2f;
-  }
-  .card-content {
-    border-radius: 50%;
-    margin: -45px 20px;
-    width: 80%;
-    height: 100px;
-  }
+.card-img {
+	border-radius: 50%;
+	border: 5px solid #292b2f;
+	object-fit: cover;
+}
+.card-content {
+	border-radius: 50%;
+	margin: -45px 20px;
+	width: 80%;
+	height: 100px;
+}
 
-  .card-member-info {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(24,25,28);
-    height: 300px;
-    width: 300px;
-    border-radius: 10px;
-    /* font-family: "Segoe UI Variable"; */
-    font-family: "Roboto";
-  }
+.card-member-info {
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(24, 25, 28);
+	height: 300px;
+	width: 300px;
+	border-radius: 10px;
+	/* font-family: "Segoe UI Variable"; */
+	font-family: "Roboto";
+}
 
-  .card-member-inner-div {
-    padding: 12px
-  }
+.card-member-inner-div {
+	padding: 12px;
+}
 
+.member-nickname {
+	font-weight: 700;
+	font-size: 21px;
+	color: #fff;
+	border-bottom: 1px solid #292b2f;
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
 
-  .member-nickname {
-    font-weight: 700;
-    font-size: 21px;
-    color: #fff;
-    border-bottom: 1px solid #292b2f;
-    padding-top: 5px;
-    padding-bottom: 10px;
-  }
+.card-section {
+	padding: 5px 0;
+}
 
-  .card-section{
-    padding: 5px 0;
-  }
-  
-  .member-h4  {
-    text-transform: uppercase;
-    color: #fff;
-    font-size: 13px;
-    padding: 5px 0;    
-  }
+.member-h4 {
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 13px;
+	padding: 5px 0;
+}
 
-  .card-text {
-    color: white;
-    font-size: 13px;
-  }
+.card-text {
+	color: white;
+	font-size: 13px;
+}
 
-  .leave-server-div {
-    padding: 20px 0;
-  }
+.leave-server-div {
+	padding: 20px 0;
+}
 
-  .delete-membership-button {
-    border: none;
-    background-color: red;
-    color: white;
-    border-radius: 5px;
-  }
+.delete-membership-button {
+	border: none;
+	background-color: red;
+	color: white;
+	border-radius: 5px;
+}

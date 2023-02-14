@@ -14,9 +14,7 @@ def seed_channels():
         name="christiano ronaldo", server_id=2, category="GOATS", is_private=False
     )
 
-    channel4 = Channel(
-        name="banana's", server_id=3, category="Main", is_private=False
-    )
+    channel4 = Channel(name="banana's", server_id=3, category="Main", is_private=False)
 
     channel5 = Channel(
         name="cat pics", server_id=4, category="Cat Media", is_private=False
@@ -40,6 +38,17 @@ def seed_channels():
 
     channel12 = Channel(name="general", server_id=5, category="Main", is_private=False)
 
+    c13 = Channel(name="general", server_id=8, category="Main", is_private=False)
+
+    c14 = Channel(
+        name="threat-level-midnight",
+        server_id=8,
+        category="super-serial",
+        is_private=False,
+    )
+
+    c15 = Channel(name="__mifflin", server_id=8, category="Main", is_private=False)
+
     db.session.add_all(
         [
             channel1,
@@ -54,6 +63,9 @@ def seed_channels():
             channel10,
             channel11,
             channel12,
+            c13,
+            c14,
+            c15,
         ]
     )
     db.session.commit()
