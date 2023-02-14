@@ -13,10 +13,10 @@ import { login } from "../../store/session";
 export default function Navigation() {
     const [ showMenu, setShowMenu ] = useState(false);
     const location = useLocation();
-    console.log("location", location.pathname)
+    // console.log("location", location.pathname)
     const history = useHistory();
     const user = useSelector(state => state.session.user);
-    console.log("Navigation - user:", user);
+    // console.log("Navigation - user:", user);
     const dispatch = useDispatch();
 
     const openMenu = () => {

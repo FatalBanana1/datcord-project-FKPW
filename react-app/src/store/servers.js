@@ -188,13 +188,13 @@ const serverReducer = (state = defaultState(), action) => {
 			return newState;
 
 		case DELETE_SERVER:
-			console.log(`DELETE reducer====>>>>>`);
+			// console.log(`DELETE reducer====>>>>>`);
 			newState = { ...state };
 			delete newState[action.server.server.id];
 			return newState;
 
 		case UPDATE_SERVER:
-			console.log(`UPDATE reducer====>>>>>`);
+			// console.log(`UPDATE reducer====>>>>>`);
 			newState = { ...state };
 			newState[action.server.id] = action.server.server;
 			return newState;

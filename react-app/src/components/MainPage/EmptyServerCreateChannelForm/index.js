@@ -22,15 +22,10 @@ export default function EmptyServerCreateChannelForm({
 
 	// console.log(`FRONT - empty server form ===>>>>`, params.channelId);
 
-	useEffect(() => {
-		// JUST FOR TESTING
-		console.log("isPrivate ? :", isPrivate);
-	}, [isPrivate]);
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setErrors([]);
-		console.log("***** HIT HANDLE SUBMIT ****");
+		// console.log("***** HIT HANDLE SUBMIT ****");
 		if (!serverId) {
 			serverId = params.channelId;
 		}
@@ -41,7 +36,7 @@ export default function EmptyServerCreateChannelForm({
 			is_private: isPrivate,
 		};
 
-		console.log("newChannel", newChannel);
+		// console.log("newChannel", newChannel);
 
 		return dispatch(thunkCreateChannel(+serverId, newChannel))
 			.then(dispatch(thunkGetChannels(+serverId)))

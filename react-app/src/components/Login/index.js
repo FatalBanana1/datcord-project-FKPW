@@ -22,9 +22,9 @@ export default function Login() {
         setErrors({});
         return dispatch(login(email, password))
             .then((res) => {
-                    console.log("res", res)
+                    // console.log("res", res)
                     if (res.errors) {
-                        console.log("res.errors", res);
+                        // console.log("res.errors", res);
                         return setErrors(res);
                     } else {
                         history.push("/channels/@me")

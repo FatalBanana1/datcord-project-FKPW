@@ -12,7 +12,7 @@ export default function Navigation() {
     const [ showMenu, setShowMenu ] = useState(false);
     const drawerRef = useRef();
     const location = useLocation();
-    console.log("location", location.pathname)
+    // console.log("location", location.pathname)
     const history = useHistory();
 
     const openMenu = () => {

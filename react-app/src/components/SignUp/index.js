@@ -20,20 +20,16 @@ export default function SignUp() {
         setErrors({});
 
         if (password === confirmPassword) {
-            console.log("confirmed pw")
             return dispatch(signUp(username, email, password, display_pic))
                 .then((res) => {
                     if (res.errors) {
-                        console.log("res.errors", res);
                         return setErrors(res.errors);
                     } else {
                         history.push("/channels/@me")
                     }
                 })
                 .catch(async(res) => {
-                    console.log("hit error - res:", res);
                     const data = await res.json();
-                    console.log("hit error - res:", data);
                     if (data && data.errors) setErrors(data.errors);
                 })
         } else {

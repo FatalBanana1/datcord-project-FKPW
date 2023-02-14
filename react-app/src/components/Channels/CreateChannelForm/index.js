@@ -14,16 +14,10 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
     const { closeModal } = useModal();
     const history = useHistory();
 
-    useEffect(() => {
-        // JUST FOR TESTING
-        console.log("isPrivate ? :", isPrivate);
-
-    }, [isPrivate])
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        console.log("***** HIT HANDLE SUBMIT ****")
+        // console.log("***** HIT HANDLE SUBMIT ****")
 
         const newChannel = {
             category,
@@ -31,21 +25,9 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
             "is_private": isPrivate
         }
 
-        console.log("newChannel", newChannel);
-
-        // const data = dispatch(thunkCreateChannel(+serverId, newChannel))
-        // if (data) {
-        //     console.log("has error")
-        //     console.log("error data:", data)
-        //     setErrors(data);
-        // } else {
-        //     console.log("no error")
-        //     closeModal();
-        //     dispatch(thunkGetChannels(+serverId));
-        // }
         return dispatch(thunkCreateChannel(+serverId, newChannel))
             .then(res => {
-                console.log("res>>>>>", res)
+                // console.log("res>>>>>", res)
                 history.push(`/channels/${serverId}/${res.id}`)
             })
             .then(closeModal)
@@ -112,8 +94,8 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
                             <input
                                 className="CreateChannelForm-checkbox"
                                 type="checkbox"
-                                value={isPrivate}
-                                onChange={e => setIsPrivate(!e.target.value)}
+                                checked={isPrivate}
+                                onChange={() => setIsPrivate(!isPrivate)}
                             />
                             <div className="CreateChannelForm-switch">
                                 <div></div>
@@ -164,7 +146,7 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
                         <input
                             id="is-private"
                             type="checkbox"
-                            value={category}
+                            checked={category}
                             onChange={(e) => setCategory(e.target.value)}
                             required
                         />
@@ -180,7 +162,7 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
                             id="is-private"
                             type="checkbox"
                             value={isPrivate}
-                            onChange={(e) => setIsPrivate(e.target.value)}
+                            onChange={() => setIsPrivate(!isPrivate)}
                             required
                         />
                         <span className="CreateChannelForm-private-slider"></span>

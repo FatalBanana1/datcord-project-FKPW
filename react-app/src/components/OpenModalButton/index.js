@@ -17,7 +17,7 @@ function OpenModalButton({
   };
 
   if (buttonText === "Create-Channel") {
-    console.log("button text");
+    // console.log("button text");
     return (
       <button
         onClick={onClick}

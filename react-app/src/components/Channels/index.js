@@ -14,46 +14,36 @@ import { thunkGetServerMembers } from "../../store/serverMembers";
 
 export default function Channels() {
     const { serverId, channelId } = useParams();
-    console.log("Channels - serverId, channelId:", serverId, channelId);
+    // console.log("Channels - serverId, channelId:", serverId, channelId);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-    console.log("USER:", user);
+    // console.log("USER:", user);
     // const server = useSelector(state => state.servers)[+serverId]
     // const server = useSelector((state) => state.servers.userServers);
     const server = useSelector((state) => state.channels.server);
-    console.log("userServers", server)
+    // console.log("userServers", server)
     // console.log("server we want:", server.find((thing) => thing.id === +serverId))
     const channels = Object.values(useSelector((state) => state.channels.channels));
     // console.log("SERVER", server);
     const serverMembers = Object.values(useSelector((state) => state.serverMembers));
     const serverMember = serverMembers.filter(member => member.user_id === user.id)[0];
-    console.log("channels - serverMember:", serverMember);
+    // console.log("channels - serverMember:", serverMember);
 
     let serverMemberRole;
 
     let permissions;
 
-
-
-    console.log(
-        "SERVER_CHANNELS",
-        channels.filter((channel) => channel.id === 1)
-    );
-    console.log("USER", user);
+    // console.log("USER", user);
     const [showMenu, setShowMenu] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
 
-    console.log("show edit", showEdit);
+    // console.log("show edit", showEdit);
 
     useEffect(() => {
         dispatch(thunkGetServerMembers(+serverId));
         dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
     }, [dispatch, serverId, channelId]);
-
-    useEffect(() => {
-        console.log("changed showEdit", showEdit);
-    }, [showEdit]);
 
     const categories = {};
 
@@ -68,7 +58,6 @@ export default function Channels() {
     }
 
     if (serverMemberRole === "admin" || serverMemberRole === "owner") {
-        console.log("hit this");
         permissions = true;
     } else {
         permissions = false;
@@ -129,21 +118,23 @@ export default function Channels() {
 
     const closeMenu = () => setShowMenu(false);
 
-    console.log("channels", channels);
-    console.log("categories", categories.category);
-    console.log("permissions", permissions);
-    console.log("serverMember", serverMember);
+    // console.log("channels", channels);
+    // console.log("categories", categories.category);
+    // console.log("permissions", permissions);
+    // console.log("serverMember", serverMember);
 
     const categoriesMap = Object.keys(categories).map((category,idx) => (
         <div className="UserLanding-Sidebar-category-container" key={idx}>
             <div className="UserLanding-sidebar-channel-category-container">
                 <i className="fa-solid fa-angle-down"></i>
                 <span className="UserLanding-sidebar-channel-category-name">{truncateNames(category)}</span>
-                <OpenModalButton
-                    buttonText="Create-Channel"
-                    onButtonClick={closeMenu}
-                    modalComponent={<CreateChannelForm categoryName={category} serverId={serverId} />}
-                />
+                { permissions && (
+                    <OpenModalButton
+                        buttonText="Create-Channel"
+                        onButtonClick={closeMenu}
+                        modalComponent={<CreateChannelForm categoryName={category} serverId={serverId} />}
+                    />
+                )}
             </div>
             <div className="UserLanding-sidebar-channel-list">
                 {/* map out channels here */}

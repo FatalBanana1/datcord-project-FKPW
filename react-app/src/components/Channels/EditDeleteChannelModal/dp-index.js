@@ -12,7 +12,7 @@ export default function EditDeleteChannelModal() {
     const server = useSelector(state => state.servers.userServers);
     const channels = Object.values(useSelector(state => state.channels.channels));
     const channel = channels.filter(channel => channel.id === +channelId)[0];
-    console.log("EditDeleteChannelModal - channel:", channel);
+    // console.log("EditDeleteChannelModal - channel:", channel);
     const [ isLoaded, setIsLoaded ] = useState(false);
 
     const channelName = channel.name;

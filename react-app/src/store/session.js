@@ -87,9 +87,9 @@ export const signUp = (username, email, password, display_pic) => async (dispatc
 		return data;
 	} else if (response.status < 500) {
 		const data = await response.json();
-		console.log("res = not ok!")
+		// console.log("res = not ok!")
 		if (data.errors) {
-			console.log("STORE SIGNUP - data.errors:", data.errors)
+			// console.log("STORE SIGNUP - data.errors:", data.errors)
 			return data;
 		}
 	} else {

@@ -36,7 +36,7 @@ export const thunkGetChannels = (serverId) => async (dispatch) => {
   const data = await res.json();
   if (data.errors) return;
   dispatch(actionGetServerChannels(data.channels, data.server));
-  console.log("CHANNEL DATA", data)
+  // console.log("CHANNEL DATA", data)
   return data.channels;
 };
 
@@ -52,7 +52,7 @@ export const thunkCreateChannel = (serverId, newChannel) => async (dispatch) => 
 
   if (res.ok) {
 		const data = await res.json();
-    console.log("thunkCreateChannel - data:", data);
+    // console.log("thunkCreateChannel - data:", data);
 		dispatch(actionCreateChannel(data.channel));
 		return data.channel;
 	} else if (res.status < 500) {
@@ -72,7 +72,7 @@ export const thunkDeleteChannel = (serverId, channelId) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    console.log("thunkDeleteChannel - data:", data);
+    // console.log("thunkDeleteChannel - data:", data);
     dispatch(actionDeleteChannel(channelId))
     return data;
   } else if (res.status < 500) {
@@ -97,7 +97,7 @@ export const thunkEditChannel = (serverId, channelId, editedChannel) => async (d
 
   if (res.ok) {
 		const data = await res.json();
-    console.log("thunkEditChannel - data:", data);
+    // console.log("thunkEditChannel - data:", data);
 		dispatch(actionEditChannel(channelId, data.channel));
 		return null;
 	} else if (res.status < 500) {
@@ -112,7 +112,7 @@ export const thunkEditChannel = (serverId, channelId, editedChannel) => async (d
 
 const normalize = (channels) => {
     const data = {};
-    console.log("channels", channels)
+    // console.log("channels", channels)
     if (channels) {
         channels.forEach(channel => data[channel.id] = channel);
         return data;
@@ -131,26 +131,26 @@ export default function reducer(state = initialState, action) {
         return getChannelsState;
       }
       getChannelsState.channels = normalize(action.channels);
-      console.log("NEW STATE", getChannelsState)
+      // console.log("NEW STATE", getChannelsState)
       return getChannelsState;
     case CREATE_CHANNEL: {
       const createChannelState = { ...state };
       createChannelState.channels = { ...state.channels, [action.channel.id]: action.channel };
-      console.log("CREATE_CHANNEL - createChannelState:", createChannelState);
+      // console.log("CREATE_CHANNEL - createChannelState:", createChannelState);
       return createChannelState;
 
     }
     case DELETE_CHANNEL: {
       const deleteChannelState = { ...state };
-      console.log("DELETE_CHANNEL - before delete:", action);
+      // console.log("DELETE_CHANNEL - before delete:", action);
       delete deleteChannelState.channels[action.channelId];
-      console.log("DELETE_CHANNEL - deleteChannelState:", deleteChannelState);
+      // console.log("DELETE_CHANNEL - deleteChannelState:", deleteChannelState);
       return deleteChannelState;
     }
     case EDIT_CHANNEL: {
       const editChannelState = { ...state };
       editChannelState.channels = { ...state.channels, [ action.channelId ]: action.channel};
-      console.log("EDIT_CHANNEL - editChannelState:", editChannelState);
+      // console.log("EDIT_CHANNEL - editChannelState:", editChannelState);
       return editChannelState;
     }
     default:
