@@ -158,9 +158,12 @@ export default function Channels() {
                                     <OpenModalButton
                                         buttonText="Edit-Channel"
                                         onButtonClick={closeMenu}
-                                        modalComponent={<EditChannelForm categoryName={category} prevName={channel.name}
+                                        modalComponent={<EditChannelForm
+                                        categoryName={category}
+                                        prevName={channel.name}
                                         serverId={serverId}
                                         channelId={channel.id}
+                                        priv={channel.is_private}
                                         />}
                                     />
                                 </div>

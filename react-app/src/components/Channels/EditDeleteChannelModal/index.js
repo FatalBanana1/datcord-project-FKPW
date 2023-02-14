@@ -4,11 +4,11 @@ import { Redirect, useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal.js";
 import { thunkCreateChannel, thunkDeleteChannel, thunkEditChannel, thunkGetChannels } from "../../../store/channels";
 
-export default function EditChannelForm({ categoryName, prevName, serverId, channelId })  {
+export default function EditChannelForm({ categoryName, prevName, serverId, channelId, priv })  {
     const dispatch = useDispatch();
     const [ category, setCategory ] = useState(categoryName ? categoryName : "");
     const [ channelName, setChannelName ] = useState(prevName ? prevName : "");
-    const [ isPrivate, setIsPrivate ] = useState(false);
+    const [ isPrivate, setIsPrivate ] = useState(priv);
     const [ errors, setErrors ] = useState([]);
     const { closeModal } = useModal();
     const history = useHistory();
@@ -28,12 +28,6 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
     //     setIsDisabled(true);
     //     console.log("disabled?", isDisabled);
     // }
-
-    // useEffect(() => {
-    //     // JUST FOR TESTING
-    //     console.log("isPrivate ? :", isPrivate);
-
-    // }, [isPrivate])
 
     if (!channels) return null;
     const handleSubmit = (e) => {
