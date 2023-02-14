@@ -55,11 +55,6 @@
 	margin-right: 5px;
 }
 
-.msg-ct:hover {
-	background-color: rgba(43, 45, 49, 0.781);
-	border: 0;
-}
-
 .cms-msg-header {
 	display: flex;
 	flex-direction: row;
@@ -77,6 +72,11 @@
 	flex-direction: row;
 	font-size: 0.8rem;
 	margin-left: auto;
+}
+
+.msg-ct:hover {
+	background-color: rgba(43, 45, 49, 0.781);
+	border: 0;
 }
 
 .cms-delete {

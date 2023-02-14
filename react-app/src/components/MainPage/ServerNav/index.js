@@ -81,9 +81,9 @@ export default function ServerNav() {
 				modalComponent={<CreateServerForm onChange={loaded} />}
 			/>
 
-			<div className="ServerNav-icons">
-				<i className="fa-solid fa-compass fa-lg"></i>
-			</div>
+			<NavLink to={`/gotMilk`} className="ServerNav-icons">
+				<i className="fa-solid fa-compass fa-lg" />
+			</NavLink>
 		</div>
 	);
 }

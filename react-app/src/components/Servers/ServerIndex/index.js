@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkReadAllServers } from "../../../store/servers";
+import "./ServerIndex.css";
 
 const ServerIndex = () => {
 	let dispatch = useDispatch();
@@ -26,7 +27,7 @@ const ServerIndex = () => {
 					<div key={el.id} className="mtop-15">
 						<img
 							src={el.icon_url}
-							className="small-icon"
+							className="servers-icon"
 							alt="server icon"
 						/>
 						<div>{`Server : ${el.name}`}</div>

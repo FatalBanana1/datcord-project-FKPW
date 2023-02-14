@@ -98,11 +98,8 @@ export const thunkCreateServer = (server) => async (dispatch) => {
 		body: JSON.stringify(server),
 	});
 
-	console.log("RESPONSE", response);
 	if (response.ok) {
-		console.log("INSIDE resOK");
 		const newServer = await response.json();
-		console.log("NEW SERVER", newServer);
 		dispatch(actionCreateServer(newServer.server));
 		return newServer.server;
 	} else if (response.status < 500) {
@@ -191,13 +188,15 @@ const serverReducer = (state = defaultState(), action) => {
 			return newState;
 
 		case DELETE_SERVER:
+			console.log(`DELETE reducer====>>>>>`);
 			newState = { ...state };
-			delete newState[action.id];
+			delete newState[action.server.server.id];
 			return newState;
 
 		case UPDATE_SERVER:
+			console.log(`UPDATE reducer====>>>>>`);
 			newState = { ...state };
-			newState[action.serverId] = action.server;
+			newState[action.server.id] = action.server.server;
 			return newState;
 
 		case RESET_SERVERS:
