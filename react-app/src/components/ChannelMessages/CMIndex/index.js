@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
@@ -18,6 +18,7 @@ const CMIndex = () => {
 	const dispatch = useDispatch();
 
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [loadBottom, setLoadBottom] = useState(false);
 	const [edit, setEdit] = useState(0);
 
 	// use state for controlled form input
@@ -32,10 +33,25 @@ const CMIndex = () => {
 	const channels = useSelector((state) => state.channels.channels);
 	const channel = channels[channelId];
 
+	const endMsgRef = useRef(null);
+
+	const scrollToBottom = () => {
+		if (!endMsgRef.current) return;
+		endMsgRef.current.scrollIntoView({ behavior: "smooth" });
+	}
+
 	useEffect(() => {
-		dispatch(thunkReadAllChannelMessages(serverId, channelId)).then(() =>
+		scrollToBottom();
+	}, [loadBottom, messages])
+
+	useEffect(() => {
+		scrollToBottom();
+		dispatch(thunkReadAllChannelMessages(serverId, channelId)).then(() => {
 			setIsLoaded(true)
+			setLoadBottom(true)
+		}
 		);
+
 
 		return () => {
 			setChatInput("");
@@ -316,6 +332,7 @@ const CMIndex = () => {
 									)}
 								</div>
 							))}
+							<div ref={endMsgRef} />
 						</div>
 						{role === "member" ||
 						role === "owner" ||
