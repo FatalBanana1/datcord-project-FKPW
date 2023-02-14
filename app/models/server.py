@@ -13,7 +13,11 @@ class Server(db.Model):
     owner_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users_table.id")), nullable=False
     )
-    icon_url = db.Column(db.String, default="https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png", nullable=False)
+    icon_url = db.Column(
+        db.String,
+        default="https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png",
+        nullable=False,
+    )
     description = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(
@@ -37,4 +41,5 @@ class Server(db.Model):
             "description": self.description,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
+            "channels": [channel.to_dict() for channel in self.channels],
         }

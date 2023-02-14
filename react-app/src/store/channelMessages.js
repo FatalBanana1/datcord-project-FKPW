@@ -131,10 +131,10 @@ const cmReducer = (state = defaultState(), action) => {
 
 		case CREATE_CHANNEL_MESSAGE:
 			newState = { ...state };
-			newState[action.userId] = {
-				...state[action.userId],
-				[action.server.id]: action.server,
-			};
+			// newState[action.userId] = {
+			// 	...state[action.userId],
+			// 	[action.server.id]: action.server,
+			// };
 			return newState;
 
 		case DELETE_CHANNEL_MESSAGE:

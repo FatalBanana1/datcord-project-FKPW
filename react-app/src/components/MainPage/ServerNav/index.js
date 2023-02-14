@@ -1,10 +1,11 @@
 import "./ServerNav.css";
 import avatar from "../../../assets/datcord_logo_svg.svg";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { NavLink, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import MainContent from "../MainContent";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+	actionResetServers,
 	thunkReadUserServers,
 } from "../../../store/servers";
 import { thunkGetChannels } from "../../../store/channels";
@@ -14,34 +15,21 @@ import OpenModalButton from "../../OpenModalButton";
 export default function ServerNav() {
 	const dispatch = useDispatch();
 	const [loaded, setLoaded] = useState(false);
-	// const allServers = useSelector((state) => state.servers);
 	const allServers = useSelector((state) => state.servers);
 	const servers = Object.values(allServers);
-	// console.log("User Servers 1", userServers);
-	// console.log("ServerNav - servers:", allServers);
-	// const servers = Object.values(userServers);
-	// const [servers, setServers] = useState([]);
 	const history = useHistory();
+	const user = useSelector((state) => state.session.user);
 
 	useEffect(() => {
-		// dispatch(thunkReadAllServers());
-		dispatch(thunkReadUserServers())
-			// .then((res) => {
-			//   // console.log("USERSERVERS, ", servers);
-			//   // setServers(res);
-			// })
-			.then(() => setLoaded(true));
-	}, [dispatch]);
+		dispatch(thunkReadUserServers()).then(() => setLoaded(true));
+		return () => dispatch(actionResetServers());
+	}, [user.id, loaded]);
 
 	const handleClick = async (serverId) => {
-		// console.log(serverId);
-		const serverChannels = await dispatch(thunkGetChannels(serverId)).then(
-			(res) =>
-				res === "Server has no channels"
-					? history.push(`/channels/${serverId}/0`)
-					: history.push(`/channels/${serverId}/${res[0].id}`)
-		);
+		dispatch(thunkGetChannels(serverId)).then(setLoaded(true));
 	};
+
+	// console.log(`FRONT server nav comp=======`, servers[0].channels[0].id);
 
 	return (
 		<div className="ServerNav-container">
@@ -57,16 +45,32 @@ export default function ServerNav() {
 			{servers.length &&
 				loaded &&
 				servers.map((server, i) => (
-					<div
-						className="ServerNav-server-icons"
-						key={i}
-						onClick={() => handleClick(server.id)}
-					>
-						<img
-							src={server.icon_url}
-							className="ServerNav-icon"
-							alt="server-icon"
-						/>
+					<div key={i}>
+						{server && server.channels && server.channels[0] ? (
+							<NavLink
+								to={`/channels/${server.id}/${server.channels[0].id}`}
+								className="ServerNav-server-icons"
+								onClick={() => handleClick(server.id)}
+							>
+								<img
+									src={server.icon_url}
+									className="ServerNav-icon"
+									alt="server-icon"
+								/>
+							</NavLink>
+						) : (
+							<NavLink
+								to={`/channels/${server.id}/new`}
+								className="ServerNav-server-icons"
+								onClick={() => handleClick(server.id)}
+							>
+								<img
+									src={server.icon_url}
+									className="ServerNav-icon"
+									alt="server-icon"
+								/>
+							</NavLink>
+						)}
 					</div>
 				))}
 			<div className="ServerNav-divider"></div>
@@ -74,8 +78,7 @@ export default function ServerNav() {
 			{/* <i className="fa-solid fa-plus"></i> */}
 			<OpenModalButton
 				buttonText="Create-Server"
-				modalComponent={<CreateServerForm />}
-				// onButtonClick={closeMenu}
+				modalComponent={<CreateServerForm onChange={loaded} />}
 			/>
 
 			<div className="ServerNav-icons">
