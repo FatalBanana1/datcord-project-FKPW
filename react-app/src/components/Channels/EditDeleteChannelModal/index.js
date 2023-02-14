@@ -26,7 +26,7 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
 
     // if (channels && channels.length < 2) {
     //     setIsDisabled(true);
-    //     console.log("disabled?", isDisabled);
+        // console.log("isPrivate ?", isPrivate);
     // }
 
     if (!channels) return null;

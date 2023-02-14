@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/datcord_logo_svg.svg";
 import { thunkGetChannels } from "../../store/channels";
@@ -13,17 +13,19 @@ import EditChannelForm from "./EditDeleteChannelModal";
 import EditServer from "../Servers/EditServer";
 import DeleteServer from "../Servers/DeleteServer";
 import { thunkGetServerMembers } from "../../store/serverMembers";
+import { logout } from "../../store/session";
 
 export default function Channels() {
   const { serverId, channelId } = useParams();
-  console.log("Channels - serverId, channelId:", serverId, channelId);
+  const history = useHistory();
+//   console.log("Channels - serverId, channelId:", serverId, channelId);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  console.log("USER:", user);
+//   console.log("USER:", user);
   // const server = useSelector(state => state.servers)[+serverId]
   // const server = useSelector((state) => state.servers.userServers);
   const server = useSelector((state) => state.channels.server);
-  console.log("userServers", server);
+//   console.log("userServers", server);
   // console.log("server we want:", server.find((thing) => thing.id === +serverId))
   const channels = Object.values(
     useSelector((state) => state.channels.channels)
@@ -35,23 +37,39 @@ export default function Channels() {
   const serverMember = serverMembers.filter(
     (member) => member.user_id === user.id
   )[0];
-  // console.log("channels - serverMember:", serverMember);
+  // console.log("channels - serverMe
+  const userSettingsRef = useRef();
+  const [showMenu, setShowMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
+  const openUserMenu = () => {
+    if (showUserMenu) return;
+    setShowUserMenu(true);
   };
+
+  useEffect(() => {
+    if (!showUserMenu) return;
+
+    const closeMenu = (e) => {
+      if (!userSettingsRef.current.contains(e.target)) {
+        setShowUserMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showUserMenu]);
 
   let serverMemberRole;
 
   let permissions;
 
-  console.log(
-    "SERVER_CHANNELS",
-    channels.filter((channel) => channel.id === 1)
-  );
-  console.log("USER", user);
-  const [showMenu, setShowMenu] = useState(false);
+//   console.log(
+//     "SERVER_CHANNELS",
+//     channels.filter((channel) => channel.id === 1)
+//   );
+//   console.log("USER", user);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showServerMenu, setShowServerMenu] = useState(false);
@@ -85,16 +103,13 @@ export default function Channels() {
   const menuClassName =
     "server-menu-dropdown" + (showServerMenu ? "" : " hidden");
 
-  console.log("show edit", showEdit);
+//   console.log("show edit", showEdit);
+
 
   useEffect(() => {
     dispatch(thunkGetServerMembers(+serverId));
     dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
   }, [dispatch, serverId, channelId]);
-
-  useEffect(() => {
-    console.log("changed showEdit", showEdit);
-  }, [showEdit]);
 
   const categories = {};
 
@@ -109,7 +124,7 @@ export default function Channels() {
   }
 
   if (serverMemberRole === "admin" || serverMemberRole === "owner") {
-    console.log("hit this");
+    // console.log("hit this");
     permissions = true;
   } else {
     permissions = false;
@@ -135,45 +150,18 @@ export default function Channels() {
     return names;
   };
 
-  // const categoriesMap = Object.keys(categories).map((category) => (
-  // 	<>
-  // 		<div className="UserLanding-sidebar-channel-category-container">
-  // 			<i className="fa-solid fa-angle-down"></i>
-  // 			<span className="UserLanding-sidebar-channel-category-name">
-  // 				{truncateNames(category)}
-  // 			</span>
-  // 			<i className="fa-solid fa-plus align-right"></i>
-  // 		</div>
-  // 		<div className="UserLanding-sidebar-channel-list">
-  // 			{/* map out channels here */}
-  // 			{category &&
-  // 				categories[category].map((channel) => (
-  // 					<NavLink
-  // 						to={`/channels/2/3`}
-  // 						className="UserLanding-sidebar-channel-name"
-  // 						key={channel.id}
-  // 					>
-  // 						<div className="UserLanding-sidebar-channel-name-label">
-  // 							<span className="hash">#</span>{" "}
-  // 							{channel.name && truncateNames(channel.name)}
-  // 						</div>
-  // 						{/* if admin, then show these buttons v */}
-  // 						<div className="UserLanding-sidebar-channel-buttons">
-  // 							<i className="fa-solid fa-user-plus"></i>
-  // 							<i className="fa-solid fa-gear"></i>
-  // 						</div>
-  // 					</NavLink>
-  // 				))}
-  // 		</div>
-  // 	</>
-  // ));
-
   const closeMenu = () => setShowMenu(false);
 
-  console.log("channels", channels);
-  console.log("categories", categories.category);
-  console.log("permissions", permissions);
-  console.log("serverMember", serverMember);
+  const goLogout = (e) => {
+    e.preventDefault();
+
+    dispatch(logout());
+    history.push("/");
+  }
+
+  console.log("showMenu", showMenu)
+
+  const userSettingsClass = "UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
   const categoriesMap = Object.keys(categories).map((category, idx) => (
     <div className="UserLanding-Sidebar-category-container" key={idx}>
@@ -324,7 +312,13 @@ export default function Channels() {
             <div className="UserLanding-sidebar-channel-user-actions">
               <i className="fa-solid fa-microphone"></i>
               <i className="fa-solid fa-headphones"></i>
-              <i className="fa-solid fa-gear user-gear"></i>
+              <i className="fa-solid fa-gear user-gear" onClick={openUserMenu}></i>
+              <div className={userSettingsClass} ref={userSettingsRef}>
+                <div className="dropdown-wrapper">
+                    <NavLink to="/" className="UserLanding-sidebar-channel-user-home">Home</NavLink>
+                    <p className="UserLanding-sidebar-channel-user-logout" onClick={goLogout}>Logout</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

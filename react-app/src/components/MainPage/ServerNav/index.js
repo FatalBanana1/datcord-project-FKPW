@@ -29,7 +29,7 @@ export default function ServerNav() {
 	const { serverId } = useParams();
 
 	useEffect(() => {
-		dispatch(thunkReadUserServers()).then(() => setLoaded(true));
+		dispatch(thunkReadUserServers()).then(() => setLoaded(true))
 		return () => dispatch(actionResetServers());
 	}, [user.id, loaded, serverId]);
 

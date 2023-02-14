@@ -25,6 +25,9 @@ export default function UserLanding({ page }) {
                 <li>members list if on server page</li>
             </ol> */}
 					<div className="UserLanding-main-content">
+						<div className="UserLanding-header">
+							
+						</div>
 						<div className="UserLanding-status">
 							{/* adding 2 as placeholder for now */}
 							<h2>Online — 2</h2>

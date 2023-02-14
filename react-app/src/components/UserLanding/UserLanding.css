@@ -13,10 +13,10 @@
 .UserLanding-main-content {
 	display: flex;
 	flex-direction: column;
-	padding-top: 16px;
+	/* padding-top: 16px; */
 	/* padding-right: 20px; */
 	/* width: 1186px; */
-	width: 90%;
+	width: 100%;
 }
 
 .UserLanding-server-members {
@@ -26,7 +26,7 @@
 
 .UserLanding-status {
 	margin-bottom: 15px;
-	padding: 0px 10px;
+	padding: 0px 26px;
 }
 
 .UserLanding-status > h2 {
@@ -45,7 +45,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	border-top: 1px solid #41454c;
-	padding: 0px 10px;
+	margin: 0px 26px;
 }
 
 .UserLanding-people-list:hover {
@@ -110,6 +110,21 @@
 	width: 240px;
 	height: 100vh;
 	background-color: #303136;
+}
+
+.UserLanding-header {
+	width: inherit;
+	height: 48px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 6px;
+	box-sizing: border-box;
+	border-bottom: 1px;
+	color: #ffffff;
+	box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
+    0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
+	margin-bottom: 16px;
 }
 
 @media (min-width: 768px) {

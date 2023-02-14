@@ -67,3 +67,35 @@
   font-size: 14px;
   color: rgb(255, 107, 107);
 }
+
+.UserLanding-Sidebar-user-dropdown {
+  z-index: 1;
+  background-color: black;
+  position: absolute;
+  top: -60px;
+  left: 142px;
+  box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
+  border-radius: 3px;
+  width: 120px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  color: #b9bbbe;
+}
+
+.UserLanding-Sidebar-user-dropdown-user-logout {
+  cursor: pointer;
+}
+
+a.UserLanding-sidebar-channel-user-home {
+  text-decoration: none;
+  font-size: 14px;
+  color: #b9bbbe;
+  cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
