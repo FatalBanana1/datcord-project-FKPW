@@ -10,6 +10,8 @@ import EditDeleteChannelModal from "./EditDeleteChannelModal/dp-index";
 import "./Channel.css";
 import { Modal } from "../../context/Modal";
 import EditChannelForm from "./EditDeleteChannelModal";
+import EditServer from "../Servers/EditServer";
+import DeleteServer from "../Servers/DeleteServer";
 import { thunkGetServerMembers } from "../../store/serverMembers";
 
 export default function Channels() {
@@ -33,7 +35,7 @@ export default function Channels() {
   const serverMember = serverMembers.filter(
     (member) => member.user_id === user.id
   )[0];
-  console.log("channels - serverMember:", serverMember);
+  // console.log("channels - serverMember:", serverMember);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -54,6 +56,12 @@ export default function Channels() {
   const [showEdit, setShowEdit] = useState(false);
   const [showServerMenu, setShowServerMenu] = useState(false);
   const menuRef = useRef();
+
+  // PETER'S SERVER DROP DOWN STUFF
+  let isOwner;
+  if (isLoaded) {
+    isOwner = user.id == server.owner_id;
+  }
 
   const openServerMenu = () => {
     if (showServerMenu) return;
@@ -261,12 +269,37 @@ export default function Channels() {
       <div className="UserLanding-sidebar">
         <div className="UserLanding-sidebar-header">
           <p>{server.name}</p>
-          <button className="server-dropdown-button" onClick={openServerMenu}>
-            <i className="fa-solid fa-angle-down big-angle-down"></i>
-          </button>
-          <div className={menuClassName} ref={menuRef}>
-            <div className="dropdown-wrapper">HELLO</div>
-          </div>
+          {isOwner && (
+            <>
+              <div className="server-dropdown-button" onClick={openServerMenu}>
+                <i className="fa-solid fa-angle-down big-angle-down"></i>
+              </div>
+              <div className={menuClassName} ref={menuRef}>
+                <div className="dropdown-wrapper">
+                  <div className="server-dropdown-edit">
+                    {/* <span>Edit Server</span>
+                    <span>
+                      <i className="fa-solid fa-pencil"></i>
+                    </span> */}
+                    <OpenModalButton
+                      buttonText="Edit-Server"
+                      modalComponent={<EditServer server={server} />}
+                    />
+                  </div>
+                  <div className="server-dropdown-delete">
+                    {/* <span>Delete Server</span>
+                    <span>
+                      <i className="fa-solid fa-trash"></i>
+                    </span> */}
+                    <OpenModalButton
+                      buttonText="Delete-Server"
+                      modalComponent={<DeleteServer />}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
         <div className="UserLanding-sidebar-channel-content">
           {channels.length > 0 && categoriesMap.length ? (

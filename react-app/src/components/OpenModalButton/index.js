@@ -1,5 +1,5 @@
-import React from 'react';
-import { useModal } from '../../context/Modal';
+import React from "react";
+import { useModal } from "../../context/Modal";
 import "./OpenModalButton.css";
 
 function OpenModalButton({
@@ -44,17 +44,46 @@ function OpenModalButton({
 
   if (buttonText === "Edit-Channel") {
     return (
-      <button onClick={onClick}
+      <button
+        onClick={onClick}
         className={`OpenModalButton-button ${buttonText}`}
       >
         <i className="fa-solid fa-gear"></i>
       </button>
-    )
+    );
   }
 
-  return (
-    <button onClick={onClick}>{buttonText}</button>
-  );
+  if (buttonText === "Edit-Server") {
+    return (
+      <div
+        role="button"
+        onClick={onClick}
+        className={`OpenModaldiv-edit-button ${buttonText}`}
+      >
+        <span>Edit Server</span>
+        <span>
+          <i className="fa-solid fa-pencil"></i>
+        </span>
+      </div>
+    );
+  }
+
+  if (buttonText === "Delete-Server") {
+    return (
+      <div
+        role="button"
+        onClick={onClick}
+        className={`OpenModaldiv-delete-button ${buttonText}`}
+      >
+        <span>Delete Server</span>
+        <span>
+          <i className="fa-solid fa-trash"></i>
+        </span>
+      </div>
+    );
+  }
+
+  return <button onClick={onClick}>{buttonText}</button>;
 }
 
 export default OpenModalButton;

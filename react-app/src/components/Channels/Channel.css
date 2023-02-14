@@ -25,9 +25,45 @@
   z-index: 1;
   background-color: black;
   position: absolute;
-  top: 50px;
-  left: 80px;
+  top: 55px;
+  left: 82px;
   box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
-  border-radius: 10px;
-  width: 216px;
+  border-radius: 3px;
+  width: 200px;
+  padding: 10px;
+}
+
+.server-dropdown-button:hover {
+  cursor: pointer;
+}
+
+.dropdown-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.server-dropdown-edit {
+  font-size: 14px;
+  color: #b9bbbe;
+  margin-bottom: 10px;
+}
+
+.OpenModaldiv-edit-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.OpenModaldiv-delete-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.OpenModaldiv-edit-button:hover,
+.OpenModaldiv-delete-button:hover {
+  cursor: pointer;
+}
+
+.server-dropdown-delete {
+  font-size: 14px;
+  color: rgb(255, 107, 107);
 }
