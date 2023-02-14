@@ -28,21 +28,26 @@ export default function Navigation() {
 
     const loginDemo = (num) => {
         switch (num) {
-            case 1: {
+            case "one": {
                 const data = dispatch(login(
                     "gotmilk@gmail.com", "password"
-                )).then(history.push("/channels/@me"))
+                )).then(() => history.push("/channels/@me"))
+                return data;
             }
-            case 2: {
+            case "two": {
                 const data = dispatch(login(
                     "wasiq@gmail.com", "password"
-                )).then(history.push("/channels/@me"))
+                )).then(() => history.push("/channels/@me"))
+                return data;
             }
-            case 3: {
+            case "three": {
                 const data = dispatch(login(
                     "fahd@gmail.com", "password"
-                )).then(history.push("/channels/@me"))
+                )).then(() => history.push("/channels/@me"))
+                return data;
             }
+            default:
+                return
         }
     }
 
@@ -70,15 +75,15 @@ export default function Navigation() {
                         <li>
                             <a href="#meet-devs">Support</a>
                         </li>
-                        <li className="Navigation-demo" onClick={() => loginDemo(1)}>
+                        <li className="Navigation-demo" onClick={() => loginDemo("one")}>
                             <span className="Navigation-demo-no-hover">De-moo 1</span>
                             <span className="Navigation-demo-hover">Demo User 1</span>
                         </li>
-                        <li className="Navigation-demo" onClick={() => loginDemo(2)}>
+                        <li className="Navigation-demo" onClick={() => loginDemo("two")}>
                             <span className="Navigation-demo-no-hover">De-moo 2</span>
                             <span className="Navigation-demo-hover">Demo User 2</span>
                         </li>
-                        <li className="Navigation-demo" onClick={() => loginDemo(3)}>
+                        <li className="Navigation-demo" onClick={() => loginDemo("three")}>
                             <span className="Navigation-demo-no-hover">De-moo 3</span>
                             <span className="Navigation-demo-hover">Demo User 3</span>
                         </li>
