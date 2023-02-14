@@ -180,7 +180,10 @@ const CMIndex = () => {
 											className="row justify"
 											key={message.id}
 										>
-											<NavLink to="#" className="img-link">
+											<NavLink
+												to="#"
+												className="img-link"
+											>
 												<img
 													src={message.display_pic}
 													alt="crown"
@@ -273,7 +276,15 @@ const CMIndex = () => {
 								  ))
 								: null}
 							{messages.map((message, i) => (
-								<div key={`s_${i}`}>
+								<div key={`s_${i}`} className="row justify">
+									<NavLink to="#" className="img-link">
+										<img
+											src={message.display_pic}
+											alt="crown"
+											className="pic-icon"
+										/>
+									</NavLink>
+
 									{message.id == edit ? (
 										<CMEdit
 											message={message}
