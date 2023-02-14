@@ -85,6 +85,7 @@ export const thunkAddServerMember = (serverId, role) => async (dispatch) => {
 
 // EDIT
 export const thunkEditServerMember = (serverId, serverMemberId, serverMember) => async (dispatch) => {
+	console.log("pre-Fetch ----->", serverMember)
 	const res = await fetch(`/api/servers/${serverId}/membership/${serverMemberId}`, {
         method: 'PUT',
         headers: {
