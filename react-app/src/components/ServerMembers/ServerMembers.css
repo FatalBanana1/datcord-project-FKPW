@@ -56,6 +56,28 @@ h2 {
     color: rgb(25,188,155)
 }
 
+.individual-person button{
+    font-size: 15px;
+    color: rgb(25,188,155);
+    background-color: rgb(48,49,54);
+    border: none;
+}
+
+.individual-person button:hover{
+    background-color: #3f434a;
+    filter: brightness(1);
+    cursor: pointer;
+}
+
+.visible {
+    position: absolute;
+    right: 100px;
+}
+
+.hidden {
+    display: none;
+}
+
 .section {
     padding: 5px 0;
 }
@@ -83,4 +105,10 @@ h2 {
 
 .pending{
     filter: brightness(0.5)
+}
+
+.server-owner-crown {
+    height: 12px;
+    padding-top: 2px;
+    padding-left: 5px;
 }
