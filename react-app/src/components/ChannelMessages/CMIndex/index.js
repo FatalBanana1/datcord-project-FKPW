@@ -169,7 +169,7 @@ const CMIndex = () => {
 		if (currMbr) {
 			role = currMbr.role;
 		}
-		console.log(`role ===`, user.server_members, role, serverId);
+		// console.log(`role ===`, user.server_members, role, serverId);
 
 		// print the username and message for each chat
 		return (
