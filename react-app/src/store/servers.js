@@ -138,15 +138,18 @@ export const thunkUpdateServer = (serverId, server) => async (dispatch) => {
 
 // DELETE
 export const thunkDeleteServer = (serverId) => async (dispatch) => {
-  const response = await fetch(`api/servers/${serverId}`, {
+  const response = await fetch(`/api/servers/${serverId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
-
+  // console.log("DELETE THUNK", response);
   if (response.ok) {
-    const deletedServer = await response.json();
-    dispatch(actionDeleteServer(deletedServer(serverId)));
-    return deletedServer;
+    const deletedServer = await response.json(); // { server : { ... }}
+    console.log("response ok", deletedServer.server);
+    // TO DO:  import actionDeleteChannel, dispatch delete action for each channel in deletedServer.server.channels
+    // OR: Create new channel action to reset channel store
+    dispatch(actionDeleteServer(deletedServer.server));
+    return deletedServer.server;
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
@@ -194,7 +197,12 @@ const serverReducer = (state = defaultState(), action) => {
     case DELETE_SERVER:
       console.log(`DELETE reducer====>>>>>`);
       newState = { ...state };
-      delete newState[action.server.server.id];
+      // remove deleted server from server store
+      console.log("DELETE REDUCER");
+      console.log("ID TO DELETE", action.server.id);
+      console.log(newState);
+      delete newState[action.server.id];
+      console.log("NEW STATE", newState);
       return newState;
 
     case UPDATE_SERVER:

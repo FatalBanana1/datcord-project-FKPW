@@ -90,7 +90,7 @@ def update_server(id):
 
 
 # DELETE SERVER
-@server_routes.route("<int:id>", methods=["DELETE"])
+@server_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_server(id):
     server = Server.query.get(id)

@@ -293,7 +293,7 @@ export default function Channels() {
                     </span> */}
                     <OpenModalButton
                       buttonText="Delete-Server"
-                      modalComponent={<DeleteServer />}
+                      modalComponent={<DeleteServer server={server} />}
                     />
                   </div>
                 </div>

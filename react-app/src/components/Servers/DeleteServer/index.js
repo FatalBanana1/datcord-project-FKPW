@@ -8,18 +8,26 @@ const DeleteServer = ({ server }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
-  dispatch(thunkDeleteServer(server.id))
-    .then(() => closeModal())
-    .then(() => history.push("/channels/@me"));
+  function handleDelete(e) {
+    e.preventDefault();
+    dispatch(thunkDeleteServer(server.id))
+      .then(() => closeModal())
+      .then(() => history.push("/channels/@me"))
+      .catch(async (res) => {
+        const data = await res;
+        if (data && data.errors) setErrors(data.errors);
+      });
+  }
 
   return (
     <div className="delete-container">
       <div className="delete-header">Are you sure you want to delete?</div>
       <div className="delete-buttons">
-        <button>Cancel</button>
-        <button>Delete</button>
+        <button onClick={closeModal}>Cancel</button>
+        <button onClick={handleDelete}>Delete</button>
       </div>
     </div>
   );
