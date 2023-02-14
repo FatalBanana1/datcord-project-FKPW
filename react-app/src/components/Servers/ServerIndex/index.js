@@ -15,11 +15,11 @@ const ServerIndex = () => {
 
 	let allServers = useSelector((state) => state.servers);
 
-	let servers = Object.values(allServers);
-
-	// console.log(`server index comp-----`, servers);
-
 	if (isLoaded) {
+		let servers = Object.values(allServers);
+
+		// console.log(`server index comp-----`, servers);
+
 		// return
 		return (
 			<div className="exp-bk">
@@ -33,21 +33,41 @@ const ServerIndex = () => {
 
 					<div className="mtop-15">Featured Communities</div>
 					<div className="mtop-15 exp-servers-ct">
-						{servers.map((el) => (
-							<NavLink
-								to={`/channels/${el.id}/${el.channels[0].id}`}
-								key={el.id}
-								className="mtop-15 exp-serv"
-							>
-								<img
-									src={el.icon_url}
-									className="servers-icon"
-									alt="server icon"
-								/>
-								<div>{`Server : ${el.name}`}</div>
-								<div>{`About : ${el.description}`}</div>
-							</NavLink>
-						))}
+						{servers.map((el) => {
+							if (el && el.channels && el.channels[0]) {
+								return (
+									<NavLink
+										to={`/channels/${el.id}/${el.channels[0].id}`}
+										key={el.id}
+										className="mtop-15 exp-serv"
+									>
+										<img
+											src={el.icon_url}
+											className="servers-icon"
+											alt="server icon"
+										/>
+										<div>{`Server : ${el.name}`}</div>
+										<div>{`About : ${el.description}`}</div>
+									</NavLink>
+								);
+							} else {
+								return (
+									<NavLink
+										to={`/channels/@me/`}
+										key={el.id}
+										className="mtop-15 exp-serv"
+									>
+										<img
+											src={el.icon_url}
+											className="servers-icon"
+											alt="server icon"
+										/>
+										<div>{`Server : ${el.name}`}</div>
+										<div>{`About : ${el.description}`}</div>
+									</NavLink>
+								);
+							}
+						})}
 					</div>
 				</div>
 			</div>
