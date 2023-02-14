@@ -1,12 +1,25 @@
+.cms-container {
+	width: 100%;
+	height: calc(100% - 40px);
+}
+
 .cms-ct {
 	height: 100%;
 	width: 100%;
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.cm-form-container {
+	width: 100%;
+	height: 80px;
 }
 
 .cm-text-input {
-	width: 60%;
-	max-width: 90%;
+	width: calc(100% - 45px);
+	/* max-width: 90%; */
 	color: rgb(211, 212, 214);
 	background-color: rgb(64, 68, 75);
 	border: 0;
@@ -22,9 +35,9 @@
 	border-bottom: 1px solid #96989d5f;
 }
 
-.submit {
+.submit-cm {
 	width: 100%;
-	position: absolute;
+	/* position: absolute; */
 	bottom: 0;
 	padding-right: 0;
 	margin-right: 0;
@@ -33,7 +46,8 @@
 }
 
 .cm-overflow {
-	position: relative;
+	/* position: relative; */
+	padding-top: 50px;
 	z-index: 0;
 	color: rgb(211, 212, 214);
 	padding: 7px;
@@ -44,6 +58,8 @@
 	white-space: break-spaces;
 	line-height: 1.375rem;
 	word-wrap: break-word;
+	overflow-y: scroll;
+	height: 100%;
 }
 
 .msg-ct {
