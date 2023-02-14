@@ -38,8 +38,36 @@ def seed_users():
         display_pic="https://www.gannett-cdn.com/-mm-/a28f7c422913d53666c847a3f95ced5d21cb7ce7/c=0-73-620-423/local/-/media/JacksonMS/TheBuzz/2014/06/12//1402610128000-Cows-in-Wigs.JPG",
         theme="dark",
     )
+    six = User(
+        email="jimjam@gmail.com",
+        username="jimothy",
+        password="password2",
+        display_pic="https://www.denofgeek.com/wp-content/uploads/2021/10/Jim-The-Office-John-Krasinski.jpg?resize=768%2C432",
+        theme="dark",
+    )
+    seven = User(
+        email="dwigt@gmail.com",
+        username="dwigt",
+        password="password2",
+        display_pic="https://i.pinimg.com/originals/82/52/94/825294e09c5e6eed6fcaa5354f47c2a8.jpg",
+        theme="dark",
+    )
+    eight = User(
+        email="fireguy@gmail.com",
+        username="thefireguy",
+        password="password2",
+        display_pic="https://cdn.mos.cms.futurecdn.net/4MwySDFfBLtYvJTk4VZkVh.jpg",
+        theme="dark",
+    )
+    nine = User(
+        email="bestboss@gmail.com",
+        username="agentscarn",
+        password="password2",
+        display_pic="https://www.looper.com/img/gallery/the-offices-michael-scott-was-almost-a-murderer/intro-1591207215.jpg",
+        theme="dark",
+    )
 
-    db.session.add_all([demo, Wasiq, Fahd, Peter, Keenly])
+    db.session.add_all([demo, Wasiq, Fahd, Peter, Keenly, six, seven, eight, nine])
     db.session.commit()
 
 

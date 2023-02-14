@@ -2,19 +2,6 @@ from app.models import db, Server, environment, SCHEMA
 
 
 def seed_servers():
-    python = Server(
-        name="Python",
-        owner_id=1,
-        icon_url="https://images.ctfassets.net/mrop88jh71hl/55rrbZfwMaURHZKAUc5oOW/9e5fe805eb03135b82e962e92169ce6d/python-programming-language.png",
-        description="Server for Python.",
-    )
-
-    javascript = Server(
-        name="Javascript",
-        owner_id=1,
-        icon_url="https://vegibit.com/wp-content/uploads/2014/04/Javascript-JS.png",
-        description="Server for Javascript.",
-    )
 
     server1 = Server(
         name="App Academy",
@@ -51,10 +38,40 @@ def seed_servers():
         description="A safe place for cow and boba lovers!",
     )
 
-    db.session.add_all([server1, server2, server3, server4, server5])
+    server6 = Server(
+        name="Python",
+        owner_id=1,
+        icon_url="https://images.ctfassets.net/mrop88jh71hl/55rrbZfwMaURHZKAUc5oOW/9e5fe805eb03135b82e962e92169ce6d/python-programming-language.png",
+        description="Server for Python.",
+    )
 
-    db.session.add(python)
-    db.session.add(javascript)
+    server7 = Server(
+        name="Javascript",
+        owner_id=1,
+        icon_url="https://vegibit.com/wp-content/uploads/2014/04/Javascript-JS.png",
+        description="Server for Javascript.",
+    )
+
+    server8 = Server(
+        name="Papertalk",
+        owner_id=5,
+        icon_url="https://s.hdnux.com/photos/01/26/52/72/22720133/4/1200x0.jpg",
+        description="Talk paper to me.",
+    )
+
+    db.session.add_all(
+        [
+            server1,
+            server2,
+            server3,
+            server4,
+            server5,
+            server6,
+            server7,
+            server8,
+        ]
+    )
+
     db.session.commit()
 
 
