@@ -7,41 +7,47 @@ import OpenModalButton from "../OpenModalButton";
 import "./Navigation.css";
 import Menu from "./Menu";
 import OpenMenuButton from "../OpenModalButton/OpenMenuButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../store/session";
 
 export default function Navigation() {
     const [ showMenu, setShowMenu ] = useState(false);
-    const drawerRef = useRef();
     const location = useLocation();
     console.log("location", location.pathname)
     const history = useHistory();
     const user = useSelector(state => state.session.user);
     console.log("Navigation - user:", user);
+    const dispatch = useDispatch();
 
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
     }
 
-    useEffect(() => {
-        if (!showMenu) return;
-
-        const closeMenu = (e) => {
-            if (!drawerRef.current.contains(e.target)) {
-                setShowMenu(false);
-            }
-        }
-
-        document.addEventListener("click", closeMenu);
-
-        return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu])
-
     const closeMenu = () => setShowMenu(false);
 
-    if (location.pathname && location.pathname === "/") {
-        return (
-            <div className="NavigationSplash-container">
+    const loginDemo = (num) => {
+        switch (num) {
+            case 1: {
+                const data = dispatch(login(
+                    "gotmilk@gmail.com", "password"
+                )).then(history.push("/channels/@me"))
+            }
+            case 2: {
+                const data = dispatch(login(
+                    "wasiq@gmail.com", "password"
+                )).then(history.push("/channels/@me"))
+            }
+            case 3: {
+                const data = dispatch(login(
+                    "fahd@gmail.com", "password"
+                )).then(history.push("/channels/@me"))
+            }
+        }
+    }
+
+    return (
+        <div className="NavigationSplash-container">
             <nav className="Navigation-container">
                 <ul className="Navigation-list">
                     <li>
@@ -56,25 +62,25 @@ export default function Navigation() {
                     </li>
                     <div className="Navigation-links-main">
                         <li>
-                            Open
-                        </li>
-                        <li>
                             Mootro
                         </li>
                         <li>
                             Discover
                         </li>
                         <li>
-                            Safety
+                            <a href="#meet-devs">Support</a>
                         </li>
-                        <li>
-                            Support
+                        <li className="Navigation-demo" onClick={() => loginDemo(1)}>
+                            <span className="Navigation-demo-no-hover">De-moo 1</span>
+                            <span className="Navigation-demo-hover">Demo User 1</span>
                         </li>
-                        <li>
-                            Blog
+                        <li className="Navigation-demo" onClick={() => loginDemo(2)}>
+                            <span className="Navigation-demo-no-hover">De-moo 2</span>
+                            <span className="Navigation-demo-hover">Demo User 2</span>
                         </li>
-                        <li>
-                            Careers
+                        <li className="Navigation-demo" onClick={() => loginDemo(3)}>
+                            <span className="Navigation-demo-no-hover">De-moo 3</span>
+                            <span className="Navigation-demo-hover">Demo User 3</span>
                         </li>
                     </div>
                     <div className="Navigation-buttons-container">
@@ -105,62 +111,6 @@ export default function Navigation() {
                 </ul>
             </nav>
             <Splash />
-        </div>
-        )
-    }
-
-    return (
-        <div className="Navigation-container-wrapper">
-            <nav className="Navigation-container">
-                <ul className="Navigation-list">
-                    <li>
-                        <NavLink
-                            exact to="/"
-                            className="Navigation-links"
-                        >
-                            <div className="Navigation-logo-container">
-                                <img src={logo} className="Navigation-logo" alt="Datcord logo" />
-                            </div>
-                        </NavLink>
-                    </li>
-                    <div></div>
-                    <div className="Navigation-links-main">
-                        <li>
-                            Open
-                        </li>
-                        <li>
-                            Mootro
-                        </li>
-                        <li>
-                            Discover
-                        </li>
-                        <li>
-                            Safety
-                        </li>
-                        <li>
-                            Support
-                        </li>
-                        <li>
-                            Blog
-                        </li>
-                        <li>
-                            Careers
-                        </li>
-                    </div>
-                    <div></div>
-                    <li>
-                        <button className="Navigation-login"
-                        >Login</button>
-                    </li>
-                    <li>
-                        <button onClick={openMenu} className="Navigation-hamburger">
-                            <i
-                                onClick={openMenu}
-                                className="fa-sharp fa-solid fa-bars hamburger Navigation-hamburger"></i>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
         </div>
     )
 }

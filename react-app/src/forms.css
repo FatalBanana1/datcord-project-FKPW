@@ -35,6 +35,8 @@
 
 .Form-title {
     margin-bottom: 8px;
+    font-size: 24px;
+    color: #ffffff;
     font-weight: 500;
     /* font-family: Roboto; */
 }
