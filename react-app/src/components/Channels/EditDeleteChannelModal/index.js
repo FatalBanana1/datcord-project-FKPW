@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal.js";
 import { thunkCreateChannel, thunkDeleteChannel, thunkEditChannel, thunkGetChannels } from "../../../store/channels";
+import OpenModalButton from "../../OpenModalButton/index.js";
+import ConfirmDelete from "../ConfirmDelete/index.js";
 
 export default function EditChannelForm({ categoryName, prevName, serverId, channelId, priv })  {
     const dispatch = useDispatch();
@@ -15,8 +17,16 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
     const [ isDisabled, setIsDisabled ] = useState(false);
     const [ isLoaded, setIsLoaded ] = useState(false);
     const channels = Object.values(useSelector((state) => state.channels.channels));
+    const [ showMenu, setShowMenu ] = useState(false);
+    const { setModalContent, setOnModalClose } = useModal();
 
+    const onClick = () => {
+        // if (onModalClose) setOnModalClose(onModalClose);
+        setModalContent(<ConfirmDelete channelName={channelName} serverId={serverId} channelId={channelId} />);
+        // if (onButtonClick) onButtonClick();
+    };
 
+    const closeMenu = () => setShowMenu(false);
 
     useEffect(() => {
         dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
@@ -26,7 +36,7 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
 
     // if (channels && channels.length < 2) {
     //     setIsDisabled(true);
-    //     console.log("disabled?", isDisabled);
+        // console.log("isPrivate ?", isPrivate);
     // }
 
     if (!channels) return null;
@@ -140,9 +150,15 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
                             Only selected members and roles will be able to view this channel.
                         </p>
                     <div className="CreateChannelForm-buttons-container">
-                        <button className="CreateChannelForm-button-delete" onClick={(e) => deleteChannel(e)} disabled={channels.length < 2}>
+                        <button className="CreateChannelForm-button-delete" disabled={channels.length < 2}>
                             <div className="EditChannelForm-button-delete-text tooltip">
-                                Delete Channel
+                                <div
+                                    role="button"
+                                    onClick={onClick}
+                                    className={`OpenModaldiv-delete-button`}
+                                >
+                                    <span>Delete Channel</span>
+                                </div>
                                 { channels.length < 2 && (
                                     <span className="EditChannelForm-button-delete-hover tooltiptext">You cannot delete a channel when it is the only channel in the server.</span>
                                 )}
