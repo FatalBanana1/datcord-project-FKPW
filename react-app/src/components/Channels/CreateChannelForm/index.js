@@ -12,6 +12,7 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
     const [ isPrivate, setIsPrivate ] = useState(false);
     const [ errors, setErrors ] = useState([]);
     const { closeModal } = useModal();
+    const history = useHistory();
 
     useEffect(() => {
         // JUST FOR TESTING
@@ -43,7 +44,10 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
         //     dispatch(thunkGetChannels(+serverId));
         // }
         return dispatch(thunkCreateChannel(+serverId, newChannel))
-            .then(dispatch(thunkGetChannels(+serverId)))
+            .then(res => {
+                console.log("res>>>>>", res)
+                history.push(`/channels/${serverId}/${res.id}`)
+            })
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res;

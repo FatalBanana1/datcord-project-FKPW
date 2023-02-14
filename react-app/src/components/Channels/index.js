@@ -26,8 +26,8 @@ export default function Channels() {
     const channels = Object.values(useSelector((state) => state.channels.channels));
     // console.log("SERVER", server);
     const serverMembers = Object.values(useSelector((state) => state.serverMembers));
-    const serverMember = serverMembers.filter(member => member.user_id === user.id);
-    console.log("channels - serverMember:", serverMembers);
+    const serverMember = serverMembers.filter(member => member.user_id === user.id)[0];
+    console.log("channels - serverMember:", serverMember);
 
     let serverMemberRole;
 
@@ -49,7 +49,7 @@ export default function Channels() {
     useEffect(() => {
         dispatch(thunkGetServerMembers(+serverId));
         dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
-    }, [dispatch, serverId]);
+    }, [dispatch, serverId, channelId]);
 
     useEffect(() => {
         console.log("changed showEdit", showEdit);
@@ -167,7 +167,8 @@ export default function Channels() {
                                     <OpenModalButton
                                         buttonText="Edit-Channel"
                                         onButtonClick={closeMenu}
-                                        modalComponent={<EditChannelForm categoryName={category} prevName={channel.name} serverId={serverId}
+                                        modalComponent={<EditChannelForm categoryName={category} prevName={channel.name}
+                                        serverId={serverId}
                                         channelId={channel.id}
                                         />}
                                     />
