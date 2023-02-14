@@ -20,6 +20,7 @@ def password_matches(form, field):
     if not user:
         raise ValidationError('No such user exists.')
     if not user.check_password(password):
+        print("@@@@___))@@@@@___PASSWORD INCORRECT")
         raise ValidationError('Password was incorrect.')
 
 

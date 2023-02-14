@@ -38,6 +38,7 @@ def login():
     # form manually to validate_on_submit can be used
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
+        print("HIT VALIDATE ON SUBMIT ON LOGIN")
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data["email"]).first()
         login_user(user)

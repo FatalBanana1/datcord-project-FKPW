@@ -24,10 +24,10 @@ export default function Menu() {
                 <div className="MenuModal-divider"></div>
 
                 <nav className="MenuModal-nav">
-                    <NavLink exact to="/" className="MenuModal-nav-link">Home</NavLink>
-                    <NavLink exact to="/open" className="MenuModal-nav-link">Open</NavLink>
-                    <NavLink exact to="/login" className="MenuModal-nav-link">Login</NavLink>
-                    <NavLink exact to="/register" className="MenuModal-nav-link">Register</NavLink>
+                    <NavLink exact to="/" className="MenuModal-nav-link" onClick={closeMenu}>Home</NavLink>
+                    <NavLink exact to="/channels/@me" className="MenuModal-nav-link" onClick={closeMenu}>Open</NavLink>
+                    <NavLink exact to="/login" className="MenuModal-nav-link" onClick={closeMenu}>Login</NavLink>
+                    <NavLink exact to="/register" className="MenuModal-nav-link" onClick={closeMenu}>Register</NavLink>
                 </nav>
 
             </div>

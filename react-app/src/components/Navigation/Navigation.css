@@ -146,8 +146,30 @@ ul {
   text-decoration: underline;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 nav > ul {
   padding: 0;
+}
+
+
+.Navigation-demo-hover {
+  display: none;
+}
+
+.Navigation-demo:hover {
+  cursor: pointer;
+}
+
+.Navigation-demo:hover > .Navigation-demo-no-hover {
+  display: none;
+}
+
+.Navigation-demo:hover > .Navigation-demo-hover {
+  display: block;
 }
 
 .MenuModal-link {
@@ -188,9 +210,10 @@ button {
 
 @media (min-width: 1024px) {
   .Navigation-links-main {
-    width: 50%;
+    /* width: 50%; */
     display: flex;
-    justify-content: space-between;
+    gap: 18px;
+    /* justify-content: space-between; */
   }
 
   .Navigation-hamburger {
