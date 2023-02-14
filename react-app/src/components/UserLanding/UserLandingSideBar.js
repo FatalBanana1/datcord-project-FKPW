@@ -82,7 +82,7 @@ export default function UserLandingSideBar({ page, isLoaded }) {
               <i className="fa-solid fa-gear user-gear" onClick={openUserMenu}></i>
               <div className={userSettingsClass} ref={userSettingsRef}>
                 <div className="dropdown-wrapper">
-                    <button className="UserLanding-sidebar-channel-user-home" onClick={() => history("/")}>Home</button>
+                    <button className="UserLanding-sidebar-channel-user-home" onClick={() => history.push("/")}>Home</button>
                     <button className="UserLanding-sidebar-channel-user-logout" onClick={goLogout}>Logout</button>
                 </div>
               </div>
