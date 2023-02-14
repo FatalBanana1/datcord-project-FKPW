@@ -21,10 +21,11 @@ const ServerMembers = () => {
     const user = useSelector((state) => state.session.user);
     let {serverId} = useParams();
     const servers = useSelector((state) =>state.servers)
-    // const server = servers[serverId]
+    const server = servers[serverId]
     const serverMembers = useSelector((state) => state.serverMembers)
     const membersArray = Object.values(serverMembers)
     const [ showMenu, setShowMenu ] = useState(false);
+    const [visible, setVisible] = useState("hidden")
 
     // console.log("membersArray ------->", membersArray)
 
@@ -39,20 +40,11 @@ const ServerMembers = () => {
 	}, [serverId, isLoaded]);
 
 
-    console.log("SERVERS --->", servers)
-    // const server = servers.userServers[+serverId]
-    // GET SERVER
-    // if (!servers.values) return null
-    // const server = servers.userServers[serverId]
-    // console.log(".values ------>", servers.values)
-    // console.log("bang ------->", !server.values)
-
-
     // Check to see if User owns the server
     let owner = null
-    // if (user && server) {
-    //     owner = (user.id == server.owner_id)
-    // }
+    if (user && server) {
+        owner = (user.id == server.owner_id)
+    }
 
     // Split into categories
     let owners
@@ -87,7 +79,10 @@ const ServerMembers = () => {
         if (membership[0].role === "admin") admin = true
     }
 
-
+    const makeVisible = (e) => {
+        e.preventDefault()
+        setVisible("visible")
+    }
 
     // const openMember = (e) => {
     //     e.preventDefault();
@@ -136,7 +131,14 @@ const ServerMembers = () => {
                         {admins.map(admin =>
                             <div key={admin.id} className="individual-person">
                                 <img className="member-img" src={admin.display_pic}></img>
-                                <p className="admin nicknames">{admin.nickname}</p>
+                                {/* <p className="admin nicknames">{admin.nickname}</p> */}
+                                <OpenModalButton
+                                id = "memberModalButton"
+                                className="admin nicknames"
+                                buttonText={admin.nickname}
+                                onButtonClick={closeMenu}
+                                modalComponent={<MemberPage member={admin} isOwner={owner} isAdmin={admin} />}
+                                />
                             </div>
                         )}
                     </div>
@@ -145,9 +147,16 @@ const ServerMembers = () => {
                     <div className = "regular-members-div section">
                         <h2>{`Members`}</h2>
                         {members.map(member => 
-                            <div key={member.id} className="individual-person">
+                            <div key={member.id} className="individual-person" onClick={makeVisible}>
                                 <img className="member-img" src={member.display_pic}></img>
-                                <p className="regular-member nicknames">{member.nickname}</p>
+                                {/* <p className="regular-member nicknames">{member.nickname}</p> */}
+                                <OpenModalButton
+                                id = "memberModalButton"
+                                className="member nicknames"
+                                buttonText={member.nickname}
+                                onButtonClick={closeMenu}
+                                modalComponent={<MemberPage member={member} isOwner={owner} isAdmin={admin} />}
+                                />
                             </div>
                         )}
                     </div>
@@ -158,7 +167,14 @@ const ServerMembers = () => {
                         {pending.map(pending =>
                             <div key={pending.id} className="individual-person pending">
                                 <img className="member-img" src={pending.display_pic}></img>
-                                <p className="pending nicknames">{pending.nickname}</p>
+                                {/* <p className="pending nicknames">{pending.nickname}</p> */}
+                                <OpenModalButton
+                                id = "memberModalButton"
+                                className="admin nicknames"
+                                buttonText={pending.nickname}
+                                onButtonClick={closeMenu}
+                                modalComponent={<MemberPage member={pending} isOwner={owner} isAdmin={admin} />}
+                                />
                             </div>
                         )}
                     </div>

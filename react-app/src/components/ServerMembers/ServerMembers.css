@@ -69,6 +69,15 @@ h2 {
     cursor: pointer;
 }
 
+.visible {
+    position: absolute;
+    right: 100px;
+}
+
+.hidden {
+    display: none;
+}
+
 .section {
     padding: 5px 0;
 }
