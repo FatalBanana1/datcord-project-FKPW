@@ -38,6 +38,7 @@ class ChannelMessage(db.Model):
             "updated_at": self.updated_at,
             "sender_nickname": self.sender.nickname,
             "role": self.sender.role,
+            "display_pic": self.sender.user.display_pic,
         }
 
     def to_dict2(self):
@@ -48,4 +49,5 @@ class ChannelMessage(db.Model):
             "message": self.message,
             "sender_nickname": self.sender.nickname,
             "role": self.sender.role,
+            "display_pic": self.sender.user.display_pic,
         }

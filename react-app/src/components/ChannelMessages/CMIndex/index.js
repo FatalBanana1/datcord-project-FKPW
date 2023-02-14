@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import {
 	actionResetChannelMessages,
@@ -176,7 +176,18 @@ const CMIndex = () => {
 						<div className="cm-overflow">
 							{cms.length
 								? cms.map((message) => (
-										<div key={message.id}>
+										<div
+											className="row justify"
+											key={message.id}
+										>
+											<NavLink to="#" className="img-link">
+												<img
+													src={message.display_pic}
+													alt="crown"
+													className="pic-icon"
+												/>
+											</NavLink>
+
 											{message.id == edit ? (
 												<CMEdit
 													message={message}
@@ -187,14 +198,14 @@ const CMIndex = () => {
 													<div className="cms-msg-header">
 														{message.role ===
 														"owner" ? (
-															<>
+															<div className="row">
 																<div className="cms-admin">{`${message.sender_nickname}`}</div>
 																<img
 																	src={crown}
 																	alt="crown"
 																	className="icon"
 																/>
-															</>
+															</div>
 														) : message.role ===
 														  "admin" ? (
 															<div className="cms-admin">{`${message.sender_nickname}`}</div>
