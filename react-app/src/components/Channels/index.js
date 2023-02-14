@@ -10,12 +10,14 @@ import EditDeleteChannelModal from "./EditDeleteChannelModal/dp-index";
 import "./Channel.css";
 import { Modal } from "../../context/Modal";
 import EditChannelForm from "./EditDeleteChannelModal";
+import { thunkGetServerMembers } from "../../store/serverMembers";
 
 export default function Channels() {
     const { serverId, channelId } = useParams();
     console.log("Channels - serverId, channelId:", serverId, channelId);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
+    console.log("USER:", user);
     // const server = useSelector(state => state.servers)[+serverId]
     // const server = useSelector((state) => state.servers.userServers);
     const server = useSelector((state) => state.channels.server);
@@ -23,6 +25,16 @@ export default function Channels() {
     // console.log("server we want:", server.find((thing) => thing.id === +serverId))
     const channels = Object.values(useSelector((state) => state.channels.channels));
     // console.log("SERVER", server);
+    const serverMembers = Object.values(useSelector((state) => state.serverMembers));
+    const serverMember = serverMembers.filter(member => member.user_id === user.id);
+    console.log("channels - serverMember:", serverMembers);
+
+    let serverMemberRole;
+
+    let permissions;
+
+
+
     console.log(
         "SERVER_CHANNELS",
         channels.filter((channel) => channel.id === 1)
@@ -35,6 +47,7 @@ export default function Channels() {
     console.log("show edit", showEdit);
 
     useEffect(() => {
+        dispatch(thunkGetServerMembers(+serverId));
         dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
     }, [dispatch, serverId]);
 
@@ -47,6 +60,19 @@ export default function Channels() {
     if (!channels) return null;
 
     if (!server) return null;
+
+    if (!serverMember) {
+        return null;
+    } else {
+        serverMemberRole = serverMember.role;
+    }
+
+    if (serverMemberRole === "admin" || serverMemberRole === "owner") {
+        console.log("hit this");
+        permissions = true;
+    } else {
+        permissions = false;
+    }
 
     if (channels.length > 0) {
         for (let i = 0; i < channels.length; i++) {
@@ -105,6 +131,8 @@ export default function Channels() {
 
     console.log("channels", channels);
     console.log("categories", categories.category);
+    console.log("permissions", permissions);
+    console.log("serverMember", serverMember);
 
     const categoriesMap = Object.keys(categories).map((category,idx) => (
         <div className="UserLanding-Sidebar-category-container" key={idx}>
@@ -130,20 +158,21 @@ export default function Channels() {
                             <div className="UserLanding-sidebar-channel-name-label">
                                 <span className="hash">#</span> {channel.name && truncateNames(channel.name)}
                             </div>
-                            {/* if admin, then show these buttons v */}
-                            <div className="UserLanding-sidebar-channel-buttons">
-                                <i className="fa-solid fa-user-plus"></i>
-                                {/* <NavLink to={`/channels/${serverId}/${channel.id}/edit`}>
-                                    <i className="fa-solid fa-gear" onClick={() => setShowEdit(true)}></i>
-                                </NavLink> */}
-                                <OpenModalButton
-                                    buttonText="Edit-Channel"
-                                    onButtonClick={closeMenu}
-                                    modalComponent={<EditChannelForm categoryName={category} prevName={channel.name} serverId={serverId}
-                                    channelId={channel.id}
-                                     />}
-                                />
-                            </div>
+                            { permissions && (
+                                <div className="UserLanding-sidebar-channel-buttons">
+                                    <i className="fa-solid fa-user-plus"></i>
+                                    {/* <NavLink to={`/channels/${serverId}/${channel.id}/edit`}>
+                                        <i className="fa-solid fa-gear" onClick={() => setShowEdit(true)}></i>
+                                    </NavLink> */}
+                                    <OpenModalButton
+                                        buttonText="Edit-Channel"
+                                        onButtonClick={closeMenu}
+                                        modalComponent={<EditChannelForm categoryName={category} prevName={channel.name} serverId={serverId}
+                                        channelId={channel.id}
+                                        />}
+                                    />
+                                </div>
+                            )}
                         </NavLink>
                     ))}
             </div>
