@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { thunkDeleteChannel, thunkGetChannels } from "../../../store/channels";
+import "./ConfirmDelete.css";
 
 export default function ConfirmDelete({ channelName, serverId, channelId }) {
     const dispatch = useDispatch();
@@ -27,8 +28,8 @@ export default function ConfirmDelete({ channelName, serverId, channelId }) {
 
     return (
         <div className="delete-container">
-            <div className="delete-header">
-                <h1>Delete Channel</h1>
+            <div className="ConfirmDelete-header">
+                <h1 className="ConfirmDelete-header-title">Delete Channel</h1>
             </div>
             <div className="ConfirmDelete-message">
                 Are you sure you want to delete <span className="ConfirmDelete-channel-name">#{channelName}</span>? This cannot be undone.
