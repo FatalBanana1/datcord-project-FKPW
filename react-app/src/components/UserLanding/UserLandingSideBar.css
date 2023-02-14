@@ -141,7 +141,7 @@ a.UserLanding-sidebar-channel-name {
   padding-left: 8px;
 }
 
-.UserLanding-sidebar-channel-user-icon {
+.UserLanding-sidebar-channel-user-icons {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -149,12 +149,14 @@ a.UserLanding-sidebar-channel-name {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 2px;
+  /* padding-left: 2px; */
   overflow: hidden;
 }
 
-.UserLanding-sidebar-channel-user-icon > img {
-  object-fit: stretch;
+.UserLanding-sidebar-channel-user-icon {
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
 
 .UserLanding-sidebar-channel-user-name {

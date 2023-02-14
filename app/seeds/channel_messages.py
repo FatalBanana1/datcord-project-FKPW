@@ -77,6 +77,16 @@ def seed_channel_messages():
         channel_id=1,
         message="thanks for the tips",
     )
+    cm16 = ChannelMessage(
+        sender_id=11,
+        channel_id=2,
+        message="Hey guys",
+    )
+    cm17 = ChannelMessage(
+        sender_id=11,
+        channel_id=2,
+        message="How is everyone doing?",
+    )
 
     db.session.add_all(
         [
@@ -95,6 +105,8 @@ def seed_channel_messages():
             cm13,
             cm14,
             cm15,
+            cm16,
+            cm17,
         ]
     )
     db.session.commit()

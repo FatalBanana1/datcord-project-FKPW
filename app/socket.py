@@ -55,6 +55,18 @@ def handle_channel_message(data):
         emit("channel_message", temp, broadcast=True)
 
 
+# # handle join chat
+# @socketio.on("join")
+# def join(data):
+#     join_room(data["room"])
+
+
+# # handle leave char
+# @socketio.on("leave")
+# def leave(data):
+#     leave_room(data["room"])
+
+
 # ----------------------------------------------
 # ----------------------------------------------
 # ----------------------------------------------

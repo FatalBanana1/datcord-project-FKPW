@@ -38,20 +38,18 @@ const CMIndex = () => {
 	const scrollToBottom = () => {
 		if (!endMsgRef.current) return;
 		endMsgRef.current.scrollIntoView({ behavior: "smooth" });
-	}
+	};
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [loadBottom, messages])
+	}, [loadBottom, messages]);
 
 	useEffect(() => {
 		scrollToBottom();
 		dispatch(thunkReadAllChannelMessages(serverId, channelId)).then(() => {
-			setIsLoaded(true)
-			setLoadBottom(true)
-		}
-		);
-
+			setIsLoaded(true);
+			setLoadBottom(true);
+		});
 
 		return () => {
 			setChatInput("");
@@ -147,8 +145,11 @@ const CMIndex = () => {
 		const sendChat = (e) => {
 			e.preventDefault();
 			if (chatInput.length < 1) return null;
+			const curr = Object.values(allMembers).find(
+				(el) => el.user_id === user.id
+			);
 			socket.emit("channel_message", {
-				sender_id: user.id,
+				sender_id: curr.id,
 				message: chatInput,
 				channelId,
 			});
@@ -338,13 +339,13 @@ const CMIndex = () => {
 						role === "owner" ||
 						role === "admin" ? (
 							<div className="cm-form-container">
-							<form onSubmit={sendChat} className="submit-cm">
-								<input
-									value={chatInput}
-									onChange={updateChatInput}
-									className="cm-text-input"
-								/>
-							</form>
+								<form onSubmit={sendChat} className="submit-cm">
+									<input
+										value={chatInput}
+										onChange={updateChatInput}
+										className="cm-text-input"
+									/>
+								</form>
 							</div>
 						) : null}
 					</div>
