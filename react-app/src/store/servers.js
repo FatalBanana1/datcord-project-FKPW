@@ -182,7 +182,7 @@ const serverReducer = (state = defaultState(), action) => {
     case READ_USER_SERVERS:
       // console.log(`REDUCER - user  servers >>>>>>>>>`, action);
       newState = { ...state };
-      if (action.servers.length) {
+      if (action.servers && action.servers.length) {
         action.servers.forEach((el) => (newState[el.id] = el));
       }
       // newState.userServers = action.servers;

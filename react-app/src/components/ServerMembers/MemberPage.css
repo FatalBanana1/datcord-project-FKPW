@@ -32,40 +32,51 @@
 	height: 100px;
 }
 
-.card-member-info {
-	display: flex;
-	flex-direction: column;
-	background-color: rgb(24, 25, 28);
-	height: 300px;
-	width: 300px;
-	border-radius: 10px;
-	/* font-family: "Segoe UI Variable"; */
-	font-family: "Roboto";
-}
+  .card-member-info {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(24,25,28);
+    height: 300px;
+    width: 300px;
+    border-radius: 10px;
+    /* font-family: "Segoe UI Variable"; */
+    font-family: "Roboto";
+  }
 
-.card-member-inner-div {
-	padding: 12px;
-}
+  .card-member-inner-div {
+    padding: 12px
+  }
 
-.member-nickname {
-	font-weight: 700;
-	font-size: 21px;
-	color: #fff;
-	border-bottom: 1px solid #292b2f;
-	padding-top: 5px;
-	padding-bottom: 10px;
-}
+  .member-nickName-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #292b2f;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    color: white;
+  }
 
-.card-section {
-	padding: 5px 0;
-}
+  .nickname-edit-button {
+    cursor: pointer;
+  }
 
-.member-h4 {
-	text-transform: uppercase;
-	color: #fff;
-	font-size: 13px;
-	padding: 5px 0;
-}
+  .member-nickname {
+    font-weight: 700;
+    font-size: 21px;
+    color: #fff;
+  }
+
+  .card-section{
+    padding: 5px 0;
+  }
+  
+  .member-h4  {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 13px;
+    padding: 5px 0;    
+  }
 
 .card-text {
 	color: white;

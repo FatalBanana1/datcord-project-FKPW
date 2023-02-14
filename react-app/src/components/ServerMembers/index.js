@@ -34,9 +34,9 @@ const ServerMembers = () => {
 			setIsLoaded(true)
 		);
 
-		return () => {
-		    dispatch(actionResetServerMember());
-		};
+		// return () => {
+		//     dispatch(actionResetServerMember());
+		// };
 	}, [serverId, isLoaded]);
 
 

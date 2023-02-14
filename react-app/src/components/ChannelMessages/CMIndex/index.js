@@ -62,7 +62,7 @@ const CMIndex = () => {
 			setMessages([]);
 			setEdit(999999990);
 		};
-	}, [channelId, serverId, user.id]);
+	}, [channelId, serverId, user.id, allMembers]);
 
 	useEffect(() => {
 		// open socket connection

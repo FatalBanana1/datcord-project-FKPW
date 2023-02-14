@@ -1,0 +1,18 @@
+.ConfirmDelete-header {
+    padding: 16px;
+}
+
+.ConfirmDelete-header-title {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.ConfirmDelete-message {
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0px 8px 20px 16px;
+}
+
+.ConfirmDelete-message > span {
+    font-weight: 600;
+}

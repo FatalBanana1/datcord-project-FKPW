@@ -10,6 +10,8 @@ function OpenModalButton({
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
+  const buttonClass = buttonText.replace(/\s/g,"");
+
   const onClick = () => {
     if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);
@@ -83,7 +85,7 @@ function OpenModalButton({
     );
   }
 
-  return <button onClick={onClick}>{buttonText}</button>;
+  return <button onClick={onClick} className={`OpenModalButton-button ${buttonClass}`}>{buttonText}</button>;
 }
 
 export default OpenModalButton;
