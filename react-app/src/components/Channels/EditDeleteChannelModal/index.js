@@ -12,13 +12,30 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
     const [ errors, setErrors ] = useState([]);
     const { closeModal } = useModal();
     const history = useHistory();
+    const [ isDisabled, setIsDisabled ] = useState(false);
+    const [ isLoaded, setIsLoaded ] = useState(false);
+    const channels = Object.values(useSelector((state) => state.channels.channels));
+
+
 
     useEffect(() => {
-        // JUST FOR TESTING
-        console.log("isPrivate ? :", isPrivate);
+        dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
+    }, [dispatch, serverId, channelId]);
 
-    }, [isPrivate])
+    // console.log("channels", channels);
 
+    // if (channels && channels.length < 2) {
+    //     setIsDisabled(true);
+    //     console.log("disabled?", isDisabled);
+    // }
+
+    // useEffect(() => {
+    //     // JUST FOR TESTING
+    //     console.log("isPrivate ? :", isPrivate);
+
+    // }, [isPrivate])
+
+    if (!channels) return null;
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -43,7 +60,7 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
         //     dispatch(thunkGetChannels(+serverId));
         // }
         return dispatch(thunkEditChannel(+serverId, +channelId, editChannel))
-            .then(dispatch(thunkGetChannels(+serverId)))
+            // .then(dispatch(thunkGetChannels(+serverId)))
             .then(closeModal)
             .catch(async (res) => {
                 console.log("EDIT CH hit error")
@@ -73,7 +90,7 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
             });
     }
 
-    if (categoryName) {
+    if (isLoaded && categoryName) {
         return (
             <div className="CreateChannelForm-container">
                 <div className="CreateChannelForm-header">
@@ -130,8 +147,13 @@ export default function EditChannelForm({ categoryName, prevName, serverId, chan
                             Only selected members and roles will be able to view this channel.
                         </p>
                     <div className="CreateChannelForm-buttons-container">
-                        <button className="CreateChannelForm-button-delete" onClick={(e) => deleteChannel(e)}>
-                            Delete Channel
+                        <button className="CreateChannelForm-button-delete" onClick={(e) => deleteChannel(e)} disabled={channels.length < 2}>
+                            <div className="EditChannelForm-button-delete-text tooltip">
+                                Delete Channel
+                                { channels.length < 2 && (
+                                    <span className="EditChannelForm-button-delete-hover tooltiptext">You cannot delete a channel when it is the only channel in the server.</span>
+                                )}
+                            </div>
                         </button>
                         <button type="submit" className="CreateChannelForm-button-create">
                             Edit Channel
