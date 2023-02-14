@@ -107,10 +107,12 @@ const ServerMembers = () => {
                 // </div>
                 )}
             <div className="server-members-div">
+                <div className="server-members-header">
+                </div>
                 <h1 className="total-members">{`Total Members - ${membersArray.length}`}</h1>
                 {owners.length > 0 && (
                     <div className = "owner-div section">
-                        <h2>Owner</h2>
+                        <h2 className="ServerMembers-headers">Owner</h2>
                         <div className="individual-person">
                             <img className="member-img" src={owners[0].display_pic}></img>
                             {/* <p className="owner nicknames">{owners[0].nickname}</p> */}
@@ -131,7 +133,7 @@ const ServerMembers = () => {
                 )}
                 {admins.length > 0 && (
                     <div className = "admin-div section">
-                        <h2>{`Admins`}</h2>
+                        <h2 className="ServerMembers-headers">{`Admins`}</h2>
                         {admins.map(admin =>
                             <div key={admin.id} className="individual-person">
                                 <img className="member-img" src={admin.display_pic}></img>
@@ -149,8 +151,8 @@ const ServerMembers = () => {
                 )}
                 {members.length > 0 && (
                     <div className = "regular-members-div section">
-                        <h2>{`Members`}</h2>
-                        {members.map(member => 
+                        <h2 className="ServerMembers-headers">{`Members`}</h2>
+                        {members.map(member =>
                             <div key={member.id} className="individual-person" onClick={makeVisible}>
                                 <img className="member-img" src={member.display_pic}></img>
                                 {/* <p className="regular-member nicknames">{member.nickname}</p> */}
@@ -167,7 +169,7 @@ const ServerMembers = () => {
                 )}
                 {pending.length > 0 && (
                     <div className = "pending-div section">
-                        <h2>{`Pending - ${pending.length}`}</h2>
+                        <h2 className="ServerMembers-headers">{`Pending - ${pending.length}`}</h2>
                         {pending.map(pending =>
                             <div key={pending.id} className="individual-person pending">
                                 <img className="member-img" src={pending.display_pic}></img>

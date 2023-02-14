@@ -1,5 +1,5 @@
 .MainPage-container {
-    width: 100%;
+    width: calc(100% - 20px);
     height: 100vh;
     display: flex;
     flex-direction: row;

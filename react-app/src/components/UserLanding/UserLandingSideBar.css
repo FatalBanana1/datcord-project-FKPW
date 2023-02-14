@@ -175,3 +175,31 @@ a.UserLanding-sidebar-channel-name {
 .user-gear {
   font-size: 16px;
 }
+
+.UserLanding-sidebar-channel-user-home,
+.UserLanding-sidebar-channel-user-logout {
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: #b9bbbe;
+  text-align: left;
+}
+
+.UserLanding-sidebar-channel-user-home:hover,
+.UserLanding-sidebar-channel-user-logout:hover {
+  width: 100%;
+  background: lightgrey;
+  border: none;
+  color: #2a2b2f;
+  text-align: left;
+}
+
+.UserLanding-sidebar-channel-user-home:hover {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.UserLanding-sidebar-channel-user-logout:hover {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
