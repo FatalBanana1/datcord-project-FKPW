@@ -10,6 +10,8 @@ import {
 import CMEdit from "../CMEdit/index.";
 import "./CMIndex.css";
 import crown from "../../../assets/crown.png";
+import OpenModalButton from "../../OpenModalButton";
+import MemberPage from "../../ServerMembers/MemberPage";
 
 // leave this OUT
 let socket;
@@ -141,6 +143,68 @@ const CMIndex = () => {
 
 	// -------------
 
+	// mbr modal
+
+	// const [visible, setVisible] = useState("hidden");
+	// const [showMenu, setShowMenu] = useState(false);
+
+	// const closeMenu = () => setShowMenu(false);
+
+	// const makeVisible = (e) => {
+	// 	e.preventDefault();
+	// 	setVisible("visible");
+	// };
+	// const handleOnChange = (e) => {
+	// 	setIsLoaded(e);
+	// };
+
+	// const memberClickHandler = (e) => {
+	// 	const message = cms.find((el) => +el.id === +e.target.dataset.id);
+	// 	// console.log(`message in cm index ====`, e.target.dataset);
+	// 	console.log(`message in cm index ====`, message);
+	// 	let member = true;
+	// 	let owner = true;
+	// 	let admin = true;
+
+	// 	return (
+	// 		<MemberPage
+	// 			member={member}
+	// 			isOwner={owner}
+	// 			isAdmin={admin}
+	// 			serverId={serverId}
+	// 			channelId={member.channelId}
+	// 			onChange={handleOnChange}
+	// 		/>
+
+	// <div
+	// 	key={message.sender_id}
+	// 	className="individual-person"
+	// 	onClick={makeVisible}
+	// >
+	// 	<img className="member-img" src={message.display_pic}></img>
+	// 	{/* <p className="regular-member nicknames">{member.nickname}</p> */}
+	// 	<OpenModalButton
+	// 		id="memberModalButton"
+	// 		className="member nicknames"
+	// 		buttonText={message.nickname}
+	// 		onButtonClick={closeMenu}
+	// 		modalComponent={
+	// 			<MemberPage
+	// 				member={member}
+	// 				isOwner={owner}
+	// 				isAdmin={admin}
+	// 				serverId={serverId}
+	// 				channelId={member.channelId}
+	// 				onChange={handleOnChange}
+	// 			/>
+	// 		}
+	// 	/>
+	// </div>
+	// 	);
+	// };
+
+	// -------------
+
 	if (isLoaded && channel) {
 		const updateChatInput = (e) => {
 			setChatInput(e.target.value);
@@ -163,13 +227,14 @@ const CMIndex = () => {
 		let date = new Date();
 		let role;
 		const currMbr = user.server_members.find(
-			(el) => +el.server_id === +serverId
+			(el) => +el.server_id === +serverId && +user.id === +el.user_id
 		);
 
 		if (currMbr) {
 			role = currMbr.role;
 		}
-		// console.log(`role ===`, user.server_members, role, serverId);
+		// console.log(`role ===`, user.server_members, role, serverId, user);
+		// console.log(`msg ===`, cms);
 
 		// print the username and message for each chat
 		return (
@@ -185,16 +250,19 @@ const CMIndex = () => {
 											className="row justify"
 											key={message.id}
 										>
-											<NavLink
+											<div
 												to="#"
 												className="img-link"
+												data-id={message.id}
+												// onClick={memberClickHandler}
 											>
 												<img
 													src={message.display_pic}
 													alt="crown"
 													className="pic-icon"
+													data-id={message.id}
 												/>
-											</NavLink>
+											</div>
 
 											{message.id == edit ? (
 												<CMEdit
@@ -232,7 +300,8 @@ const CMIndex = () => {
 															)}
 														</div>
 
-														{currMbr ||
+														{currMbr.id ===
+															message.sender_id ||
 														role === "admin" ||
 														role === "owner" ? (
 															<div className="cms-options">
@@ -321,7 +390,8 @@ const CMIndex = () => {
 														.toUTCString()
 														.slice(0, 22)}
 												</div>
-												{currMbr ||
+												{currMbr.id ===
+													message.sender_id ||
 												role === "admin" ||
 												role === "owner" ? (
 													<div className="cms-options">
