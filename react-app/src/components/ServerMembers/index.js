@@ -115,7 +115,7 @@ const ServerMembers = () => {
                                 className="owner nicknames"
                                 buttonText={owners[0].nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={owners[0]} isOwner={owner} isAdmin={admin} />}
+                                modalComponent={<MemberPage member={owners[0]} isOwner={owner} isAdmin={admin} serverId={serverId} userId={user.id} />}
                             />
                             <img
 								src={crown}
@@ -137,7 +137,7 @@ const ServerMembers = () => {
                                 className="admin nicknames"
                                 buttonText={admin.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={admin} isOwner={owner} isAdmin={admin} />}
+                                modalComponent={<MemberPage member={admin} isOwner={owner} isAdmin={admin} serverId={serverId} userId={user.id} />}
                                 />
                             </div>
                         )}
@@ -155,7 +155,7 @@ const ServerMembers = () => {
                                 className="member nicknames"
                                 buttonText={member.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={member} isOwner={owner} isAdmin={admin} />}
+                                modalComponent={<MemberPage member={member} isOwner={owner} isAdmin={admin} serverId={serverId} userId={user.id} />}
                                 />
                             </div>
                         )}
@@ -173,7 +173,7 @@ const ServerMembers = () => {
                                 className="admin nicknames"
                                 buttonText={pending.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={pending} isOwner={owner} isAdmin={admin} />}
+                                modalComponent={<MemberPage member={pending} isOwner={owner} isAdmin={admin} serverId={serverId} userId={user.id} />}
                                 />
                             </div>
                         )}
