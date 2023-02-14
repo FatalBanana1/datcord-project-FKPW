@@ -32,7 +32,7 @@
 	height: 100px;
 }
 
-  .card-member-info {
+.card-member-info {
     display: flex;
     flex-direction: column;
     background-color: rgb(24,25,28);
@@ -41,13 +41,13 @@
     border-radius: 10px;
     /* font-family: "Segoe UI Variable"; */
     font-family: "Roboto";
-  }
+}
 
-  .card-member-inner-div {
+.card-member-inner-div {
     padding: 12px
-  }
+}
 
-  .member-nickName-div{
+.member-nickName-div{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -55,28 +55,50 @@
     padding-top: 5px;
     padding-bottom: 10px;
     color: white;
-  }
+}
 
-  .nickname-edit-button {
+.nickname-edit-button {
     cursor: pointer;
-  }
+}
 
-  .member-nickname {
+.member-nickname {
     font-weight: 700;
     font-size: 21px;
     color: #fff;
-  }
+}
 
-  .card-section{
+.card-section{
     padding: 5px 0;
-  }
+}
   
-  .member-h4  {
+.member-h4  {
     text-transform: uppercase;
     color: #fff;
     font-size: 13px;
     padding: 5px 0;    
-  }
+}
+
+.member-role-div {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    font-size: 14px;
+}
+
+.member-role {
+    padding-right: 5px;
+}
+
+.role-edit-button {
+    cursor: pointer;
+    font-size: 16px;
+	/* background-color: #292b2f; */
+    padding: 0 5px;
+}
+
+.role-edit-button:hover {
+	background-color: #292b2f;
+}
 
 .card-text {
 	color: white;
