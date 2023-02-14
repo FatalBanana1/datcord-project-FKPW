@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal.js";
 import {
 	thunkCreateServer,
@@ -9,6 +10,7 @@ import "./CreateServerForm.css";
 
 const CreateServerForm = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [name, setName] = useState("");
 	const [icon_url, setIconUrl] = useState("");
 	const [description, setDescription] = useState("");
@@ -27,10 +29,11 @@ const CreateServerForm = () => {
 		};
 
 		dispatch(thunkCreateServer(newServer))
-			.then(() => dispatch(thunkReadUserServers()))
+			.then((data) =>
+				history.push(`/channels/${data.id}/${data.channels[0].id}`)
+			)
 			.then(() => closeModal())
 			.catch((res) => {
-				console.log("FRONT END RES", res);
 				const data = res.json();
 				if (data && data.errors) setErrors(data.errors);
 			});

@@ -20,7 +20,7 @@ export default function EmptyServerCreateChannelForm({
 	const allServers = useSelector((state) => state.servers);
 	const server = allServers[params.channelId];
 
-	console.log(`FRONT - empty server form ===>>>>`, params.channelId);
+	// console.log(`FRONT - empty server form ===>>>>`, params.channelId);
 
 	useEffect(() => {
 		// JUST FOR TESTING
@@ -53,7 +53,7 @@ export default function EmptyServerCreateChannelForm({
 			});
 	};
 
-	console.log(`front end channels create form >>>>>>>>>>>>>>>>>>>>>`, params);
+	// console.log(`front end channels create form >>>>>>>>>>>>>>>>>>>>>`, params);
 
 	if (categoryName || params.channelId) {
 		return (
