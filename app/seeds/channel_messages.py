@@ -205,7 +205,7 @@ def seed_channel_messages():
     cm41 = ChannelMessage(
         sender_id=21,
         channel_id=15,
-        message="figures we would get downsized right before I ordered a stack 100 personalized business cards...",
+        message="figures we would get downsized right before I ordered a stack of 100 personalized business cards...",
     )
     cm42 = ChannelMessage(
         sender_id=22,
