@@ -45,7 +45,7 @@ export default function EmptyServerCreateChannelForm({
 
 		return dispatch(thunkCreateChannel(+serverId, newChannel))
 			.then(dispatch(thunkGetChannels(+serverId)))
-			.then(history.push(`/`))
+			.then(history.push(`/channels/@me`))
 			.then(closeModal)
 			.catch(async (res) => {
 				const data = await res;

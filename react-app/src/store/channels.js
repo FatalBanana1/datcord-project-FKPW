@@ -54,7 +54,7 @@ export const thunkCreateChannel = (serverId, newChannel) => async (dispatch) => 
 		const data = await res.json();
     console.log("thunkCreateChannel - data:", data);
 		dispatch(actionCreateChannel(data.channel));
-		return null;
+		return data.channel;
 	} else if (res.status < 500) {
 		const data = await res.json();
 		if (data.errors) {

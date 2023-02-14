@@ -15,6 +15,7 @@ import MainContent from "./components/MainPage/MainContent";
 import "./components/MainPage/MainPage.css";
 import EditDeleteChannelModal from "./components/Channels/EditDeleteChannelModal/dp-index";
 import EmptyServerCreateChannelForm from "./components/MainPage/EmptyServerCreateChannelForm";
+import ServerIndex from "./components/Servers/ServerIndex";
 
 function App() {
 	const dispatch = useDispatch();
@@ -65,6 +66,13 @@ function App() {
 							<EditDeleteChannelModal />
 						</div>
 					</ProtectedRoute>
+
+					<ProtectedRoute path="/gotMilk" exact={true}>
+						<div className="MainPage-container">
+							<ServerIndex />
+						</div>
+					</ProtectedRoute>
+					<Route>404: Error. Got Milk?</Route>
 				</Switch>
 			</div>
 		)

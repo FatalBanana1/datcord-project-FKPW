@@ -32,8 +32,8 @@ export default function Channels() {
   );
   const serverMember = serverMembers.filter(
     (member) => member.user_id === user.id
-  );
-  console.log("channels - serverMember:", serverMembers);
+  )[0];
+  console.log("channels - serverMember:", serverMember);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -82,7 +82,7 @@ export default function Channels() {
   useEffect(() => {
     dispatch(thunkGetServerMembers(+serverId));
     dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
-  }, [dispatch, serverId]);
+  }, [dispatch, serverId, channelId]);
 
   useEffect(() => {
     console.log("changed showEdit", showEdit);

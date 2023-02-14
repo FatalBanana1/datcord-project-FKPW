@@ -12,6 +12,7 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
     const [ isPrivate, setIsPrivate ] = useState(false);
     const [ errors, setErrors ] = useState([]);
     const { closeModal } = useModal();
+    const history = useHistory();
 
     useEffect(() => {
         // JUST FOR TESTING
@@ -43,7 +44,10 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
         //     dispatch(thunkGetChannels(+serverId));
         // }
         return dispatch(thunkCreateChannel(+serverId, newChannel))
-            .then(dispatch(thunkGetChannels(+serverId)))
+            .then(res => {
+                console.log("res>>>>>", res)
+                history.push(`/channels/${serverId}/${res.id}`)
+            })
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res;
@@ -91,7 +95,7 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
                             <i className="fa-solid fa-lock"></i>
                             Private channel
                         </span>
-                        <label
+                        {/* <label
                             // htmlFor="is-private"
                             className="CreateChannelForm-private-switch"
                         >
@@ -101,8 +105,20 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
                                 value={isPrivate}
                                 onChange={(e) => setIsPrivate(!e.target.value)}
                             />
-                            <span className="CreateChannelForm-private-slider-round"></span>
-                        </label>
+                            <span className="CreateChannelForm-private-slider-round">
+                            </span>
+                        </label> */}
+                        <div className="CreateChannelForm-checkbox-container">
+                            <input
+                                className="CreateChannelForm-checkbox"
+                                type="checkbox"
+                                value={isPrivate}
+                                onChange={e => setIsPrivate(!e.target.value)}
+                            />
+                            <div className="CreateChannelForm-switch">
+                                <div></div>
+                            </div>
+                        </div>
                     </div>
                         <p className="CreateChannelForm-private-text">
                             Only selected members and roles will be able to view this channel.
