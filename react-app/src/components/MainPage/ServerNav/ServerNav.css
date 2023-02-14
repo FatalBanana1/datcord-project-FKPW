@@ -36,12 +36,12 @@
   align-items: center;
   box-sizing: border-box;
   margin-bottom: 8px;
-  transition: 0.2s;
+  transition: all 0.3s ease-in-out;
   flex-shrink: 0;
 }
 
 .ServerNav-server-icons {
-  color: #3ba55d;
+  /* color: #3ba55d; */
   width: 50px;
   height: 50px;
   border-radius: 25px;
@@ -51,7 +51,6 @@
   align-items: center;
   box-sizing: border-box;
   margin-bottom: 8px;
-  transition: 0.2s;
   flex-shrink: 0;
 }
 
@@ -88,8 +87,7 @@
 }
 
 .ServerNav-icons:hover,
-.ServerNav-profile:hover,
-.ServerNav-server-icons:hover {
+.ServerNav-profile:hover {
   cursor: pointer;
   border-radius: 16px;
   color: white;
@@ -111,9 +109,18 @@
 
 .ServerNav-icon {
   width: 100%;
-  aspect-ratio: 1;
-  /* object-fit: cover; */
+  /* aspect-ratio: 1; */
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
   border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.ServerNav-profile-cow-icon {
+  object-fit: cover;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
 }
 
 .ServerNav-icon:hover {
