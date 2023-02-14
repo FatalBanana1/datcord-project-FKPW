@@ -192,8 +192,8 @@ export default function Channels() {
                 <div className="UserLanding-sidebar-channel-content">
                     <div className="UserLanding-sidebar-channel-user-info">
                         <div className="UserLanding-sidebar-channel-user-container">
-                            <div className="UserLanding-sidebar-channel-user-icon">
-                                <img src={logo} alt="User profile image" />
+                            <div className="UserLanding-sidebar-channel-user-icons">
+                                <img src={logo} className="UserLanding-sidebar-channel-user-icon" alt="User profile image" />
                             </div>
                             <div className="UserLanding-sidebar-channel-user-name">{user && user.username}</div>
                         </div>
@@ -224,8 +224,8 @@ export default function Channels() {
 
                     <div className="UserLanding-sidebar-channel-user-info">
                         <div className="UserLanding-sidebar-channel-user-container">
-                            <div className="UserLanding-sidebar-channel-user-icon">
-                                <img src={user && user.display_pic} alt="User profile image" />
+                            <div className="UserLanding-sidebar-channel-user-icons">
+                                <img src={user && user.display_pic} className="UserLanding-sidebar-channel-user-icon" alt="User profile image" />
                             </div>
                             <div className="UserLanding-sidebar-channel-user-name">{user && user.username}</div>
                         </div>
