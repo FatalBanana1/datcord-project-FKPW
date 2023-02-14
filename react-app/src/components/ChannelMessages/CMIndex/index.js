@@ -19,7 +19,7 @@ const CMIndex = () => {
 
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [loadBottom, setLoadBottom] = useState(false);
-	const [edit, setEdit] = useState(0);
+	const [edit, setEdit] = useState(999999990);
 
 	// use state for controlled form input
 	const [chatInput, setChatInput] = useState("");
@@ -35,14 +35,19 @@ const CMIndex = () => {
 
 	const endMsgRef = useRef(null);
 
+	console.log(`edit ----cms >>>>>>`, edit);
 	const scrollToBottom = () => {
-		if (!endMsgRef.current) return;
-		endMsgRef.current.scrollIntoView({ behavior: "smooth" });
+		if (!endMsgRef.current) {
+			return;
+		} else if (edit === 999999999 || edit === 999999990) {
+			endMsgRef.current.scrollIntoView({ behavior: "smooth" });
+		}
 	};
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [loadBottom, messages]);
+	}, [loadBottom, messages, channelId, cms]);
+	// }, [loadBottom, messages, channels, cms, channelId]);
 
 	useEffect(() => {
 		scrollToBottom();
@@ -54,6 +59,7 @@ const CMIndex = () => {
 		return () => {
 			setChatInput("");
 			setMessages([]);
+			setEdit(999999990);
 		};
 	}, [channelId, serverId, user.id]);
 

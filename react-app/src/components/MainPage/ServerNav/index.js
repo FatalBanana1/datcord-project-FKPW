@@ -1,6 +1,13 @@
 import "./ServerNav.css";
 import avatar from "../../../assets/datcord_logo_svg.svg";
-import { NavLink, Redirect, Route, Switch, useHistory, useParams } from "react-router-dom";
+import {
+	NavLink,
+	Redirect,
+	Route,
+	Switch,
+	useHistory,
+	useParams,
+} from "react-router-dom";
 import MainContent from "../MainContent";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +26,7 @@ export default function ServerNav() {
 	const servers = Object.values(allServers);
 	const history = useHistory();
 	const user = useSelector((state) => state.session.user);
-	const {serverId} = useParams()
+	const { serverId } = useParams();
 
 	useEffect(() => {
 		dispatch(thunkReadUserServers()).then(() => setLoaded(true));
@@ -34,13 +41,13 @@ export default function ServerNav() {
 
 	return (
 		<div className="ServerNav-container">
-			<div className="ServerNav-profile">
+			<NavLink to="/channels/@me" className="ServerNav-profile">
 				<img
 					src={avatar}
 					className="ServerNav-icon"
 					alt="server-icon"
 				/>
-			</div>
+			</NavLink>
 			<div className="ServerNav-divider"></div>
 			{/* // can probably map all the servers icon_url */}
 			{servers.length &&
