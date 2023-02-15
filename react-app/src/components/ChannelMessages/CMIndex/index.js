@@ -438,9 +438,7 @@ const CMIndex = () => {
 							))}
 							<div ref={endMsgRef} />
 						</div>
-						{role === "member" ||
-						role === "owner" ||
-						role === "admin" ? (
+						{role ? (
 							<div className="cm-form-container">
 								<form onSubmit={sendChat} className="submit-cm">
 									<input
