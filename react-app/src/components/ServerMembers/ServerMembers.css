@@ -112,6 +112,29 @@
 	color: white;
 }
 
+
+#owner.individual-person button:hover {
+	/* color: rgb(103, 223, 147); */
+	color: rgb(25, 188, 155);
+	background-color: #3f434a;
+}
+
+#admin.individual-person button:hover {
+	/* color: rgb(103, 223, 147); */
+	color: rgb(25, 188, 155);
+	background-color: #3f434a;
+}
+
+#member.individual-person button:hover {
+	color: rgb(196, 122, 228);
+	background-color: #3f434a;
+}
+
+#pending.individual-person button:hover {
+	color: white;
+	background-color: #3f434a;
+}
+
 .individual-person button:hover {
 	background-color: #3f434a;
 	filter: brightness(1);
