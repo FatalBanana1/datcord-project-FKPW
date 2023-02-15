@@ -263,7 +263,7 @@ def seed_channel_messages():
         message="You were the Chosen One! It was said that you would destroy the Sith, not join them. Bring balance to the Force, not leave it in Darkness",
     )
     cm63 = ChannelMessage(
-        sender_id=24,
+        sender_id=27,
         channel_id=16,
         message="I hate you!",
     )

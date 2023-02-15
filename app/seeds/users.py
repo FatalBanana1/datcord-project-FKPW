@@ -80,8 +80,15 @@ def seed_users():
         display_pic="https://thenerdstash.com/wp-content/uploads/2021/10/Hayden-Christensen-Anakin-Skywalker.jpg",
         theme="dark",
     )
+    Burnt_Anakin = User(
+        email="burntanakin@gmail.com",
+        username="BurntAnakin",
+        password="password",
+        display_pic="https://i.imgflip.com/1jklzc.jpg?a465192",
+        theme="dark",
+    )
 
-    db.session.add_all([demo, Wasiq, Fahd, Peter, Keenly, six, seven, eight, nine, Obi_Wan, Anakin])
+    db.session.add_all([demo, Wasiq, Fahd, Peter, Keenly, six, seven, eight, nine, Obi_Wan, Anakin, Burnt_Anakin])
     db.session.commit()
 
 
