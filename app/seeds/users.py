@@ -66,8 +66,22 @@ def seed_users():
         display_pic="https://www.looper.com/img/gallery/the-offices-michael-scott-was-almost-a-murderer/intro-1591207215.jpg",
         theme="dark",
     )
+    Obi_Wan = User(
+        email="obiwan@gmail.com",
+        username="Obi-Wan",
+        password="password",
+        display_pic="https://i.guim.co.uk/img/media/8a36c17d2c101a4b6bf2c2ead340c3c703784be0/0_1425_2216_1330/master/2216.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=571ac94d27bbfeb1476227c3d2c7fea9",
+        theme="dark",
+    )
+    Anakin = User(
+        email="anakin@gmail.com",
+        username="Anakin",
+        password="password",
+        display_pic="https://thenerdstash.com/wp-content/uploads/2021/10/Hayden-Christensen-Anakin-Skywalker.jpg",
+        theme="dark",
+    )
 
-    db.session.add_all([demo, Wasiq, Fahd, Peter, Keenly, six, seven, eight, nine])
+    db.session.add_all([demo, Wasiq, Fahd, Peter, Keenly, six, seven, eight, nine, Obi_Wan, Anakin])
     db.session.commit()
 
 
