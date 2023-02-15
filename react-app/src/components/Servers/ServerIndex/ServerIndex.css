@@ -5,15 +5,16 @@
 }
 
 .servers-icon {
-  height: 150px;
-  width: 180px;
-  border-radius: 7px;
+  height: 50px;
+  width: 50px;
+  border-radius: 25%;
+  border: 5px solid #292b2f;
   object-fit: cover;
 }
 
 .explorer-img {
   height: auto;
-  /* width: 100%; */
+  width: 100%;
   max-height: 400px;
   object-fit: cover;
   border-radius: 9px;
@@ -51,22 +52,93 @@
 .explorer-banner-server-container {
   margin: 15px 10px;
   width: 100%;
-  /* display: flex; */
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   word-wrap: break-word;
 }
 
-.exp-serv {
-  width: inherit;
-  max-width: 300px;
-  height: max-content;
-}
-
 .explorer-server-container {
-  border: 1px solid red;
+  position: relative;
+  /* border: 1px solid white; */
+  background-color: #292b2f;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 350px;
+  height: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: 0.5s;
+}
+
+.explorer-server-container:hover {
+  background-color: #34363b;
+}
+
+.explorer-server-description {
+  display: flex;
+  text-align: center;
+}
+
+.explorer-server-top {
+  display: flex;
+  /* align-items: center; */
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   justify-content: center;
-  width: 300px;
+  background: linear-gradient(
+    140deg,
+    rgba(145, 173, 159, 1) 0%,
+    rgba(60, 70, 78, 1) 100%
+  );
+
+  margin-bottom: 30px;
+  height: 100px;
+  width: 100%;
+}
+
+.explorer-server-img {
+  position: absolute;
+  bottom: 155px;
+}
+
+.explorer-server-name {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+}
+
+.check {
+  color: green;
+  margin-right: 5px;
+}
+
+.explorer-server-description {
+  color: #b6b6b6;
+  font-size: 12px;
+  margin-top: 10px;
+  height: 10%;
+}
+
+.join-server {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: bold;
+  margin-top: 55px;
+  color: rgb(55, 137, 231);
+  transition: 0.5s;
+}
+
+.join-server:hover {
+  color: rgb(109, 214, 255);
+}
+
+.already-joined {
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-top: 50px;
 }

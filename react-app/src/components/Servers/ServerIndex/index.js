@@ -43,39 +43,57 @@ const ServerIndex = () => {
                 user.server_members.find((j) => j.server_id === el.id)
               ) {
                 return (
-                  <div className="explorer-server-container">
-                    <NavLink
-                      to={`/channels/${el.id}/${el.channels[0].id}`}
-                      key={el.id}
-                      className=""
-                    >
-                      <img
-                        src={el.icon_url}
-                        className="servers-icon"
-                        alt="server icon"
-                      />
-                      <div>{`Server : ${el.name}`}</div>
-                      <div>{`About : ${el.description}`}</div>
-                      <div>Already Joined</div>
-                      <div>End of card</div>
-                    </NavLink>
-                  </div>
+                  <NavLink
+                    to={`/channels/${el.id}/${el.channels[0].id}`}
+                    key={el.id}
+                    className=""
+                  >
+                    <div className="explorer-server-container">
+                      <div className="explorer-server-top">
+                        <div className="explorer-server-img">
+                          <img
+                            src={el.icon_url}
+                            className="servers-icon"
+                            alt="server icon"
+                          />
+                        </div>
+                      </div>
+                      <div className="explorer-server-name">
+                        <div className="check">
+                          <i className="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div>{`${el.name}`}</div>
+                      </div>
+                      <div className="explorer-server-description">{`${el.description}`}</div>
+                      <div className="already-joined">
+                        <i className="fa-solid fa-circle-check"></i>
+                      </div>
+                    </div>
+                  </NavLink>
                 );
               } else {
                 return (
-                  <div className="explorer-server-container">
-                    <NavLink to={`/channels/@me/`} key={el.id} className="">
-                      <img
-                        src={el.icon_url}
-                        className="servers-icon"
-                        alt="server icon"
-                      />
-                      <div>{`Server : ${el.name}`}</div>
-                      <div>{`About : ${el.description}`}</div>
-                      <div>Join Server</div>
-                      <div>End of card</div>
-                    </NavLink>
-                  </div>
+                  <NavLink to={`/channels/@me/`} key={el.id} className="">
+                    <div className="explorer-server-container">
+                      <div className="explorer-server-top">
+                        <div className="explorer-server-img">
+                          <img
+                            src={el.icon_url}
+                            className="servers-icon"
+                            alt="server icon"
+                          />
+                        </div>
+                      </div>
+                      <div className="explorer-server-name">
+                        <div className="check">
+                          <i className="fa-regular fa-circle-check"></i>
+                        </div>
+                        <div>{`${el.name}`}</div>
+                      </div>
+                      <div className="explorer-server-description">{`${el.description}`}</div>
+                      <div className="join-server">Join Server</div>
+                    </div>
+                  </NavLink>
                 );
               }
             })}
