@@ -10,6 +10,7 @@ export default function CreateChannelForm({
 	prevName,
 	serverId,
 	role,
+	isLoaded,
 }) {
 	const dispatch = useDispatch();
 	const [category, setCategory] = useState(categoryName ? categoryName : "");
@@ -43,7 +44,7 @@ export default function CreateChannelForm({
 			});
 	};
 
-	if (categoryName) {
+	if (isLoaded && categoryName) {
 		return (
 			<div className="CreateChannelForm-container">
 				<div className="CreateChannelForm-header">
@@ -79,7 +80,10 @@ export default function CreateChannelForm({
 								id="channel-name"
 								type="text"
 								value={channelName}
-								onChange={(e) => setChannelName(e.target.value)}
+								onChange={(e) => {
+									// if (e.keycode === 13) e.preventDefault();
+									setChannelName(e.target.value);
+								}}
 								required
 								placeholder="new-channel"
 							/>
@@ -136,59 +140,5 @@ export default function CreateChannelForm({
 				</form>
 			</div>
 		);
-	}
-
-	return (
-		<div className="CreateChannelForm-container">
-			<div className="CreateChannelForm-header">
-				<h1 className="CreateChannelForm-title">Create Channel</h1>
-				<p className="CreateChannelForm-subtext"></p>
-			</div>
-			<form className="CreateChannelForm-form">
-				<div className="CreateChannelForm-group-channel-name">
-					<label htmlFor="channel-name">Channel Name</label>
-					<input
-						id="channel-name"
-						type="text"
-						value={channelName}
-						onChange={(e) => setChannelName(e.target.value)}
-						required
-						placeholder="new-channel"
-					/>
-				</div>
-				<div className="CreateChannelForm-group-category">
-					<label
-						htmlFor="is-private"
-						className="CreateChannelForm-private-switch"
-					>
-						Category Name
-						<input
-							id="is-private"
-							type="checkbox"
-							checked={category}
-							onChange={(e) => setCategory(e.target.value)}
-							required
-						/>
-						<span className="CreateChannelForm-private-slider"></span>
-					</label>
-				</div>
-				<div className="CreateChannelForm-group-private">
-					<label
-						htmlFor="is-private"
-						className="CreateChannelForm-private-switch"
-					>
-						Private channel
-						<input
-							id="is-private"
-							type="checkbox"
-							value={isPrivate}
-							onChange={() => setIsPrivate(!isPrivate)}
-							required
-						/>
-						<span className="CreateChannelForm-private-slider"></span>
-					</label>
-				</div>
-			</form>
-		</div>
-	);
+	} else return <div>Loading...</div>;
 }

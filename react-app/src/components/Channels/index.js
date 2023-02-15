@@ -188,6 +188,7 @@ export default function Channels() {
 								categoryName={category}
 								serverId={serverId}
 								role={serverMemberRole}
+								isLoaded={isLoaded}
 							/>
 						}
 					/>
