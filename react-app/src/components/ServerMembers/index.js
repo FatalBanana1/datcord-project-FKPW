@@ -114,7 +114,7 @@ const ServerMembers = () => {
                     <div className = "owner-div section">
                         <h2 className="ServerMembers-headers">Owner</h2>
                         <div className="individual-person">
-                            <img className="member-img" src={owners[0].display_pic}></img>
+                            <img className="member-img" id="owner" src={owners[0].display_pic}></img>
                             {/* <p className="owner nicknames">{owners[0].nickname}</p> */}
                             <OpenModalButton
                                 id = "memberModalButton"
@@ -135,7 +135,7 @@ const ServerMembers = () => {
                     <div className = "admin-div section">
                         <h2 className="ServerMembers-headers">{`Admins`}</h2>
                         {admins.map(admin =>
-                            <div key={admin.id} className="individual-person">
+                            <div key={admin.id} id="admin" className="individual-person">
                                 <img className="member-img" src={admin.display_pic}></img>
                                 {/* <p className="admin nicknames">{admin.nickname}</p> */}
                                 <OpenModalButton
@@ -153,7 +153,7 @@ const ServerMembers = () => {
                     <div className = "regular-members-div section">
                         <h2 className="ServerMembers-headers">{`Members`}</h2>
                         {members.map(member =>
-                            <div key={member.id} className="individual-person" onClick={makeVisible}>
+                            <div key={member.id} id="member" className="individual-person member-name" onClick={makeVisible}>
                                 <img className="member-img" src={member.display_pic}></img>
                                 {/* <p className="regular-member nicknames">{member.nickname}</p> */}
                                 <OpenModalButton
@@ -171,7 +171,7 @@ const ServerMembers = () => {
                     <div className = "pending-div section">
                         <h2 className="ServerMembers-headers">{`Pending - ${pending.length}`}</h2>
                         {pending.map(pending =>
-                            <div key={pending.id} className="individual-person pending">
+                            <div key={pending.id} id="pending" className="individual-person pending">
                                 <img className="member-img" src={pending.display_pic}></img>
                                 {/* <p className="pending nicknames">{pending.nickname}</p> */}
                                 <OpenModalButton

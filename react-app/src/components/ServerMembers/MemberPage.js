@@ -145,11 +145,11 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
                         )
                     }
                         </div>
-                        <div className="card-section">
+                        <div className="member-since-section">
                             <h4 className="member-h4">Member Since</h4>
                             <p className="card-text">{date}</p>
                         </div>
-                        <div className="card-section">
+                        <div className="role-section">
                             <h4 className="member-h4">Role</h4>
                             {!isNotOwner ? (
                                 <div className="member-role-div">
