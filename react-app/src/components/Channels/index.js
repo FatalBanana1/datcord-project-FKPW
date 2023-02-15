@@ -30,7 +30,7 @@ export default function Channels() {
 	const server = useSelector((state) => state.channels.server);
 	// console.log("server we want:", server.find((thing) => thing.id === +serverId))
 	// console.log("SERVER", server);
-	const channels = Object.values(
+	let channels = Object.values(
 		useSelector((state) => state.channels.channels)
 	);
 	const serverMembers = Object.values(
@@ -124,6 +124,13 @@ export default function Channels() {
 	} else {
 		serverMemberRole = serverMember.role;
 	}
+
+    console.log("channels, servermemberrole", channels, serverMemberRole);
+    if (serverMemberRole === "pending") {
+        channels = channels.filter(channel => channel.is_private === false);
+    }
+
+    console.log("LINE 133 - CHANNELS >>>>>>>>>>>>>>>>", channels)
 
 	if (serverMemberRole === "admin" || serverMemberRole === "owner") {
 		// console.log("hit this");
