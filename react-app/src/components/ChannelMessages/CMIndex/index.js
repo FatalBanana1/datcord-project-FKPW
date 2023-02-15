@@ -61,7 +61,6 @@ const CMIndex = () => {
 			setChatInput("");
 			setMessages([]);
 			setEdit(999999990);
-			// dispatch(actionResetChannelMessages());
 		};
 	}, [channelId, serverId, user.id]);
 
@@ -138,7 +137,14 @@ const CMIndex = () => {
 	const handleEditChange = (e) => {
 		setEdit(e);
 		if (e === 0) {
+			setChatInput("");
 			setMessages([]);
+			dispatch(thunkReadAllChannelMessages(serverId, channelId))
+				.then(() => {
+					setIsLoaded(true);
+					setLoadBottom(true);
+				})
+				.then(() => setEdit(999999990));
 		}
 	};
 
