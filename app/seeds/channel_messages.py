@@ -272,16 +272,6 @@ def seed_channel_messages():
         channel_id=16,
         message="You will try",
     )
-    cm55 = ChannelMessage(
-        sender_id=23,
-        channel_id=16,
-        message="*FIGHT!!!*",
-    )
-    cm56 = ChannelMessage(
-        sender_id=24,
-        channel_id=16,
-        message="*FIGHT!!!*",
-    )
     cm57 = ChannelMessage(
         sender_id=23,
         channel_id=16,
@@ -379,8 +369,6 @@ def seed_channel_messages():
             cm52,
             cm53,
             cm54,
-            cm55,
-            cm56,
             cm57,
             cm58,
             cm59,
