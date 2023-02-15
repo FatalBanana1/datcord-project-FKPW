@@ -146,14 +146,13 @@ def edit_channel(serverId, channel_id):
     if serverId not in server_ids:
         return {"error": ["User is not part of this server"]}
 
-    server_role = [
-        membership.role
-        for membership in user_memberships
-        if membership.server_id == serverId
-    ]
-
-    if user.id != channel.server.owner_id and server_role != "admin":
-        return {"error": ["You do not have permission to edit this channel"]}
+    # server_role = [
+    #     membership.role
+    #     for membership in user_memberships
+    #     if membership.server_id == serverId
+    # ]
+    # if user.id != channel.server.owner_id or server_role != "admin":
+    #     return {"error": ["You do not have permission to edit this channel"]}
 
     if form.validate_on_submit():
         channel.name = res["name"]

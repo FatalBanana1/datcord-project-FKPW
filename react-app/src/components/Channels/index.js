@@ -125,7 +125,7 @@ export default function Channels() {
 		serverMemberRole = serverMember.role;
 	}
 
-	console.log("channels, servermemberrole", channels, serverMemberRole);
+	// console.log("channels, servermemberrole", channels, serverMemberRole);
 	if (serverMemberRole === "pending") {
 		channels = channels.filter((channel) => channel.is_private === false);
 	}

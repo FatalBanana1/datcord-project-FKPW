@@ -87,8 +87,55 @@ def seed_users():
         display_pic="https://i.imgflip.com/1jklzc.jpg?a465192",
         theme="dark",
     )
+    pending = User(
+        email="karma@gmail.com",
+        username="karma",
+        password="password3",
+        display_pic="https://www.artofliving.org/sites/www.artofliving.org/files/styles/original_image/public/wysiwyg_imageupload/karma_4.jpg?itok=uKx-_qpW",
+        theme="dark",
+    )
+    pending2 = User(
+        email="choco@gmail.com",
+        username="choco",
+        password="password3",
+        display_pic="https://milkandpop.com/wp-content/uploads/2020/11/mocha-latte-13-720x720.jpg",
+        theme="dark",
+    )
+    m1 = User(
+        email="supa@gmail.com",
+        username="supadupa",
+        password="password4",
+        display_pic="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2022/10/20/16662224157675.jpg",
+        theme="dark",
+    )
+    m2 = User(
+        email="darkknight@gmail.com",
+        username="geniusinabottle",
+        password="password4",
+        display_pic="https://image.cnbcfm.com/api/v1/image/105814861-1553608877209ben-affleck-batman-1.jpg?v=1553609938&w=929&h=523&vtcrop=y",
+        theme="dark",
+    )
 
-    db.session.add_all([demo, Wasiq, Fahd, Peter, Keenly, six, seven, eight, nine, Obi_Wan, Anakin, Burnt_Anakin])
+    db.session.add_all(
+        [
+            demo,
+            Wasiq,
+            Fahd,
+            Peter,
+            Keenly,
+            six,
+            seven,
+            eight,
+            nine,
+            Obi_Wan,
+            Anakin,
+            Burnt_Anakin,
+            pending,
+            pending2,
+            m1,
+            m2,
+        ]
+    )
     db.session.commit()
 
 

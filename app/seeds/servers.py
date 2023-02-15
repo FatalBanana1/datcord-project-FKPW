@@ -61,14 +61,14 @@ def seed_servers():
 
     db.session.add_all(
         [
-            server1,
+            server8,
             server2,
             server3,
             server4,
             server5,
             server6,
             server7,
-            server8,
+            server1,
         ]
     )
 
