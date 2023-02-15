@@ -14,6 +14,7 @@ import EditServer from "../Servers/EditServer";
 import DeleteServer from "../Servers/DeleteServer";
 import { thunkGetServerMembers } from "../../store/serverMembers";
 import { logout } from "../../store/session";
+import { thunkReadUserServers } from "../../store/servers";
 
 export default function Channels() {
 	const { serverId, channelId } = useParams();
@@ -25,7 +26,7 @@ export default function Channels() {
 	// const server = useSelector(state => state.servers)[+serverId]
 	const allServers = useSelector((state) => state.servers);
 	const server2 = allServers[serverId];
-	console.log("userServers=====", server2);
+	// console.log("userServers=====", server2);
 	const server = useSelector((state) => state.channels.server);
 	// console.log("server we want:", server.find((thing) => thing.id === +serverId))
 	// console.log("SERVER", server);
@@ -260,8 +261,8 @@ export default function Channels() {
 	// 	);
 	// }
 
-	return (
-		isLoaded && (
+	if (isLoaded && server2) {
+		return (
 			<div className="UserLanding-sidebar">
 				<div className="UserLanding-sidebar-header">
 					<p>{server2.name}</p>
@@ -283,9 +284,7 @@ export default function Channels() {
 										<OpenModalButton
 											buttonText="Edit-Server"
 											modalComponent={
-												<EditServer
-													server={server2}
-												/>
+												<EditServer server={server2} />
 											}
 										/>
 									</div>
@@ -358,6 +357,6 @@ export default function Channels() {
 					</div>
 				</div>
 			</div>
-		)
-	);
+		);
+	} else return <div>Loading...</div>;
 }

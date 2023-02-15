@@ -16,7 +16,7 @@ export default function UserLandingSideBar({ page, isLoaded }) {
 	const [showMenu, setShowMenu] = useState(false);
 	const [showUserMenu, setShowUserMenu] = useState(false);
 	const history = useHistory();
-	console.log("user", user)
+	// console.log("user", user)
 
 	const openUserMenu = () => {
 		if (showUserMenu) return;
@@ -27,69 +27,80 @@ export default function UserLandingSideBar({ page, isLoaded }) {
 		if (!showUserMenu) return;
 
 		const closeMenu = (e) => {
-		if (userSettingsRef.current) {
-			if (!userSettingsRef.current.contains(e.target)) {
-				setShowUserMenu(false);
+			if (userSettingsRef.current) {
+				if (!userSettingsRef.current.contains(e.target)) {
+					setShowUserMenu(false);
+				}
 			}
-			};
-		}
+		};
 
 		document.addEventListener("click", closeMenu);
 
 		return () => document.removeEventListener("click", closeMenu);
 	}, [showUserMenu]);
 
-	const userSettingsClass = "UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
+	const userSettingsClass =
+		"UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
 	const goLogout = (e) => {
 		e.preventDefault();
 
 		dispatch(logout());
 		history.push("/");
-	}
+	};
 
 	if (page === "channel") {
-		return <Channels isLoaded={isLoaded} />
+		return <Channels isLoaded={isLoaded} />;
 	}
 	return (
 		<div className="UserLanding-sidebar">
-
-		<div className="UserLanding-sidebar-header">
-			{ user && (
-				user.username
-			)}
-        </div>
+			<div className="UserLanding-sidebar-header">
+				{user && user.username}
+			</div>
 
 			<div className="UserLanding-sidebar-channel-content">
-
-
-          <div className="UserLanding-sidebar-channel-user-info">
-            <div className="UserLanding-sidebar-channel-user-container">
-              <div className="UserLanding-sidebar-channel-user-icons">
-                <img
-                  src={user && user.display_pic}
-                  className="UserLanding-sidebar-channel-user-icon"
-                  alt="User profile image"
-                />
-              </div>
-              <div className="UserLanding-sidebar-channel-user-name">
-                {user && user.username}
-              </div>
-            </div>
-            <div className="UserLanding-sidebar-channel-user-actions">
-              <i className="fa-solid fa-microphone"></i>
-              <i className="fa-solid fa-headphones"></i>
-              <i className="fa-solid fa-gear user-gear" onClick={openUserMenu}></i>
-              <div className={userSettingsClass} ref={userSettingsRef}>
-                <div className="dropdown-wrapper">
-                    <button className="UserLanding-sidebar-channel-user-home" onClick={() => history.push("/")}>Home</button>
-                    <button className="UserLanding-sidebar-channel-user-logout" onClick={goLogout}>Logout</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+				<div className="UserLanding-sidebar-channel-user-info">
+					<div className="UserLanding-sidebar-channel-user-container">
+						<div className="UserLanding-sidebar-channel-user-icons">
+							<img
+								src={user && user.display_pic}
+								className="UserLanding-sidebar-channel-user-icon"
+								alt="User profile image"
+							/>
+						</div>
+						<div className="UserLanding-sidebar-channel-user-name">
+							{user && user.username}
+						</div>
+					</div>
+					<div className="UserLanding-sidebar-channel-user-actions">
+						<i className="fa-solid fa-microphone"></i>
+						<i className="fa-solid fa-headphones"></i>
+						<i
+							className="fa-solid fa-gear user-gear"
+							onClick={openUserMenu}
+						></i>
+						<div
+							className={userSettingsClass}
+							ref={userSettingsRef}
+						>
+							<div className="dropdown-wrapper">
+								<button
+									className="UserLanding-sidebar-channel-user-home"
+									onClick={() => history.push("/")}
+								>
+									Home
+								</button>
+								<button
+									className="UserLanding-sidebar-channel-user-logout"
+									onClick={goLogout}
+								>
+									Logout
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }

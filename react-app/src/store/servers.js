@@ -123,11 +123,11 @@ export const thunkUpdateServer = (serverId, server) => async (dispatch) => {
   if (response.ok) {
     const updatedServer = await response.json();
     dispatch(actionUpdateServer(serverId, updatedServer.server));
-    console.log("EDIT THUNK==============>", updatedServer);
+    // console.log("EDIT THUNK==============>", updatedServer);
     return updatedServer.server;
   } else if (response.status < 500) {
     const data = await response.json();
-    console.log("EDIT THUNK ELSE IF ==========>", data);
+    // console.log("EDIT THUNK ELSE IF ==========>", data);
     if (data.errors) {
       return data.errors;
     }
@@ -145,7 +145,7 @@ export const thunkDeleteServer = (serverId) => async (dispatch) => {
   // console.log("DELETE THUNK", response);
   if (response.ok) {
     const deletedServer = await response.json(); // { server : { ... }}
-    console.log("response ok", deletedServer.server);
+    // console.log("response ok", deletedServer.server);
     // TO DO:  import actionDeleteChannel, dispatch delete action for each channel in deletedServer.server.channels
     // OR: Create new channel action to reset channel store
     dispatch(actionDeleteServer(deletedServer.server));
@@ -195,21 +195,21 @@ const serverReducer = (state = defaultState(), action) => {
       return newState;
 
     case DELETE_SERVER:
-      console.log(`DELETE reducer====>>>>>`);
+      // console.log(`DELETE reducer====>>>>>`);
       newState = { ...state };
       // remove deleted server from server store
-      console.log("DELETE REDUCER");
-      console.log("ID TO DELETE", action.server.id);
-      console.log(newState);
+      // console.log("DELETE REDUCER");
+      // console.log("ID TO DELETE", action.server.id);
+      // console.log(newState);
       delete newState[action.server.id];
-      console.log("NEW STATE", newState);
+      // console.log("NEW STATE", newState);
       return newState;
 
     case UPDATE_SERVER:
-      console.log(`UPDATE reducer====>>>>>`);
+      // console.log(`UPDATE reducer====>>>>>`);
       newState = { ...state };
       newState[action.server.id] = action.server;
-      console.log("NEW UPDATE STATE==============>>>>", action.server);
+      // console.log("NEW UPDATE STATE==============>>>>", action.server);
       return newState;
 
     case RESET_SERVERS:
