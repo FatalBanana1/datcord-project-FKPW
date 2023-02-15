@@ -16,318 +16,348 @@ import { thunkGetServerMembers } from "../../store/serverMembers";
 import { logout } from "../../store/session";
 
 export default function Channels() {
-  const { serverId, channelId } = useParams();
-  const history = useHistory();
-//   console.log("Channels - serverId, channelId:", serverId, channelId);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
-  console.log("USER:", user);
-  // const server = useSelector(state => state.servers)[+serverId]
-  // const server = useSelector((state) => state.servers.userServers);
-  const server = useSelector((state) => state.channels.server);
-//   console.log("userServers", server);
-  // console.log("server we want:", server.find((thing) => thing.id === +serverId))
-  const channels = Object.values(
-    useSelector((state) => state.channels.channels)
-  );
-  // console.log("SERVER", server);
-  const serverMembers = Object.values(
-    useSelector((state) => state.serverMembers)
-  );
-  const serverMember = serverMembers.filter(
-    (member) => member.user_id === user.id
-  )[0];
-  console.log("channels - serverMembers", serverMember)
-  const userSettingsRef = useRef();
-  const [showMenu, setShowMenu] = useState(false);
-  const [showUserMenu, setShowUserMenu] = useState(false);
+	const { serverId, channelId } = useParams();
+	const history = useHistory();
+	//   console.log("Channels - serverId, channelId:", serverId, channelId);
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.session.user);
+	// console.log("USER:", user);
+	// const server = useSelector(state => state.servers)[+serverId]
+	const allServers = useSelector((state) => state.servers);
+	const server2 = allServers[serverId];
+	console.log("userServers=====", server2);
+	const server = useSelector((state) => state.channels.server);
+	// console.log("server we want:", server.find((thing) => thing.id === +serverId))
+	// console.log("SERVER", server);
+	const channels = Object.values(
+		useSelector((state) => state.channels.channels)
+	);
+	const serverMembers = Object.values(
+		useSelector((state) => state.serverMembers)
+	);
+	const serverMember = serverMembers.filter(
+		(member) => member.user_id === user.id
+	)[0];
+	// console.log("channels - serverMembers", serverMember);
+	const userSettingsRef = useRef();
+	const [showMenu, setShowMenu] = useState(false);
+	const [showUserMenu, setShowUserMenu] = useState(false);
 
+	const openUserMenu = () => {
+		if (showUserMenu) return;
+		setShowUserMenu(true);
+	};
 
-  const openUserMenu = () => {
-    if (showUserMenu) return;
-    setShowUserMenu(true);
-  };
+	useEffect(() => {
+		if (!showUserMenu) return;
 
-  useEffect(() => {
-    if (!showUserMenu) return;
+		const closeMenu = (e) => {
+			if (userSettingsRef.current) {
+				if (!userSettingsRef.current.contains(e.target)) {
+					setShowUserMenu(false);
+				}
+			}
+		};
 
-    const closeMenu = (e) => {
-      if (userSettingsRef.current) {
-        if (!userSettingsRef.current.contains(e.target)) {
-            setShowUserMenu(false);
-        }
-      }
-    };
+		document.addEventListener("click", closeMenu);
 
-    document.addEventListener("click", closeMenu);
+		return () => document.removeEventListener("click", closeMenu);
+	}, [showUserMenu]);
 
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showUserMenu]);
+	let serverMemberRole;
 
-  let serverMemberRole;
+	let permissions;
 
-  let permissions;
+	//   console.log(
+	//     "SERVER_CHANNELS",
+	//     channels.filter((channel) => channel.id === 1)
+	//   );
+	//   console.log("USER", user);
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [showEdit, setShowEdit] = useState(false);
+	const [showServerMenu, setShowServerMenu] = useState(false);
+	const menuRef = useRef();
 
-//   console.log(
-//     "SERVER_CHANNELS",
-//     channels.filter((channel) => channel.id === 1)
-//   );
-//   console.log("USER", user);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
-  const [showServerMenu, setShowServerMenu] = useState(false);
-  const menuRef = useRef();
+	// PETER'S SERVER DROP DOWN STUFF
+	let isOwner;
+	if (isLoaded) {
+		isOwner = user.id == server.owner_id;
+	}
 
-  // PETER'S SERVER DROP DOWN STUFF
-  let isOwner;
-  if (isLoaded) {
-    isOwner = user.id == server.owner_id;
-  }
+	const openServerMenu = () => {
+		if (showServerMenu) return;
+		setShowServerMenu(true);
+	};
 
-  const openServerMenu = () => {
-    if (showServerMenu) return;
-    setShowServerMenu(true);
-  };
+	useEffect(() => {
+		if (!showServerMenu) return;
 
-  useEffect(() => {
-    if (!showServerMenu) return;
+		const closeServerMenu = (e) => {
+			if (!menuRef.current.contains(e.target)) {
+				setShowServerMenu(false);
+			}
+		};
 
-    const closeServerMenu = (e) => {
-      if (!menuRef.current.contains(e.target)) {
-        setShowServerMenu(false);
-      }
-    };
+		document.addEventListener("click", closeServerMenu);
 
-    document.addEventListener("click", closeServerMenu);
+		return () => document.removeEventListener("click", closeServerMenu);
+	}, [showServerMenu]);
 
-    return () => document.removeEventListener("click", closeServerMenu);
-  }, [showServerMenu]);
+	const menuClassName =
+		"server-menu-dropdown" + (showServerMenu ? "" : " hidden");
 
-  const menuClassName =
-    "server-menu-dropdown" + (showServerMenu ? "" : " hidden");
+	//   console.log("show edit", showEdit);
 
-//   console.log("show edit", showEdit);
+	useEffect(() => {
+		dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
+	}, [dispatch, serverId, channelId]);
 
+	const categories = {};
 
-  useEffect(() => {
-    dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
-  }, [dispatch, serverId, channelId]);
+	if (!channels) return null;
 
-  const categories = {};
+	if (!server) return null;
 
-  if (!channels) return null;
+	if (!serverMember) {
+		return null;
+	} else {
+		serverMemberRole = serverMember.role;
+	}
 
-  if (!server) return null;
+	if (serverMemberRole === "admin" || serverMemberRole === "owner") {
+		// console.log("hit this");
+		permissions = true;
+	} else {
+		permissions = false;
+	}
 
-  if (!serverMember) {
-    return null;
-  } else {
-    serverMemberRole = serverMember.role;
-  }
+	if (channels.length > 0) {
+		for (let i = 0; i < channels.length; i++) {
+			const channel = channels[i];
 
-  if (serverMemberRole === "admin" || serverMemberRole === "owner") {
-    // console.log("hit this");
-    permissions = true;
-  } else {
-    permissions = false;
-  }
+			if (!categories[channel.category]) {
+				categories[channel.category] = [channel];
+			} else {
+				categories[channel.category].push(channel);
+			}
+		}
+	}
 
-  if (channels.length > 0) {
-    for (let i = 0; i < channels.length; i++) {
-      const channel = channels[i];
+	const truncateNames = (names) => {
+		if (names.length > 18) {
+			return `${names.substring(0, 18)}...`;
+		}
 
-      if (!categories[channel.category]) {
-        categories[channel.category] = [channel];
-      } else {
-        categories[channel.category].push(channel);
-      }
-    }
-  }
+		return names;
+	};
 
-  const truncateNames = (names) => {
-    if (names.length > 18) {
-      return `${names.substring(0, 18)}...`;
-    }
+	const closeMenu = () => setShowUserMenu(false);
 
-    return names;
-  };
+	const goLogout = (e) => {
+		e.preventDefault();
 
-  const closeMenu = () => setShowUserMenu(false);
+		closeMenu();
+		dispatch(logout());
+		history.push("/");
+	};
 
-  const goLogout = (e) => {
-    e.preventDefault();
+	const userSettingsClass =
+		"UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
-    closeMenu();
-    dispatch(logout());
-    history.push("/");
-  }
-
-  const userSettingsClass = "UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
-
-  const categoriesMap = Object.keys(categories).map((category, idx) => (
-    <div className="UserLanding-Sidebar-category-container" key={idx}>
-      <div className="UserLanding-sidebar-channel-category-container">
-        <i className="fa-solid fa-angle-down"></i>
-        <span className="UserLanding-sidebar-channel-category-name">
-          {truncateNames(category)}
-        </span>
-        { permissions && (
-            <OpenModalButton
-            buttonText="Create-Channel"
-            onButtonClick={closeMenu}
-            modalComponent={
-                <CreateChannelForm categoryName={category} serverId={serverId} />
-            }
-            />
-        )}
-      </div>
-      <div className="UserLanding-sidebar-channel-list">
-        {/* map out channels here */}
-        {category &&
-          channels.length > 0 &&
-          categories[category].map((channel) => (
-            // channel.is_private === false && serverMember.role === "member"
-            <NavLink
-              to={`/channels/${serverId}/${channel.id}`}
-              className="UserLanding-sidebar-channel-name"
-              key={channel.id}
-            >
-              <div className="UserLanding-sidebar-channel-name-label">
-                <span className="hash">#</span>{" "}
-                {channel.name && truncateNames(channel.name)}
-              </div>
-              {permissions && (
-                <div className="UserLanding-sidebar-channel-buttons">
-                  <i className="fa-solid fa-user-plus"></i>
-                  {/* <NavLink to={`/channels/${serverId}/${channel.id}/edit`}>
+	const categoriesMap = Object.keys(categories).map((category, idx) => (
+		<div className="UserLanding-Sidebar-category-container" key={idx}>
+			<div className="UserLanding-sidebar-channel-category-container">
+				<i className="fa-solid fa-angle-down"></i>
+				<span className="UserLanding-sidebar-channel-category-name">
+					{truncateNames(category)}
+				</span>
+				{permissions && (
+					<OpenModalButton
+						buttonText="Create-Channel"
+						onButtonClick={closeMenu}
+						modalComponent={
+							<CreateChannelForm
+								categoryName={category}
+								serverId={serverId}
+							/>
+						}
+					/>
+				)}
+			</div>
+			<div className="UserLanding-sidebar-channel-list">
+				{/* map out channels here */}
+				{category &&
+					channels.length > 0 &&
+					categories[category].map((channel) => (
+						// channel.is_private === false && serverMember.role === "member"
+						<NavLink
+							to={`/channels/${serverId}/${channel.id}`}
+							className="UserLanding-sidebar-channel-name"
+							key={channel.id}
+						>
+							<div className="UserLanding-sidebar-channel-name-label">
+								<span className="hash">#</span>{" "}
+								{channel.name && truncateNames(channel.name)}
+							</div>
+							{permissions && (
+								<div className="UserLanding-sidebar-channel-buttons">
+									<i className="fa-solid fa-user-plus"></i>
+									{/* <NavLink to={`/channels/${serverId}/${channel.id}/edit`}>
                                         <i className="fa-solid fa-gear" onClick={() => setShowEdit(true)}></i>
                                     </NavLink> */}
-                  <OpenModalButton
-                    buttonText="Edit-Channel"
-                    onButtonClick={closeMenu}
-                    modalComponent={
-                      <EditChannelForm
-                        categoryName={category}
-                        prevName={channel.name}
-                        serverId={serverId}
-                        channelId={channel.id}
-                        priv={channel.is_private}
-                      />
-                    }
-                  />
-                </div>
-              )}
-            </NavLink>
-          ))}
-      </div>
-    </div>
-  ));
+									<OpenModalButton
+										buttonText="Edit-Channel"
+										onButtonClick={closeMenu}
+										modalComponent={
+											<EditChannelForm
+												categoryName={category}
+												prevName={channel.name}
+												serverId={serverId}
+												channelId={channel.id}
+												priv={channel.is_private}
+											/>
+										}
+									/>
+								</div>
+							)}
+						</NavLink>
+					))}
+			</div>
+		</div>
+	));
 
-  // console.log("CATEGORIES", categories)
+	// console.log("CATEGORIES", categories)
 
-  if (!channels.length || !server) {
-    return (
-      <div className="UserLanding-sidebar">
-        <div className="UserLanding-sidebar-header">
-          {/* <p>{server.name}</p> */}
-          <i className="fa-solid fa-angle-down big-angle-down"></i>
-        </div>
-        <div className="UserLanding-sidebar-channel-content">
-          <div className="UserLanding-sidebar-channel-user-info">
-            <div className="UserLanding-sidebar-channel-user-container">
-              <div className="UserLanding-sidebar-channel-user-icons">
-                <img
-                  src={logo}
-                  className="UserLanding-sidebar-channel-user-icon"
-                  alt="User profile image"
-                />
-              </div>
-              <div className="UserLanding-sidebar-channel-user-name">
-                {user && user.username}
-              </div>
-            </div>
-            <div className="UserLanding-sidebar-channel-user-actions">
-              <i className="fa-solid fa-microphone"></i>
-              <i className="fa-solid fa-headphones"></i>
-              <i className="fa-solid fa-gear user-gear"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+	// if (!channels.length || !server) {
+	// 	return (
+	// 		<div className="UserLanding-sidebar">
+	// 			<div className="UserLanding-sidebar-header">
+	// 				{/* <p>{server.name}</p> */}
+	// 				<i className="fa-solid fa-angle-down big-angle-down"></i>
+	// 			</div>
+	// 			<div className="UserLanding-sidebar-channel-content">
+	// 				<div className="UserLanding-sidebar-channel-user-info">
+	// 					<div className="UserLanding-sidebar-channel-user-container">
+	// 						<div className="UserLanding-sidebar-channel-user-icons">
+	// 							<img
+	// 								src={logo}
+	// 								className="UserLanding-sidebar-channel-user-icon"
+	// 								alt="User profile image"
+	// 							/>
+	// 						</div>
+	// 						<div className="UserLanding-sidebar-channel-user-name">
+	// 							{user && user.username}
+	// 						</div>
+	// 					</div>
+	// 					<div className="UserLanding-sidebar-channel-user-actions">
+	// 						<i className="fa-solid fa-microphone"></i>
+	// 						<i className="fa-solid fa-headphones"></i>
+	// 						<i className="fa-solid fa-gear user-gear"></i>
+	// 					</div>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
 
-  return (
-    isLoaded && (
-      <div className="UserLanding-sidebar">
-        <div className="UserLanding-sidebar-header">
-          <p>{server.name}</p>
-          {isOwner && (
-            <>
-              <div className="server-dropdown-button" onClick={openServerMenu}>
-                <i className="fa-solid fa-angle-down big-angle-down"></i>
-              </div>
-              <div className={menuClassName} ref={menuRef}>
-                <div className="dropdown-wrapper">
-                  <div className="server-dropdown-edit">
-                    {/* <span>Edit Server</span>
+	return (
+		isLoaded && (
+			<div className="UserLanding-sidebar">
+				<div className="UserLanding-sidebar-header">
+					<p>{server2.name}</p>
+					{isOwner && (
+						<>
+							<div
+								className="server-dropdown-button"
+								onClick={openServerMenu}
+							>
+								<i className="fa-solid fa-angle-down big-angle-down"></i>
+							</div>
+							<div className={menuClassName} ref={menuRef}>
+								<div className="dropdown-wrapper">
+									<div className="server-dropdown-edit">
+										{/* <span>Edit Server</span>
                     <span>
                       <i className="fa-solid fa-pencil"></i>
                     </span> */}
-                    <OpenModalButton
-                      buttonText="Edit-Server"
-                      modalComponent={<EditServer server={server} />}
-                    />
-                  </div>
-                  <div className="server-dropdown-delete">
-                    {/* <span>Delete Server</span>
+										<OpenModalButton
+											buttonText="Edit-Server"
+											modalComponent={
+												<EditServer
+													server={server2}
+												/>
+											}
+										/>
+									</div>
+									<div className="server-dropdown-delete">
+										{/* <span>Delete Server</span>
                     <span>
                       <i className="fa-solid fa-trash"></i>
                     </span> */}
-                    <OpenModalButton
-                      buttonText="Delete-Server"
-                      modalComponent={<DeleteServer server={server} />}
-                    />
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-        <div className="UserLanding-sidebar-channel-content">
-          {channels.length > 0 && categoriesMap.length ? (
-            categoriesMap
-          ) : (
-            <div className="UserLanding-sidebar-channel-category-container"></div>
-          )}
+										<OpenModalButton
+											buttonText="Delete-Server"
+											modalComponent={
+												<DeleteServer
+													server={server2}
+												/>
+											}
+										/>
+									</div>
+								</div>
+							</div>
+						</>
+					)}
+				</div>
+				<div className="UserLanding-sidebar-channel-content">
+					{channels.length > 0 && categoriesMap.length ? (
+						categoriesMap
+					) : (
+						<div className="UserLanding-sidebar-channel-category-container"></div>
+					)}
 
-          <div className="UserLanding-sidebar-channel-user-info">
-            <div className="UserLanding-sidebar-channel-user-container">
-              <div className="UserLanding-sidebar-channel-user-icons">
-                <img
-                  src={user && user.display_pic}
-                  className="UserLanding-sidebar-channel-user-icon"
-                  alt="User profile image"
-                />
-              </div>
-              <div className="UserLanding-sidebar-channel-user-name">
-                {user && user.username}
-              </div>
-            </div>
-            <div className="UserLanding-sidebar-channel-user-actions">
-              <i className="fa-solid fa-microphone"></i>
-              <i className="fa-solid fa-headphones"></i>
-              <i className="fa-solid fa-gear user-gear" onClick={openUserMenu}></i>
-              <div className={userSettingsClass} ref={userSettingsRef}>
-                <div className="dropdown-wrapper">
-                    <button className="UserLanding-sidebar-channel-user-home" onClick={() => history.push("/")}>Home</button>
-                    <button className="UserLanding-sidebar-channel-user-logout" onClick={goLogout}>Logout</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  );
+					<div className="UserLanding-sidebar-channel-user-info">
+						<div className="UserLanding-sidebar-channel-user-container">
+							<div className="UserLanding-sidebar-channel-user-icons">
+								<img
+									src={user && user.display_pic}
+									className="UserLanding-sidebar-channel-user-icon"
+									alt="User profile image"
+								/>
+							</div>
+							<div className="UserLanding-sidebar-channel-user-name">
+								{user && user.username}
+							</div>
+						</div>
+						<div className="UserLanding-sidebar-channel-user-actions">
+							<i className="fa-solid fa-microphone"></i>
+							<i className="fa-solid fa-headphones"></i>
+							<i
+								className="fa-solid fa-gear user-gear"
+								onClick={openUserMenu}
+							></i>
+							<div
+								className={userSettingsClass}
+								ref={userSettingsRef}
+							>
+								<div className="dropdown-wrapper">
+									<button
+										className="UserLanding-sidebar-channel-user-home"
+										onClick={() => history.push("/")}
+									>
+										Home
+									</button>
+									<button
+										className="UserLanding-sidebar-channel-user-logout"
+										onClick={goLogout}
+									>
+										Logout
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	);
 }
