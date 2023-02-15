@@ -146,10 +146,40 @@ def seed_server_members():
         nickname = "AgentScarn",
         role = "owner"
     )
+    m23 = ServerMember(
+        user_id = 10,
+        server_id = 2,
+        nickname = "Obi Wan",
+        role = "admin"
+    )
+    m24 = ServerMember(
+        user_id = 11,
+        server_id = 2,
+        nickname = "Anakin",
+        role = "member"
+    )
+    m25 = ServerMember(
+        user_id = 5,
+        server_id = 2,
+        nickname = "Chanyeol",
+        role = "member"
+    )
+    m26 = ServerMember(
+        user_id = 4,
+        server_id = 2,
+        nickname = "Panda",
+        role = "member"
+    )
+    m27 = ServerMember(
+        user_id = 12,
+        server_id = 2,
+        nickname = "Burnt Anakin",
+        role = "member"
+    )
 
 
 
-    db.session.add_all([member1, member2, member3, member4, member5, member6, member7, member8, member9, member10, member11, member12, member13, m14, m15, m16, m17, m18, m19, m20, m21, m22])
+    db.session.add_all([member1, member2, member3, member4, member5, member6, member7, member8, member9, member10, member11, member12, member13, m14, m15, m16, m17, m18, m19, m20, m21, m22, m23, m24, m25, m26, m27])
     db.session.commit()
 
 

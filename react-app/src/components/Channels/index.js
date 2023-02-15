@@ -21,7 +21,7 @@ export default function Channels() {
 //   console.log("Channels - serverId, channelId:", serverId, channelId);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-//   console.log("USER:", user);
+  console.log("USER:", user);
   // const server = useSelector(state => state.servers)[+serverId]
   // const server = useSelector((state) => state.servers.userServers);
   const server = useSelector((state) => state.channels.server);
@@ -37,7 +37,7 @@ export default function Channels() {
   const serverMember = serverMembers.filter(
     (member) => member.user_id === user.id
   )[0];
-  // console.log("channels - serverMe
+  console.log("channels - serverMembers", serverMember)
   const userSettingsRef = useRef();
   const [showMenu, setShowMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -110,7 +110,6 @@ export default function Channels() {
 
 
   useEffect(() => {
-    dispatch(thunkGetServerMembers(+serverId));
     dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
   }, [dispatch, serverId, channelId]);
 
@@ -163,8 +162,6 @@ export default function Channels() {
     history.push("/");
   }
 
-  console.log("showMenu", showMenu)
-
   const userSettingsClass = "UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
   const categoriesMap = Object.keys(categories).map((category, idx) => (
@@ -174,19 +171,22 @@ export default function Channels() {
         <span className="UserLanding-sidebar-channel-category-name">
           {truncateNames(category)}
         </span>
-        <OpenModalButton
-          buttonText="Create-Channel"
-          onButtonClick={closeMenu}
-          modalComponent={
-            <CreateChannelForm categoryName={category} serverId={serverId} />
-          }
-        />
+        { permissions && (
+            <OpenModalButton
+            buttonText="Create-Channel"
+            onButtonClick={closeMenu}
+            modalComponent={
+                <CreateChannelForm categoryName={category} serverId={serverId} />
+            }
+            />
+        )}
       </div>
       <div className="UserLanding-sidebar-channel-list">
         {/* map out channels here */}
         {category &&
           channels.length > 0 &&
           categories[category].map((channel) => (
+            // channel.is_private === false && serverMember.role === "member"
             <NavLink
               to={`/channels/${serverId}/${channel.id}`}
               className="UserLanding-sidebar-channel-name"
@@ -211,6 +211,7 @@ export default function Channels() {
                         prevName={channel.name}
                         serverId={serverId}
                         channelId={channel.id}
+                        priv={channel.is_private}
                       />
                     }
                   />

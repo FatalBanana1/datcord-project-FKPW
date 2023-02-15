@@ -232,6 +232,46 @@ def seed_channel_messages():
         channel_id=13,
         message="yes you would need to submit that complaint asap, takes 2-3 weeks for it process",
     )
+    cm57 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="It's over Anakin. I have the high ground.",
+    )
+    cm58 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="You underestimate my power!",
+    )
+    cm59 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="Don't try it",
+    )
+    cm60 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="*Attempts to jump to high ground*",
+    )
+    cm61 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="*Cuts Anakin in half*",
+    )
+    cm62 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="You were the Chosen One! It was said that you would destroy the Sith, not join them. Bring balance to the Force, not leave it in Darkness",
+    )
+    cm63 = ChannelMessage(
+        sender_id=27,
+        channel_id=16,
+        message="I hate you!",
+    )
+    cm64 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="You were my brother Anakin. I loved you.",
+    )
 
     db.session.add_all(
         [
@@ -281,6 +321,14 @@ def seed_channel_messages():
             cm44,
             cm45,
             cm46,
+            cm57,
+            cm58,
+            cm59,
+            cm60,
+            cm61,
+            cm62,
+            cm63,
+            cm64
         ]
     )
     db.session.commit()

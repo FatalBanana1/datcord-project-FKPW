@@ -67,8 +67,13 @@
     color: #fff;
 }
 
-.card-section{
+.member-since-section{
     padding: 5px 0;
+}
+
+.role-section {
+    padding: 5px 0;
+    height: 75px;
 }
   
 .member-h4  {
@@ -110,6 +115,7 @@
 }
 
 .delete-membership-button {
+    margin-top: 40px;
 	border: none;
 	background-color: red;
 	color: white;

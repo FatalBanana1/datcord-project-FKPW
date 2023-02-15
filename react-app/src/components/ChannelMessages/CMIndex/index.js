@@ -62,7 +62,7 @@ const CMIndex = () => {
 			setMessages([]);
 			setEdit(999999990);
 		};
-	}, [channelId, serverId, user.id, allMembers]);
+	}, [channelId, serverId, user.id]);
 
 	useEffect(() => {
 		// open socket connection
@@ -137,7 +137,14 @@ const CMIndex = () => {
 	const handleEditChange = (e) => {
 		setEdit(e);
 		if (e === 0) {
+			setChatInput("");
 			setMessages([]);
+			dispatch(thunkReadAllChannelMessages(serverId, channelId))
+				.then(() => {
+					setIsLoaded(true);
+					setLoadBottom(true);
+				})
+				.then(() => setEdit(999999990));
 		}
 	};
 
