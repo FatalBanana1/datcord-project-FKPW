@@ -21,8 +21,9 @@ export default function Login() {
     e.preventDefault();
     setErrors({});
     return dispatch(login(email, password)).then((res) => {
-      if (res.email || res.password) {
-        // console.log("res.errors", res);
+        console.log("res", res)
+      if (res.email === "Email provided not found." || res.password === "No such user exists.") {
+        console.log("res.errors", res);
         return setErrors(res);
       } else {
         history.push("/channels/@me");
