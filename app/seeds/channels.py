@@ -49,6 +49,13 @@ def seed_channels():
 
     c15 = Channel(name="__mifflin", server_id=8, category="Main", is_private=False)
 
+    c16 = Channel(
+        name="Star Wars",
+        server_id=2,
+        category="Main",
+        is_private=False,
+    )
+
     db.session.add_all(
         [
             channel1,
@@ -66,6 +73,7 @@ def seed_channels():
             c13,
             c14,
             c15,
+            c16
         ]
     )
     db.session.commit()

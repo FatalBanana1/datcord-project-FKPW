@@ -232,6 +232,96 @@ def seed_channel_messages():
         channel_id=13,
         message="yes you would need to submit that complaint asap, takes 2-3 weeks for it process",
     )
+    cm47 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="I have brought peace, freedom, justice, and security to my new empire.",
+    )
+    cm48 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="Your new empire?",
+    )
+    cm49 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="Don't make me kill you.",
+    )
+    cm50 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="Anakin, my allegiance is to the Republic, to democracy!",
+    )
+    cm51 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="If you're not with me... then you're my enemy.",
+    )
+    cm52 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="Only a sith deals in absolutes.",
+    )
+    cm53 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="I will do what I must",
+    )
+    cm54 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="You will try",
+    )
+    cm55 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="*FIGHT!!!*",
+    )
+    cm56 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="*FIGHT!!!*",
+    )
+    cm57 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="It's over Anakin. I have the high ground.",
+    )
+    cm58 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="You underestimate my power!",
+    )
+    cm59 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="Don't try it",
+    )
+    cm60 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="*Attempts to jump to high ground*",
+    )
+    cm61 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="*Cuts Anakin in half*",
+    )
+    cm62 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="You were the Chosen One! It was said that you would destroy the Sith, not join them. Bring balance to the Force, not leave it in Darkness",
+    )
+    cm63 = ChannelMessage(
+        sender_id=24,
+        channel_id=16,
+        message="I hate you!",
+    )
+    cm64 = ChannelMessage(
+        sender_id=23,
+        channel_id=16,
+        message="You were my brother Anakin. I loved you.",
+    )
 
     db.session.add_all(
         [
@@ -281,6 +371,24 @@ def seed_channel_messages():
             cm44,
             cm45,
             cm46,
+            cm47,
+            cm48,
+            cm49,
+            cm50,
+            cm51,
+            cm52,
+            cm53,
+            cm54,
+            cm55,
+            cm56,
+            cm57,
+            cm58,
+            cm59,
+            cm60,
+            cm61,
+            cm62,
+            cm63,
+            cm64
         ]
     )
     db.session.commit()
