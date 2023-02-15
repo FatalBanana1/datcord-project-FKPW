@@ -42,6 +42,7 @@ class Server(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "channels": [channel.to_dict() for channel in self.channels],
+            "server_members": [server_member.to_dict() for server_member in self.server_members]
         }
     def to_dict2(self):
         return {
