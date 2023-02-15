@@ -11,8 +11,6 @@ export default function Menu({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    console.log("USER", user)
-
     const loginDemo = (num) => {
         switch (num) {
             case "one": {

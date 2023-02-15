@@ -56,7 +56,7 @@ const allServerReducer = (state = defaultState(), action) => {
 
 	switch (action.type) {
 		case READ_ALLSERVERS:
-			console.log(`reducer-----`, action);
+			// console.log(`reducer-----`, action);
 			newState = {};
 			action.allServers.servers.forEach((el) => (newState[el.id] = el));
 			return newState;

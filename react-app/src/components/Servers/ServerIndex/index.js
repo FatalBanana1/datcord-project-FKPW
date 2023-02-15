@@ -24,7 +24,7 @@ const ServerIndex = () => {
   const joinServer = (serverId) => {
     // e.preventDefault();
     // console.log("IS THIS WORKING????");
-    console.log(serverId);
+    // console.log(serverId);
 
     dispatch(thunkAddServerMember(serverId, "pending")).then(
       setJoined(!joined)

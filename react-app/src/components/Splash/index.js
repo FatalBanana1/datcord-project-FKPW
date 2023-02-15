@@ -14,7 +14,7 @@ export default function Splash({ user }) {
   const history = useHistory();
 
   const handleOpenClick = () => {
-    console.log("SPLASH USER", user)
+    // console.log("SPLASH USER", user)
 
     if (user) {
       history.push("/channels/@me");
