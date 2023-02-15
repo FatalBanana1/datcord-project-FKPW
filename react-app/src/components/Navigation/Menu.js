@@ -4,12 +4,14 @@ import { useMenuModal } from "../../context/MenuModal";
 import logo from "../../assets/datcord_logo_full_black.svg"
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/session";
+import { login, logout } from "../../store/session";
 
-export default function Menu() {
+export default function Menu({ user }) {
     const { closeMenu } = useMenuModal();
     const dispatch = useDispatch();
     const history = useHistory();
+
+    console.log("USER", user)
 
     const loginDemo = (num) => {
         switch (num) {
@@ -36,6 +38,14 @@ export default function Menu() {
         }
     }
 
+    const goLogout = (e) => {
+		e.preventDefault();
+
+		closeMenu();
+		dispatch(logout());
+		history.push("/");
+    };
+
     return (
         <div className="MenuModal-container">
             <div className="MenuModal-top">
@@ -55,11 +65,23 @@ export default function Menu() {
                 <nav className="MenuModal-nav">
                     <NavLink exact to="/" className="MenuModal-nav-link" onClick={closeMenu}>Home</NavLink>
                     <NavLink exact to="/channels/@me" className="MenuModal-nav-link" onClick={closeMenu}>Open</NavLink>
-                    <NavLink exact to="/login" className="MenuModal-nav-link" onClick={closeMenu}>Login</NavLink>
-                    <NavLink exact to="/register" className="MenuModal-nav-link" onClick={closeMenu}>Register</NavLink>
+                    { user ? "" : (
+                        <NavLink exact to="/login" className="MenuModal-nav-link" onClick={closeMenu}>Login</NavLink>
+                    )}
+                    { user ? "" : (
+                        <NavLink exact to="/register" className="MenuModal-nav-link" onClick={closeMenu}>Register</NavLink>
+                    )}
                     <NavLink exact to="/channels/@me" className="MenuModal-nav-link" onClick={loginDemo}>Demo 1</NavLink>
                     <NavLink exact to="/channels/@me" className="MenuModal-nav-link" onClick={loginDemo}>Demo 2</NavLink>
                     <NavLink exact to="/channels/@me" className="MenuModal-nav-link" onClick={loginDemo}>Demo 3</NavLink>
+                    { user ? (
+                        <p
+                            className="MenuModal-nav-link"
+                            onClick={goLogout}
+                        >
+                            Logout
+                        </p>
+                    ) : ""}
                 </nav>
 
             </div>

@@ -125,7 +125,7 @@ export default function Navigation() {
               <OpenMenuButton
                 buttonText="hamburger"
                 onButtonClick={closeMenu}
-                modalComponent={<Menu />}
+                modalComponent={<Menu user={user} />}
                 icon={"hamburger"}
               />
             </li>
