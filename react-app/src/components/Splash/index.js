@@ -3,13 +3,25 @@ import "./Splash.css";
 import background from "../../assets/splash_background.svg";
 import backgroundLeft from "../../assets/splash_left.svg";
 import backgroundRight from "../../assets/splash_right.svg";
+import { useHistory } from "react-router-dom";
 
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }
 
-export default function Splash() {
+export default function Splash({ user }) {
   const [hidden, setHidden] = useState(false);
+  const history = useHistory();
+
+  const handleOpenClick = () => {
+    console.log("SPLASH USER", user)
+
+    if (user) {
+      history.push("/channels/@me");
+    } else {
+      history.push("/login")
+    }
+  }
 
   return (
     <>
@@ -29,10 +41,11 @@ export default function Splash() {
           <div className="splash-top-details-buttons">
             {!hidden && (
               <button
-                onClick={() => {
-                  setHidden(true);
-                  openForm();
-                }}
+                // onClick={() => {
+                //   setHidden(true);
+                //   openForm();
+                // }}
+                onClick={handleOpenClick}
                 className="open-discord-button"
               >
                 Open Datcord in your browser

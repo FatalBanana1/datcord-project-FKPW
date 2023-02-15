@@ -115,7 +115,7 @@ export default function Navigation() {
                     </div>
                 </ul>
             </nav>
-            <Splash />
+            <Splash user={user} />
         </div>
     )
 }
