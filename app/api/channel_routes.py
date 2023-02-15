@@ -189,14 +189,13 @@ def delete_channel(server_id, channel_id):
     if server_id not in server_ids:
         return {"error": ["User is not part of this server"]}
 
-    server_role = [
-        membership.role
-        for membership in user_memberships
-        if membership.server_id == server_id
-    ]
-
-    if user.id != channel.server.owner_id and server_role != "admin":
-        return {"error": ["You do not have permission to delete this channel"]}
+    # server_role = [
+    #     membership.role
+    #     for membership in user_memberships
+    #     if membership.server_id == server_id
+    # ]
+    # if user.id != channel.server.owner_id and server_role != "admin":
+    #     return {"error": ["You do not have permission to delete this channel"]}
 
     db.session.delete(channel)
     db.session.commit()

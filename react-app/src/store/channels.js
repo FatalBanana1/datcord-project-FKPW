@@ -68,7 +68,7 @@ export const thunkDeleteChannel = (serverId, channelId) => async (dispatch) => {
 
 	if (res.ok) {
 		const data = await res.json();
-		// console.log("thunkDeleteChannel - data:", data);
+		// console.log("thunkDeleteChannel - data:+++++++++++++++++++++++", data);
 		dispatch(actionDeleteChannel(channelId));
 		return data;
 	} else if (res.status < 500) {
