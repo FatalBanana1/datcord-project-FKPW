@@ -30,19 +30,19 @@ export default function Navigation() {
         switch (num) {
             case "one": {
                 const data = dispatch(login(
-                    "gotmilk@gmail.com", "password"
+                    "fahd@gmail.com", "password"
                 )).then(() => history.push("/channels/@me"))
                 return data;
             }
             case "two": {
                 const data = dispatch(login(
-                    "wasiq@gmail.com", "password"
+                    "supa@gmail.com", "password4"
                 )).then(() => history.push("/channels/@me"))
                 return data;
             }
             case "three": {
                 const data = dispatch(login(
-                    "fahd@gmail.com", "password"
+                    "choco@gmail.com", "password3"
                 )).then(() => history.push("/channels/@me"))
                 return data;
             }
@@ -66,10 +66,10 @@ export default function Navigation() {
                         </NavLink>
                     </li>
                     <div className="Navigation-links-main">
-                        <li>
+                        <li className="Navigation-display-none">
                             Mootro
                         </li>
-                        <li>
+                        <li className="Navigation-display-none">
                             Discover
                         </li>
                         <li>
