@@ -175,6 +175,7 @@ a.UserLanding-sidebar-channel-name {
 
 .user-gear {
 	font-size: 16px;
+	cursor: pointer;
 }
 
 .UserLanding-sidebar-channel-user-home,

@@ -8,7 +8,7 @@ import "./Navigation.css";
 import Menu from "./Menu";
 import OpenMenuButton from "../OpenModalButton/OpenMenuButton";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/session";
+import { login, logout } from "../../store/session";
 
 export default function Navigation() {
   const [showMenu, setShowMenu] = useState(false);
@@ -51,6 +51,14 @@ export default function Navigation() {
     }
   };
 
+  const goLogout = (e) => {
+		e.preventDefault();
+
+		closeMenu();
+		dispatch(logout());
+		history.push("/");
+};
+
   return (
     <div className="NavigationSplash-container">
       <nav className="Navigation-container">
@@ -86,6 +94,16 @@ export default function Navigation() {
             </li>
           </div>
           <div className="Navigation-buttons-container">
+            <li>
+                { user ? (
+                    <button
+                        className="Navigation-login"
+                        onClick={goLogout}
+                       >
+                        Logout
+                    </button>
+                ) : ""}
+            </li>
             <li>
               {user ? (
                 <button
