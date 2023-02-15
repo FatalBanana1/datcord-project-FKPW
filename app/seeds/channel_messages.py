@@ -232,46 +232,6 @@ def seed_channel_messages():
         channel_id=13,
         message="yes you would need to submit that complaint asap, takes 2-3 weeks for it process",
     )
-    cm47 = ChannelMessage(
-        sender_id=24,
-        channel_id=16,
-        message="I have brought peace, freedom, justice, and security to my new empire.",
-    )
-    cm48 = ChannelMessage(
-        sender_id=23,
-        channel_id=16,
-        message="Your new empire?",
-    )
-    cm49 = ChannelMessage(
-        sender_id=24,
-        channel_id=16,
-        message="Don't make me kill you.",
-    )
-    cm50 = ChannelMessage(
-        sender_id=23,
-        channel_id=16,
-        message="Anakin, my allegiance is to the Republic, to democracy!",
-    )
-    cm51 = ChannelMessage(
-        sender_id=24,
-        channel_id=16,
-        message="If you're not with me... then you're my enemy.",
-    )
-    cm52 = ChannelMessage(
-        sender_id=23,
-        channel_id=16,
-        message="Only a sith deals in absolutes.",
-    )
-    cm53 = ChannelMessage(
-        sender_id=23,
-        channel_id=16,
-        message="I will do what I must",
-    )
-    cm54 = ChannelMessage(
-        sender_id=24,
-        channel_id=16,
-        message="You will try",
-    )
     cm57 = ChannelMessage(
         sender_id=23,
         channel_id=16,
@@ -361,14 +321,6 @@ def seed_channel_messages():
             cm44,
             cm45,
             cm46,
-            cm47,
-            cm48,
-            cm49,
-            cm50,
-            cm51,
-            cm52,
-            cm53,
-            cm54,
             cm57,
             cm58,
             cm59,
