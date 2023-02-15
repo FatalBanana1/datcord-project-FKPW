@@ -11,6 +11,7 @@ import {
     thunkReadUserServers
 } from "../../store/servers"
 import NickNameEdit from "./NickNameForm.js";
+import RoleEdit from "./RoleForm.js";
 
 import "./MemberPage.css"
 
@@ -26,6 +27,7 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
     // let {serverId} = useParams();
     const user = useSelector((state) => state.session.user);
     const [editNickName, setEditNickName] = useState(false)
+    const [editRole, setEditRole] = useState(false)
 
     let userId = user.id
 
@@ -35,6 +37,8 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
     let permission = (isOwner || isAdmin)
     let isUser = (userId == member.user_id)
     let isNotOwner = (member.role !== "owner")
+
+    let userIsOwner = (isUser && member.role === "owner")
 
     serverId = +serverId
     channelId = +channelId
@@ -76,6 +80,8 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
         onChange(false)
     }
 
+
+    // Edit Name
     const startEditNickName = (e) => {
         setEditNickName(true)
     }
@@ -83,6 +89,20 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
     const endEditNickName = (e) => {
         setEditNickName(false)
     }
+
+
+    // Edit Role
+
+    const startEditRole = (e) => {
+        setEditRole(true)
+    }
+
+    const endEditRole = (e) => {
+        setEditRole(false)
+    }
+
+
+    // console.log("PERMISSION ------>", permission)
 
     return (
         <>
@@ -93,6 +113,18 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
                 <div className="card-member-info">
                     <div className="card-member-inner-div">
                         <div className="member-nickName-div">
+                            {userIsOwner && (
+                                <>
+                                {editNickName ? (
+                                    <NickNameEdit member={member} onChange={onChange} serverId={serverId} endEditNickName = {endEditNickName}/>
+                                ):(
+                                    <>
+                                    <h4 className="member-nickname">{member.nickname}</h4>
+                                    <h4 className="nickname-edit-button" onClick={startEditNickName}>Edit</h4>
+                                    </>
+                                )}
+                                </>
+                            )}
                         {(permission || isUser) && isNotOwner ? (
                             <>
                             {editNickName ? (
@@ -105,7 +137,11 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
                             )}
                             </>
                         ) : (
-                        <h4 className="member-nickname">{member.nickname}</h4>
+                            <>
+                            {!userIsOwner && (
+                                <h4 className="member-nickname">{member.nickname}</h4>
+                            )}
+                            </>
                         )
                     }
                         </div>
@@ -115,7 +151,31 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
                         </div>
                         <div className="card-section">
                             <h4 className="member-h4">Role</h4>
-                            <p className="card-text">{member.role}</p>
+                            {!isNotOwner ? (
+                                <div className="member-role-div">
+                                    <p className="member-role">{member.role}</p>
+                                </div>
+                            ) : (
+                                <>
+                                    {isNotOwner && (isAdmin || isOwner) ? (
+                                        <>
+                                        {editRole ? (
+                                         <RoleEdit member={member} onChange={onChange} serverId={serverId} endEditRole = {endEditRole}/>
+                                                    ):(
+                                            <div className="member-role-div">
+                                                <p className="member-role">{member.role}</p>
+                                                <p className="role-edit-button" onClick={startEditRole}>+</p>
+                                            </div>
+                                        )}
+                                        </>
+                                        ) : (
+                                            <div className="member-role-div">
+                                                <p className="member-role">{member.role}</p>
+                                            </div>
+                                        )}
+                                </>
+                            )}
+                            {/* <p className="card-text">{member.role}</p> */}
                         </div>
                         <div className="leave-server-div">
                             {permission && isNotOwner && (

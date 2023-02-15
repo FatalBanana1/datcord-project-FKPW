@@ -319,8 +319,8 @@ export default function Channels() {
               <i className="fa-solid fa-gear user-gear" onClick={openUserMenu}></i>
               <div className={userSettingsClass} ref={userSettingsRef}>
                 <div className="dropdown-wrapper">
-                    <NavLink to="/" className="UserLanding-sidebar-channel-user-home">Home</NavLink>
-                    <p className="UserLanding-sidebar-channel-user-logout" onClick={goLogout}>Logout</p>
+                    <button className="UserLanding-sidebar-channel-user-home" onClick={() => history.push("/")}>Home</button>
+                    <button className="UserLanding-sidebar-channel-user-logout" onClick={goLogout}>Logout</button>
                 </div>
               </div>
             </div>

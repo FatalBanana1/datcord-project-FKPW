@@ -71,12 +71,12 @@ const ServerMembers = () => {
     //     setIsLoaded(false);
     // }
 
-    let admin
+    let isAdmin
     if (isMember && !owner) {
         const membership = membersArray.filter(member => {
             return member.user_id === user.id
         })
-        if (membership[0].role === "admin") admin = true
+        if (membership[0].role === "admin") isAdmin = true
     }
 
     const makeVisible = (e) => {
@@ -121,7 +121,7 @@ const ServerMembers = () => {
                                 className="owner nicknames"
                                 buttonText={owners[0].nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={owners[0]} isOwner={owner} isAdmin={admin} serverId={serverId} channelId={channelId} onChange={handleOnChange} />}
+                                modalComponent={<MemberPage member={owners[0]} isOwner={owner} isAdmin={isAdmin} serverId={serverId} channelId={channelId} onChange={handleOnChange} />}
                             />
                             <img
 								src={crown}
@@ -143,7 +143,7 @@ const ServerMembers = () => {
                                 className="admin nicknames"
                                 buttonText={admin.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={admin} isOwner={owner} isAdmin={admin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
+                                modalComponent={<MemberPage member={admin} isOwner={owner} isAdmin={isAdmin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
                                 />
                             </div>
                         )}
@@ -161,7 +161,7 @@ const ServerMembers = () => {
                                 className="member nicknames"
                                 buttonText={member.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={member} isOwner={owner} isAdmin={admin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
+                                modalComponent={<MemberPage member={member} isOwner={owner} isAdmin={isAdmin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
                                 />
                             </div>
                         )}
@@ -179,7 +179,7 @@ const ServerMembers = () => {
                                 className="admin nicknames"
                                 buttonText={pending.nickname}
                                 onButtonClick={closeMenu}
-                                modalComponent={<MemberPage member={pending} isOwner={owner} isAdmin={admin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
+                                modalComponent={<MemberPage member={pending} isOwner={owner} isAdmin={isAdmin} serverId={serverId} channelId={channelId} onChange={handleOnChange}/>}
                                 />
                             </div>
                         )}

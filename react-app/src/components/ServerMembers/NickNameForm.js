@@ -21,8 +21,13 @@ const NickNameEdit = ({member, onChange, serverId, endEditNickName}) => {
         endEditNickName()
     }
 
+    const cacnelChange = (e) => {
+        e.preventDefault()
+        endEditNickName()
+    }
+
     return (
-        <>
+        <div className="edit-nickname-div">
         <form onSubmit={changeNickname} className="edit-nickname-form">
 				<input
 					value={nickName}
@@ -30,8 +35,11 @@ const NickNameEdit = ({member, onChange, serverId, endEditNickName}) => {
 					className="nickname-input"
 				/>
 		</form>
-        <button type="submit" className="save-nickName-button" onClick={changeNickname}>Save</button>
-        </>
+        <div>
+            <button type="submit" className="save-nickName-button" onClick={cacnelChange}>Cancel</button>
+            <button type="submit" className="save-nickName-button" onClick={changeNickname}>Save</button>
+        </div>
+        </div>
     )
 }
 
