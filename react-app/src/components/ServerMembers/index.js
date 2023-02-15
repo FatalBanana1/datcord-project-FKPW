@@ -110,7 +110,7 @@ const ServerMembers = () => {
 					{owners.length > 0 && (
 						<div className="owner-div section">
 							<h2 className="ServerMembers-headers">Owner</h2>
-							<div className="individual-person">
+							<div id="owner" className="individual-person">
 								<img
 									className="member-img"
 									src={owners[0].display_pic}
@@ -146,6 +146,7 @@ const ServerMembers = () => {
 							{admins.map((admin) => (
 								<div
 									key={admin.id}
+                                    id="admin"
 									className="individual-person"
 								>
 									<img
@@ -179,6 +180,7 @@ const ServerMembers = () => {
 							{members.map((member) => (
 								<div
 									key={member.id}
+                                    id="member"
 									className="individual-person"
 									onClick={makeVisible}
 								>
@@ -213,6 +215,7 @@ const ServerMembers = () => {
 							{pending.map((pending) => (
 								<div
 									key={pending.id}
+                                    id="pending"
 									className="individual-person pending"
 								>
 									<img
