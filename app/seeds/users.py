@@ -21,7 +21,7 @@ def seed_users():
         email="fahd@gmail.com",
         username="Dhaf",
         password="password",
-        display_pic="https://i.kym-cdn.com/photos/images/newsfeed/001/141/172/ed1.jpg",
+        display_pic="https://wallpapers.com/images/hd/sebastian-vettel-red-textured-background-bnjujnpd4jy06cij.jpg",
         theme="dark",
     )
     Peter = User(
