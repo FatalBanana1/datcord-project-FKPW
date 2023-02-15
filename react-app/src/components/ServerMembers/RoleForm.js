@@ -39,8 +39,8 @@ const RoleEdit = ({member, onChange, serverId, endEditRole}) => {
                     <option value="pending">pending</option>
                 </select>
 		</form>
-        <div>
-            <button type="submit" className="save-role-button" onClick={cancelChange}>Cancel</button>
+        <div className="role-button">
+            <button type="submit" className="cancel-role-button" onClick={cancelChange}>Cancel</button>
             <button type="submit" className="save-role-button" onClick={changeRole}>Save</button>
         </div>
         </div>
