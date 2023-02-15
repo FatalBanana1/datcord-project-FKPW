@@ -42,6 +42,12 @@ export default function Login() {
                 <div className="Form-logo">
                     <img src={logo} className="Form-logo" alt="Datcord Logo" />
                 </div>
+                <div
+                    className="Form-close clickable"
+                    onClick={() => history.push("/")}
+                >
+                    <i className="fa-solid fa-xmark"></i>
+                </div>
                 <div className="Form-header">
                     <h2 className="Form-title">Welcome back!</h2>
                     <p className="LoginForm-subtext">We're so excited to see you again!</p>

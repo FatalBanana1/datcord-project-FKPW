@@ -123,6 +123,19 @@
 .Form-link {
     margin-left: 4px;
     color: #00aff4;
+    cursor: pointer;
+}
+
+.Form-close {
+    justify-self: right;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.Form-link:hover {
+    text-decoration: underline;
 }
 
 @media (min-width: 468px) {

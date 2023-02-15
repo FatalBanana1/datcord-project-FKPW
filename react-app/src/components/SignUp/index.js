@@ -47,6 +47,12 @@ export default function SignUp() {
                 <div className="Form-logo">
                     <img src={logo} className="Form-logo" alt="Datcord Logo" />
                 </div>
+                <div
+                    className="Form-close clickable"
+                    onClick={() => history.push("/")}
+                >
+                    <i className="fa-solid fa-xmark"></i>
+                </div>
                 <div className="Form-header">
                     <h2 className="Form-title">Create an account</h2>
                 </div>
