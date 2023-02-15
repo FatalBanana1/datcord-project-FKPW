@@ -31,7 +31,7 @@ export default function ServerNav() {
 	useEffect(() => {
 		dispatch(thunkReadUserServers()).then(() => setLoaded(true));
 		return () => dispatch(actionResetServers());
-	}, [user.id, serverId]);
+	}, [user.id]);
 
 	const handleClick = async (serverId) => {
 		dispatch(thunkGetChannels(serverId)).then(setLoaded(true));

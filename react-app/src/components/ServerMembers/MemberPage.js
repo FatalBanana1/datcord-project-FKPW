@@ -51,12 +51,12 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
 
     // console.log("OnChange -------->",onChange)
 
-    const leaveServer = async (e) => {
+    const leaveServer = (e) => {
         e.preventDefault()
 
         permission = true
 
-        let deleteMembership = dispatch(thunkDeleteServerMember(serverId, member.id, permission))
+        dispatch(thunkDeleteServerMember(serverId, member.id, permission))
         .then(() => history.push("/channels/@me"))
         .then(closeModal())
         .catch(async (res) => {
@@ -66,12 +66,12 @@ export default function MemberPage ({member, isOwner, isAdmin, serverId, channel
         onChange(false)
     }
 
-    const submitDelete = async (e) => {
+    const submitDelete = (e) => {
         e.preventDefault()
 
         permission = true
 
-        let deleteMembership = dispatch(thunkDeleteServerMember(serverId, member.id, permission))
+        dispatch(thunkDeleteServerMember(serverId, member.id, permission))
         .then(closeModal())
         .catch(async (res) => {
             const data = await res.json()

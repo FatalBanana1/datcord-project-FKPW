@@ -35,7 +35,7 @@ const ServerMembers = () => {
 		return () => {
 			dispatch(actionResetServerMember());
 		};
-	}, [serverId, isLoaded]);
+	}, [serverId]);
 
 	// Check to see if User owns the server
 	let owner = null;
