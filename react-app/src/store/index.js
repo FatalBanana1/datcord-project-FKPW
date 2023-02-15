@@ -3,8 +3,9 @@ import thunk from "redux-thunk";
 import session from "./session";
 import serverReducer from "./servers";
 import cmReducer from "./channelMessages";
-import channels from "./channels"
-import serverMembers from "./serverMembers"
+import channels from "./channels";
+import serverMembers from "./serverMembers";
+import allServerReducer from "./allServers";
 
 const rootReducer = combineReducers({
 	session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
 	channels,
 	serverMembers,
 	channelMessages: cmReducer,
+	allServers: allServerReducer,
 });
 
 let enhancer;

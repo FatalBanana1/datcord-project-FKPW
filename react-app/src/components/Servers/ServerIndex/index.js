@@ -5,16 +5,17 @@ import "./ServerIndex.css";
 import explorerBanner from "../../../assets/explorer-banner.svg";
 import { NavLink } from "react-router-dom";
 import ServerNav from "../../MainPage/ServerNav";
+import { thunkReadAllAllServers } from "../../../store/allServers";
 
 const ServerIndex = () => {
   let dispatch = useDispatch();
   let [isLoaded, setIsLoaded] = useState(false);
 
-  let allServers = useSelector((state) => state.servers);
+  let allServers = useSelector((state) => state.allServers);
   const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(thunkReadAllServers()).then(() => setIsLoaded(true));
+    dispatch(thunkReadAllAllServers()).then(() => setIsLoaded(true));
   }, [dispatch, isLoaded]);
 
   if (isLoaded) {
