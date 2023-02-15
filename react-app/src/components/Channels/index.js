@@ -110,7 +110,6 @@ export default function Channels() {
 
 
   useEffect(() => {
-    dispatch(thunkGetServerMembers(+serverId));
     dispatch(thunkGetChannels(+serverId)).then(() => setIsLoaded(true));
   }, [dispatch, serverId, channelId]);
 

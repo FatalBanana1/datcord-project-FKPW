@@ -12,7 +12,7 @@ const NickNameEdit = ({member, onChange, serverId, endEditNickName}) => {
     const changeNickname = (e) => {
         e.preventDefault()
         member.nickname = nickName
-        let editMembership = dispatch(thunkEditServerMember(serverId, member.id, member))
+        dispatch(thunkEditServerMember(serverId, member.id, member))
         .catch(async (res) => {
             const data = await res.json()
             if (data && data.errors) setErrors(data.errors);

@@ -166,7 +166,8 @@ export default function ServerMembers(state = initialState, action) {
 		}
 		case EDIT_SERVERMEMBER: {
 			let newState = { ...state }
-			newState = { ...state.serverMembers, [action.serverMember.id]: action.serverMember}
+			// newState = { ...state.serverMembers, [action.serverMember.id]: action.serverMember}
+			newState[action.serverMember.id] = action.serverMember;
             return newState
 		}
 		case DELETE_SERVERMEMBER: {

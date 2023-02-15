@@ -61,8 +61,9 @@ const CMIndex = () => {
 			setChatInput("");
 			setMessages([]);
 			setEdit(999999990);
+			// dispatch(actionResetChannelMessages());
 		};
-	}, [channelId, serverId, user.id, allMembers]);
+	}, [channelId, serverId, user.id]);
 
 	useEffect(() => {
 		// open socket connection
