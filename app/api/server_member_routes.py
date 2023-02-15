@@ -94,4 +94,4 @@ def delete_server_member(server_id, member_id):
     else:
         db.session.delete(membership)
         db.session.commit()
-        return {"server_member": membership.to_dict()}
+        return {"server_member": member_id}
