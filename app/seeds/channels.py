@@ -7,11 +7,11 @@ def seed_channels():
     )
 
     channel2 = Channel(
-        name="lionel messi", server_id=2, category="GOATS", is_private=False
+        name="Lionel Messi", server_id=2, category="GOATS", is_private=False
     )
 
     channel3 = Channel(
-        name="christiano ronaldo", server_id=2, category="GOATS", is_private=False
+        name="Khabib", server_id=2, category="GOATS", is_private=False
     )
 
     channel4 = Channel(name="banana's", server_id=3, category="Main", is_private=False)
