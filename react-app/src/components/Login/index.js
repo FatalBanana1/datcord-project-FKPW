@@ -22,8 +22,7 @@ export default function Login() {
         setErrors({});
         return dispatch(login(email, password))
             .then((res) => {
-                    // console.log("res", res)
-                    if (res.errors) {
+                    if (res.email || res.password) {
                         // console.log("res.errors", res);
                         return setErrors(res);
                     } else {
@@ -82,9 +81,9 @@ export default function Login() {
                                 required
                             />
                             <div className="Form-error-container">
-                              { errors && (
+                              { errors && Object.keys(errors).length ? (
                                   <p className="Form-error">Email or password is incorrect</p>
-                              )}
+                              ) : ""}
                             </div>
                         </div>
                         <div className="Form-button-container">
