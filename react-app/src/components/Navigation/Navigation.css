@@ -39,6 +39,10 @@
 
 .Navigation-links-main {
   display: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .Navigation-logo-container {
@@ -78,7 +82,6 @@
   margin-right: 16px;
 }
 
-
 .MenuModal-logo-container {
   display: flex;
   flex-direction: row;
@@ -96,11 +99,11 @@
 }
 
 .MenuModal-main-container {
-    padding: 24px 48px 120px 18px;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    font-size: 14px;
+  padding: 24px 48px 120px 18px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
 .MenuModal-divider {
@@ -155,9 +158,14 @@ nav > ul {
   padding: 0;
 }
 
+.Navigation-demo {
+  margin-left: 40px;
+  width: 100px;
+}
 
 .Navigation-demo-hover {
   display: none;
+  /* font-size: 12px; */
 }
 
 .Navigation-demo:hover {
