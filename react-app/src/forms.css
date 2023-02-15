@@ -4,10 +4,11 @@
   width: 100%;
   height: 100vh;
   font-family: Roboto;
-  padding: 0px 16px;
+  /* padding: 0px 16px; */
 }
 
-.Form-container {
+.Form-container,
+.Form-container-signup {
   width: 100%;
   height: 100%;
   background-color: #36393f;
@@ -16,6 +17,7 @@
   flex-direction: column;
   align-items: center;
   padding: 20px 0px;
+  box-sizing: border-box;
 }
 
 .Form-logo {
@@ -129,43 +131,155 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 100%;
 }
+
 
 .close-icon {
   cursor: pointer;
   margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-icon:hover {
+    text-decoration: underline;
+    /* padding-bottom: 1px; */
+    /* border-bottom: 1px solid #ffffff;
+    box-sizing: border-box; */
 }
 
 .Form-link:hover {
   text-decoration: underline;
 }
 
-@media (min-width: 468px) {
-  .Form-logo {
-    display: none;
-  }
-
-  .Form-wrapper {
-    /* background-color: #5865f2; */
-    background-image: url("https://keenlychung.com/images/datcord_bg.svg");
-    background-size: cover;
-    /* background-repeat: no-repeat; */
-    padding: 0;
+.Form-login {
     width: 100%;
-    height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-  }
+}
 
-  .Form-container {
-    padding: 32px;
+.Form-demos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    max-width: 480px;
-    height: max-content;
-    border-radius: 5px;
-    box-sizing: border-box;
-    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
-  }
+}
+
+.Form-demos-header {
+    font-size: 20px;
+    margin-bottom: 14px;
+    margin-top: 24px;
+    font-weight: 500;
+}
+
+.Forms-demos-card {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background-color: #2e3136;
+    border-radius: 3px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+}
+
+.Form-demos-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.Form-demos-image > img {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.Form-demos-username {
+    width: calc(100% - 170px);
+    text-align: left;
+    font-size: 16px;
+}
+
+.Form-demos-button {
+    width: 96px;
+    background-color: #4f545c;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.Form-demos-button:hover {
+    background-color: #696d72;
+}
+@media (min-width: 468px) {
+    .Form-logo {
+        display: none;
+    }
+
+    .Form-wrapper {
+        /* background-color: #5865f2; */
+        background-image: url("https://keenlychung.com/images/datcord_bg.svg");
+        background-size: cover;
+        /* background-repeat: no-repeat; */
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .Form-container,
+    .Form-container-signup {
+        padding: 32px;
+        width: 100%;
+        max-width: 480px;
+        height: max-content;
+        border-radius: 5px;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Form-demos {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .Form-demos-header {
+        margin-top: 26px;
+    }
+}
+
+@media (min-width: 832px) {
+    .Form-container {
+        padding: 32px;
+        width: 100%;
+        max-width: 784px;
+        height: max-content;
+        border-radius: 5px;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: row;
+    }
+
+    .Form-demos-header {
+        margin-bottom: 26px;
+        margin-top: 0;
+    }
 }
