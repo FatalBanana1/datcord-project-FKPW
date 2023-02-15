@@ -27,7 +27,7 @@
     font-size: 15px;
     background-color: #3f434a;
     width: 70px;
-    
+    /* margin-top: 8px; */
 }
 
 .cancel-role-button {
@@ -38,5 +38,5 @@
     font-family: "Roboto";
     font-size: 15px;
     width: 70px;
-    margin-bottom: 8px;
+    margin-top: 8px;
 }
