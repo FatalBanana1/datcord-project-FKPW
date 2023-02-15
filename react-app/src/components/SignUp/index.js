@@ -46,86 +46,88 @@ export default function SignUp() {
 
   return (
     <div className="Form-wrapper">
-      <div className="Form-container">
-        <div className="Form-logo">
-          <img src={logo} className="Form-logo" alt="Datcord Logo" />
-        </div>
-        <div className="Form-close-container" onClick={() => history.push("/")}>
-          <div className="close-icon">
-            <i className="fa-solid fa-xmark"></i>
-          </div>
-          <div></div>
-        </div>
-        <div className="Form-header">
-          <h2 className="Form-title">Create an account</h2>
-        </div>
-        <div className="Form-form-container">
-          <form className="Form-form" onSubmit={handleSubmit}>
-            <div className="Form-form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <div className="Form-error-container">
-                {errors.email && <p className="Form-error">{errors.email}</p>}
-              </div>
+      <div className="Form-container-signup">
+        <div className="Form-login">
+            <div className="Form-close-container" onClick={() => history.push("/")}>
+            <div className="close-icon">
+                <i className="fa-solid fa-angle-left"></i> <p className="go-back">&nbsp; Go back</p>
             </div>
-            <div className="Form-form-group">
-              <label htmlFor="username">Username</label>
-              <input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <div className="Form-error-container">
-                {errors.username && (
-                  <p className="Form-error">{errors.username}</p>
-                )}
-              </div>
+            <div></div>
             </div>
-            <div className="Form-form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <div className="Form-error-container">
-                {/* <p className="Form-error">Any error text will go here</p> */}
-              </div>
+            <div className="Form-logo">
+            <img src={logo} className="Form-logo" alt="Datcord Logo" />
             </div>
-            <div className="Form-form-group">
-              <label htmlFor="confirm-password">Confirm Password</label>
-              <input
-                id="confirm-password"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-              <div className="Form-error-container">
-                {errors.password && (
-                  <p className="Form-error">{errors.password}</p>
-                )}
-              </div>
+            <div className="Form-header">
+            <h2 className="Form-title">Create an account</h2>
             </div>
-            <div className="Form-button-container">
-              <button className="Form-submit-button">Continue</button>
+            <div className="Form-form-container">
+            <form className="Form-form" onSubmit={handleSubmit}>
+                <div className="Form-form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                    id="email"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <div className="Form-error-container">
+                    {errors.email && <p className="Form-error">{errors.email}</p>}
+                </div>
+                </div>
+                <div className="Form-form-group">
+                <label htmlFor="username">Username</label>
+                <input
+                    id="username"
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
+                <div className="Form-error-container">
+                    {errors.username && (
+                    <p className="Form-error">{errors.username}</p>
+                    )}
+                </div>
+                </div>
+                <div className="Form-form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <div className="Form-error-container">
+                    {/* <p className="Form-error">Any error text will go here</p> */}
+                </div>
+                </div>
+                <div className="Form-form-group">
+                <label htmlFor="confirm-password">Confirm Password</label>
+                <input
+                    id="confirm-password"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                />
+                <div className="Form-error-container">
+                    {errors.password && (
+                    <p className="Form-error">{errors.password}</p>
+                    )}
+                </div>
+                </div>
+                <div className="Form-button-container">
+                <button className="Form-submit-button">Continue</button>
+                </div>
+                <div className="Form-small-text">
+                <span className="Form-link" onClick={goLogin}>
+                    Already have an account?
+                </span>
+                </div>
+            </form>
             </div>
-            <div className="Form-small-text">
-              <span className="Form-link" onClick={goLogin}>
-                Already have an account?
-              </span>
-            </div>
-          </form>
         </div>
       </div>
     </div>
