@@ -5,79 +5,92 @@ import { useModal } from "../../../context/Modal.js";
 import { thunkCreateChannel, thunkGetChannels } from "../../../store/channels";
 import "./CreateChannelForm.css";
 
-export default function CreateChannelForm({ categoryName, prevName, serverId })  {
-    const dispatch = useDispatch();
-    const [ category, setCategory ] = useState(categoryName ? categoryName : "");
-    const [ channelName, setChannelName ] = useState(prevName ? prevName : "");
-    const [ isPrivate, setIsPrivate ] = useState(false);
-    const [ errors, setErrors ] = useState([]);
-    const { closeModal } = useModal();
-    const history = useHistory();
+export default function CreateChannelForm({
+	categoryName,
+	prevName,
+	serverId,
+	role,
+}) {
+	const dispatch = useDispatch();
+	const [category, setCategory] = useState(categoryName ? categoryName : "");
+	const [channelName, setChannelName] = useState(prevName ? prevName : "");
+	const [isPrivate, setIsPrivate] = useState(false);
+	const [errors, setErrors] = useState([]);
+	const { closeModal } = useModal();
+	const history = useHistory();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setErrors([]);
-        // console.log("***** HIT HANDLE SUBMIT ****")
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setErrors([]);
+		// console.log("***** HIT HANDLE SUBMIT ****")
 
-        const newChannel = {
-            category,
-            "name": channelName,
-            "is_private": isPrivate
-        }
+		const newChannel = {
+			category,
+			name: channelName,
+			is_private: isPrivate,
+			role: role,
+		};
 
-        return dispatch(thunkCreateChannel(+serverId, newChannel))
-            .then(res => {
-                // console.log("res>>>>>", res)
-                history.push(`/channels/${serverId}/${res.id}`)
-            })
-            .then(closeModal)
-            .catch(async (res) => {
-                const data = await res;
-                if (data && data.errors) setErrors(data.errors);
-            });
-    }
+		return dispatch(thunkCreateChannel(+serverId, newChannel))
+			.then((res) => {
+				// console.log("res>>>>>", res)
+				history.push(`/channels/${serverId}/${res.id}`);
+			})
+			.then(closeModal)
+			.catch(async (res) => {
+				const data = await res;
+				if (data && data.errors) setErrors(data.errors);
+			});
+	};
 
-    if (categoryName) {
-        return (
-            <div className="CreateChannelForm-container">
-                <div className="CreateChannelForm-header">
-                    <div className="CreateChannelForm-title-text">
-                        <h1 className="CreateChannelForm-title">
-                            Create Channel
-                        </h1>
-                        <p className="CreateChannelForm-subtext">
-                            in {category}
-                        </p>
-                    </div>
-                    <div className="CreateChannelForm-close" onClick={closeModal}>
-                        <i className="fa-solid fa-xmark"></i>
-                    </div>
-                </div>
-                <form className="CreateChannelForm-form" onSubmit={handleSubmit}>
-                    <div className="CreateChannelForm-group-channel-name">
-                        <label
-                            htmlFor="channel-name"
-                            className="CreateChannelForm-label"
-                        >Channel Name
-                        </label>
-                        <div className="CreateChannelForm-group-channel-input">
-                            <p className="hashtag">#</p>
-                            <input
-                                id="channel-name"
-                                type="text"
-                                value={channelName}
-                                onChange={(e) => setChannelName(e.target.value)}
-                                required
-                                placeholder="new-channel"
-                            />
-                        </div>
-                    </div>
-                    <div className="CreateChannelForm-group-private">
-                        <span>
-                            <i className="fa-solid fa-lock"></i>
-                            Private channel
-                        </span>
-                        {/* <label
+	if (categoryName) {
+		return (
+			<div className="CreateChannelForm-container">
+				<div className="CreateChannelForm-header">
+					<div className="CreateChannelForm-title-text">
+						<h1 className="CreateChannelForm-title">
+							Create Channel
+						</h1>
+						<p className="CreateChannelForm-subtext">
+							in {category}
+						</p>
+					</div>
+					<div
+						className="CreateChannelForm-close"
+						onClick={closeModal}
+					>
+						<i className="fa-solid fa-xmark"></i>
+					</div>
+				</div>
+				<form
+					className="CreateChannelForm-form"
+					onSubmit={handleSubmit}
+				>
+					<div className="CreateChannelForm-group-channel-name">
+						<label
+							htmlFor="channel-name"
+							className="CreateChannelForm-label"
+						>
+							Channel Name
+						</label>
+						<div className="CreateChannelForm-group-channel-input">
+							<p className="hashtag">#</p>
+							<input
+								id="channel-name"
+								type="text"
+								value={channelName}
+								onChange={(e) => setChannelName(e.target.value)}
+								required
+								placeholder="new-channel"
+							/>
+						</div>
+					</div>
+					<div className="CreateChannelForm-group-private">
+						<span>
+							<i className="fa-solid fa-lock"></i>
+							Private channel
+						</span>
+						{/* <label
                             // htmlFor="is-private"
                             className="CreateChannelForm-private-switch"
                         >
@@ -90,85 +103,92 @@ export default function CreateChannelForm({ categoryName, prevName, serverId }) 
                             <span className="CreateChannelForm-private-slider-round">
                             </span>
                         </label> */}
-                        <div className="CreateChannelForm-checkbox-container">
-                            <input
-                                className="CreateChannelForm-checkbox"
-                                type="checkbox"
-                                checked={isPrivate}
-                                onChange={() => setIsPrivate(!isPrivate)}
-                            />
-                            <div className="CreateChannelForm-switch">
-                                <div></div>
-                            </div>
-                        </div>
-                    </div>
-                        <p className="CreateChannelForm-private-text">
-                            Only selected members and roles will be able to view this channel.
-                        </p>
-                    <div className="CreateChannelForm-buttons-container">
-                        <button className="CreateChannelForm-button-cancel" onClick={closeModal}>
-                            Cancel
-                        </button>
-                        <button type="submit" className="CreateChannelForm-button-create">
-                            Create Channel
-                        </button>
-                    </div>
-                </form>
-            </div>
-        )
-    }
+						<div className="CreateChannelForm-checkbox-container">
+							<input
+								className="CreateChannelForm-checkbox"
+								type="checkbox"
+								checked={isPrivate}
+								onChange={() => setIsPrivate(!isPrivate)}
+							/>
+							<div className="CreateChannelForm-switch">
+								<div></div>
+							</div>
+						</div>
+					</div>
+					<p className="CreateChannelForm-private-text">
+						Only selected members and roles will be able to view
+						this channel.
+					</p>
+					<div className="CreateChannelForm-buttons-container">
+						<button
+							className="CreateChannelForm-button-cancel"
+							onClick={closeModal}
+						>
+							Cancel
+						</button>
+						<button
+							type="submit"
+							className="CreateChannelForm-button-create"
+						>
+							Create Channel
+						</button>
+					</div>
+				</form>
+			</div>
+		);
+	}
 
-    return (
-        <div className="CreateChannelForm-container">
-            <div className="CreateChannelForm-header">
-                <h1 className="CreateChannelForm-title">
-                    Create Channel
-                </h1>
-                <p className="CreateChannelForm-subtext"></p>
-            </div>
-            <form className="CreateChannelForm-form">
-                <div className="CreateChannelForm-group-channel-name">
-                    <label htmlFor="channel-name">Channel Name</label>
-                    <input
-                        id="channel-name"
-                        type="text"
-                        value={channelName}
-                        onChange={(e) => setChannelName(e.target.value)}
-                        required
-                        placeholder="new-channel"
-                    />
-                </div>
-                <div className="CreateChannelForm-group-category">
-                    <label htmlFor="is-private"
-                        className="CreateChannelForm-private-switch"
-                    >
-                        Category Name
-                        <input
-                            id="is-private"
-                            type="checkbox"
-                            checked={category}
-                            onChange={(e) => setCategory(e.target.value)}
-                            required
-                        />
-                        <span className="CreateChannelForm-private-slider"></span>
-                    </label>
-                </div>
-                <div className="CreateChannelForm-group-private">
-                    <label htmlFor="is-private"
-                        className="CreateChannelForm-private-switch"
-                    >
-                        Private channel
-                        <input
-                            id="is-private"
-                            type="checkbox"
-                            value={isPrivate}
-                            onChange={() => setIsPrivate(!isPrivate)}
-                            required
-                        />
-                        <span className="CreateChannelForm-private-slider"></span>
-                    </label>
-                </div>
-            </form>
-        </div>
-    )
+	return (
+		<div className="CreateChannelForm-container">
+			<div className="CreateChannelForm-header">
+				<h1 className="CreateChannelForm-title">Create Channel</h1>
+				<p className="CreateChannelForm-subtext"></p>
+			</div>
+			<form className="CreateChannelForm-form">
+				<div className="CreateChannelForm-group-channel-name">
+					<label htmlFor="channel-name">Channel Name</label>
+					<input
+						id="channel-name"
+						type="text"
+						value={channelName}
+						onChange={(e) => setChannelName(e.target.value)}
+						required
+						placeholder="new-channel"
+					/>
+				</div>
+				<div className="CreateChannelForm-group-category">
+					<label
+						htmlFor="is-private"
+						className="CreateChannelForm-private-switch"
+					>
+						Category Name
+						<input
+							id="is-private"
+							type="checkbox"
+							checked={category}
+							onChange={(e) => setCategory(e.target.value)}
+							required
+						/>
+						<span className="CreateChannelForm-private-slider"></span>
+					</label>
+				</div>
+				<div className="CreateChannelForm-group-private">
+					<label
+						htmlFor="is-private"
+						className="CreateChannelForm-private-switch"
+					>
+						Private channel
+						<input
+							id="is-private"
+							type="checkbox"
+							value={isPrivate}
+							onChange={() => setIsPrivate(!isPrivate)}
+							required
+						/>
+						<span className="CreateChannelForm-private-slider"></span>
+					</label>
+				</div>
+			</form>
+		</div>
+	);
 }

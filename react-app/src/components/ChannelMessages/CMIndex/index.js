@@ -121,9 +121,14 @@ const CMIndex = () => {
 		// console.log(`find message in delete`, msg);
 
 		// return
-		return dispatch(thunkDeleteChannelMessage(payload)).then(() =>
-			setIsLoaded(true)
-		);
+		return dispatch(thunkDeleteChannelMessage(payload))
+			.then(() => {
+				setChatInput("");
+				setMessages([]);
+				dispatch(thunkReadAllChannelMessages(serverId, channelId));
+			})
+			.then(() => setEdit(999999990))
+			.then(() => setIsLoaded(true));
 	};
 
 	// -------------

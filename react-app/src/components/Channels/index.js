@@ -125,12 +125,12 @@ export default function Channels() {
 		serverMemberRole = serverMember.role;
 	}
 
-    console.log("channels, servermemberrole", channels, serverMemberRole);
-    if (serverMemberRole === "pending") {
-        channels = channels.filter(channel => channel.is_private === false);
-    }
+	console.log("channels, servermemberrole", channels, serverMemberRole);
+	if (serverMemberRole === "pending") {
+		channels = channels.filter((channel) => channel.is_private === false);
+	}
 
-    console.log("LINE 133 - CHANNELS >>>>>>>>>>>>>>>>", channels)
+	// console.log("LINE 133 - CHANNELS >>>>>>>>>>>>>>>>", channels);
 
 	if (serverMemberRole === "admin" || serverMemberRole === "owner") {
 		// console.log("hit this");
@@ -187,6 +187,7 @@ export default function Channels() {
 							<CreateChannelForm
 								categoryName={category}
 								serverId={serverId}
+								role={serverMemberRole}
 							/>
 						}
 					/>
