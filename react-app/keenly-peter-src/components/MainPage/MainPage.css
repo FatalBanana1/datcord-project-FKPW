@@ -1,7 +1,0 @@
-.MainPage-container {
-    width: calc(100% - 20px);
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    /* box-sizing: border-box; */
-}

@@ -11,24 +11,24 @@ server_member_routes = Blueprint("server_members", __name__)
 @login_required
 def all_server_members(server_id):
     server = Server.query.get(server_id)
-    if not server:
+    if (not server):
         return {"errors": ["Server does not exist"]}, 404
 
     members = [member.to_dict() for member in server.server_members]
-    if len(members) > 0:
-        return {"server_members": members}
+    if (len(members) > 0):
+        return {'server_members': members}
     else:
-        return {"server_members": "No current members in this server"}
+        return {"server_members": 'No current members in this server'}
 
 
 # ADD SERVER MEMBER
-@server_routes.route("/<int:server_id>/members", methods=["POST"])
+@server_routes.route("/<int:server_id>/members", methods=['POST'])
 @login_required
 def add_server_member(server_id):
     userId = int(current_user.id)
     server = Server.query.get(server_id)
-    role = request.json["role"]
-    if not server:
+    role = request.json['role']
+    if (not server):
         return {"errors": ["Server does not exist"]}, 404
 
     memberIds = [member.user_id for member in server.server_members]
@@ -38,28 +38,28 @@ def add_server_member(server_id):
         new_user = ServerMember(
             user_id=userId,
             server_id=server_id,
-            nickname=current_user.username,
-            role=role,
-        )
+            nickname = current_user.username,
+            role = role
+            )
         db.session.add(new_user)
         db.session.commit()
-        return {"server_member": new_user.to_dict()}
+        return {'server_member': new_user.to_dict()}
 
 
 # EDIT SERVER MEMBER
-@server_routes.route("/<int:server_id>/membership/<int:member_id>", methods=["PUT"])
+@server_routes.route("/<int:server_id>/membership/<int:member_id>", methods=['PUT'])
 @login_required
 def edit_server_member(server_id, member_id):
-    # print("PRIIIIIIIINT", request.json)
-    nickname = request.json["serverMember"]["nickname"]
-    role = request.json["serverMember"]["role"]
+    print("PRIIIIIIIINT", request.json)
+    nickname = request.json["serverMember"]['nickname']
+    role = request.json["serverMember"]['role']
     userId = int(current_user.id)
     server = Server.query.get(server_id)
     membership = ServerMember.query.get(member_id)
-    if membership == None:
+    if (membership == None):
         return {"errors": ["Membership does not exist"]}, 404
 
-    if not server:
+    if ( not server):
         return {"errors": ["Server does not exist"]}, 404
 
     if membership not in server.server_members:
@@ -76,10 +76,10 @@ def edit_server_member(server_id, member_id):
 
 
 # DELETE MEMBER
-@server_routes.route("/<int:server_id>/membership/<int:member_id>", methods=["DELETE"])
+@server_routes.route("/<int:server_id>/membership/<int:member_id>", methods=['DELETE'])
 @login_required
 def delete_server_member(server_id, member_id):
-    # userId = int(current_user.id)
+    userId = int(current_user.id)
     server = Server.query.get(server_id)
     membership = ServerMember.query.get(member_id)
     permission = request.json['permission']
@@ -94,4 +94,4 @@ def delete_server_member(server_id, member_id):
     else:
         db.session.delete(membership)
         db.session.commit()
-        return {"server_member": member_id}
+        return {"server_member": membership.to_dict()}
