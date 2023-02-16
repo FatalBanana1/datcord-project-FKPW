@@ -152,26 +152,6 @@ const CMIndex = () => {
 		}
 	};
 
-	// const handleEditChange2 = (e) => {
-	// 	setEdit(e);
-	// 	if (e === 0) {
-	// 		console.log(`front CM index`, e, edit);
-	// 		setChatInput("");
-	// 		setMessages([]);
-	// 		if (reload === 1) setReload(2);
-	// 		// setLoadBottom(false);
-	// 		// setEdit(999999990);
-	// 		// dispatch(thunkReadAllChannelMessages(serverId, channelId)).then(
-	// 		// 	() => {
-	// 		// 		setIsLoaded(true);
-	// 		// 		setLoadBottom(false);
-	// 		// 		setMessages([]);
-	// 		// 	}
-	// 		// );
-	// 		// .then(() => setEdit(999999990));
-	// 	}
-	// };
-
 	// -------------
 
 	// mbr modal
@@ -629,6 +609,7 @@ const CMIndex = () => {
 										x
 									</button>
 								)}
+
 								{imageButton ? (
 									// image upload
 									<form
@@ -641,15 +622,10 @@ const CMIndex = () => {
 											onChange={updateImage}
 										/>
 										<button type="submit">Submit</button>
-										{/* <div
-											className="cm-text-input image-input"
-											onClick={sendImage}
-										>
-											Upload Image
-										</div> */}
 										{imageLoading && <div>Loading...</div>}
 									</form>
-								) : (
+								) : null}
+								{!imageButton ? (
 									// text input
 									<form
 										onSubmit={sendChat}
@@ -661,7 +637,7 @@ const CMIndex = () => {
 											className="cm-text-input"
 										/>
 									</form>
-								)}
+								) : null}
 							</div>
 						) : null}
 					</div>
