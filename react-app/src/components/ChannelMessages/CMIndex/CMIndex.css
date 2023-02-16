@@ -1,5 +1,5 @@
 .cms-container {
-	width: calc(100% - 230px);
+	width: calc(100% - 240px);
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -246,4 +246,8 @@
 
 .absolute-op {
 	position: relative;
+}
+
+.loading-cms {
+	width: calc(100% - 240px);
 }

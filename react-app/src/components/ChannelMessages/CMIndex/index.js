@@ -677,7 +677,7 @@ const CMIndex = () => {
 			)
 		);
 	} else {
-		return <div># Loading...</div>;
+		return <div className="loading-cms"># Loading...</div>;
 	}
 };
 
