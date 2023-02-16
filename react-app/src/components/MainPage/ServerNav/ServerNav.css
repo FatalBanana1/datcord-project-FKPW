@@ -81,7 +81,17 @@
   background-color: white;
   display: block;
   width: 10px;
-  height: 25px;
+  height: 35px;
+  left: -6px;
+  content: " ";
+}
+
+.ServerNav-server-icons:hover.active::before {
+  position: absolute;
+  background-color: white;
+  display: block;
+  width: 10px;
+  height: 35px;
   left: -6px;
   content: " ";
 }
