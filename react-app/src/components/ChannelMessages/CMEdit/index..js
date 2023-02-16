@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { thunkEditChannelMessage } from "../../../store/channelMessages";
+import { useParams } from "react-router-dom";
+import {
+	thunkEditChannelMessage,
+	thunkReadAllChannelMessages,
+} from "../../../store/channelMessages";
 
-const CMEdit = ({ message, onChange }) => {
+const CMEdit = ({ message, onChange, channelId, serverId }) => {
 	let dispatch = useDispatch();
+	let params = useParams()
+	if(!serverId) serverId = params.serverId
+	if(!channelId) channelId = params.channelId
+	// console.log(`front cm EDIT`, channelId, serverId)
 
 	let [mval, setMval] = useState(message.message);
 	const onCancel = () => {
@@ -15,8 +23,11 @@ const CMEdit = ({ message, onChange }) => {
 		e.preventDefault();
 		if (message.message !== mval) {
 			let payload = { id: message.id, message: mval };
-			dispatch(thunkEditChannelMessage(payload));
-			onChange(0);
+			dispatch(thunkEditChannelMessage(payload))
+				.then(() =>
+					dispatch(thunkReadAllChannelMessages(serverId, channelId))
+				)
+				.then(onChange(0));
 		} else {
 			onChange(999999999);
 		}
