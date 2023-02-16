@@ -46,8 +46,7 @@
 	border-bottom: 1px;
 	color: #ffffff;
 	box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
-    0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
-
+		0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
 }
 
 .submit-cm {
@@ -168,8 +167,8 @@
 
 .pic-icon,
 .img-link {
-	height: 40px;
 	width: 40px;
+	height: 40px;
 	object-fit: cover;
 	border-radius: 9999px;
 }

@@ -54,9 +54,23 @@ def seed_servers():
 
     server8 = Server(
         name="Papertalk",
-        owner_id=5,
+        owner_id=9,
         icon_url="https://s.hdnux.com/photos/01/26/52/72/22720133/4/1200x0.jpg",
         description="Talk paper to me.",
+    )
+
+    server9 = Server(
+        name="Welcome",
+        owner_id=17,
+        icon_url="https://media.discordapp.net/attachments/1072663876040146944/1075539563784704060/favicon.png",
+        description="Official Datcord Welcome Server",
+    )
+
+    server10 = Server(
+        name="The Last Blockbuster",
+        owner_id=5,
+        icon_url="https://cdn.mos.cms.futurecdn.net/35af26903d70fb40e85933743adfb24d.jpg",
+        description="Please support us!",
     )
 
     db.session.add_all(
@@ -69,6 +83,8 @@ def seed_servers():
             server6,
             server7,
             server1,
+            server9,
+            server10,
         ]
     )
 
