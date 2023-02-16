@@ -18,65 +18,62 @@ import EmptyServerCreateChannelForm from "./components/MainPage/EmptyServerCreat
 import ServerIndex from "./components/Servers/ServerIndex";
 
 function App() {
-	const dispatch = useDispatch();
-	const [isLoaded, setIsLoaded] = useState(false);
-	useEffect(() => {
-		dispatch(authenticate()).then(() => setIsLoaded(true));
-	}, [dispatch, authenticate]);
+  const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    dispatch(authenticate()).then(() => setIsLoaded(true));
+  }, [dispatch, authenticate]);
 
-	if (!isLoaded) return null;
+  if (!isLoaded) return null;
 
-	return (
-		isLoaded && (
-			<div className="App-container">
-				<Switch>
-					<Route exact path="/">
-						<Navigation />
-						<SplashBody />
-					</Route>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<Route exact path="/register">
-						<SignUp />
-					</Route>
-					<Route path="/channels/:channelId/new">
-						<EmptyServerCreateChannelForm />
-					</Route>
-					<ProtectedRoute path="/channels/@me" exact={true}>
-						<div className="MainPage-container">
-							<ServerNav />
-							<MainContent page="profile" />
-						</div>
-					</ProtectedRoute>
-					<ProtectedRoute
-						path="/channels/:serverId/:channelId"
-						exact={true}
-					>
-						<div className="MainPage-container">
-							<ServerNav />
-							<MainContent page="channel" isLoaded={isLoaded} />
-						</div>
-					</ProtectedRoute>
-					<ProtectedRoute
-						path="/channels/:serverId/:channelId/edit"
-						exact={true}
-					>
-						<div className="MainPage-container">
-							<EditDeleteChannelModal />
-						</div>
-					</ProtectedRoute>
+  return (
+    isLoaded && (
+      <div className="App-container">
+        <Switch>
+          <Route exact path="/">
+            <Navigation />
+            <SplashBody />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/register">
+            <SignUp />
+          </Route>
+          <Route path="/channels/:channelId/new">
+            <EmptyServerCreateChannelForm />
+          </Route>
+          <ProtectedRoute path="/channels/@me" exact={true}>
+            <div className="MainPage-container">
+              <ServerNav />
+              <MainContent page="profile" />
+            </div>
+          </ProtectedRoute>
+          <ProtectedRoute path="/channels/:serverId/:channelId" exact={true}>
+            <div className="MainPage-container">
+              <ServerNav />
+              <MainContent page="channel" isLoaded={isLoaded} />
+            </div>
+          </ProtectedRoute>
+          <ProtectedRoute
+            path="/channels/:serverId/:channelId/edit"
+            exact={true}
+          >
+            <div className="MainPage-container">
+              <EditDeleteChannelModal />
+            </div>
+          </ProtectedRoute>
 
-					<ProtectedRoute path="/gotMilk" exact={true}>
-						<div className="MainPage-container">
-							<ServerIndex />
-						</div>
-					</ProtectedRoute>
-					<Route>404: Error. Got Milk?</Route>
-				</Switch>
-			</div>
-		)
-	);
+          <ProtectedRoute path="/gotMilk" exact={true}>
+            <div className="MainPage-container">
+              <ServerIndex />
+            </div>
+          </ProtectedRoute>
+          <Route>404: Error. Got Milk?</Route>
+        </Switch>
+      </div>
+    )
+  );
 }
 
 export default App;

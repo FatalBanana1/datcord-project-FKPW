@@ -15,6 +15,8 @@ import DeleteServer from "../Servers/DeleteServer";
 import { thunkGetServerMembers } from "../../store/serverMembers";
 import { logout } from "../../store/session";
 import { thunkReadUserServers } from "../../store/servers";
+import { thunkSetTheme } from "../../store/users";
+import UserLanding from "../UserLanding";
 
 export default function Channels() {
   const { serverId, channelId } = useParams();
@@ -22,6 +24,7 @@ export default function Channels() {
   //   console.log("Channels - serverId, channelId:", serverId, channelId);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const theme = user.theme;
   // console.log("USER:", user);
   // const server = useSelector(state => state.servers)[+serverId]
   const allServers = useSelector((state) => state.servers);
@@ -58,6 +61,10 @@ export default function Channels() {
     setShowThemeMenu(true);
   };
 
+  const handleChangeTheme = (theme) => {
+    return dispatch(thunkSetTheme(user.id, theme));
+  };
+
   useEffect(() => {
     if (!showUserMenu) return;
 
@@ -89,6 +96,8 @@ export default function Channels() {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showThemeMenu]);
+
+  useEffect(() => {});
 
   let serverMemberRole;
 
@@ -202,7 +211,10 @@ export default function Channels() {
 
   const categoriesMap = Object.keys(categories).map((category, idx) => (
     <div className="UserLanding-Sidebar-category-container" key={idx}>
-      <div className="UserLanding-sidebar-channel-category-container">
+      <div
+        className="UserLanding-sidebar-channel-category-container"
+        id={theme}
+      >
         <i className="fa-solid fa-angle-down"></i>
         <span className="UserLanding-sidebar-channel-category-name">
           {truncateNames(category)}
@@ -231,9 +243,13 @@ export default function Channels() {
             <NavLink
               to={`/channels/${serverId}/${channel.id}`}
               className="UserLanding-sidebar-channel-name"
+              id={theme}
               key={channel.id}
             >
-              <div className="UserLanding-sidebar-channel-name-label">
+              <div
+                className="UserLanding-sidebar-channel-name-label"
+                id={theme}
+              >
                 <span className="hash">#</span>{" "}
                 {channel.name && truncateNames(channel.name)}
               </div>
@@ -300,101 +316,114 @@ export default function Channels() {
 
   if (isLoaded && server2) {
     return (
-      <div className="UserLanding-sidebar">
-        <div className="UserLanding-sidebar-header">
-          <p>{server2.name}</p>
-          {isOwner && (
-            <>
-              <div className="server-dropdown-button" onClick={openServerMenu}>
-                <i className="fa-solid fa-angle-down big-angle-down"></i>
-              </div>
-              <div className={menuClassName} ref={menuRef}>
-                <div className="dropdown-wrapper">
-                  <div className="server-dropdown-edit">
-                    {/* <span>Edit Server</span>
+      theme && (
+        <div className="UserLanding-sidebar" id={theme}>
+          <div className="UserLanding-sidebar-header" id={theme}>
+            <p>{server2.name}</p>
+            {isOwner && (
+              <>
+                <div
+                  className="server-dropdown-button"
+                  onClick={openServerMenu}
+                >
+                  <i className="fa-solid fa-angle-down big-angle-down"></i>
+                </div>
+                <div className={menuClassName} ref={menuRef}>
+                  <div className="dropdown-wrapper">
+                    <div className="server-dropdown-edit">
+                      {/* <span>Edit Server</span>
                     <span>
                       <i className="fa-solid fa-pencil"></i>
                     </span> */}
-                    <OpenModalButton
-                      buttonText="Edit-Server"
-                      modalComponent={<EditServer server={server2} />}
-                    />
-                  </div>
-                  <div className="server-dropdown-delete">
-                    {/* <span>Delete Server</span>
+                      <OpenModalButton
+                        buttonText="Edit-Server"
+                        modalComponent={<EditServer server={server2} />}
+                      />
+                    </div>
+                    <div className="server-dropdown-delete">
+                      {/* <span>Delete Server</span>
                     <span>
                       <i className="fa-solid fa-trash"></i>
                     </span> */}
-                    <OpenModalButton
-                      buttonText="Delete-Server"
-                      modalComponent={<DeleteServer server={server2} />}
-                    />
+                      <OpenModalButton
+                        buttonText="Delete-Server"
+                        modalComponent={<DeleteServer server={server2} />}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </>
-          )}
-        </div>
-        <div className="UserLanding-sidebar-channel-content">
-          {channels.length > 0 && categoriesMap.length ? (
-            categoriesMap
-          ) : (
-            <div className="UserLanding-sidebar-channel-category-container"></div>
-          )}
+              </>
+            )}
+          </div>
+          <div className="UserLanding-sidebar-channel-content">
+            {channels.length > 0 && categoriesMap.length ? (
+              categoriesMap
+            ) : (
+              <div
+                className="UserLanding-sidebar-channel-category-container"
+                id={theme}
+              ></div>
+            )}
 
-          <div className="UserLanding-sidebar-channel-user-info">
-            <div className="UserLanding-sidebar-channel-user-container">
-              <div className="UserLanding-sidebar-channel-user-icons">
-                <img
-                  src={user && user.display_pic}
-                  className="UserLanding-sidebar-channel-user-icon"
-                  alt="User profile image"
-                />
-              </div>
-              <div className="UserLanding-sidebar-channel-user-name">
-                {user && user.username}
-              </div>
-            </div>
-            <div className="UserLanding-sidebar-channel-user-actions">
-              {/* <i className="fa-solid fa-microphone"></i>
-							<i className="fa-solid fa-headphones"></i> */}
-              <i className="fa-solid fa-yin-yang" onClick={openThemeMenu}></i>
-              <div className={userThemeClass} ref={userThemeRef}>
-                <div className="dropdown-wrapper">
-                  <button
-                    className="UserLanding-sidebar-channel-user-home"
-                    onClick={() =>
-                      setSelectTheme(selectTheme === "dark" ? "light" : "dark")
-                    }
-                  >
-                    {selectTheme === "dark" ? "light" : "dark"}
-                  </button>
+            <div className="UserLanding-sidebar-channel-user-info" id={theme}>
+              <div className="UserLanding-sidebar-channel-user-container">
+                <div className="UserLanding-sidebar-channel-user-icons">
+                  <img
+                    src={user && user.display_pic}
+                    className="UserLanding-sidebar-channel-user-icon"
+                    alt="User profile image"
+                  />
+                </div>
+                <div
+                  className="UserLanding-sidebar-channel-user-name"
+                  id={theme}
+                >
+                  {user && user.username}
                 </div>
               </div>
-              <i
-                className="fa-solid fa-gear user-gear"
-                onClick={openUserMenu}
-              ></i>
-              <div className={userSettingsClass} ref={userSettingsRef}>
-                <div className="dropdown-wrapper">
-                  <button
-                    className="UserLanding-sidebar-channel-user-home"
-                    onClick={() => history.push("/")}
-                  >
-                    Home
-                  </button>
-                  <button
-                    className="UserLanding-sidebar-channel-user-logout"
-                    onClick={goLogout}
-                  >
-                    Logout
-                  </button>
+              <div className="UserLanding-sidebar-channel-user-actions">
+                {/* <i className="fa-solid fa-microphone"></i>
+							<i className="fa-solid fa-headphones"></i> */}
+                <i className="fa-solid fa-yin-yang" onClick={openThemeMenu}></i>
+                <div className={userThemeClass} ref={userThemeRef}>
+                  <div className="dropdown-wrapper">
+                    <button
+                      className="UserLanding-sidebar-channel-user-home"
+                      onClick={() =>
+                        handleChangeTheme(
+                          user.theme === "dark" ? "light" : "dark"
+                        )
+                      }
+                    >
+                      {user.theme === "dark" ? "light" : "dark"}
+                    </button>
+                  </div>
+                </div>
+                <i
+                  className="fa-solid fa-gear user-gear"
+                  onClick={openUserMenu}
+                ></i>
+                <div className={userSettingsClass} ref={userSettingsRef}>
+                  <div className="dropdown-wrapper">
+                    <button
+                      className="UserLanding-sidebar-channel-user-home"
+                      onClick={() => history.push("/")}
+                    >
+                      Home
+                    </button>
+                    <button
+                      className="UserLanding-sidebar-channel-user-logout"
+                      onClick={goLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )
     );
   } else return <div>Loading...</div>;
 }

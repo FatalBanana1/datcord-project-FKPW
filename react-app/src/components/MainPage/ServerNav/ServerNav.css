@@ -18,7 +18,7 @@
 }
 
 #dark.ServerNav-container {
-  background-color: white;
+  background-color: #e3e5e8;
 }
 
 .ServerNav-divider {
@@ -27,6 +27,10 @@
   border-radius: 1px;
   background-color: #36393f;
   margin-bottom: 8px;
+}
+
+#dark.ServerNav-divider {
+  background-color: #c5cacf;
 }
 
 .ServerNav-icons,
@@ -45,12 +49,16 @@
   flex-shrink: 0;
 }
 
+#dark.ServerNav-icons,
+#dark.ServerNav-profile {
+  background-color: white;
+}
+
 .ServerNav-server-icons {
   /* color: #3ba55d; */
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  background-color: #34363e;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,6 +81,12 @@
   transition: 0.4s;
 }
 
+#dark.ServerNav-icons::before,
+#dark.ServerNav-profile::before,
+#dark.ServerNav-server-icons::before {
+  background-color: black;
+}
+
 .ServerNav-icons:active,
 .ServerNav-profile:active,
 .ServerNav-server-icons:active {
@@ -91,6 +105,12 @@
   content: " ";
 }
 
+#dark.ServerNav-icons.active::before,
+#dark.ServerNav-profile.active::before,
+#dark.ServerNav-server-icons.active::before {
+  background-color: black;
+}
+
 .ServerNav-server-icons:hover.active::before {
   position: absolute;
   background-color: white;
@@ -99,6 +119,10 @@
   height: 35px;
   left: -6px;
   content: " ";
+}
+
+#dark.ServerNav-server-icons:hover.active::before {
+  background-color: black;
 }
 
 .ServerNav-icons:hover,
@@ -120,6 +144,12 @@
   left: -6px;
   content: " ";
   /* border-radius: 5px; */
+}
+
+#dark.ServerNav-icons:hover::before,
+#dark.ServerNav-profile:hover::before,
+#dark.ServerNav-server-icons:hover::before {
+  background-color: black;
 }
 
 .ServerNav-icon {

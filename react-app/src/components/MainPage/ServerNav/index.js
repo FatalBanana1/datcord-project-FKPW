@@ -38,21 +38,21 @@ export default function ServerNav() {
   };
 
   const theme = user.theme;
-  console.log("THEME-------------->", theme);
+  // console.log("THEME-------------->", theme);
 
   // console.log(`FRONT server nav comp=======`, servers[0].channels[0].id);
 
   return (
     theme && (
       <div className="ServerNav-container" id={theme}>
-        <NavLink to="/channels/@me" className="ServerNav-profile">
+        <NavLink to="/channels/@me" className="ServerNav-profile" id={theme}>
           <img
             src={avatar}
             className="ServerNav-profile-cow-icon"
             alt="server-icon"
           />
         </NavLink>
-        <div className="ServerNav-divider"></div>
+        <div className="ServerNav-divider" id={theme}></div>
         {/* // can probably map all the servers icon_url */}
         {servers.length &&
           loaded &&
@@ -62,11 +62,13 @@ export default function ServerNav() {
                 <NavLink
                   to={`/channels/${server.id}/${server.channels[0].id}`}
                   className="ServerNav-server-icons"
+                  id={theme}
                   onClick={() => handleClick(server.id)}
                 >
                   <img
                     src={server.icon_url}
                     className="ServerNav-icon"
+                    id={theme}
                     alt="server-icon"
                   />
                 </NavLink>
@@ -74,26 +76,29 @@ export default function ServerNav() {
                 <NavLink
                   to={`/channels/${server.id}/new`}
                   className="ServerNav-server-icons"
+                  id={theme}
                   onClick={() => handleClick(server.id)}
                 >
                   <img
                     src={server.icon_url}
                     className="ServerNav-icon"
+                    id={theme}
                     alt="server-icon"
                   />
                 </NavLink>
               )}
             </div>
           ))}
-        <div className="ServerNav-divider"></div>
+        <div className="ServerNav-divider" id={theme}></div>
 
         {/* <i className="fa-solid fa-plus"></i> */}
         <OpenModalButton
           buttonText="Create-Server"
+          id={theme}
           modalComponent={<CreateServerForm onChange={loaded} />}
         />
 
-        <NavLink to={`/gotMilk`} className="ServerNav-icons">
+        <NavLink to={`/gotMilk`} className="ServerNav-icons" id={theme}>
           <i className="fa-solid fa-compass fa-lg" />
         </NavLink>
       </div>

@@ -110,12 +110,6 @@
   border-radius: 50%;
 }
 
-.UserLanding-sidebar {
-  width: 240px;
-  height: 100vh;
-  background-color: #303136;
-}
-
 .UserLanding-header {
   width: inherit;
   height: 48px;

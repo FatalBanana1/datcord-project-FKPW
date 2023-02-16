@@ -10,97 +10,98 @@ import { logout } from "../../store/session";
 import { NavLink, useHistory } from "react-router-dom";
 
 export default function UserLandingSideBar({ page, isLoaded }) {
-	const dispatch = useDispatch();
-	const user = useSelector((state) => state.session.user);
-	const userSettingsRef = useRef();
-	const [showMenu, setShowMenu] = useState(false);
-	const [showUserMenu, setShowUserMenu] = useState(false);
-	const history = useHistory();
-	// console.log("user", user)
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
+  const theme = user.theme;
+  console.log("THEME FROM USERLANDING-------------->", theme);
+  const userSettingsRef = useRef();
+  const [showMenu, setShowMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const history = useHistory();
+  // console.log("user", user)
 
-	const openUserMenu = () => {
-		if (showUserMenu) return;
-		setShowUserMenu(true);
-	};
+  const openUserMenu = () => {
+    if (showUserMenu) return;
+    setShowUserMenu(true);
+  };
 
-	useEffect(() => {
-		if (!showUserMenu) return;
+  useEffect(() => {
+    if (!showUserMenu) return;
 
-		const closeMenu = (e) => {
-			if (userSettingsRef.current) {
-				if (!userSettingsRef.current.contains(e.target)) {
-					setShowUserMenu(false);
-				}
-			}
-		};
+    const closeMenu = (e) => {
+      if (userSettingsRef.current) {
+        if (!userSettingsRef.current.contains(e.target)) {
+          setShowUserMenu(false);
+        }
+      }
+    };
 
-		document.addEventListener("click", closeMenu);
+    document.addEventListener("click", closeMenu);
 
-		return () => document.removeEventListener("click", closeMenu);
-	}, [showUserMenu]);
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showUserMenu]);
 
-	const userSettingsClass =
-		"UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
+  const userSettingsClass =
+    "UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
-	const goLogout = (e) => {
-		e.preventDefault();
+  const goLogout = (e) => {
+    e.preventDefault();
 
-		dispatch(logout());
-		history.push("/");
-	};
+    dispatch(logout());
+    history.push("/");
+  };
 
-	if (page === "channel") {
-		return <Channels isLoaded={isLoaded} />;
-	}
-	return (
-		<div className="UserLanding-sidebar">
-			<div className="UserLanding-sidebar-header">
-				{user && user.username}
-			</div>
+  if (page === "channel") {
+    return <Channels isLoaded={isLoaded} />;
+  }
+  return (
+    theme && (
+      <div className="UserLanding-sidebar" id={theme}>
+        <div className="UserLanding-sidebar-header" id={theme}>
+          {user && user.username}
+        </div>
 
-			<div className="UserLanding-sidebar-channel-content">
-				<div className="UserLanding-sidebar-channel-user-info">
-					<div className="UserLanding-sidebar-channel-user-container">
-						<div className="UserLanding-sidebar-channel-user-icons">
-							<img
-								src={user && user.display_pic}
-								className="UserLanding-sidebar-channel-user-icon"
-								alt="User profile image"
-							/>
-						</div>
-						<div className="UserLanding-sidebar-channel-user-name">
-							{user && user.username}
-						</div>
-					</div>
-					<div className="UserLanding-sidebar-channel-user-actions">
-						<i className="fa-solid fa-microphone"></i>
-						<i className="fa-solid fa-headphones"></i>
-						<i
-							className="fa-solid fa-gear user-gear"
-							onClick={openUserMenu}
-						></i>
-						<div
-							className={userSettingsClass}
-							ref={userSettingsRef}
-						>
-							<div className="dropdown-wrapper">
-								<button
-									className="UserLanding-sidebar-channel-user-home"
-									onClick={() => history.push("/")}
-								>
-									Home
-								</button>
-								<button
-									className="UserLanding-sidebar-channel-user-logout"
-									onClick={goLogout}
-								>
-									Logout
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+        <div className="UserLanding-sidebar-channel-content">
+          <div className="UserLanding-sidebar-channel-user-info">
+            <div className="UserLanding-sidebar-channel-user-container">
+              <div className="UserLanding-sidebar-channel-user-icons">
+                <img
+                  src={user && user.display_pic}
+                  className="UserLanding-sidebar-channel-user-icon"
+                  alt="User profile image"
+                />
+              </div>
+              <div className="UserLanding-sidebar-channel-user-name">
+                {user && user.username}
+              </div>
+            </div>
+            <div className="UserLanding-sidebar-channel-user-actions">
+              <i className="fa-solid fa-microphone"></i>
+              <i className="fa-solid fa-headphones"></i>
+              <i
+                className="fa-solid fa-gear user-gear"
+                onClick={openUserMenu}
+              ></i>
+              <div className={userSettingsClass} ref={userSettingsRef}>
+                <div className="dropdown-wrapper">
+                  <button
+                    className="UserLanding-sidebar-channel-user-home"
+                    onClick={() => history.push("/")}
+                  >
+                    Home
+                  </button>
+                  <button
+                    className="UserLanding-sidebar-channel-user-logout"
+                    onClick={goLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  );
 }

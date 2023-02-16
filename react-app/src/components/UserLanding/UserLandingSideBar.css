@@ -12,6 +12,10 @@
   user-select: none;
 }
 
+#dark.UserLanding-sidebar {
+  background-color: #f2f3f5;
+}
+
 .UserLanding-sidebar-header {
   width: inherit;
   height: 48px;
@@ -24,6 +28,10 @@
   color: #ffffff;
   box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
     0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
+}
+
+#dark.UserLanding-sidebar-header {
+  color: black;
 }
 
 .UserLanding-sidebar-channel-content {
@@ -39,6 +47,10 @@
   font-weight: 500;
   display: flex;
   align-items: center;
+}
+
+#dark.UserLanding-sidebar-channel-category-container {
+  color: #5e6772;
 }
 
 .UserLanding-sidebar-channel-category-name {
@@ -105,9 +117,21 @@ a.UserLanding-sidebar-channel-name {
   border-radius: 4px;
 }
 
+#dark.UserLanding-sidebar-channel-name.active {
+  color: #303031;
+}
+
+.UserLanding-sidebar-channel-name.active {
+  background-color: #d1d5da;
+}
+
 .UserLanding-sidebar-channel-name:hover {
   background-color: #3c4045;
   border-radius: 4px;
+}
+
+#dark.UserLanding-sidebar-channel-name:hover {
+  background-color: #d1d5da;
 }
 
 .UserLanding-sidebar-channel-buttons {
@@ -130,6 +154,10 @@ a.UserLanding-sidebar-channel-name {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+#dark.UserLanding-sidebar-channel-user-info {
+  background-color: #ebedef;
 }
 
 .UserLanding-sidebar-channel-user-container {
@@ -164,6 +192,10 @@ a.UserLanding-sidebar-channel-name {
   width: calc(100% - 40px);
   font-size: 12px;
   color: #ffffff;
+}
+
+#dark.UserLanding-sidebar-channel-user-name {
+  color: #060607;
 }
 
 .UserLanding-sidebar-channel-user-actions {
