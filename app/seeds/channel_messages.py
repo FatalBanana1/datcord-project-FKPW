@@ -280,101 +280,116 @@ def seed_channel_messages():
     cm66 = ChannelMessage(
         sender_id=77,
         channel_id=19,
-        message="I'm John Wick, and I'm thrilled to have you here. Whether you're a fan of my movies, a fellow professional killer, or just someone who loves a good action-packed adventure, you'll find a community of like-minded individuals here who share your passion.",
+        message="I'm John Wick, and I'm thrilled to have you here.",
     )
     cm67 = ChannelMessage(
         sender_id=77,
         channel_id=19,
-        message="In this server, we'll be discussing all things related to the world of assassins, from the latest techniques and gadgets to the best places to stash your weapons. You'll have a chance to connect with other members, share your own tips and experiences, and even collaborate on missions if you're feeling up to it.",
+        message="Whether you're a fan of my movies, a fellow professional killer, or just someone who loves a good action-packed adventure, you'll find a community of like-minded individuals here who share your passion.",
     )
     cm68 = ChannelMessage(
         sender_id=77,
         channel_id=19,
-        message="But most importantly, this is a safe and welcoming space where you can be yourself and have fun. We have a zero-tolerance policy for bullying, hate speech, or any other behavior that goes against our community guidelines. So please be respectful to each other and remember that we're all here to have a good time.",
+        message="In this server, we'll be discussing all things related to the world of assassins, from the latest techniques and gadgets to the best places to stash your weapons.",
     )
     cm69 = ChannelMessage(
         sender_id=77,
         channel_id=19,
-        message="Once again, welcome to Datcord! Feel free to browse our server collection via the compass icon in the icon list on the left.",
+        message="You'll have a chance to connect with other members, share your own tips and experiences, and even collaborate on missions if you're feeling up to it.",
     )
     cm70 = ChannelMessage(
+        sender_id=77,
+        channel_id=19,
+        message="But most importantly, this is a safe and welcoming space where you can be yourself and have fun. We have a zero-tolerance policy for bullying, hate speech, or any other behavior that goes against our community guidelines.",
+    )
+    cm71 = ChannelMessage(
+        sender_id=77,
+        channel_id=19,
+        message="So please be respectful to each other and remember that we're all here to have a good time.",
+    )
+    cm72 = ChannelMessage(
+        sender_id=77,
+        channel_id=19,
+        message="Once again, welcome to Datcord! Feel free to browse our server collection via the compass icon in the icon list on the left.",
+    )
+    cm73 = ChannelMessage(
         sender_id=77,
         channel_id=19,
         message="If you have an information related to the whereabouts of my dog, please report to the DogSighting channel in this server!",
     )
 
-    cm71 = ChannelMessage(
+    cm74 = ChannelMessage(
         sender_id=77,
         channel_id=20,
         message="Breaking these rules will result in an instant Kick or Ban from the server.  By verifying your email with OpenBot you agree to following the rules and the consequences for not adhering to the rules.",
     )
 
-    cm72 = ChannelMessage(
+    cm75 = ChannelMessage(
         sender_id=77,
         channel_id=20,
         message="No discrimination. This includes using racist terms/slang, sexist remarks, or making others feel bad for their race, gender, sexuality or disability. See more in our community guidelines below.",
     )
-    cm73 = ChannelMessage(
+    cm76 = ChannelMessage(
         sender_id=77,
         channel_id=20,
         message="No promo spam or fundraising links. No advertising yours or others youtube, twitch, discord or social media. Doing so will lead to a kick for the first offense and a ban on the second offense.",
     )
-    cm74 = ChannelMessage(
+    cm77 = ChannelMessage(
         sender_id=77,
         channel_id=20,
         message="No illegal discussions or activity. This includes any discussion about illegal drugs or activities, as well as hacking and/or piracy.",
     )
-    cm75 = ChannelMessage(
+    cm78 = ChannelMessage(
         sender_id=77,
         channel_id=20,
-        message="Be kind to each other. Be a positive person that gives people the benefit of the doubt. See the best in people. Embrace diversity: of backgrounds, of perspective, of those things we can choose, and those we can’t. Accept your own failures, and those of your peers.",
+        message="Be kind to each other. Be a positive person that gives people the benefit of the doubt. See the best in people. Embrace diversity: of backgrounds, of perspective, of those things we can choose, and those we can’t.",
     )
-    cm76 = ChannelMessage(
+    cm79 = ChannelMessage(
         sender_id=77,
         channel_id=20,
         message="No spamming. Avoid sending the same message multiple times within the span of a few minutes.",
     )
-    cm77 = ChannelMessage(
+    cm80 = ChannelMessage(
         sender_id=77,
         channel_id=23,
         message="Can't go wrong with your own basement!",
     )
-    cm78 = ChannelMessage(
+    cm81 = ChannelMessage(
         sender_id=65,
         channel_id=23,
         message="Real men use a cave.",
     )
-    cm79 = ChannelMessage(
+    cm82 = ChannelMessage(
         sender_id=66,
         channel_id=23,
         message="*real men use their fists",
     )
-    cm80 = ChannelMessage(
+    cm83 = ChannelMessage(
         sender_id=87,
         channel_id=23,
         message="Always carry it on me! You never know when danger strikes.",
     )
-    cm81 = ChannelMessage(
+    cm84 = ChannelMessage(
         sender_id=88,
         channel_id=23,
         message="doesnt the force tell you when danger strikes???",
     )
-    cm82 = ChannelMessage(
+    cm85 = ChannelMessage(
         sender_id=88,
         channel_id=23,
         message="ive lost more light sabers than I can count",
     )
-    cm83 = ChannelMessage(
+    cm86 = ChannelMessage(
         sender_id=87,
         channel_id=23,
         message="a real jedi needs to take better care of his weapon",
     )
-    cm84 = ChannelMessage(
+    cm87 = ChannelMessage(
         sender_id=88,
         channel_id=23,
         message="then why did I find yours in the pit in Utapau...",
     )
-    cm85 = ChannelMessage(
+    cm88 = ChannelMessage(
         sender_id=65,
         channel_id=21,
         message="Checked my cave, wasnt there...sorry!",
@@ -463,6 +478,15 @@ def seed_channel_messages():
             cm83,
             cm84,
             cm85,
+        ]
+    )
+    db.session.commit()
+
+    db.session.add_all(
+        [
+            cm86,
+            cm87,
+            cm88,
         ]
     )
     db.session.commit()
