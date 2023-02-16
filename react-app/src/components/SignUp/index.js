@@ -26,19 +26,22 @@ export default function SignUp() {
 
         if (username.length < 4 || username.length > 50) {
             submitErrors.usernameLength = "Please enter a username between 4 and 50 characters";
-            console.log("username errors >>>>>", submitErrors);
         }
 
         if (password.length < 6 || password.length > 50) {
             submitErrors.passwordLength = "Please enter a password between 6 and 50 characters"
         }
 
-        if (Object.keys(submitErrors) > 0) {
-            // console.log("submitErrors >>>>>>>>>>>>", submitErrors)
+        if (password !== confirmPassword) {
+            submitErrors.password = "Confirm Password field must be the same as the Password field"
+        }
+
+        if (Object.keys(submitErrors).length > 0) {
             return setErrors(submitErrors);
         }
 
-		if (password === confirmPassword) {
+		if (Object.keys(submitErrors).length === 0) {
+
 			return dispatch(signUp(username, email, password, display_pic))
 				.then((res) => {
 					if (res.errors) {
@@ -51,10 +54,6 @@ export default function SignUp() {
 					const data = await res.json();
 					if (data && data.errors) setErrors(data.errors);
 				});
-		} else {
-            // console.log("dfaldfkajdfkajkdlfjad")
-            submitErrors.password = "Confirm Password field must be the same as the Password field"
-			return setErrors(submitErrors);
 		}
 	};
 

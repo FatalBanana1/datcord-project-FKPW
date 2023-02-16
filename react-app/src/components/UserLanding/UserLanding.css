@@ -3,7 +3,14 @@
   height: 100%;
   display: flex;
   flex-direction: row;
+}
+
+#dark.UserLanding-container {
   background-color: #36393f;
+}
+
+#light.UserLanding-container {
+  background-color: #ffffff;
 }
 
 .reverse {
