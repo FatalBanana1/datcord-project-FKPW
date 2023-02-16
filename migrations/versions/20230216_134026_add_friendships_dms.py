@@ -7,6 +7,11 @@ Create Date: 2023-02-16 13:40:26.253480
 """
 from alembic import op
 import sqlalchemy as sa
+import os
+
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 
 # revision identifiers, used by Alembic.
@@ -27,6 +32,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users_table.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE friendships_table SET SCHEMA {SCHEMA};")
+
     op.create_table('direct_messages_table',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('sender_id', sa.Integer(), nullable=False),
@@ -38,6 +46,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['sender_id'], ['users_table.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE direct_messages_table SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
