@@ -44,11 +44,13 @@ def seed_server_members():
     m20 = ServerMember(user_id=7, server_id=1, nickname="Dwigt", role="admin")
     m21 = ServerMember(user_id=8, server_id=1, nickname="thefireguy", role="member")
     m22 = ServerMember(user_id=9, server_id=1, nickname="AgentScarn", role="owner")
-    m23 = ServerMember(user_id=10, server_id=2, nickname="Obi Wan", role="admin")
-    m24 = ServerMember(user_id=11, server_id=2, nickname="Anakin", role="member")
+    m23 = ServerMember(user_id=10, server_id=2, nickname="WanAndOnly", role="admin")
+    m24 = ServerMember(user_id=11, server_id=2, nickname="ChosenOne", role="member")
     m25 = ServerMember(user_id=5, server_id=2, nickname="Chanyeol", role="member")
     m26 = ServerMember(user_id=4, server_id=2, nickname="Panda", role="member")
-    m27 = ServerMember(user_id=12, server_id=2, nickname="Burnt Anakin", role="member")
+    m27 = ServerMember(
+        user_id=12, server_id=2, nickname="BurntChosenOne", role="member"
+    )
     m28 = ServerMember(user_id=3, server_id=3, nickname="Dhaaf", role="admin")
     m29 = ServerMember(user_id=3, server_id=4, nickname="Dhaaf", role="admin")
     m30 = ServerMember(user_id=3, server_id=5, nickname="Dhaaf", role="admin")
@@ -78,6 +80,7 @@ def seed_server_members():
     m54 = ServerMember(user_id=15, server_id=6, nickname="supadupa", role="member")
     m55 = ServerMember(user_id=15, server_id=7, nickname="supadupa", role="member")
     m56 = ServerMember(user_id=15, server_id=8, nickname="supadupa", role="member")
+
     m57 = ServerMember(user_id=16, server_id=1, nickname="genius", role="member")
     m58 = ServerMember(user_id=16, server_id=2, nickname="genius", role="member")
     m59 = ServerMember(user_id=16, server_id=3, nickname="genius", role="member")
@@ -86,6 +89,34 @@ def seed_server_members():
     m62 = ServerMember(user_id=16, server_id=6, nickname="genius", role="member")
     m63 = ServerMember(user_id=16, server_id=7, nickname="genius", role="member")
     m64 = ServerMember(user_id=16, server_id=8, nickname="genius", role="member")
+    m65 = ServerMember(user_id=16, server_id=9, nickname="genius", role="member")
+    m66 = ServerMember(user_id=15, server_id=9, nickname="supadupa", role="member")
+    m67 = ServerMember(user_id=14, server_id=9, nickname="choco", role="pending")
+    m68 = ServerMember(user_id=13, server_id=9, nickname="badkarma", role="pending")
+
+    m69 = ServerMember(user_id=17, server_id=1, nickname="johnwick", role="admin")
+    m70 = ServerMember(user_id=17, server_id=2, nickname="johnwick", role="admin")
+    m71 = ServerMember(user_id=17, server_id=3, nickname="johnwick", role="admin")
+    m72 = ServerMember(user_id=17, server_id=4, nickname="johnwick", role="admin")
+    m73 = ServerMember(user_id=17, server_id=5, nickname="johnwick", role="admin")
+    m74 = ServerMember(user_id=17, server_id=6, nickname="johnwick", role="admin")
+    m75 = ServerMember(user_id=17, server_id=7, nickname="johnwick", role="admin")
+    m76 = ServerMember(user_id=17, server_id=8, nickname="johnwick", role="admin")
+    m77 = ServerMember(user_id=17, server_id=9, nickname="johnwick", role="owner")
+
+    m78 = ServerMember(user_id=1, server_id=9, nickname="Sir Demo", role="member")
+    m79 = ServerMember(user_id=2, server_id=9, nickname="naners", role="admin")
+    m80 = ServerMember(user_id=12, server_id=9, nickname="toasty", role="admin")
+    m81 = ServerMember(user_id=3, server_id=9, nickname="Dhaaaf", role="member")
+    m82 = ServerMember(user_id=4, server_id=9, nickname="pandas", role="admin")
+    m83 = ServerMember(user_id=5, server_id=9, nickname="Chanyeol", role="member")
+    m84 = ServerMember(user_id=6, server_id=9, nickname="jimjam", role="member")
+    m85 = ServerMember(user_id=7, server_id=9, nickname="dwight", role="member")
+    m86 = ServerMember(user_id=8, server_id=9, nickname="thefireguy", role="member")
+    m87 = ServerMember(user_id=9, server_id=9, nickname="agentscarn", role="member")
+    m88 = ServerMember(user_id=10, server_id=9, nickname="WanAndOnly", role="member")
+    m89 = ServerMember(user_id=11, server_id=9, nickname="ChosenOne", role="member")
+    m90 = ServerMember(user_id=17, server_id=10, nickname="johnwick", role="owner")
 
     db.session.add_all(
         [
@@ -153,6 +184,33 @@ def seed_server_members():
             m62,
             m63,
             m64,
+            m64,
+            m65,
+            m66,
+            m67,
+            m68,
+            m69,
+            m70,
+            m71,
+            m72,
+            m73,
+            m74,
+            m75,
+            m76,
+            m77,
+            m78,
+            m79,
+            m81,
+            m82,
+            m83,
+            m84,
+            m85,
+            m86,
+            m87,
+            m88,
+            m89,
+            m80,
+            m90,
         ]
     )
     db.session.commit()

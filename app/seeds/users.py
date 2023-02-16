@@ -116,6 +116,14 @@ def seed_users():
         theme="dark",
     )
 
+    main = User(
+        email="discord@discord.com",
+        username="Discord",
+        password="password123",
+        display_pic="https://avatarfiles.alphacoders.com/203/203174.jpg",
+        theme="dark",
+    )
+
     db.session.add_all(
         [
             demo,
@@ -134,6 +142,7 @@ def seed_users():
             pending2,
             m1,
             m2,
+            main
         ]
     )
     db.session.commit()

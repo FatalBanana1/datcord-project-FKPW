@@ -6,43 +6,43 @@ import { signUp } from "../../store/session";
 import { useHistory } from "react-router-dom";
 
 export default function SignUp() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [display_pic, setDisplayPic] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [display_pic, setDisplayPic] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+	const [errors, setErrors] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrors({});
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setErrors({});
 
-    if (password === confirmPassword) {
-      return dispatch(signUp(username, email, password, display_pic))
-        .then((res) => {
-          if (res.errors) {
-            return setErrors(res.errors);
-          } else {
-            history.push("/channels/@me");
-          }
-        })
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
-    } else {
-      setErrors({
-        password:
-          "Confirm Password field must be the same as the Password field",
-      });
-    }
-  };
+		if (password === confirmPassword) {
+			return dispatch(signUp(username, email, password, display_pic))
+				.then((res) => {
+					if (res.errors) {
+						return setErrors(res.errors);
+					} else {
+						history.push("/channels/9/19");
+					}
+				})
+				.catch(async (res) => {
+					const data = await res.json();
+					if (data && data.errors) setErrors(data.errors);
+				});
+		} else {
+			setErrors({
+				password:
+					"Confirm Password field must be the same as the Password field",
+			});
+		}
+	};
 
-  const goLogin = () => {
-    history.push("/login");
-  };
+	const goLogin = () => {
+		history.push("/login");
+	};
 
   return (
     <div className="Form-wrapper">

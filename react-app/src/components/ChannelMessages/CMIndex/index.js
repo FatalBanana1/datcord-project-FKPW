@@ -458,8 +458,6 @@ const CMIndex = () => {
 				</div>
 			)
 		);
-	} else if (isLoaded && !channel) {
-		return <div>No Channels Found!</div>;
 	} else {
 		return <div># Loading...</div>;
 	}

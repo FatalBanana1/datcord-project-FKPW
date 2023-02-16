@@ -65,6 +65,36 @@ def seed_channels():
         category="Main",
         is_private=False,
     )
+    c19 = Channel(
+        name="Welcome",
+        server_id=9,
+        category="Main",
+        is_private=False,
+    )
+    c20 = Channel(
+        name="Community-Guidelines",
+        server_id=9,
+        category="Main",
+        is_private=False,
+    )
+    c21 = Channel(
+        name="DogSighting",
+        server_id=9,
+        category="wick",
+        is_private=False,
+    )
+    c22 = Channel(
+        name="Welcome",
+        server_id=10,
+        category="Main",
+        is_private=False,
+    )
+    c23 = Channel(
+        name="your-weapon-stash",
+        server_id=9,
+        category="wick",
+        is_private=False,
+    )
 
     db.session.add_all(
         [
@@ -86,6 +116,11 @@ def seed_channels():
             c16,
             c17,
             c18,
+            c19,
+            c20,
+            c21,
+            c22,
+            c23,
         ]
     )
     db.session.commit()
