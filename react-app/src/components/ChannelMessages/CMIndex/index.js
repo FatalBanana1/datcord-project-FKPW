@@ -464,6 +464,7 @@ const CMIndex = () => {
 							{messages.map((message, i) => (
 								<div key={`s_${i}`} className="row justify">
 									{i - 1 >= 0 &&
+									message &&
 									messages[i - 1] &&
 									message.sender_id &&
 									message.sender_id ===
