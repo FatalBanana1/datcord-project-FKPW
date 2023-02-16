@@ -13,21 +13,35 @@
   width: 240px;
   height: 100vh;
   box-sizing: border-box;
-  background-color: #36393f;
   display: flex;
   flex-direction: column;
   user-select: none;
+}
+
+#dark.ServerMember-sidebar {
+  background-color: #36393f;
+}
+
+#light.ServerMember-sidebar {
+  background-color: #ffffff;
 }
 
 .ServerMember-content {
   margin-top: 1px;
   display: flex;
   flex-direction: column;
-  background-color: #303136;
   height: calc(100% - 48px);
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+#dark.ServerMember-content {
+  background-color: #303136;
+}
+
+#light.ServerMember-content {
+  background-color: #eeeff1;
 }
 
 .join-server-div {

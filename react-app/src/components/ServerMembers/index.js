@@ -27,6 +27,9 @@ const ServerMembers = () => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [visible, setVisible] = useState("hidden");
 
+	let theme = user.theme;
+	theme = "light";
+
 	// console.log("membersArray ------->", membersArray)
 
 	useEffect(() => {
@@ -94,9 +97,9 @@ const ServerMembers = () => {
 	};
 
 	return (
-		user &&
+		user && theme &&
 		membersArray.length > 0 && (
-			<div className="ServerMember-sidebar">
+			<div id={theme} className="ServerMember-sidebar">
 				{!isMember && (
 					<></>
 					// <div className="join-server-div">
@@ -107,7 +110,7 @@ const ServerMembers = () => {
 				{/* <div className="server-members-div"> */}
 				{/* <div className="UserLanding-sidebar-header"></div> */}
 				<div className="server-members-header"></div>
-				<div className="ServerMember-content">
+				<div className="ServerMember-content" id={theme}>
 					<h1 className="total-members">{`Total Members - ${membersArray.length}`}</h1>
 					{owners.length > 0 && (
 						<div className="owner-div section">
