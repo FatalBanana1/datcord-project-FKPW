@@ -17,6 +17,12 @@ const actionReadAllChannelMessages = (channelMessages) => ({
 	channelMessages,
 });
 
+// CREATE
+const actionCreateCMImage = (channelMessages) => ({
+	type: CREATE_CHANNEL_MESSAGE,
+	channelMessages,
+});
+
 //edit
 const actionEditChannelMessage = (channelMessages) => ({
 	type: UPDATE_CHANNEL_MESSAGE,
@@ -59,6 +65,28 @@ export const thunkReadAllChannelMessages =
 			return ["An error occurred. Please try again."];
 		}
 	};
+
+// CREATE
+export const thunkCreateCMImage = (payload) => async (dispatch) => {
+	const response = await fetch(`/api/cms`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(payload),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(actionCreateCMImage(data));
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
 
 // EDIT: Edit channel messages
 // Route: /api/channel/:serverId/:channelId/cms
@@ -131,10 +159,7 @@ const cmReducer = (state = defaultState(), action) => {
 
 		case CREATE_CHANNEL_MESSAGE:
 			newState = { ...state };
-			// newState[action.userId] = {
-			// 	...state[action.userId],
-			// 	[action.server.id]: action.server,
-			// };
+			newState[action.channelMessages.id] = action.channelMessages;
 			return newState;
 
 		case DELETE_CHANNEL_MESSAGE:

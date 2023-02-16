@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from app.models import ChannelMessage, db
 from .channel_routes import channel_routes
 from datetime import datetime
+from app.aws_s3_upload import upload_file_to_s3, allowed_file, get_unique_filename
 
 
 #  url_prefix="/api/cms
@@ -44,21 +45,36 @@ def update_cms(id):
         return data.to_dict()
 
 
+@channel_message_routes.route("/images/<int:id>", methods=["POST"])
+# @login_required
+def create_message_image(id):
+    res = request.files
+    # images
+    if "image" not in res:
+        return {"errors": "image required"}, 400
+    image = res["image"]
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if dict doesn't have url key = err when uploading > send back err msg
+        return upload, 400
+    url = upload["url"]
+    data = ChannelMessage(
+        sender_id=current_user.id,
+        message=url,
+        channel_id=id,
+    )
+    db.session.add(data)
+    db.session.commit()
+    return data.to_dict()
+
+
 # get messages by user id
 # @channel_message_routes.route("/<int:id>")
 # @login_required
 # def server(id):
 #     data = ChannelMessage.query.get(id)
-#     return data.to_dict()
-
-
-# @channel_message_routes.route("/", methods=["POST"])
-# def create_message():
-#     res = request.get_json()
-#     data = ChannelMessage(
-#         sender_id=current_user.id, message=res["message"], channel_id=res["channelId"]
-#     )
-#     db.session.add(data)
-#     db.session.commit()
-#     print("BACKEND----->>>> post for CM====", data)
 #     return data.to_dict()

@@ -18,16 +18,22 @@ let socket;
 
 const CMIndex = () => {
 	const dispatch = useDispatch();
-
+	//states
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [reload, setReload] = useState(0);
 	const [loadBottom, setLoadBottom] = useState(false);
 	const [edit, setEdit] = useState(999999990);
-
-	// use state for controlled form input
+	// controlled form input
 	const [chatInput, setChatInput] = useState("");
 	const [messages, setMessages] = useState([]);
-	const user = useSelector((state) => state.session.user);
+	// img upload
+	const [imageButton, setImageButton] = useState(false);
+	const [image, setImage] = useState(null);
+	const [newImage, setNewImage] = useState(false);
+	const [imageLoading, setImageLoading] = useState(false);
 
+	//selectors
+	const user = useSelector((state) => state.session.user);
 	const allMembers = useSelector((state) => state.serverMembers);
 	const allcms = useSelector((state) => state.channelMessages);
 	let cms = Object.values(allcms);
@@ -48,7 +54,7 @@ const CMIndex = () => {
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [loadBottom, messages, cms]);
+	}, [loadBottom, messages, cms, newImage]);
 
 	useEffect(() => {
 		scrollToBottom();
@@ -62,7 +68,7 @@ const CMIndex = () => {
 			setMessages([]);
 			setEdit(999999990);
 		};
-	}, [channelId, serverId, user.id]);
+	}, [channelId, user.id, image, serverId, reload]);
 
 	useEffect(() => {
 		// open socket connection
@@ -71,10 +77,6 @@ const CMIndex = () => {
 		// socket.emit("join", { channelId: channelId, username: user.username });
 
 		socket.on("channel_message", (channel_message) => {
-			// console.log(
-			// 	`front comp messages checking******************`,
-			// 	channel_message
-			// );
 			setMessages((messages) => [...messages, channel_message]);
 		});
 
@@ -143,14 +145,10 @@ const CMIndex = () => {
 	const handleEditChange = (e) => {
 		setEdit(e);
 		if (e === 0) {
+			// console.log(`front CM index`, e, edit);
 			setChatInput("");
 			setMessages([]);
-			dispatch(thunkReadAllChannelMessages(serverId, channelId))
-				.then(() => {
-					setIsLoaded(true);
-					setLoadBottom(true);
-				})
-				.then(() => setEdit(999999990));
+			setLoadBottom(true);
 		}
 	};
 
@@ -237,6 +235,60 @@ const CMIndex = () => {
 			});
 			setChatInput("");
 		};
+
+		// -----------
+		// upload images
+		const imageLinks = {
+			".pdf": 1,
+			".png": 1,
+			".jpg": 1,
+			jpeg: 1,
+			".gif": 1,
+			".svg": 1,
+		};
+		const sendImage = async (e) => {
+			e.preventDefault();
+			//img upload
+			const formData = new FormData();
+			formData.append("image", image);
+			setImageLoading(true);
+			const res = await fetch(`/api/cms/images/${channelId}`, {
+				method: "POST",
+				body: formData,
+			});
+			if (res.ok) {
+				await res.json();
+				setImage("");
+				dispatch(thunkReadAllChannelMessages(serverId, channelId))
+					.then(() => {
+						setIsLoaded(true);
+						setLoadBottom(true);
+						setImageButton(false);
+						setImageLoading(false);
+					})
+					.then(() => setEdit(999999990));
+			} else {
+				setImageLoading(false);
+				console.log("Error uploading image to AWS!", res);
+			}
+			setChatInput("");
+			setNewImage(false);
+		};
+		const updateImage = (e) => {
+			const file = e.target.files[0];
+			setImage(file);
+		};
+
+		const imageClickHandler = (message) => {
+			return (
+				<div>
+					<img src={message.message}></img>
+				</div>
+			);
+		};
+
+		// --------------------
+		// date
 		let date = new Date();
 		let role;
 		const currMbr = user.server_members.find(
@@ -258,66 +310,92 @@ const CMIndex = () => {
 					<div className="cms-ct">
 						<div className="cm-overflow">
 							{cms.length
-								? cms.map((message) => (
+								? cms.map((message, i) => (
 										<div
 											className="row justify"
 											key={message.id}
 										>
-											<div
-												to="#"
-												className="img-link"
-												data-id={message.id}
-												// onClick={memberClickHandler}
-											>
-												<img
-													src={message.display_pic}
-													alt="crown"
-													className="pic-icon"
+											{i - 1 >= 0 &&
+											cms[i - 1] &&
+											message.sender_id &&
+											message.sender_id ===
+												cms[i - 1].sender_id ? (
+												<div className="cm-spacer"></div>
+											) : (
+												<div
+													// to="#"
+													className="img-link"
 													data-id={message.id}
-												/>
-											</div>
+													// onClick={memberClickHandler}
+												>
+													<img
+														src={
+															message.display_pic
+														}
+														alt="crown"
+														className="pic-icon"
+														data-id={message.id}
+													/>
+												</div>
+											)}
 
 											{message.id == edit ? (
 												<CMEdit
 													message={message}
 													onChange={handleEditChange}
+													channelId={channelId}
+													serverId={serverId}
 												/>
 											) : (
 												<div className="msg-ct">
 													<div className="cms-msg-header">
-														{message.role ===
-														"owner" ? (
-															<div className="row">
-																<div className="cms-admin">{`${message.sender_nickname}`}</div>
-																<img
-																	src={crown}
-																	alt="crown"
-																	className="icon"
-																/>
-															</div>
-														) : message.role ===
-														  "admin" ? (
-															<div className="cms-admin">{`${message.sender_nickname}`}</div>
-														) : message.role ===
-														  "member" ? (
-															<div className="cms-member">
-																{`${message.sender_nickname}`}{" "}
-															</div>
+														{i - 1 >= 0 &&
+														cms[i - 1] &&
+														message.sender_id &&
+														message.sender_id ===
+															cms[i - 1]
+																.sender_id ? (
+															<div className="cm-spacer2"></div>
 														) : (
-															<div className="cms-pending">{`${message.sender_nickname}`}</div>
+															<>
+																{message.role ===
+																"owner" ? (
+																	<div className="row">
+																		<div className="cms-admin">{`${message.sender_nickname}`}</div>
+																		<img
+																			src={
+																				crown
+																			}
+																			alt="crown"
+																			className="icon"
+																		/>
+																	</div>
+																) : message.role ===
+																  "admin" ? (
+																	<div className="cms-admin">{`${message.sender_nickname}`}</div>
+																) : message.role ===
+																  "member" ? (
+																	<div className="cms-member">
+																		{`${message.sender_nickname}`}{" "}
+																	</div>
+																) : (
+																	<div className="cms-pending">{`${message.sender_nickname}`}</div>
+																)}
+
+																<div className="cms-msg-date">
+																	{message.created_at.slice(
+																		0,
+																		22
+																	)}
+																</div>
+															</>
 														)}
-														<div className="cms-msg-date">
-															{message.created_at.slice(
-																0,
-																22
-															)}
-														</div>
 
 														{currMbr.id ===
 															message.sender_id ||
 														role === "admin" ||
 														role === "owner" ? (
-															<div className="cms-options">
+															<div className="cms-options absolute-op">
 																<div
 																	className="cms-edit"
 																	data-id={
@@ -348,8 +426,29 @@ const CMIndex = () => {
 													</div>
 
 													{message.created_at ==
-													message.updated_at ? (
+														message.updated_at &&
+													!imageLinks[
+														message.message.slice(
+															message.message
+																.length - 4
+														)
+													] ? (
 														<div className="cms-msg-detail">{`${message.message}`}</div>
+													) : imageLinks[
+															message.message.slice(
+																message.message
+																	.length - 4
+															)
+													  ] ? (
+														<div>
+															<img
+																src={
+																	message.message
+																}
+																className="aws-image"
+																alt={`uploaded by ${message.sender_nickname}`}
+															></img>
+														</div>
 													) : (
 														<div className="row">
 															<div className="cms-msg-detail">{`${message.message}`}</div>
@@ -361,15 +460,30 @@ const CMIndex = () => {
 										</div>
 								  ))
 								: null}
+
 							{messages.map((message, i) => (
 								<div key={`s_${i}`} className="row justify">
-									<NavLink to="#" className="img-link">
-										<img
-											src={message.display_pic}
-											alt="crown"
-											className="pic-icon"
-										/>
-									</NavLink>
+									{i - 1 >= 0 &&
+									message &&
+									messages[i - 1] &&
+									message.sender_id &&
+									message.sender_id ===
+										messages[i - 1].sender_id ? (
+										<div className="cm-spacer"></div>
+									) : cms &&
+									  cms.length - 1 &&
+									  cms[cms.length - 1].sender_id ===
+											message.sender_id ? (
+										<div className="cm-spacer"></div>
+									) : (
+										<div className="img-link">
+											<img
+												src={message.display_pic}
+												alt="crown"
+												className="pic-icon"
+											/>
+										</div>
+									)}
 
 									{message.id == edit ? (
 										<CMEdit
@@ -379,35 +493,55 @@ const CMIndex = () => {
 									) : (
 										<div className="msg-ct">
 											<div className="cms-msg-header">
-												{message.role === "owner" ? (
-													<>
-														<div className="cms-admin">{`${message.sender_nickname}`}</div>
-														<img
-															src={crown}
-															alt="crown"
-															className="icon"
-														/>
-													</>
-												) : message.role === "admin" ? (
-													<div className="cms-admin">{`${message.sender_nickname}`}</div>
-												) : message.role ===
-												  "member" ? (
-													<div className="cms-member">
-														{`${message.sender_nickname}`}{" "}
-													</div>
+												{i - 1 >= 0 &&
+												messages[i - 1] &&
+												message.sender_id &&
+												message.sender_id ===
+													messages[i - 1]
+														.sender_id ? (
+													<div className="cm-spacer2"></div>
+												) : cms &&
+												  cms.length - 1 &&
+												  cms[cms.length - 1]
+														.sender_id ===
+														message.sender_id ? (
+													<div className="cm-spacer2"></div>
 												) : (
-													<div className="cms-pending">{`${message.sender_nickname}`}</div>
-												)}{" "}
-												<div className="cms-msg-date">
-													{date
-														.toUTCString()
-														.slice(0, 22)}
-												</div>
-												{currMbr.id ===
-													message.sender_id ||
+													<>
+														{message.role ===
+														"owner" ? (
+															<>
+																<div className="cms-admin">{`${message.sender_nickname}`}</div>
+																<img
+																	src={crown}
+																	alt="crown"
+																	className="icon"
+																/>
+															</>
+														) : message.role ===
+														  "admin" ? (
+															<div className="cms-admin">{`${message.sender_nickname}`}</div>
+														) : message.role ===
+														  "member" ? (
+															<div className="cms-member">
+																{`${message.sender_nickname}`}{" "}
+															</div>
+														) : (
+															<div className="cms-pending">{`${message.sender_nickname}`}</div>
+														)}
+														<div className="cms-msg-date">
+															{date
+																.toUTCString()
+																.slice(0, 22)}
+														</div>
+													</>
+												)}
+
+												{+currMbr.id ===
+													+message.sender_id ||
 												role === "admin" ||
 												role === "owner" ? (
-													<div className="cms-options">
+													<div className="cms-options absolute-op">
 														<div
 															className="cms-edit"
 															data-id={message.id}
@@ -437,22 +571,74 @@ const CMIndex = () => {
 												) : null}
 											</div>
 
-											<div className="cms-msg-detail">{`${message.message}`}</div>
+											{imageLinks[
+												message.message.slice(
+													message.message.length - 4
+												)
+											] ? (
+												<div>
+													<img
+														src={message.message}
+														className="aws-image"
+														alt={`uploaded by ${message.sender_nickname}`}
+													></img>
+												</div>
+											) : (
+												<div className="cms-msg-detail">{`${message.message}`}</div>
+											)}
 										</div>
 									)}
 								</div>
 							))}
 							<div ref={endMsgRef} />
 						</div>
+
 						{role ? (
 							<div className="cm-form-container">
-								<form onSubmit={sendChat} className="submit-cm">
-									<input
-										value={chatInput}
-										onChange={updateChatInput}
-										className="cm-text-input"
-									/>
-								</form>
+								{!imageButton ? (
+									<button
+										className="cm-img-input"
+										onClick={() => setImageButton(true)}
+									>
+										+
+									</button>
+								) : (
+									<button
+										className="cm-img-input-x"
+										onClick={() => setImageButton(false)}
+									>
+										x
+									</button>
+								)}
+
+								{imageButton ? (
+									// image upload
+									<form
+										onSubmit={sendImage}
+										className="submit-cm"
+									>
+										<input
+											type="file"
+											accept="image/*"
+											onChange={updateImage}
+										/>
+										<button type="submit">Submit</button>
+										{imageLoading && <div>Loading...</div>}
+									</form>
+								) : null}
+								{!imageButton ? (
+									// text input
+									<form
+										onSubmit={sendChat}
+										className="submit-cm"
+									>
+										<input
+											value={chatInput}
+											onChange={updateChatInput}
+											className="cm-text-input"
+										/>
+									</form>
+								) : null}
 							</div>
 						) : null}
 					</div>

@@ -16,6 +16,10 @@
 .cm-form-container {
   width: 100%;
   height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 5px;
 }
 
 .cm-text-input {
@@ -183,4 +187,63 @@
   align-items: center;
   padding-left: 5px;
   padding: 0px 20px;
+}
+
+.cm-img-input {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 22px;
+  text-decoration: none;
+  border: 0;
+  border-radius: 50%;
+  font-size: 20px;
+  background-color: #ffffff65;
+}
+.cm-img-input-x {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 22px;
+  text-decoration: none;
+  border: 0;
+  border-radius: 50%;
+  font-size: 15px;
+  background-color: #ffffff65;
+  padding-bottom: 3px;
+}
+
+.cm-img-input:hover,
+.cm-img-input-x:hover {
+  background-color: #ffffff5b;
+}
+
+.image-input {
+  background-color: rgb(74, 79, 87);
+}
+
+.aws-image {
+  width: auto;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  align-self: flex-start;
+  margin-top: 5px;
+}
+
+.cm-spacer {
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-left: 40px;
+}
+
+.cm-spacer2 {
+  margin-top: 0px;
+  padding-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.absolute-op {
+  position: relative;
 }

@@ -6,11 +6,11 @@ export default function UserLanding({ page }) {
 	switch (page) {
 		case "channel": {
 			return (
-				<div className="UserLanding-container">
+				<div className="UserLanding-container reverse">
 					{/* <div className="UserLanding-main-content"> */}
 					{/* <div className="UserLanding-server-members"> */}
-						<CMIndex />
 						<ServerMembers />
+						<CMIndex />
 					{/* </div> */}
 					{/* </div> */}
 				</div>
