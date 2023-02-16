@@ -74,9 +74,9 @@
   background-color: #3ba55d;
 }
 
-.ServerNav-icons:active::before,
-.ServerNav-profile:active::before,
-.ServerNav-server-icons:active::before {
+.ServerNav-icons.active::before,
+.ServerNav-profile.active::before,
+.ServerNav-server-icons.active::before {
   position: absolute;
   background-color: white;
   display: block;
