@@ -18,6 +18,25 @@ export default function SignUp() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setErrors({});
+        const submitErrors = {};
+
+        if (!email.includes("@")) {
+            submitErrors.emailAt = "Please enter a valid email";
+        }
+
+        if (username.length < 4 || username.length > 50) {
+            submitErrors.usernameLength = "Please enter a username between 4 and 50 characters";
+            console.log("username errors >>>>>", submitErrors);
+        }
+
+        if (password.length < 6 || password.length > 50) {
+            submitErrors.passwordLength = "Please enter a password between 6 and 50 characters"
+        }
+
+        if (Object.keys(submitErrors) > 0) {
+            console.log("submitErrors >>>>>>>>>>>>", submitErrors)
+            return setErrors(submitErrors);
+        }
 
 		if (password === confirmPassword) {
 			return dispatch(signUp(username, email, password, display_pic))
@@ -33,10 +52,9 @@ export default function SignUp() {
 					if (data && data.errors) setErrors(data.errors);
 				});
 		} else {
-			setErrors({
-				password:
-					"Confirm Password field must be the same as the Password field",
-			});
+            console.log("dfaldfkajdfkajkdlfjad")
+            submitErrors.password = "Confirm Password field must be the same as the Password field"
+			return setErrors(submitErrors);
 		}
 	};
 
@@ -73,6 +91,7 @@ export default function SignUp() {
                 />
                 <div className="Form-error-container">
                     {errors.email && <p className="Form-error">{errors.email}</p>}
+                    {errors.emailAt && <p className="Form-error">{errors.emailAt}</p>}
                 </div>
                 </div>
                 <div className="Form-form-group">
@@ -87,6 +106,9 @@ export default function SignUp() {
                 <div className="Form-error-container">
                     {errors.username && (
                     <p className="Form-error">{errors.username}</p>
+                    )}
+                    {errors.usernameLength && (
+                    <p className="Form-error">{errors.usernameLength}</p>
                     )}
                 </div>
                 </div>
@@ -115,6 +137,9 @@ export default function SignUp() {
                 <div className="Form-error-container">
                     {errors.password && (
                     <p className="Form-error">{errors.password}</p>
+                    )}
+                    {errors.passwordLength && (
+                        <p className="Form-error">{errors.passwordLength}</p>
                     )}
                 </div>
                 </div>
