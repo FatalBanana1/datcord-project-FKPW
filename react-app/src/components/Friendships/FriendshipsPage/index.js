@@ -3,13 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkGetFriendships } from "../../../store/friendships";
 
 export default function FriendshipsPage() {
-	console.log(`friendships page comp========>>>>>>>>>`);
 	let dispatch = useDispatch();
 	//states
 	let [isLoaded, setIsLoaded] = useState(false);
 
+	//selectors
+	let allFriends = useSelector((state) => state.friendships);
+	let friends = Object.values(allFriends);
+	let user = useSelector((state) => state.session.user);
+	let yourMemberships = Object.values(user.server_members).reduce(
+		(acc, val) => {
+			acc[val.server_id] = 1;
+			return acc;
+		},
+		{}
+	);
+
 	useEffect(() => {
-		console.log(`inside dispatch front friends`);
 		dispatch(thunkGetFriendships()).then(setIsLoaded(true));
 	}, [dispatch]);
 
@@ -28,64 +38,57 @@ export default function FriendshipsPage() {
             can rename this later! */}
 					<div className="UserLanding-people-list-container">
 						{/* this holds a single user from the list */}
-						<div className="UserLanding-people-list">
-							{/* this holds the icon and the username and their status */}
-							<div className="UserLanding-user-info-container">
-								<div className="UserLanding-user-icon">
-									<img
-										src="https://qph.cf2.quoracdn.net/main-qimg-752ed13d997193cc6ab3b81f52d18168-lq"
-										alt="user landing user icon"
-									></img>
-								</div>
-								<div className="UserLanding-user-name-status-container">
-									<div className="UserLanding-user-name">
-										Sukuna
+						{/* this holds the icon and the username and their status */}
+
+						{/* map HERE------------------------- */}
+						{friends.length ? (
+							friends.map((friend) => (
+								<div key={friend.id} className="UserLanding-people-list">
+									<div className="UserLanding-user-info-container">
+										<div className="UserLanding-user-icon">
+											<img
+												src={friend.display_pic}
+												alt="user landing user icon"
+											></img>
+										</div>
+										<div className="UserLanding-user-name-status-container">
+											<div className="UserLanding-user-name">
+												{friend.username}
+											</div>
+											<div className="UserLanding-user-status">
+												{`You have ${Object.values(
+													friend.server_members
+												).reduce((acc, val) => {
+													if (
+														yourMemberships[
+															val.server_id
+														]
+													) {
+														acc++;
+													}
+													return acc;
+												}, 0)} servers in common.`}
+											</div>
+										</div>
 									</div>
-									<div className="UserLanding-user-status">
-										Online
+
+									{/* this holds the message and vertical ellipsis icons for actions */}
+									<div className="UserLanding-user-actions-container">
+										<div className="UserLanding-user-actions">
+											<i className="fa-solid fa-message fa-xs"></i>
+										</div>
+										<div className="UserLanding-user-actions">
+											<i className="fa-solid fa-ellipsis-vertical"></i>
+										</div>
 									</div>
 								</div>
-							</div>
-							{/* this holds the message and vertical ellipsis icons for actions */}
-							<div className="UserLanding-user-actions-container">
-								<div className="UserLanding-user-actions">
-									<i className="fa-solid fa-message fa-xs"></i>
-								</div>
-								<div className="UserLanding-user-actions">
-									<i className="fa-solid fa-ellipsis-vertical"></i>
-								</div>
-							</div>
-						</div>
-						{/* this is the second placeholder (chamber) */}
-						<div className="UserLanding-people-list">
-							<div className="UserLanding-user-info-container">
-								<div className="UserLanding-user-icon">
-									<img
-										src="https://static.wikia.nocookie.net/valorant/images/0/09/Chamber_icon.png"
-										alt="user landing user icon"
-									></img>
-								</div>
-								<div className="UserLanding-user-name-status-container">
-									<div className="UserLanding-user-name">
-										Chamber
-									</div>
-									<div className="UserLanding-user-status">
-										Online
-									</div>
-								</div>
-							</div>
-							<div className="UserLanding-user-actions-container">
-								<div className="UserLanding-user-actions">
-									<i className="fa-solid fa-message fa-xs"></i>
-								</div>
-								<div className="UserLanding-user-actions">
-									<i className="fa-solid fa-ellipsis-vertical"></i>
-								</div>
-							</div>
-						</div>
+							))
+						) : (
+							<div>You will die alone...</div>
+						)}
 					</div>
 				</div>
 			</div>
 		);
-	} else return <div>Loading...</div>;
+	} else return <div className="loading-cms">Loading...</div>;
 }

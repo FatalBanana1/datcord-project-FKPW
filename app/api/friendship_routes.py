@@ -8,24 +8,13 @@ friendship_routes = Blueprint("friendships", __name__)
 
 
 # GET SERVER MEMBERS
+# @friendship_routes.route("/<int:id>")
 @friendship_routes.route("/")
 @login_required
-def all_server_members():
+def all_friends():
     user = User.query.get(current_user.id)
     friends = user.friendships
-    print(
-        "back end get friendships--------+++++++++++++++++++=====================>>>>>>>>",
-        friends,
-    )
-    # if (not friend):
-    #     return {"errors": ["Friendship does not exist"]}, 404
-
-    # members = [member.to_dict() for member in server.server_members]
-    # if (len(members) > 0):
-    #     return {'server_members': members}
-    # else:
-    #     return {"server_members": 'No current members in this server'}
-    return {"friends": friends}
+    return {"friendships": [fr.to_dict() for fr in friends]}
 
 
 # # ADD SERVER MEMBER
