@@ -1,6 +1,3 @@
-import { useLocation } from "react-router-dom";
-import ProtectedRoute from "../../auth/ProtectedRoute";
-import GuildDiscovery from "../../GuildDiscovery";
 import UserLanding from "../../UserLanding";
 import UserLandingSideBar from "../../UserLanding/UserLandingSideBar";
 import "./MainContent.css";
@@ -8,9 +5,6 @@ import "./MainContent.css";
 export default function MainContent({ page, isLoaded }) {
     switch(page) {
         case "channel":
-            // console.log("hit switch case in MainContent - channel")
-                // <div className="MainContent-container">
-                // </div>
             return (
                     <div className="UserLanding-container">
                         <UserLandingSideBar page={page} isLoaded={isLoaded} />
@@ -27,16 +21,4 @@ export default function MainContent({ page, isLoaded }) {
                 </div>
             )
     }
-    return (
-        <div className="MainContent-container">
-            {/* <ol>
-                <li>welcome page when first logging in</li>
-                <li>messages if on server page</li>
-                <li>members list if on server page</li>
-            </ol> */}
-            <ProtectedRoute path="/guild-discovery" exact={true}>
-                <GuildDiscovery />
-            </ProtectedRoute>
-        </div>
-    )
 }

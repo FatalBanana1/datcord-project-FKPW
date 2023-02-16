@@ -41,10 +41,13 @@
     border-radius: 10px;
     /* font-family: "Segoe UI Variable"; */
     font-family: "Roboto";
+    box-sizing: border-box;
+    padding: 12px;
 }
 
 .card-member-inner-div {
-    padding: 12px
+    /* width: calc(100% - 12px); */
+    width: 100%;
 }
 
 .member-nickName-div{
@@ -55,16 +58,36 @@
     padding-top: 5px;
     padding-bottom: 10px;
     color: white;
+    height: max-content;
+    width: 100%;
+}
+
+.member-nickname-div-container {
+    width: 100%;
+}
+
+.member-nickname-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .nickname-edit-button {
     cursor: pointer;
+    width: 32px;
 }
 
 .member-nickname {
+    width: calc(100% - 32px);
+    /* height: 28px; */
     font-weight: 700;
     font-size: 21px;
     color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .member-since-section{
@@ -75,12 +98,12 @@
     padding: 5px 0;
     height: 75px;
 }
-  
+
 .member-h4  {
     text-transform: uppercase;
     color: #fff;
     font-size: 13px;
-    padding: 5px 0;    
+    padding: 5px 0;
 }
 
 .member-role-div {
@@ -88,17 +111,77 @@
     flex-direction: row;
     color: white;
     font-size: 14px;
+    /* border-radius: 4px; */
+    /* padding: 2px 6px; */
+    box-sizing: border-box;
+    width: max-content;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: #282b2f; */
+    gap: 4px;
+}
+
+#owner.member-role-div,
+#member.member-role-div,
+#pending.member-role-div {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    font-size: 14px;
+    /* border-radius: 4px; */
+    /* padding: 2px 6px; */
+    box-sizing: border-box;
+    width: max-content;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: #282b2f; */
+    gap: 4px;
+}
+
+.member-role-container {
+    border-radius: 4px;
+    background-color: #282b2f;
+    padding: 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.member-role-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+#owner.member-role-circle,
+#admin.member-role-circle {
+    background-color: rgb(25, 188, 155);
+}
+
+#member.member-role-circle {
+    background-color: rgb(196, 122, 228);
+}
+
+#pending.member-role-circle {
+    background-color: rgb(255, 255, 255);
 }
 
 .member-role {
-    padding-right: 5px;
+    /* padding-right: 5px; */
+    padding-bottom: 1px;
+    font-size: 14px;
 }
 
 .role-edit-button {
+    border-radius: 4px;
+    background-color: #282b2f;
+    padding: 2px 8px;
     cursor: pointer;
     font-size: 16px;
 	/* background-color: #292b2f; */
-    padding: 0 5px;
+    /* padding: 0 5px; */
+    /* padding-bottom: 1px; */
 }
 
 .role-edit-button:hover {
