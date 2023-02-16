@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
-from app.models import ChannelMessage, db
+from app.models import DirectMessage, db
 from .channel_routes import channel_routes
 from datetime import datetime
 from app.aws_s3_upload import upload_file_to_s3, allowed_file, get_unique_filename
@@ -9,14 +9,12 @@ from app.aws_s3_upload import upload_file_to_s3, allowed_file, get_unique_filena
 #  url_prefix="/api/dms
 direct_message_routes = Blueprint("direct_messages", __name__)
 
-# # get all messages
-# @channel_routes.route("/<int:serverId>/<int:channelId>/cms")
-# @login_required
-# def get_cms(serverId, channelId):
-#     # print("DATA messages ======>>>>>>> ", channelId)
-#     # msg = ChannelMessage.query.all()
-#     messages = ChannelMessage.query.filter(ChannelMessage.channel_id == channelId).all()
-#     return {"direct_message": [el.to_dict() for el in messages]}
+# get all messages
+@direct_message_routes.route("/")
+@login_required
+def get_dms():
+    messages = DirectMessage.query.filter(DirectMessage.user_id == current_user.id).all()
+    return {"direct_message": [el.to_dict() for el in messages]}
 
 
 # # delete messages by channel id

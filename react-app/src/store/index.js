@@ -6,6 +6,8 @@ import cmReducer from "./channelMessages";
 import channels from "./channels";
 import serverMembers from "./serverMembers";
 import allServerReducer from "./allServers";
+import friendshipsReducer from "./friendships";
+import dmReducer from "./directMessages";
 
 const rootReducer = combineReducers({
 	session,
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
 	serverMembers,
 	channelMessages: cmReducer,
 	allServers: allServerReducer,
+	friendships: friendshipsReducer,
+	directMessages: dmReducer,
 });
 
 let enhancer;

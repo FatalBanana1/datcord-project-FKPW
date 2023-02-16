@@ -13,25 +13,25 @@ export const actionGetFriendships = (friendships) => ({
 });
 
 // CREATE
-export const actionAddServerMember = (serverMember) => ({
+export const actionAddFriendship = (serverMember) => ({
 	type: ADD_FRIENDSHIP,
 	serverMember,
 });
 
 // EDIT
-export const actionEditServerMember = (serverMember) => ({
+export const actionEditFriendship = (serverMember) => ({
 	type: EDIT_FRIENDSHIP,
 	serverMember,
 });
 
 // DELETE
-export const actionDeleteServerMember = (memberId) => ({
+export const actionDeleteFriendship = (memberId) => ({
 	type: DELETE_FRIENDSHIP,
 	memberId,
 });
 
 // RESET
-export const actionResetServerMember = () => ({
+export const actionResetFriendship = () => ({
 	type: RESET_FRIENDSHIPS,
 });
 
@@ -60,7 +60,7 @@ export const thunkGetFriendships = () => async (dispatch) => {
 };
 
 // CREATE
-export const thunkAddServerMember = (serverId, role) => async (dispatch) => {
+export const thunkAddFriendship = (serverId, role) => async (dispatch) => {
 	const res = await fetch(`/api/servers/${serverId}/members`, {
 		method: "POST",
 		headers: {
@@ -71,9 +71,9 @@ export const thunkAddServerMember = (serverId, role) => async (dispatch) => {
 		}),
 	});
 	if (res.ok) {
-		const serverMember = await res.json();
-		dispatch(actionAddServerMember(serverMember.server_member));
-		return serverMember.server_member;
+		const data = await res.json();
+		dispatch(actionAddFriendship(data.server_member));
+		return data.server_member;
 	} else if (res.status < 500) {
 		const data = await res.json();
 		if (data.errors) {
@@ -85,7 +85,7 @@ export const thunkAddServerMember = (serverId, role) => async (dispatch) => {
 };
 
 // EDIT
-export const thunkEditServerMember =
+export const thunkEditFriendship =
 	(serverId, serverMemberId, serverMember) => async (dispatch) => {
 		console.log("pre-Fetch ----->", serverMember);
 		const res = await fetch(
@@ -101,9 +101,9 @@ export const thunkEditServerMember =
 			}
 		);
 		if (res.ok) {
-			const serverMember = await res.json();
-			dispatch(actionEditServerMember(serverMember.server_member));
-			return serverMember.server_member;
+			const data = await res.json();
+			dispatch(actionEditFriendship(data.server_member));
+			return data.server_member;
 		} else if (res.status < 500) {
 			const data = await res.json();
 			if (data.errors) {
@@ -115,11 +115,11 @@ export const thunkEditServerMember =
 	};
 
 // DELETE
-export const thunkDeleteServerMember =
-	(serverId, serverMemberId, permission) => async (dispatch) => {
+export const thunkDeleteFriendship =
+	(friendshipId, permission) => async (dispatch) => {
 		// console.log("Pre-Fetch ------>", serverId, serverMemberId, permission);
 		const res = await fetch(
-			`/api/servers/${serverId}/membership/${serverMemberId}`,
+			`/api/friends/${friendshipId}`,
 			{
 				method: "DELETE",
 				headers: {
@@ -132,9 +132,9 @@ export const thunkDeleteServerMember =
 		);
 		// console.log("Post-Fetch ------>", res);
 		if (res.ok) {
-			const serverMember = await res.json();
-			dispatch(actionDeleteServerMember(serverMemberId));
-			return serverMember.server_member;
+			const data = await res.json();
+			dispatch(actionDeleteFriendship(friendshipId));
+			return data.server_member;
 		} else if (res.status < 500) {
 			const data = await res.json();
 			if (data.errors) {
@@ -158,7 +158,7 @@ const normalize = (serverMembers) => {
 
 const initialState = {};
 
-export default function ServerMembers(state = initialState, action) {
+export default function friendshipsReducer(state = initialState, action) {
 	switch (action.type) {
 		case GET_FRIENDSHIPS: {
 			console.log(`action in reducer FRIend >>>>>>>>>>>>`, action);
