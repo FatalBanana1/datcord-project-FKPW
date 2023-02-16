@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
+from .friendship import Friendship
 
 
 class User(db.Model, UserMixin):
@@ -28,6 +29,17 @@ class User(db.Model, UserMixin):
     servers = db.relationship("Server", back_populates="owner")
     server_memberships = db.relationship(
         "ServerMember", back_populates="user", cascade="all, delete-orphan"
+    )
+
+    friendships = db.relationship(
+        "User",
+        secondary="friendships_table",
+        primaryjoin=(id == Friendship.user_id),
+        secondaryjoin=(id == Friendship.friend_id),
+    )
+
+    direct_messages = db.relationship(
+        "DirectMessage", back_populates="sender", cascade="all, delete-orphan"
     )
 
     @property
