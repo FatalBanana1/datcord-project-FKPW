@@ -30,7 +30,7 @@ export default function FriendshipsPage() {
 				<div className="UserLanding-header"></div>
 				<div className="UserLanding-status">
 					{/* adding 2 as placeholder for now */}
-					<h2>Online — 2</h2>
+					<h2>{`Friends - ${friends.length}`}</h2>
 				</div>
 				{/* making fake friends here :( */}
 				<div className="UserLanding-people-list-parent">
