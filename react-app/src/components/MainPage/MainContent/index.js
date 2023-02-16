@@ -9,13 +9,13 @@ export default function MainContent({ page, isLoaded }) {
     switch(page) {
         case "channel":
             // console.log("hit switch case in MainContent - channel")
+                // <div className="MainContent-container">
+                // </div>
             return (
-                <div className="MainContent-container">
                     <div className="UserLanding-container">
                         <UserLandingSideBar page={page} isLoaded={isLoaded} />
                         <UserLanding page={page} isLoaded={isLoaded} />
                     </div>
-                </div>
             )
         default:
             return (
