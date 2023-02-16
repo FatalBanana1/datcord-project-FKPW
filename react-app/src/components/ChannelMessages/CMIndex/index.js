@@ -41,6 +41,9 @@ const CMIndex = () => {
 	const channels = useSelector((state) => state.channels.channels);
 	const channel = channels[channelId];
 
+	// theme
+	let theme = user.theme;
+
 	const endMsgRef = useRef(null);
 
 	// console.log(`edit ----cms >>>>>>`, edit);
@@ -216,7 +219,9 @@ const CMIndex = () => {
 
 	// -------------
 
-	if (isLoaded && channel && user) {
+	console.log("THEME >>>>>>", theme)
+	theme = "light";
+	if (isLoaded && channel && user && theme) {
 		const updateChatInput = (e) => {
 			setChatInput(e.target.value);
 		};
@@ -308,10 +313,11 @@ const CMIndex = () => {
 					<div className="cms-ch-name">{`# ${channel.name}`}</div>
 
 					<div className="cms-ct">
-						<div className="cm-overflow">
+						<div className="cm-overflow" id={theme}>
 							{cms.length
 								? cms.map((message, i) => (
 										<div
+											id={theme}
 											className="row justify"
 											key={message.id}
 										>
@@ -384,7 +390,7 @@ const CMIndex = () => {
 																	<div className="cms-pending">{`${message.sender_nickname}`}</div>
 																)}
 
-																<div className="cms-msg-date">
+																<div className="cms-msg-date" id={theme}>
 																	{message.created_at.slice(
 																		0,
 																		22
@@ -397,7 +403,10 @@ const CMIndex = () => {
 															message.sender_id ||
 														role === "admin" ||
 														role === "owner" ? (
-															<div className="cms-options absolute-op">
+															<div
+																id={theme}
+																className="cms-options absolute-op"
+															>
 																<div
 																	className="cms-edit"
 																	data-id={
@@ -466,6 +475,7 @@ const CMIndex = () => {
 							{messages.length > 0
 								? messages.map((message, i) => (
 										<div
+											id={theme}
 											key={`s_${i}`}
 											className="row justify"
 										>
@@ -628,6 +638,7 @@ const CMIndex = () => {
 							<div className="cm-form-container">
 								{!imageButton ? (
 									<button
+										id={theme}
 										className="cm-img-input"
 										onClick={() => setImageButton(true)}
 									>
@@ -635,6 +646,7 @@ const CMIndex = () => {
 									</button>
 								) : (
 									<button
+										id={theme}
 										className="cm-img-input-x"
 										onClick={() => setImageButton(false)}
 									>
@@ -667,6 +679,7 @@ const CMIndex = () => {
 											value={chatInput}
 											onChange={updateChatInput}
 											className="cm-text-input"
+											id={theme}
 										/>
 									</form>
 								) : null}
