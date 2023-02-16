@@ -17,7 +17,7 @@
   user-select: none;
 }
 
-#dark.ServerNav-container {
+#light.ServerNav-container {
   background-color: #e3e5e8;
 }
 
@@ -29,7 +29,7 @@
   margin-bottom: 8px;
 }
 
-#dark.ServerNav-divider {
+#light.ServerNav-divider {
   background-color: #c5cacf;
 }
 
@@ -49,8 +49,8 @@
   flex-shrink: 0;
 }
 
-#dark.ServerNav-icons,
-#dark.ServerNav-profile {
+#light.ServerNav-icons,
+#light.ServerNav-profile {
   background-color: white;
 }
 
@@ -81,9 +81,9 @@
   transition: 0.4s;
 }
 
-#dark.ServerNav-icons::before,
-#dark.ServerNav-profile::before,
-#dark.ServerNav-server-icons::before {
+#light.ServerNav-icons::before,
+#light.ServerNav-profile::before,
+#light.ServerNav-server-icons::before {
   background-color: black;
 }
 
@@ -105,9 +105,9 @@
   content: " ";
 }
 
-#dark.ServerNav-icons.active::before,
-#dark.ServerNav-profile.active::before,
-#dark.ServerNav-server-icons.active::before {
+#light.ServerNav-icons.active::before,
+#light.ServerNav-profile.active::before,
+#light.ServerNav-server-icons.active::before {
   background-color: black;
 }
 
@@ -121,7 +121,7 @@
   content: " ";
 }
 
-#dark.ServerNav-server-icons:hover.active::before {
+#light.ServerNav-server-icons:hover.active::before {
   background-color: black;
 }
 
@@ -146,9 +146,9 @@
   /* border-radius: 5px; */
 }
 
-#dark.ServerNav-icons:hover::before,
-#dark.ServerNav-profile:hover::before,
-#dark.ServerNav-server-icons:hover::before {
+#light.ServerNav-icons:hover::before,
+#light.ServerNav-profile:hover::before,
+#light.ServerNav-server-icons:hover::before {
   background-color: black;
 }
 
