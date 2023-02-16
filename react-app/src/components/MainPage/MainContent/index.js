@@ -3,17 +3,16 @@ import { useSelector } from "react-redux";
 import UserLandingSideBar from "../../UserLanding/UserLandingSideBar";
 import "./MainContent.css";
 
-export default function MainContent({ page, isLoaded }) {
+export default function MainContent({ page, isLoaded, theme }) {
   const user = useSelector((state) => state.session.user);
-  const theme = user.theme;
 
   switch (page) {
     case "channel":
       return (
         theme && (
           <div className="UserLanding-container" id={theme}>
-            <UserLandingSideBar page={page} isLoaded={isLoaded} />
-            <UserLanding page={page} isLoaded={isLoaded} />
+            <UserLandingSideBar page={page} isLoaded={isLoaded} theme={theme} />
+            <UserLanding page={page} isLoaded={isLoaded} theme={theme} />
           </div>
         )
       );
@@ -22,8 +21,8 @@ export default function MainContent({ page, isLoaded }) {
         theme && (
           <div className="MainContent-container" id={theme}>
             <div className="UserLanding-container" id={theme}>
-              <UserLandingSideBar page={page} />
-              <UserLanding />
+              <UserLandingSideBar page={page} theme={theme} />
+              <UserLanding theme={theme} />
             </div>
           </div>
         )
