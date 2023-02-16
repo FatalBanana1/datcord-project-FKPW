@@ -4,12 +4,8 @@ import FriendshipsPage from "../Friendships/FriendshipsPage";
 import ServerMembers from "../ServerMembers";
 import "./UserLanding.css";
 
-export default function UserLanding({ page }) {
+export default function UserLanding({ page, theme }) {
 	const user = useSelector((state) => state.session.user);
-	let theme;
-
-	if (user && user.theme) theme = user.theme;
-	theme = "light";
 
 	switch (page) {
 		case "channel": {
@@ -17,8 +13,8 @@ export default function UserLanding({ page }) {
 				<div className="UserLanding-container reverse" id={theme}>
 					{/* <div className="UserLanding-main-content"> */}
 					{/* <div className="UserLanding-server-members"> */}
-					<ServerMembers />
-					<CMIndex />
+					<ServerMembers theme={theme} />
+					<CMIndex theme={theme} />
 					{/* </div> */}
 					{/* </div> */}
 				</div>
@@ -32,7 +28,7 @@ export default function UserLanding({ page }) {
                 <li>messages if on server page</li>
                 <li>members list if on server page</li>
             </ol> */}
-					<FriendshipsPage />
+					<FriendshipsPage theme={theme} />
 				</div>
 			);
 		}

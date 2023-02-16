@@ -13,7 +13,7 @@ import crown from "../../assets/crown.png";
 import OpenModalButton from "../OpenModalButton";
 import MemberPage from "./MemberPage";
 
-const ServerMembers = () => {
+const ServerMembers = ({ theme }) => {
 	const dispatch = useDispatch();
 
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -26,9 +26,6 @@ const ServerMembers = () => {
 	const membersArray = Object.values(serverMembers);
 	const [showMenu, setShowMenu] = useState(false);
 	const [visible, setVisible] = useState("hidden");
-
-	let theme = user.theme;
-	theme = "light";
 
 	// console.log("membersArray ------->", membersArray)
 
