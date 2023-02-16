@@ -17,6 +17,10 @@
   user-select: none;
 }
 
+#dark.ServerNav-container {
+  background-color: white;
+}
+
 .ServerNav-divider {
   height: 2px;
   width: 32px;
