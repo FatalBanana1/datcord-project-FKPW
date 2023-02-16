@@ -28,7 +28,6 @@ export default function MemberPage({
 	const history = useHistory();
 	const { closeModal } = useModal();
 	const [isLoaded, setIsLoaded] = useState(false);
-	// let {serverId} = useParams();
 	const user = useSelector((state) => state.session.user);
 	const [editNickName, setEditNickName] = useState(false);
 	const [editRole, setEditRole] = useState(false);
@@ -121,6 +120,7 @@ export default function MemberPage({
 												member={member}
 												onChange={onChange}
 												serverId={serverId}
+												channelId={channelId}
 												endEditNickName={
 													endEditNickName
 												}
@@ -147,6 +147,7 @@ export default function MemberPage({
 												member={member}
 												onChange={onChange}
 												serverId={serverId}
+												channelId={channelId}
 												endEditNickName={
 													endEditNickName
 												}

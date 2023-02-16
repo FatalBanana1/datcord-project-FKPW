@@ -10,8 +10,8 @@ import {
 import CMEdit from "../CMEdit/index.";
 import "./CMIndex.css";
 import crown from "../../../assets/crown.png";
-import OpenModalButton from "../../OpenModalButton";
-import MemberPage from "../../ServerMembers/MemberPage";
+// import OpenModalButton from "../../OpenModalButton";
+// import MemberPage from "../../ServerMembers/MemberPage";
 
 // leave this OUT
 let socket;
@@ -82,6 +82,7 @@ const CMIndex = () => {
 		return () => {
 			setChatInput("");
 			socket.disconnect();
+			// setMessages([]);
 			dispatch(actionResetChannelMessages());
 		};
 	}, [user.id, serverId, channelId]);
@@ -217,7 +218,7 @@ const CMIndex = () => {
 
 	// -------------
 
-	if (isLoaded && channel) {
+	if (isLoaded && channel && user) {
 		const updateChatInput = (e) => {
 			setChatInput(e.target.value);
 		};
@@ -245,7 +246,7 @@ const CMIndex = () => {
 		if (currMbr) {
 			role = currMbr.role;
 		}
-		// console.log(`role ===`, user.server_members, role, serverId, user);
+		// console.log(`role ===`, role, serverId, currMbr);
 		// console.log(`msg ===`, cms);
 
 		// print the username and message for each chat

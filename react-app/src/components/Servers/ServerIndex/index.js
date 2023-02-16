@@ -9,10 +9,11 @@ import explorerBanner from "../../../assets/explorer-banner.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import ServerNav from "../../MainPage/ServerNav";
 import {
-	actionResetServers,
+	actionResetAllServers,
 	thunkReadAllAllServers,
 } from "../../../store/allServers";
 import { thunkAddServerMember } from "../../../store/serverMembers";
+import { authenticate } from "../../../store/session";
 
 const ServerIndex = () => {
 	let dispatch = useDispatch();
@@ -29,34 +30,26 @@ const ServerIndex = () => {
 			.then(() => thunkReadUserServers())
 			.then(() => setIsLoaded(true));
 
-		return () => actionResetServers();
+		return () => actionResetAllServers();
 	}, [dispatch, joined, userId]);
 
 	const joinServer = (serverId, server) => {
-		// e.preventDefault();
-		// console.log("IS THIS WORKING????");
-		console.log(serverId);
 		setIsLoaded(false);
+		// .then(setJoined(!joined))
 
-		dispatch(thunkAddServerMember(serverId, "pending"))
+		return dispatch(thunkAddServerMember(serverId, "pending"))
+			.then(() => dispatch(authenticate()))
 			.then(() =>
 				history.push(`/channels/${server.id}/${server.channels[0].id}`)
-			)
-			.then(setJoined(!joined));
+			);
 	};
-
-	// if (allServers) console.log(allServers[0].server_members);
 
 	if (isLoaded) {
 		let servers = Object.values(allServers);
 
-		// console.log(`server index comp-----`, servers);
-
 		// return
 		return (
 			<div className="exp-bk">
-				{/* <div to="/channels/@me" className="exp-link">
-				</div> */}
 				<ServerNav />
 				<div className="explorer-container">
 					<div className="explorer-banner-container">
@@ -131,12 +124,7 @@ const ServerIndex = () => {
 													<div>{`${el.name}`}</div>
 												</div>
 												<div className="explorer-server-description">{`${el.description}`}</div>
-												<div
-													onClick={() =>
-														joinServer(el.id)
-													}
-													className="join-server"
-												>
+												<div className="join-server">
 													Join Server
 												</div>
 											</div>

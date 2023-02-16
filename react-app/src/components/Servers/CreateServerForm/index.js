@@ -6,6 +6,7 @@ import {
 	thunkCreateServer,
 	thunkReadUserServers,
 } from "../../../store/servers";
+import { authenticate } from "../../../store/session.js";
 import "./CreateServerForm.css";
 
 const CreateServerForm = () => {
@@ -32,9 +33,10 @@ const CreateServerForm = () => {
 			.then((data) =>
 				history.push(`/channels/${data.id}/${data.channels[0].id}`)
 			)
+			.then(() => dispatch(authenticate()))
 			.then(() => closeModal())
-			.catch((res) => {
-				const data = res.json();
+			.catch(async (res) => {
+				const data = await res.json();
 				if (data && data.errors) setErrors(data.errors);
 			});
 	};

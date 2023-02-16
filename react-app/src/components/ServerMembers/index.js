@@ -146,7 +146,7 @@ const ServerMembers = () => {
 							{admins.map((admin) => (
 								<div
 									key={admin.id}
-                                    id="admin"
+									id="admin"
 									className="individual-person"
 								>
 									<img
@@ -180,7 +180,7 @@ const ServerMembers = () => {
 							{members.map((member) => (
 								<div
 									key={member.id}
-                                    id="member"
+									id="member"
 									className="individual-person"
 									onClick={makeVisible}
 								>
@@ -215,7 +215,7 @@ const ServerMembers = () => {
 							{pending.map((pending) => (
 								<div
 									key={pending.id}
-                                    id="pending"
+									id="pending"
 									className="individual-person pending"
 								>
 									<img

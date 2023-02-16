@@ -42,7 +42,7 @@ export const thunkGetServerMembers = (serverId) => async (dispatch) => {
 	const res = await fetch(`/api/servers/${serverId}/members`);
 	if (res.ok) {
 		const serverMembers = await res.json();
-		console.log("serverMembers get =========", serverMembers.server_members)
+		// console.log("serverMembers get =========", serverMembers.server_members)
 		dispatch(actionGetServerMembers(serverMembers.server_members));
 		return serverMembers.server_members;
 	} else if (res.status < 500) {

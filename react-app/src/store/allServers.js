@@ -15,7 +15,7 @@ const actionReadAllAllServers = (allServers) => ({
 });
 
 // RESET
-export const actionResetServers = () => ({
+export const actionResetAllServers = () => ({
 	type: RESET_ALLSERVERS,
 });
 
