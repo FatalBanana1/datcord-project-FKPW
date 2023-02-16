@@ -126,7 +126,7 @@ export default function MemberPage({
 												}
 											/>
 										) : (
-											<>
+											<div className="member-nickname-container">
 												<h4 className="member-nickname">
 													{member.nickname}
 												</h4>
@@ -136,7 +136,7 @@ export default function MemberPage({
 												>
 													Edit
 												</h4>
-											</>
+											</div>
 										)}
 									</>
 								)}
@@ -153,7 +153,7 @@ export default function MemberPage({
 												}
 											/>
 										) : (
-											<>
+											<div className="member-nickname-container">
 												<h4 className="member-nickname">
 													{member.nickname}
 												</h4>
@@ -163,7 +163,7 @@ export default function MemberPage({
 												>
 													Edit
 												</h4>
-											</>
+											</div>
 										)}
 									</>
 								) : (
