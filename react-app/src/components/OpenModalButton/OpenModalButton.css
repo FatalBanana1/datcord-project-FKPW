@@ -1,40 +1,41 @@
 .OpenModalButton-button {
-    background: none;
-    border: 0;
-    font-size: 14px;
-    margin-left: 8px;
-    cursor: pointer;
+  background: none;
+  border: 0;
+  font-size: 14px;
+  margin-left: 8px;
+  cursor: pointer;
 }
 
 .Create-Channel {
-    color: #ffffff;
-    background: none;
-    border: 0;
-    font-size: 14px;
-    margin-left: 8px;
-    cursor: pointer;
+  color: #ffffff;
+  background: none;
+  border: 0;
+  font-size: 14px;
+  margin-left: 8px;
+  cursor: pointer;
 }
 
-.Edit, .Delete {
-    display: flex;
-    gap: 8px;
-    padding: 0px 5px;
-    align-items: center;
-    margin-left: 0;
+.Edit,
+.Delete {
+  display: flex;
+  gap: 8px;
+  padding: 0px 5px;
+  align-items: center;
+  margin-left: 0;
 }
 
 .Edit-Channel {
-    font-size: 12px;
-    color: #96989d;
-    display: flex;
-    align-items: center;
-    margin-left: 0;
+  font-size: 12px;
+  color: #96989d;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
 }
 
 .DeleteChannel {
-    color: #ffffff;
-    background: none;
-    border: 0;
-    font-size: 13px;
-    margin-left: 8px;
+  color: #ffffff;
+  background: none;
+  border: 0;
+  font-size: 13px;
+  margin-left: 8px;
 }
