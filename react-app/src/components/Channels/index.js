@@ -33,6 +33,7 @@ export default function Channels() {
 	let channels = Object.values(
 		useSelector((state) => state.channels.channels)
 	);
+	// if (channels) channels = channels.channels
 	const serverMembers = Object.values(
 		useSelector((state) => state.serverMembers)
 	);
