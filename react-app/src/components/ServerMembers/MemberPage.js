@@ -114,7 +114,7 @@ export default function MemberPage({
 						<div className="card-member-inner-div">
 							<div className="member-nickName-div">
 								{userIsOwner && (
-									<>
+									<div className="member-nickname-div-container">
 										{editNickName ? (
 											<NickNameEdit
 												member={member}
@@ -126,7 +126,7 @@ export default function MemberPage({
 												}
 											/>
 										) : (
-											<>
+											<div className="member-nickname-container">
 												<h4 className="member-nickname">
 													{member.nickname}
 												</h4>
@@ -136,9 +136,9 @@ export default function MemberPage({
 												>
 													Edit
 												</h4>
-											</>
+											</div>
 										)}
-									</>
+									</div>
 								)}
 								{(permission || isUser) && isNotOwner ? (
 									<>
@@ -153,7 +153,7 @@ export default function MemberPage({
 												}
 											/>
 										) : (
-											<>
+											<div className="member-nickname-container">
 												<h4 className="member-nickname">
 													{member.nickname}
 												</h4>
@@ -163,7 +163,7 @@ export default function MemberPage({
 												>
 													Edit
 												</h4>
-											</>
+											</div>
 										)}
 									</>
 								) : (
@@ -183,10 +183,13 @@ export default function MemberPage({
 							<div className="role-section">
 								<h4 className="member-h4">Role</h4>
 								{!isNotOwner ? (
-									<div className="member-role-div">
-										<p className="member-role">
-											{member.role}
-										</p>
+									<div id="owner" className="member-role-div">
+										<div className="member-role-container">
+											<div id="owner" className="member-role-circle"></div>
+											<p className="member-role">
+												{member.role}
+											</p>
+										</div>
 									</div>
 								) : (
 									<>
@@ -203,9 +206,12 @@ export default function MemberPage({
 													/>
 												) : (
 													<div className="member-role-div">
-														<p className="member-role">
-															{member.role}
-														</p>
+														<div className="member-role-container">
+															<div id={member.role} className="member-role-circle"></div>
+															<p className="member-role">
+																{member.role}
+															</p>
+														</div>
 														<p
 															className="role-edit-button"
 															onClick={
@@ -218,10 +224,13 @@ export default function MemberPage({
 												)}
 											</>
 										) : (
-											<div className="member-role-div">
-												<p className="member-role">
-													{member.role}
-												</p>
+											<div id={member.role} className="member-role-div">
+												<div className="member-role-container">
+													<div id={member.role} className="member-role-circle"></div>
+													<p className="member-role">
+														{member.role}
+													</p>
+												</div>
 											</div>
 										)}
 									</>
