@@ -422,6 +422,12 @@ def seed_channel_messages():
             cm38,
             cm39,
             cm40,
+        ]
+    )
+    db.session.commit()
+
+    db.session.add_all(
+        [
             cm41,
             cm42,
             cm43,

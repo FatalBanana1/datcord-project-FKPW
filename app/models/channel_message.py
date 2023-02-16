@@ -19,7 +19,7 @@ class ChannelMessage(db.Model):
         db.ForeignKey(add_prefix_for_prod("channels_table.id")),
         nullable=False,
     )
-    message = db.Column(db.Text(1000), nullable=True)
+    message = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
