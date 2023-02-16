@@ -114,7 +114,7 @@ export default function MemberPage({
 						<div className="card-member-inner-div">
 							<div className="member-nickName-div">
 								{userIsOwner && (
-									<>
+									<div className="member-nickname-div-container">
 										{editNickName ? (
 											<NickNameEdit
 												member={member}
@@ -138,7 +138,7 @@ export default function MemberPage({
 												</h4>
 											</div>
 										)}
-									</>
+									</div>
 								)}
 								{(permission || isUser) && isNotOwner ? (
 									<>

@@ -41,10 +41,13 @@
     border-radius: 10px;
     /* font-family: "Segoe UI Variable"; */
     font-family: "Roboto";
+    box-sizing: border-box;
+    padding: 12px;
 }
 
 .card-member-inner-div {
-    padding: 12px
+    /* width: calc(100% - 12px); */
+    width: 100%;
 }
 
 .member-nickName-div{
@@ -56,23 +59,35 @@
     padding-bottom: 10px;
     color: white;
     height: max-content;
+    width: 100%;
+}
+
+.member-nickname-div-container {
+    width: 100%;
 }
 
 .member-nickname-container {
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .nickname-edit-button {
     cursor: pointer;
+    width: 32px;
 }
 
 .member-nickname {
+    width: calc(100% - 32px);
+    /* height: 28px; */
     font-weight: 700;
     font-size: 21px;
     color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .member-since-section{
