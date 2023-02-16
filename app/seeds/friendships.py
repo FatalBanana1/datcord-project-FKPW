@@ -1,7 +1,7 @@
 from app.models import db, Friendship, environment, SCHEMA
 
 
-def seed_users():
+def seed_friendships():
     f1 = Friendship(user_id=3, friend_id=1, role="friend")
     f2 = Friendship(user_id=3, friend_id=2, role="friend")
     f3 = Friendship(user_id=3, friend_id=4, role="friend")
@@ -11,7 +11,7 @@ def seed_users():
     db.session.commit()
 
 
-def undo_users():
+def undo_friendships():
     if environment == "production":
         db.session.execute(
             f"TRUNCATE table {SCHEMA}.friendships_table RESTART IDENTITY CASCADE;"

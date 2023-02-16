@@ -1,25 +1,31 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from .server_routes import server_routes
-from app.models import db, Server, ServerMember, Friendship
+from app.models import db, Server, ServerMember, Friendship, User
 
 # api/friends
 friendship_routes = Blueprint("friendships", __name__)
 
 
-# # GET SERVER MEMBERS
-# @server_routes.route("/<int:server_id>/members")
-# @login_required
-# def all_server_members(server_id):
-#     server = Server.query.get(server_id)
-#     if (not server):
-#         return {"errors": ["Server does not exist"]}, 404
+# GET SERVER MEMBERS
+@friendship_routes.route("/")
+@login_required
+def all_server_members():
+    user = User.query.get(current_user.id)
+    friends = user.friendships
+    print(
+        "back end get friendships--------+++++++++++++++++++=====================>>>>>>>>",
+        friends,
+    )
+    # if (not friend):
+    #     return {"errors": ["Friendship does not exist"]}, 404
 
-#     members = [member.to_dict() for member in server.server_members]
-#     if (len(members) > 0):
-#         return {'server_members': members}
-#     else:
-#         return {"server_members": 'No current members in this server'}
+    # members = [member.to_dict() for member in server.server_members]
+    # if (len(members) > 0):
+    #     return {'server_members': members}
+    # else:
+    #     return {"server_members": 'No current members in this server'}
+    return {"friends": friends}
 
 
 # # ADD SERVER MEMBER
