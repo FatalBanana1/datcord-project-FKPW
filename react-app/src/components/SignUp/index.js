@@ -34,7 +34,7 @@ export default function SignUp() {
         }
 
         if (Object.keys(submitErrors) > 0) {
-            console.log("submitErrors >>>>>>>>>>>>", submitErrors)
+            // console.log("submitErrors >>>>>>>>>>>>", submitErrors)
             return setErrors(submitErrors);
         }
 
@@ -52,7 +52,7 @@ export default function SignUp() {
 					if (data && data.errors) setErrors(data.errors);
 				});
 		} else {
-            console.log("dfaldfkajdfkajkdlfjad")
+            // console.log("dfaldfkajdfkajkdlfjad")
             submitErrors.password = "Confirm Password field must be the same as the Password field"
 			return setErrors(submitErrors);
 		}

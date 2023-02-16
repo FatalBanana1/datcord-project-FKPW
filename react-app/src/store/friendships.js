@@ -39,16 +39,12 @@ export const actionResetFriendship = () => ({
 
 // GET
 export const thunkGetFriendships = () => async (dispatch) => {
-	console.log("friendships front store get PRE =========")
-
-	const res = await fetch(`/api/friends`);
-
-	console.log("friendships front store get POST=========", res)
-
+	const res = await fetch(`/api/friendships/`);
+	// console.log("friendships front store get POST=========", res);
 	if (res.ok) {
-		const serverMembers = await res.json();
-		dispatch(actionGetFriendships(serverMembers.server_members));
-		return serverMembers.server_members;
+		const data = await res.json();
+		dispatch(actionGetFriendships(data.friendships));
+		return data;
 	} else if (res.status < 500) {
 		const data = await res.json();
 		if (data.errors) {
@@ -60,20 +56,18 @@ export const thunkGetFriendships = () => async (dispatch) => {
 };
 
 // CREATE
-export const thunkAddFriendship = (serverId, role) => async (dispatch) => {
-	const res = await fetch(`/api/servers/${serverId}/members`, {
+export const thunkAddFriendship = (payload) => async (dispatch) => {
+	const res = await fetch(`/api/friendships/`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({
-			role,
-		}),
+		body: JSON.stringify(payload),
 	});
 	if (res.ok) {
 		const data = await res.json();
-		dispatch(actionAddFriendship(data.server_member));
-		return data.server_member;
+		dispatch(actionAddFriendship(data.friendship));
+		return data.friendship;
 	} else if (res.status < 500) {
 		const data = await res.json();
 		if (data.errors) {
@@ -85,51 +79,45 @@ export const thunkAddFriendship = (serverId, role) => async (dispatch) => {
 };
 
 // EDIT
-export const thunkEditFriendship =
-	(serverId, serverMemberId, serverMember) => async (dispatch) => {
-		console.log("pre-Fetch ----->", serverMember);
-		const res = await fetch(
-			`/api/servers/${serverId}/membership/${serverMemberId}`,
-			{
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					serverMember,
-				}),
-			}
-		);
-		if (res.ok) {
-			const data = await res.json();
-			dispatch(actionEditFriendship(data.server_member));
-			return data.server_member;
-		} else if (res.status < 500) {
-			const data = await res.json();
-			if (data.errors) {
-				return data.errors;
-			}
-		} else {
-			return ["An error occurred. Please try again."];
+export const thunkEditFriendship = (friendshipId) => async (dispatch) => {
+	// console.log("pre-Fetch ----->", friendshipId);
+	const res = await fetch(`/api/friendships/${friendshipId}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			friendshipId,
+		}),
+	});
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(actionEditFriendship(data.server_member));
+		return data.server_member;
+	} else if (res.status < 500) {
+		const data = await res.json();
+		if (data.errors) {
+			return data.errors;
 		}
-	};
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
 
 // DELETE
 export const thunkDeleteFriendship =
-	(friendshipId, permission) => async (dispatch) => {
+	(friendshipId, permission, role) => async (dispatch) => {
 		// console.log("Pre-Fetch ------>", serverId, serverMemberId, permission);
-		const res = await fetch(
-			`/api/friends/${friendshipId}`,
-			{
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					permission: permission,
-				}),
-			}
-		);
+		const res = await fetch(`/api/friendships/${friendshipId}`, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				permission,
+				role,
+			}),
+		});
 		// console.log("Post-Fetch ------>", res);
 		if (res.ok) {
 			const data = await res.json();
@@ -145,14 +133,14 @@ export const thunkDeleteFriendship =
 		}
 	};
 
-const normalize = (serverMembers) => {
-	const data = {};
-	if (serverMembers === "No current members in this server") {
+const normalize = (data) => {
+	const newData = {};
+	if (data === "No current members in this server") {
 		return {};
 	}
-	if (serverMembers) {
-		serverMembers.forEach((member) => (data[member.id] = member));
-		return data;
+	if (data) {
+		data.forEach((el) => (newData[el.id] = el));
+		return newData;
 	}
 };
 
@@ -161,7 +149,7 @@ const initialState = {};
 export default function friendshipsReducer(state = initialState, action) {
 	switch (action.type) {
 		case GET_FRIENDSHIPS: {
-			console.log(`action in reducer FRIend >>>>>>>>>>>>`, action);
+			// console.log(`action in reducer FRIend >>>>>>>>>>>>`, action);
 			let newState = { ...state };
 			newState = normalize(action.friendships);
 			return newState;
@@ -169,22 +157,22 @@ export default function friendshipsReducer(state = initialState, action) {
 		case ADD_FRIENDSHIP: {
 			let newState = { ...state };
 			newState = {
-				...state.serverMembers,
-				[action.serverMember.id]: action.serverMember,
+				...state.friendships,
+				[action.friendship.id]: action.friendship,
 			};
 			return newState;
 		}
 		case EDIT_FRIENDSHIP: {
 			let newState = { ...state };
-			// newState = { ...state.serverMembers, [action.serverMember.id]: action.serverMember}
-			newState[action.serverMember.id] = action.serverMember;
+			// newState = { ...state.friendships, [action.friendship.id]: action.friendship}
+			newState[action.friendship.id] = action.friendship;
 			return newState;
 		}
 		case DELETE_FRIENDSHIP: {
 			// console.log(`action in reducer SMBR >>>>>>>>>>>>`, action);
 			// console.log(`action in reducer SMBR >>>>>>>>>>>>`, action.memberId);
 			let newState = { ...state };
-			delete newState[action.memberId];
+			delete newState[action.friendshipId];
 			return newState;
 		}
 		case RESET_FRIENDSHIPS: {
