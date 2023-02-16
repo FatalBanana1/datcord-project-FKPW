@@ -8,7 +8,6 @@ import serverMembers from "./serverMembers";
 import allServerReducer from "./allServers";
 import friendshipsReducer from "./friendships";
 import dmReducer from "./directMessages";
-import themeReducer from "./users";
 
 const rootReducer = combineReducers({
   session,
@@ -19,7 +18,6 @@ const rootReducer = combineReducers({
   allServers: allServerReducer,
   friendships: friendshipsReducer,
   directMessages: dmReducer,
-  userThemes: themeReducer,
 });
 
 let enhancer;

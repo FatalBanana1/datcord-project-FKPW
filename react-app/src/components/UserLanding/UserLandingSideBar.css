@@ -119,9 +119,6 @@ a.UserLanding-sidebar-channel-name {
 
 #dark.UserLanding-sidebar-channel-name.active {
   color: #303031;
-}
-
-.UserLanding-sidebar-channel-name.active {
   background-color: #d1d5da;
 }
 

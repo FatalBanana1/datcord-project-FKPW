@@ -62,7 +62,7 @@ export default function UserLandingSideBar({ page, isLoaded }) {
         </div>
 
         <div className="UserLanding-sidebar-channel-content">
-          <div className="UserLanding-sidebar-channel-user-info">
+          <div className="UserLanding-sidebar-channel-user-info" id={theme}>
             <div className="UserLanding-sidebar-channel-user-container">
               <div className="UserLanding-sidebar-channel-user-icons">
                 <img
@@ -71,7 +71,7 @@ export default function UserLandingSideBar({ page, isLoaded }) {
                   alt="User profile image"
                 />
               </div>
-              <div className="UserLanding-sidebar-channel-user-name">
+              <div className="UserLanding-sidebar-channel-user-name" id={theme}>
                 {user && user.username}
               </div>
             </div>

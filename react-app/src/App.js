@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 // import Splash from "./components/Splash/index";
 // import SignupFormPage from "./components/SignupFormPage";
@@ -20,14 +20,21 @@ import ServerIndex from "./components/Servers/ServerIndex";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const user = useSelector((state) => state.session.user);
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch, authenticate]);
 
   if (!isLoaded) return null;
+  console.log("THEME FROM APP.JS --------->", user);
 
-  return (
-    isLoaded && (
+  if (isLoaded) {
+    console.log("USER THEME ---------->", user.theme);
+    const theme = user.theme;
+
+    return (
       <div className="App-container">
         <Switch>
           <Route exact path="/">
@@ -44,36 +51,36 @@ function App() {
             <EmptyServerCreateChannelForm />
           </Route>
           <ProtectedRoute path="/channels/@me" exact={true}>
-            <div className="MainPage-container">
-              <ServerNav />
-              <MainContent page="profile" />
+            <div className="MainPage-container" id={theme}>
+              <ServerNav theme={theme} />
+              <MainContent page="profile" theme={theme} />
             </div>
           </ProtectedRoute>
-          <ProtectedRoute path="/channels/:serverId/:channelId" exact={true}>
-            <div className="MainPage-container">
-              <ServerNav />
-              <MainContent page="channel" isLoaded={isLoaded} />
+          <ProtectedRoute path="/channels/:serverId/:channelId">
+            <div className="MainPage-container" id={theme}>
+              <ServerNav theme={theme} />
+              <MainContent page="channel" isLoaded={isLoaded} theme={theme} />
             </div>
           </ProtectedRoute>
           <ProtectedRoute
             path="/channels/:serverId/:channelId/edit"
             exact={true}
           >
-            <div className="MainPage-container">
-              <EditDeleteChannelModal />
+            <div className="MainPage-container" theme={theme}>
+              <EditDeleteChannelModal theme={theme} />
             </div>
           </ProtectedRoute>
 
           <ProtectedRoute path="/gotMilk" exact={true}>
-            <div className="MainPage-container">
-              <ServerIndex />
+            <div className="MainPage-container" id={theme}>
+              <ServerIndex theme={theme} />
             </div>
           </ProtectedRoute>
           <Route>404: Error. Got Milk?</Route>
         </Switch>
       </div>
-    )
-  );
+    );
+  }
 }
 
 export default App;
