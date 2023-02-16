@@ -183,10 +183,13 @@ export default function MemberPage({
 							<div className="role-section">
 								<h4 className="member-h4">Role</h4>
 								{!isNotOwner ? (
-									<div className="member-role-div">
-										<p className="member-role">
-											{member.role}
-										</p>
+									<div id="owner" className="member-role-div">
+										<div className="member-role-container">
+											<div id="owner" className="member-role-circle"></div>
+											<p className="member-role">
+												{member.role}
+											</p>
+										</div>
 									</div>
 								) : (
 									<>
@@ -203,9 +206,12 @@ export default function MemberPage({
 													/>
 												) : (
 													<div className="member-role-div">
-														<p className="member-role">
-															{member.role}
-														</p>
+														<div className="member-role-container">
+															<div id={member.role} className="member-role-circle"></div>
+															<p className="member-role">
+																{member.role}
+															</p>
+														</div>
 														<p
 															className="role-edit-button"
 															onClick={
@@ -218,10 +224,13 @@ export default function MemberPage({
 												)}
 											</>
 										) : (
-											<div className="member-role-div">
-												<p className="member-role">
-													{member.role}
-												</p>
+											<div id={member.role} className="member-role-div">
+												<div className="member-role-container">
+													<div id={member.role} className="member-role-circle"></div>
+													<p className="member-role">
+														{member.role}
+													</p>
+												</div>
 											</div>
 										)}
 									</>

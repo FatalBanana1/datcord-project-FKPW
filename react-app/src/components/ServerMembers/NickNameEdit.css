@@ -9,6 +9,8 @@
     background-color: #3f434a;
     color: white;
     border: none;
+    border-radius: 4px;
+    padding-left: 4px;
 }
 
 .save-nickName-button {
