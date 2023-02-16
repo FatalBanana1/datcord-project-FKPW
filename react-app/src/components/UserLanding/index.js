@@ -6,13 +6,13 @@ export default function UserLanding({ page }) {
 	switch (page) {
 		case "channel": {
 			return (
-				<div className="UserLanding-container reverse">
-					<div className="UserLanding-server-members">
-						<ServerMembers />
-					</div>
-					<div className="UserLanding-main-content">
+				<div className="UserLanding-container">
+					{/* <div className="UserLanding-main-content"> */}
+					{/* <div className="UserLanding-server-members"> */}
 						<CMIndex />
-					</div>
+						<ServerMembers />
+					{/* </div> */}
+					{/* </div> */}
 				</div>
 			);
 		}
@@ -26,7 +26,7 @@ export default function UserLanding({ page }) {
             </ol> */}
 					<div className="UserLanding-main-content">
 						<div className="UserLanding-header">
-							
+
 						</div>
 						<div className="UserLanding-status">
 							{/* adding 2 as placeholder for now */}

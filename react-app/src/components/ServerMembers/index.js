@@ -96,7 +96,7 @@ const ServerMembers = () => {
 	return (
 		user &&
 		membersArray.length > 0 && (
-			<>
+			<div className="ServerMember-sidebar">
 				{!isMember && (
 					<></>
 					// <div className="join-server-div">
@@ -104,8 +104,10 @@ const ServerMembers = () => {
 					//     <button type="submit" onClick={join} className='join-server-button'>Join {server.name}</button>
 					// </div>
 				)}
-				<div className="server-members-div">
-					<div className="server-members-header"></div>
+				{/* <div className="server-members-div"> */}
+				{/* <div className="UserLanding-sidebar-header"></div> */}
+				<div className="server-members-header"></div>
+				<div className="ServerMember-content">
 					<h1 className="total-members">{`Total Members - ${membersArray.length}`}</h1>
 					{owners.length > 0 && (
 						<div className="owner-div section">
@@ -244,7 +246,7 @@ const ServerMembers = () => {
 						</div>
 					)}
 				</div>
-			</>
+			</div>
 		)
 	);
 };

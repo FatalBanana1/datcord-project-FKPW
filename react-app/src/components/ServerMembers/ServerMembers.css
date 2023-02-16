@@ -2,10 +2,26 @@
 	display: flex;
 	flex-direction: column;
 	background-color: rgb(48, 49, 54);
-	height: 100%;
+	height: calc(100% - 46px);
+	/* height: 100%; */
 	width: 230px;
 	overflow-y: scroll;
 	overflow-x: hidden;
+}
+
+.ServerMember-sidebar {
+	width: 230px;
+	height: 100vh;
+	box-sizing: border-box;
+	background-color: #303136;
+	display: flex;
+	flex-direction: column;
+}
+
+.ServerMember-content {
+	height: calc(100% - 48px);
+	width: 230px;
+	overflow-y: auto;
 }
 
 .join-server-div {
@@ -41,22 +57,23 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	/* padding: 12px 16px; */
+	padding: 12px 16px;
+	/* margin-top: 5px; */
 	box-sizing: border-box;
 	border-bottom: 1px;
 	color: #ffffff;
-	background-color: #36393f;
 	box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
 		0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
 }
 
 .total-members {
 	font-size: 15px;
-	width: calc(100% - 20px);
+	/* width: calc(100% - 20px); */
 	color: rgba(211, 212, 214, 0.8);
 	padding-top: 15px;
 	padding-bottom: 10px;
 	padding-left: 5px;
+	margin: 0;
 }
 
 /* h2 {
@@ -187,13 +204,14 @@
 
 .owner-div.section,
 .admin-div.section,
+.regular-members-div.section,
 .pending-div.section {
+	padding-left: 5px;
 	width: calc(100% - 10px);
 }
 
 .ServerMembers-headers {
-	width: calc(100% - 20px);
-	width: 230px;
+	width: 100%;
 	padding-left: 5px;
 	padding-bottom: 3px;
 	font-size: 12px;
