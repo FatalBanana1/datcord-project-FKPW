@@ -13,9 +13,8 @@ import EditChannelForm from "./EditDeleteChannelModal";
 import EditServer from "../Servers/EditServer";
 import DeleteServer from "../Servers/DeleteServer";
 import { thunkGetServerMembers } from "../../store/serverMembers";
-import { logout } from "../../store/session";
+import { logout, thunkSetTheme } from "../../store/session";
 import { thunkReadUserServers } from "../../store/servers";
-import { thunkSetTheme } from "../../store/users";
 import UserLanding from "../UserLanding";
 
 export default function Channels() {
@@ -62,7 +61,7 @@ export default function Channels() {
   };
 
   const handleChangeTheme = (theme) => {
-    return dispatch(thunkSetTheme(user.id, theme));
+    return dispatch(thunkSetTheme(user.id, theme)).then();
   };
 
   useEffect(() => {

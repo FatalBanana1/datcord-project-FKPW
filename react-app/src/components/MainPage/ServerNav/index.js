@@ -19,7 +19,7 @@ import { thunkGetChannels } from "../../../store/channels";
 import CreateServerForm from "../../Servers/CreateServerForm";
 import OpenModalButton from "../../OpenModalButton";
 
-export default function ServerNav() {
+export default function ServerNav({ theme }) {
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
   const allServers = useSelector((state) => state.servers);
@@ -37,7 +37,7 @@ export default function ServerNav() {
     dispatch(thunkGetChannels(serverId)).then(setLoaded(true));
   };
 
-  const theme = user.theme;
+  // const theme = user.theme;
   // console.log("THEME-------------->", theme);
 
   // console.log(`FRONT server nav comp=======`, servers[0].channels[0].id);
