@@ -1,15 +1,16 @@
 .cms-container {
-	width: 100%;
-	height: calc(100% - 40px);
+	width: calc(100% - 230px);
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 .cms-ct {
-	height: 100%;
+	height: calc(100% - 48px);
 	width: 100%;
-	/* overflow-y: scroll; */
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 }
 
 .cm-form-container {
@@ -40,7 +41,7 @@
 } */
 
 .cms-ch-name {
-	width: inherit;
+	width: 100%;
 	height: 48px;
 	display: flex;
 	justify-content: space-between;
@@ -59,9 +60,13 @@
 	bottom: 0;
 	padding-right: 0;
 	margin-right: 0;
-	margin-left: 5px;
-	padding-bottom: 25px;
+	/* padding-left: 10px; */
+	/* margin-left: 10px; */
+	/* padding-bottom: 25px; */
+	display: flex;
+	justify-content: center;
 	outline: 0;
+	box-sizing: border-box;
 }
 
 .cm-overflow {
@@ -76,6 +81,7 @@
 	word-wrap: break-word;
 	overflow-y: scroll;
 	height: 100%;
+	width: 100%;
 }
 
 .msg-ct {
