@@ -48,6 +48,10 @@
   margin-bottom: 10px;
 }
 
+.server-dropdown-edit:hover {
+  color: white;
+}
+
 .OpenModaldiv-edit-button {
   display: flex;
   justify-content: space-between;
@@ -66,6 +70,10 @@
 .server-dropdown-delete {
   font-size: 14px;
   color: rgb(255, 107, 107);
+}
+
+.server-dropdown-delete:hover {
+  color: red;
 }
 
 .UserLanding-Sidebar-user-dropdown {
@@ -96,5 +104,5 @@ a.UserLanding-sidebar-channel-user-home {
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
