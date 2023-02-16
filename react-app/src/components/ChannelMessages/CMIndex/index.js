@@ -354,7 +354,7 @@ const CMIndex = () => {
 												/>
 											) : (
 												<div className="msg-ct">
-													<div className="cms-msg-header">
+													<div className="cms-msg-header" id={theme}>
 														{i - 1 >= 0 &&
 														cms &&
 														cms.length &&
@@ -369,7 +369,7 @@ const CMIndex = () => {
 																{message.role ===
 																"owner" ? (
 																	<div className="row">
-																		<div className="cms-admin">{`${message.sender_nickname}`}</div>
+																		<div id={theme} className="cms-admin">{`${message.sender_nickname}`}</div>
 																		<img
 																			src={
 																				crown
@@ -380,14 +380,14 @@ const CMIndex = () => {
 																	</div>
 																) : message.role ===
 																  "admin" ? (
-																	<div className="cms-admin">{`${message.sender_nickname}`}</div>
+																	<div id={theme} className="cms-admin">{`${message.sender_nickname}`}</div>
 																) : message.role ===
 																  "member" ? (
-																	<div className="cms-member">
+																	<div id={theme} className="cms-member">
 																		{`${message.sender_nickname}`}{" "}
 																	</div>
 																) : (
-																	<div className="cms-pending">{`${message.sender_nickname}`}</div>
+																	<div id={theme} className="cms-pending">{`${message.sender_nickname}`}</div>
 																)}
 
 																<div className="cms-msg-date" id={theme}>
@@ -537,7 +537,7 @@ const CMIndex = () => {
 																{message.role ===
 																"owner" ? (
 																	<>
-																		<div className="cms-admin">{`${message.sender_nickname}`}</div>
+																		<div id={theme} className="cms-admin">{`${message.sender_nickname}`}</div>
 																		<img
 																			src={
 																				crown
@@ -548,14 +548,14 @@ const CMIndex = () => {
 																	</>
 																) : message.role ===
 																  "admin" ? (
-																	<div className="cms-admin">{`${message.sender_nickname}`}</div>
+																	<div id={theme} className="cms-admin">{`${message.sender_nickname}`}</div>
 																) : message.role ===
 																  "member" ? (
-																	<div className="cms-member">
+																	<div id={theme} className="cms-member">
 																		{`${message.sender_nickname}`}{" "}
 																	</div>
 																) : (
-																	<div className="cms-pending">{`${message.sender_nickname}`}</div>
+																	<div id={theme} className="cms-pending">{`${message.sender_nickname}`}</div>
 																)}
 																<div className="cms-msg-date">
 																	{date
@@ -572,7 +572,10 @@ const CMIndex = () => {
 															+message.sender_id ||
 														role === "admin" ||
 														role === "owner" ? (
-															<div className="cms-options absolute-op">
+															<div
+																 id={theme}
+																className="cms-options absolute-op"
+															>
 																<div
 																	className="cms-edit"
 																	data-id={

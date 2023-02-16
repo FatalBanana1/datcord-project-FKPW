@@ -210,6 +210,18 @@
 	color: white;
 }
 
+#light.cms-member {
+	color: rgb(166, 92, 228);
+}
+
+#light.cms-admin {
+	color: rgb(73, 193, 147);
+}
+
+#light.cms-pending {
+	color: #5c5e66;
+}
+
 .cms-member:hover,
 .cms-pending:hover,
 .cms-admin:hover {
