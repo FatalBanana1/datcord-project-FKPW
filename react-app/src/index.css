@@ -61,3 +61,8 @@
 .Navigation-display-none {
   display: none;
 }
+
+/* Remove outline from all input fields */
+input:focus {
+  outline: none;
+}
