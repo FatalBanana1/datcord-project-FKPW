@@ -16,6 +16,7 @@ import "./components/MainPage/MainPage.css";
 import EditDeleteChannelModal from "./components/Channels/EditDeleteChannelModal/dp-index";
 import EmptyServerCreateChannelForm from "./components/MainPage/EmptyServerCreateChannelForm";
 import ServerIndex from "./components/Servers/ServerIndex";
+import NotFound from "./components/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -83,7 +84,10 @@ function App() {
               <ServerIndex theme={theme} />
             </div>
           </ProtectedRoute>
-          <Route>404: Error. Got Milk?</Route>
+          <Route>
+            {/* <Navigation /> */}
+            <NotFound />
+          </Route>
         </Switch>
       </div>
     );
