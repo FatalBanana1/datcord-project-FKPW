@@ -617,8 +617,10 @@ const CMIndex = ({ theme }) => {
   } else {
     return (
       <div className="loader-container">
-        <div className="loader-header"># Summoning Pandas...</div>
-        <div className="loader"></div>
+        <div className="loader-header" id={theme}>
+          # Summoning Pandas...
+        </div>
+        <div className="loader" id={theme}></div>
       </div>
     );
   }
