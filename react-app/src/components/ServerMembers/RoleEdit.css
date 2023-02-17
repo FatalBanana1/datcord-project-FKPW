@@ -6,9 +6,19 @@
 }
 
 .role-input {
+    border: none;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+#dark.role-input {
     background-color: #3f434a;
     color: white;
-    border: none;
+}
+
+#light.role-input {
+    background-color: #e9eaed;
+    color: #313338;
 }
 
 .role-button {
@@ -16,27 +26,41 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 5px;
+    /* padding-left: 5px;g */
+    gap: 8px;
 }
 
-.save-role-button {
+.save-role-button,
+.cancel-role-button {
     border: none;
-    color: white;
+    border-radius: 4px;
     /* background-color: rgb(24,25,28); */
     font-family: "Roboto";
     font-size: 15px;
-    background-color: #3f434a;
     width: 70px;
+    padding: 3px;
     /* margin-top: 8px; */
 }
 
-.cancel-role-button {
+/* .cancel-role-button {
     border: none;
     color: white;
-    /* background-color: rgb(24,25,28); */
+    background-color: rgb(24,25,28);
     background-color: #3f434a;
     font-family: "Roboto";
     font-size: 15px;
     width: 70px;
     margin-top: 8px;
+} */
+
+#dark.save-role-button,
+#dark.cancel-role-button {
+    color: white;
+    background-color: #3f434a;
+}
+
+#light.save-role-button,
+#light.cancel-role-button {
+    background-color: #e9eaed;
+    color: #313338;
 }

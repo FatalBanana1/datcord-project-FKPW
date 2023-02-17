@@ -299,6 +299,7 @@ export default function MemberPage({
 														endEditRole={
 															endEditRole
 														}
+														theme={theme}
 													/>
 												) : (
 													<div className="member-role-div">

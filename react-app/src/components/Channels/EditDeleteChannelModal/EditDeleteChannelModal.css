@@ -71,7 +71,6 @@
 .CreateChannelForm-button-delete.tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
 }
 
 .EditChannelForm-button-delete-text {
