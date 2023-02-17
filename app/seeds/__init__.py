@@ -23,19 +23,19 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         undo_direct_messages()
-        undo_friendships()
         undo_channel_messages()
         undo_server_members()
         undo_channels()
         undo_servers()
         undo_users()
+        undo_friendships()
     # Add other seed functions here
+    seed_friendships()
     seed_users()
     seed_servers()
     seed_channels()
     seed_server_members()
     seed_channel_messages()
-    seed_friendships()
     seed_direct_messages()
 
 
@@ -44,9 +44,9 @@ def seed():
 def undo():
     # Add other undo functions here
     undo_direct_messages()
-    undo_friendships()
     undo_channel_messages()
     undo_server_members()
     undo_channels()
     undo_servers()
     undo_users()
+    undo_friendships()
