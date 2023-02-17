@@ -120,4 +120,4 @@ Datcord is a full-stack web application cloned and inspired by Discord. The buil
 
 ![datcord-dbdiagram]
 
-[datcord-dbdiagram]: ./datcord-schema.png
+[datcord-dbdiagram]: ./datcords-schema.png

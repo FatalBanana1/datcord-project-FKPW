@@ -4,7 +4,7 @@
 
 ![datcord-dbdiagram]
 
-[datcord-dbdiagram]: ./datcord-schema.png
+[datcord-dbdiagram]: ./datcords-schema.png
 
 ## API Documentation
 
