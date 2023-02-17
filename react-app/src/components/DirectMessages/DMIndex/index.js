@@ -41,38 +41,38 @@ export default function DMIndex({ theme }) {
 		scrollToBottom();
 	}, [loadBottom, messages, dms, newImage]);
 
-	useEffect(() => {
-		scrollToBottom();
-		dispatch(thunkReadAllDirectMessages(serverId, channelId)).then(() => {
-			setIsLoaded(true);
-			setLoadBottom(true);
-		});
+	// useEffect(() => {
+	// 	scrollToBottom();
+	// 	dispatch(thunkReadAllDirectMessages(serverId, channelId)).then(() => {
+	// 		setIsLoaded(true);
+	// 		setLoadBottom(true);
+	// 	});
 
-		return () => {
-			setChatInput("");
-			setMessages([]);
-			setEdit(999999990);
-		};
-	}, [friendId, senderId, image, reload]);
+	// 	return () => {
+	// 		setChatInput("");
+	// 		setMessages([]);
+	// 		setEdit(999999990);
+	// 	};
+	// }, [friendId, senderId, image, reload]);
 
-	useEffect(() => {
-		// open socket connection
-		// create websocket
-		socket = io();
-		// socket.emit("join", { channelId: channelId, username: user.username });
+	// useEffect(() => {
+	// 	// open socket connection
+	// 	// create websocket
+	// 	socket = io();
+	// 	// socket.emit("join", { channelId: channelId, username: user.username });
 
-		socket.on("direct_message", (direct_message) => {
-			setMessages((messages) => [...messages, direct_message]);
-		});
+	// 	socket.on("direct_message", (direct_message) => {
+	// 		setMessages((messages) => [...messages, direct_message]);
+	// 	});
 
-		// when component unmounts, disconnect
-		return () => {
-			setChatInput("");
-			socket.disconnect();
-			// setMessages([]);
-			dispatch(actionResetChannelMessages());
-		};
-	}, [user.id, serverId, channelId]);
+	// 	// when component unmounts, disconnect
+	// 	return () => {
+	// 		setChatInput("");
+	// 		socket.disconnect();
+	// 		// setMessages([]);
+	// 		dispatch(actionResetChannelMessages());
+	// 	};
+	// }, [user.id, serverId, channelId]);
 
 	if (isLoaded) {
 		// return
