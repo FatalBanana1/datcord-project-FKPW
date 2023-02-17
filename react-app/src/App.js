@@ -28,11 +28,12 @@ function App() {
   }, [dispatch, authenticate]);
 
   if (!isLoaded) return null;
-  console.log("THEME FROM APP.JS --------->", user);
+  // console.log("THEME FROM APP.JS --------->", user);
 
   if (isLoaded) {
-    console.log("USER THEME ---------->", user.theme);
-    const theme = user.theme;
+    // console.log("USER THEME ---------->", user.theme);
+    let theme = "dark";
+    if (user) theme = user.theme
 
     return (
       <div className="App-container">
