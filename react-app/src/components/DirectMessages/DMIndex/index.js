@@ -243,7 +243,7 @@ export default function DMIndex({ theme }) {
 					<div
 						className="cms-ch-name"
 						id={theme}
-					>{`# ${friend.username}`}</div>
+					>{`@ ${friend.username}`}</div>
 
 					<div className="cms-ct">
 						<div className="cm-overflow" id={theme}>
