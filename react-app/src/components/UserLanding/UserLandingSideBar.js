@@ -70,7 +70,7 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
     "UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
   const userThemeClass =
-    "UserLanding-Sidebar-user-dropdown" + (showThemeMenu ? "" : " hidden");
+    "UserLanding-Sidebar-yingyang-dropdown" + (showThemeMenu ? "" : " hidden");
 
   const goLogout = (e) => {
     e.preventDefault();
@@ -90,7 +90,6 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
           {user && user.username}
         </div>
 
-
         {/* user dm channels component here */}
 
         <div className="UserLanding-sidebar-channel-content">
@@ -108,16 +107,15 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
               </div>
             </div>
 
-
-
-
-
             <div className="UserLanding-sidebar-channel-user-actions">
-              <i className="fa-solid fa-yin-yang" onClick={openThemeMenu}></i>
+              <i
+                className="fa-solid fa-yin-yang user-ying-yang"
+                onClick={openThemeMenu}
+              ></i>
               <div className={userThemeClass} ref={userThemeRef}>
                 <div className="dropdown-wrapper">
                   <button
-                    className="UserLanding-sidebar-channel-user-home"
+                    className="UserLanding-sidebar-yingyang"
                     onClick={() =>
                       handleChangeTheme(
                         user.theme === "dark" ? "light" : "dark"
