@@ -113,7 +113,7 @@
 	border-radius: 6px;
 	margin: 10px 0px;
 	margin-right: 5px;
-	width: calc(100%-40px);
+	width: 100%;
 }
 
 .cms-msg-header {
@@ -178,6 +178,7 @@
 .row {
 	display: flex;
 	flex-direction: row;
+	/* width: 100%; */
 }
 
 .edited {
@@ -240,8 +241,8 @@
 
 .justify {
 	align-items: center;
-	padding-left: 5px;
 	padding: 0px 20px;
+	width: calc(100%-10px);
 }
 
 .cm-img-input {
