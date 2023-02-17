@@ -37,6 +37,8 @@ Datcord is a full-stack web application cloned and inspired by Discord. The buil
 
 ### Channels
 
+![img](https://i.imgur.com/hCViw3z.gif)
+
 ### Channel Messages
 
 ![img](https://i.imgur.com/b4omBbw.gif)
