@@ -141,20 +141,20 @@ a.UserLanding-sidebar-channel-user-home {
 
 .edit-channel-tooltip .edit-channel-tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: max-content;
   background-color: black;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 10px 0;
-  font-size: 12px;
+  padding: 8px;
+  font-size: 13px;
 
   /* Position the tooltip */
   position: absolute;
   z-index: 999;
   bottom: 155%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -46px;
 }
 
 .edit-channel-tooltip:hover .edit-channel-tooltiptext {
@@ -170,4 +170,50 @@ a.UserLanding-sidebar-channel-user-home {
   border-width: 5px;
   border-style: solid;
   border-color: black transparent transparent transparent;
+}
+
+.channels-tooltip-container {
+  padding-bottom: 18px;
+  padding-right: 42.5px;
+  text-transform: none;
+}
+
+.channels-tooltip {
+  position: absolute;
+  display: inline-block;
+}
+
+.channels-tooltip .channels-tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  background-color: #18191c;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 13px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -52px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.channels-tooltip .channels-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.channels-tooltip:hover .channels-tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
