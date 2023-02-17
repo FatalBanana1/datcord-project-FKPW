@@ -11,6 +11,7 @@ export default function CreateChannelForm({
 	serverId,
 	role,
 	isLoaded,
+	theme
 }) {
 	const dispatch = useDispatch();
 	const [category, setCategory] = useState(categoryName ? categoryName : "");

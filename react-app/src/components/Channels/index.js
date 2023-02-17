@@ -17,13 +17,12 @@ import { logout, thunkSetTheme } from "../../store/session";
 import { thunkReadUserServers } from "../../store/servers";
 import UserLanding from "../UserLanding";
 
-export default function Channels() {
+export default function Channels({ theme }) {
   const { serverId, channelId } = useParams();
   const history = useHistory();
   //   console.log("Channels - serverId, channelId:", serverId, channelId);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const theme = user.theme;
   // console.log("USER:", user);
   // const server = useSelector(state => state.servers)[+serverId]
   const allServers = useSelector((state) => state.servers);
@@ -228,6 +227,7 @@ export default function Channels() {
                 serverId={serverId}
                 role={serverMemberRole}
                 isLoaded={isLoaded}
+                theme={theme}
               />
             }
           />
