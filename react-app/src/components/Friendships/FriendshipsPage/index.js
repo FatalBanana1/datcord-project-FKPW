@@ -18,6 +18,19 @@ export default function FriendshipsPage({ theme }) {
     },
     {}
   );
+	//selectors
+	let allFriends = useSelector((state) => state.friendships);
+	let friends = Object.values(allFriends);
+	let user = useSelector((state) => state.session.user);
+	let yourMemberships = Object.values(user.server_members).reduce(
+		(acc, val) => {
+			acc[val.server_id] = 1;
+			return acc;
+		},
+		{}
+	);
+
+	console.log("FRIENDS ------->", friends)
 
   useEffect(() => {
     dispatch(thunkGetFriendships()).then(setIsLoaded(true));

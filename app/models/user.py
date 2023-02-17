@@ -38,6 +38,13 @@ class User(db.Model, UserMixin):
         secondaryjoin=(id == Friendship.friend_id),
     )
 
+    friendships2 = db.relationship(
+        "User",
+        secondary="friendships_table",
+        primaryjoin=(id == Friendship.friend_id),
+        secondaryjoin=(id == Friendship.user_id),
+    )
+
     direct_messages = db.relationship(
         "DirectMessage", back_populates="sender", cascade="all, delete-orphan"
     )
