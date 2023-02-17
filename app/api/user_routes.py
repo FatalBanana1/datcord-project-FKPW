@@ -38,3 +38,4 @@ def user_theme(id):
         user.theme = res["theme"]
         db.session.commit()
         return user.to_dict()
+    return {"error": "Could not find user..."}

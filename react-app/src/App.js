@@ -56,7 +56,7 @@ function App() {
               <MainContent page="profile" theme={theme} />
             </div>
           </ProtectedRoute>
-          <ProtectedRoute path="/channels/:serverId/:channelId">
+          <ProtectedRoute path="/channels/:serverId/:channelId" exact={true}>
             <div className="MainPage-container" id={theme}>
               <ServerNav theme={theme} />
               <MainContent page="channel" isLoaded={isLoaded} theme={theme} />

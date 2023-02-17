@@ -34,7 +34,7 @@ export default function ServerNav({ theme }) {
   }, [user.id]);
 
   const handleClick = async (serverId) => {
-    dispatch(thunkGetChannels(serverId)).then(setLoaded(true));
+    return dispatch(thunkGetChannels(serverId)).then(setLoaded(true));
   };
 
   // const theme = user.theme;
