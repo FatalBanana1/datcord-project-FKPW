@@ -50,6 +50,22 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showUserMenu]);
 
+  useEffect(() => {
+    if (!showThemeMenu) return;
+
+    const closeMenu = (e) => {
+      if (userThemeRef.current) {
+        if (!userThemeRef.current.contains(e.target)) {
+          setShowThemeMenu(false);
+        }
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showThemeMenu]);
+
   const userSettingsClass =
     "UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
@@ -89,20 +105,20 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
             </div>
             <div className="UserLanding-sidebar-channel-user-actions">
               <i className="fa-solid fa-yin-yang" onClick={openThemeMenu}></i>
-                <div className={userThemeClass} ref={userThemeRef}>
-                  <div className="dropdown-wrapper">
-                    <button
-                      className="UserLanding-sidebar-channel-user-home"
-                      onClick={() =>
-                        handleChangeTheme(
-                          user.theme === "dark" ? "light" : "dark"
-                        )
-                      }
-                    >
-                      {user.theme === "dark" ? "light" : "dark"}
-                    </button>
-                  </div>
+              <div className={userThemeClass} ref={userThemeRef}>
+                <div className="dropdown-wrapper">
+                  <button
+                    className="UserLanding-sidebar-channel-user-home"
+                    onClick={() =>
+                      handleChangeTheme(
+                        user.theme === "dark" ? "light" : "dark"
+                      )
+                    }
+                  >
+                    {user.theme === "dark" ? "light" : "dark"}
+                  </button>
                 </div>
+              </div>
               <i
                 className="fa-solid fa-gear user-gear"
                 onClick={openUserMenu}
