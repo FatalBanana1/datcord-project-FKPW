@@ -140,6 +140,7 @@ const ServerMembers = ({ theme }) => {
 											serverId={serverId}
 											channelId={channelId}
 											onChange={handleOnChange}
+											theme={theme}
 										/>
 									}
 								/>
@@ -179,6 +180,7 @@ const ServerMembers = ({ theme }) => {
 												serverId={serverId}
 												channelId={channelId}
 												onChange={handleOnChange}
+												theme={theme}
 											/>
 										}
 									/>
@@ -214,6 +216,7 @@ const ServerMembers = ({ theme }) => {
 												serverId={serverId}
 												channelId={channelId}
 												onChange={handleOnChange}
+												theme={theme}
 											/>
 										}
 									/>
@@ -248,6 +251,7 @@ const ServerMembers = ({ theme }) => {
 												serverId={serverId}
 												channelId={channelId}
 												onChange={handleOnChange}
+												theme={theme}
 											/>
 										}
 									/>
