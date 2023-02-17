@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkGetFriendships } from "../../../store/friendships";
 import OpenModalButton from "../../OpenModalButton";
 import FriendCard from "./FriendCard";
+import { thunkDeleteFriendship } from "../../../store/friendships";
 
 export default function FriendshipsPage({ theme }) {
 	let dispatch = useDispatch();
 	//states
 	let [isLoaded, setIsLoaded] = useState(false);
+	const [reloadFriend, setReloadFriend] = useState(false)
+	const [errors, setErrors] = useState([]);
 
 	//selectors
-	let allFriends = useSelector((state) => state.friendships);
-	let friends = Object.values(allFriends);
+	let friendships = useSelector((state) => state.friendships);
+	let friends = Object.values(friendships)
 	let user = useSelector((state) => state.session.user);
 	let yourMemberships = Object.values(user.server_members).reduce(
 		(acc, val) => {
@@ -26,6 +29,20 @@ export default function FriendshipsPage({ theme }) {
 		dispatch(thunkGetFriendships()).then(setIsLoaded(true));
 	}, []);
 
+
+
+	// DELETE Friend
+	
+	const deleteFriend = (friendId) => {
+		dispatch(thunkDeleteFriendship(friendId))
+		.then(() => {setReloadFriend(!reloadFriend)})
+		// .then(dispatch(thunkGetFriendships()))
+		.catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
+	}
+
 	if (isLoaded) {
 		// return
 		return (
@@ -33,7 +50,11 @@ export default function FriendshipsPage({ theme }) {
 				<div className="UserLanding-header" id={theme}></div>
 				<div className="UserLanding-status" id={theme}>
 					{/* adding 2 as placeholder for now */}
-					<h2>{`Friends - ${friends.length}`}</h2>
+					{friends.length ? (
+						<h2>{`Friends - ${friends.length}`}</h2>
+					) : (
+						<h2>{`Enemies - 1`}</h2>
+					)}
 				</div>
 				{/* making fake friends here :( */}
 				<div className="UserLanding-people-list-parent" id={theme}>
@@ -101,7 +122,7 @@ export default function FriendshipsPage({ theme }) {
                       <i className="fa-solid fa-message fa-xs"></i>
                     </div>
                     <div className="UserLanding-user-actions" id={theme}>
-                      <i className="fa-solid fa-ellipsis-vertical"></i>
+						<i id="remove-friend-icon" className="fa-solid fa-user-xmark" onClick={() => deleteFriend(friend.id)}></i>
                     </div>
                   </div>
                 </div>
