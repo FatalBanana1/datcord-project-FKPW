@@ -137,6 +137,8 @@ export default function MemberPage({
 		});
 	}
 
+	// DELETE Friend
+	
 	const deleteFriend = (e) => {
 		e.preventDefault()
 		dispatch(thunkDeleteFriendship(member.user_id))
@@ -151,10 +153,26 @@ export default function MemberPage({
 
 	// console.log("PERMISSION ------>", permission)
 
+	// RANDOM COLORS
+	function getRandomColor() {
+		const r = Math.floor(Math.random() * 256);
+		const g = Math.floor(Math.random() * 256);
+		const b = Math.floor(Math.random() * 256);
+		const a = Math.random().toFixed(2);
+		return `rgba(${r}, ${g}, ${b}, ${a})`;
+	}
+
+	const randomColor = getRandomColor();
+
+  	const style = {
+    backgroundColor: randomColor,
+  	};
+
+
 	return (
 		<>
 			<div className="member-card" id={theme}>
-				<div id="card-header"></div>
+				<div id="card-header" style={style}></div>
 				<div className="card-content">
 					<div className="member-header">
 						<img className="card-img" id={theme} src={member.display_pic}></img>
