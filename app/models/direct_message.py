@@ -50,6 +50,5 @@ class DirectMessage(db.Model):
             "message": self.message,
             "sender_id": self.sender.id,
             "sender_nickname": self.sender.username,
-            "role": self.friendship.role,
             "display_pic": self.sender.display_pic,
         }

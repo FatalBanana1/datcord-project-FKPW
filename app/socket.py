@@ -1,5 +1,5 @@
 from flask_socketio import SocketIO, emit, join_room, leave_room, send
-from .models import ChannelMessage, db
+from .models import ChannelMessage, db, DirectMessage
 import os, json
 
 
@@ -53,6 +53,25 @@ def handle_channel_message(data):
         temp = message.to_dict2()
         # print("sockets--------=========-=-==-=-=", data, temp)
         emit("channel_message", temp, broadcast=True)
+
+
+# handle chat messages
+@socketio.on("direct_message")
+def handle_direct_message(data):
+    # print(f"backend socket . py RECEIVED msg >>>>> ----", data)
+
+    if data != "User connected!":
+        message = DirectMessage(
+            **{
+                "sender_id": data["sender_id"],
+                "message": data["message"],
+                "friendship_id": data["friendshipId"],
+            }
+        )
+        db.session.add(message)
+        db.session.commit()
+        temp = message.to_dict2()
+        emit("direct_message", temp, broadcast=True)
 
 
 # # handle join chat
