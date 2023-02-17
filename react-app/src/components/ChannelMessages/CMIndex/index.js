@@ -305,7 +305,7 @@ const CMIndex = ({ theme }) => {
 		return (
 			user && (
 				<div className="cms-container">
-					<div className="cms-ch-name">{`# ${channel.name}`}</div>
+					<div className="cms-ch-name" id={theme}>{`# ${channel.name}`}</div>
 
 					<div className="cms-ct">
 						<div className="cm-overflow" id={theme}>

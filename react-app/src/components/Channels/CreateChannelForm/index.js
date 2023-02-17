@@ -93,7 +93,7 @@ export default function CreateChannelForm({
 					</div>
 					<div className="CreateChannelForm-group-private">
 						<span className="CreateChannelForm-group-private-span">
-							<i className="fa-solid fa-lock"></i>
+							<i className="fa-solid fa-lock" id={theme}></i>
 							Private channel
 						</span>
 						{/* <label
@@ -121,12 +121,13 @@ export default function CreateChannelForm({
 							</div>
 						</div>
 					</div>
-					<p className="CreateChannelForm-private-text">
+					<p className="CreateChannelForm-private-text" id={theme}>
 						Only selected members and roles will be able to view
 						this channel.
 					</p>
-					<div className="CreateChannelForm-buttons-container">
+					<div className="CreateChannelForm-buttons-container" id={theme}>
 						<button
+							id={theme}
 							className="CreateChannelForm-button-cancel"
 							onClick={closeModal}
 						>
