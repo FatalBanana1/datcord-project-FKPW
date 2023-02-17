@@ -1,8 +1,15 @@
 .CreateChannelForm-container {
     width: 460px;
-    color: #ffffff;
     /* padding: 0px 16px; */
     box-sizing: border-box;
+}
+
+#dark.CreateChannelForm-container {
+    color: #ffffff;
+}
+
+#light.CreateChannelForm-container {
+    color: #060607;
 }
 
 .CreateChannelForm-header {
@@ -11,8 +18,22 @@
     justify-content: space-between;
 }
 
-.fa-xmark {
+#dark.fa-xmark {
     color: #b9bbbe;
+    transition: ease .2s;
+}
+
+#dark.fa-xmark:hover {
+    color: #060707;
+}
+
+#light.fa-xmark {
+    color: #acadb0;
+    transition: ease .2s;
+}
+
+#light.fa-xmark:hover {
+    color: #060707;
 }
 
 .CreateChannelForm-title {
@@ -22,6 +43,18 @@
 .CreateChannelForm-subtext, .CreateChannelForm-label {
     font-size: 12px;
     color: #b9bbbe;
+}
+
+#dark.CreateChannelForm-subtext,
+#dark.CreateChannelForm-label {
+    font-size: 12px;
+    color: #b9bbbe;
+}
+
+#light.CreateChannelForm-subtext,
+#light.CreateChannelForm-label {
+    font-size: 12px;
+    color: #4e5058;
 }
 
 .CreateChannelForm-label {
@@ -42,21 +75,45 @@
     width: calc(100% - 16px);
     border: none;
     border-radius: 3px;
-    color: #ffffff;
-    background-color: #202225;
+    /* color: #ffffff; */
     padding: 10px 10px 10px 8px;
     align-items: center;
 }
 
+#dark.CreateChannelForm-group-channel-input,
+#dark.CreateChannelForm-group-channel-input > input {
+    background-color: #202225;
+}
+
+#light.CreateChannelForm-group-channel-input,
+#light#channel-name input {
+    background-color: #e9eaed;
+}
+
 .CreateChannelForm-group-channel-input > input {
     width: 100%;
-    background-color: #202225;
+    background-color: transparent;
     border: 0;
-    color: #ffffff;
+}
+
+#dark.CreateChannelForm-group-channel-input > input::placeholder {
+    color: #7c7f82;
+}
+
+#light.CreateChannelForm-group-channel-input > input::placeholder {
+    color: #060607;
 }
 
 .hashtag {
     margin-right: 8px;
+}
+
+#dark.hashtag {
+    color: #ffffff;
+}
+
+#light.hashtag {
+    color: #060607;
 }
 
 /* .CreateChannelForm-group-channel-name > label::placeholder {
@@ -64,6 +121,14 @@
     border-radius: 3px;
     color: #7c7f82;
 } */
+
+#dark.CreateChannelForm-group-private-span {
+    color: #060607;
+}
+
+#light.CreateChannelForm-group-private-span {
+    color: #060607;
+}
 
 .fa-lock {
     color: #b9bbbe;
