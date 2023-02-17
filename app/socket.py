@@ -58,8 +58,6 @@ def handle_channel_message(data):
 # handle chat messages
 @socketio.on("direct_message")
 def handle_direct_message(data):
-    # print(f"backend socket . py RECEIVED msg >>>>> ----", data)
-
     if data != "User connected!":
         message = DirectMessage(
             **{
