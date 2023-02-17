@@ -688,7 +688,7 @@ const CMIndex = ({ theme }) => {
 			)
 		);
 	} else {
-		return <div className="loading-cms"># Loading...</div>;
+		return <div className="loading-cms"># Summoning Pandas...</div>;
 	}
 };
 
