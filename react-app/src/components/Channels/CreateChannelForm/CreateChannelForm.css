@@ -278,6 +278,10 @@ input:checked + .CreateChannelForm-private-slider-round:before {
   border-radius: 4px;
 }
 
+.CreateChannelForm-button-create:hover {
+  background-color: #3c4beb;
+}
+
 .CreateChannelForm-button-delete {
   color: red;
   font-weight: 600;

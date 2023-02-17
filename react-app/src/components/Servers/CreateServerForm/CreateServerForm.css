@@ -69,6 +69,7 @@
   border: none;
   background-color: transparent;
   font-weight: bold;
+  color: rgb(34, 34, 34);
   text-align: left;
   line-height: initial;
 }
@@ -79,4 +80,12 @@
   color: white;
   padding: 12px 25px;
   border-radius: 3px;
+}
+
+.create-server-button-submit:hover {
+  background-color: #3c4beb;
+}
+
+.create-server-button-cancel:hover {
+  color: black;
 }
