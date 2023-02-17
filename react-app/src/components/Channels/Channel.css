@@ -14,7 +14,14 @@
 .server-dropdown-button {
   border: none;
   background-color: transparent;
+}
+
+#dark.server-dropdown-button {
   color: white;
+}
+
+#light.server-dropdown-button {
+  color: #060607;
 }
 
 .hidden {

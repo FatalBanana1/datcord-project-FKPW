@@ -326,6 +326,7 @@ export default function Channels({ theme }) {
                 <div
                   className="server-dropdown-button"
                   onClick={openServerMenu}
+                  id={theme}
                 >
                   <i className="fa-solid fa-angle-down big-angle-down"></i>
                 </div>
