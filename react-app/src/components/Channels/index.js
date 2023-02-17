@@ -259,20 +259,25 @@ export default function Channels({ theme }) {
                   {/* <NavLink to={`/channels/${serverId}/${channel.id}/edit`}>
                                         <i className="fa-solid fa-gear" onClick={() => setShowEdit(true)}></i>
                                     </NavLink> */}
-                  <OpenModalButton
-                    buttonText="Edit-Channel"
-                    onButtonClick={closeMenu}
-                    modalComponent={
-                      <EditChannelForm
-                        categoryName={category}
-                        prevName={channel.name}
-                        serverId={serverId}
-                        channelId={channel.id}
-                        priv={channel.is_private}
-                        theme={theme}
-                      />
-                    }
-                  />
+                  <div className="edit-channel-tooltip">
+                    <OpenModalButton
+                      buttonText="Edit-Channel"
+                      onButtonClick={closeMenu}
+                      modalComponent={
+                        <EditChannelForm
+                          categoryName={category}
+                          prevName={channel.name}
+                          serverId={serverId}
+                          channelId={channel.id}
+                          priv={channel.is_private}
+                          theme={theme}
+                        />
+                      }
+                    />
+                    <span className="edit-channel-tooltiptext">
+                      Edit Channel
+                    </span>
+                  </div>
                 </div>
               )}
             </NavLink>
@@ -386,12 +391,14 @@ export default function Channels({ theme }) {
                 </div>
               </div>
               <div className="UserLanding-sidebar-channel-user-actions">
-                {/* <i className="fa-solid fa-microphone"></i>
-							<i className="fa-solid fa-headphones"></i> */}
-                <i
-                  className="fa-solid fa-yin-yang user-ying-yang"
-                  onClick={openThemeMenu}
-                ></i>
+                <div class="themes-tooltip">
+                  <i
+                    className="fa-solid fa-yin-yang user-ying-yang"
+                    onClick={openThemeMenu}
+                  ></i>
+                  <span class="themes-tooltiptext">Change Theme</span>
+                </div>
+
                 <div className={userThemeClass} ref={userThemeRef}>
                   <div className="dropdown-wrapper">
                     <button
@@ -406,10 +413,13 @@ export default function Channels({ theme }) {
                     </button>
                   </div>
                 </div>
-                <i
-                  className="fa-solid fa-gear user-gear"
-                  onClick={openUserMenu}
-                ></i>
+                <div class="settings-tooltip">
+                  <i
+                    className="fa-solid fa-gear user-gear"
+                    onClick={openUserMenu}
+                  ></i>
+                  <span class="settings-tooltiptext">User Actions</span>
+                </div>
                 <div className={userSettingsClass} ref={userSettingsRef}>
                   <div className="dropdown-wrapper">
                     <button

@@ -50,17 +50,12 @@ function OpenModalButton({
 
   if (buttonText === "Edit-Channel") {
     return (
-      <div>
-        <div className="edit-channel-tooltip">
-          <button
-            onClick={onClick}
-            className={`OpenModalButton-button ${buttonText}`}
-          >
-            <i className="fa-solid fa-gear"></i>
-          </button>
-          <span className="edit-channel-tooltiptext">Hello</span>
-        </div>
-      </div>
+      <button
+        onClick={onClick}
+        className={`OpenModalButton-button ${buttonText}`}
+      >
+        <i className="fa-solid fa-gear"></i>
+      </button>
     );
   }
 
