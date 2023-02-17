@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import CMIndex from "../ChannelMessages/CMIndex";
+import DMIndex from "../DirectMessages/DMIndex";
 import FriendshipsPage from "../Friendships/FriendshipsPage";
 import ServerMembers from "../ServerMembers";
 import "./UserLanding.css";
@@ -12,12 +13,8 @@ export default function UserLanding({ page, theme }) {
       return (
         theme && (
           <div className="UserLanding-container reverse" id={theme}>
-            {/* <div className="UserLanding-main-content"> */}
-            {/* <div className="UserLanding-server-members"> */}
             <ServerMembers theme={theme} />
             <CMIndex theme={theme} />
-            {/* </div> */}
-            {/* </div> */}
           </div>
         )
       );
@@ -27,7 +24,7 @@ export default function UserLanding({ page, theme }) {
         theme && (
           <div className="UserLanding-container" id={theme}>
             {/* direct messages component goes here */}
-            <CMIndex theme={theme} />
+            <DMIndex theme={theme} />
           </div>
         )
       )

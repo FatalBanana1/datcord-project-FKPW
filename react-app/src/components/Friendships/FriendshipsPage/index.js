@@ -19,7 +19,7 @@ export default function FriendshipsPage({ theme }) {
     {}
   );
 
-	console.log("FRIENDS ------->", friends)
+	// console.log("FRIENDS ------->", friends)
 
   useEffect(() => {
     dispatch(thunkGetFriendships()).then(setIsLoaded(true));

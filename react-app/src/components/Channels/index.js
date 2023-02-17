@@ -428,5 +428,5 @@ export default function Channels({ theme }) {
         </div>
       )
     );
-  } else return <div>Loading...</div>;
+  } else return <div>Monkeys are hard at work...</div>;
 }
