@@ -178,6 +178,7 @@
 .row {
 	display: flex;
 	flex-direction: row;
+	/* width: 100%; */
 }
 
 .edited {
@@ -233,14 +234,15 @@
 .img-link {
 	width: 40px;
 	height: 40px;
+	aspect-ratio: 1;
 	object-fit: cover;
 	border-radius: 9999px;
 }
 
 .justify {
 	align-items: center;
-	padding-left: 5px;
 	padding: 0px 20px;
+	width: calc(100%-10px);
 }
 
 .cm-img-input {

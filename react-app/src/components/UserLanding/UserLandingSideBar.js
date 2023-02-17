@@ -9,11 +9,9 @@ import { useEffect, useRef, useState } from "react";
 import { logout } from "../../store/session";
 import { NavLink, useHistory } from "react-router-dom";
 
-export default function UserLandingSideBar({ page, isLoaded }) {
+export default function UserLandingSideBar({ page, isLoaded, theme }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const theme = user.theme;
-  console.log("THEME FROM USERLANDING-------------->", theme);
   const userSettingsRef = useRef();
   const [showMenu, setShowMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -52,7 +50,7 @@ export default function UserLandingSideBar({ page, isLoaded }) {
   };
 
   if (page === "channel") {
-    return <Channels isLoaded={isLoaded} />;
+    return <Channels isLoaded={isLoaded} theme={theme} />;
   }
   return (
     theme && (
