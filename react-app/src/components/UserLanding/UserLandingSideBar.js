@@ -68,8 +68,8 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 	const userSettingsClass =
 		"UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
-	const userThemeClass =
-		"UserLanding-Sidebar-user-dropdown" + (showThemeMenu ? "" : " hidden");
+  const userThemeClass =
+    "UserLanding-Sidebar-yingyang-dropdown" + (showThemeMenu ? "" : " hidden");
 
 	const goLogout = (e) => {
 		e.preventDefault();
@@ -113,56 +113,49 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 							</div>
 						</div>
 
-						<div className="UserLanding-sidebar-channel-user-actions">
-							<i
-								className="fa-solid fa-yin-yang"
-								onClick={openThemeMenu}
-							></i>
-							<div className={userThemeClass} ref={userThemeRef}>
-								<div className="dropdown-wrapper">
-									<button
-										className="UserLanding-sidebar-channel-user-home"
-										onClick={() =>
-											handleChangeTheme(
-												user.theme === "dark"
-													? "light"
-													: "dark"
-											)
-										}
-									>
-										{user.theme === "dark"
-											? "light"
-											: "dark"}
-									</button>
-								</div>
-							</div>
-							<i
-								className="fa-solid fa-gear user-gear"
-								onClick={openUserMenu}
-							></i>
-							<div
-								className={userSettingsClass}
-								ref={userSettingsRef}
-							>
-								<div className="dropdown-wrapper">
-									<button
-										className="UserLanding-sidebar-channel-user-home"
-										onClick={() => history.push("/")}
-									>
-										Home
-									</button>
-									<button
-										className="UserLanding-sidebar-channel-user-logout"
-										onClick={goLogout}
-									>
-										Logout
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		)
-	);
+            <div className="UserLanding-sidebar-channel-user-actions">
+              <i
+                className="fa-solid fa-yin-yang user-ying-yang"
+                onClick={openThemeMenu}
+              ></i>
+              <div className={userThemeClass} ref={userThemeRef}>
+                <div className="dropdown-wrapper">
+                  <button
+                    className="UserLanding-sidebar-yingyang"
+                    onClick={() =>
+                      handleChangeTheme(
+                        user.theme === "dark" ? "light" : "dark"
+                      )
+                    }
+                  >
+                    {user.theme === "dark" ? "light" : "dark"}
+                  </button>
+                </div>
+              </div>
+              <i
+                className="fa-solid fa-gear user-gear"
+                onClick={openUserMenu}
+              ></i>
+              <div className={userSettingsClass} ref={userSettingsRef}>
+                <div className="dropdown-wrapper">
+                  <button
+                    className="UserLanding-sidebar-channel-user-home"
+                    onClick={() => history.push("/")}
+                  >
+                    Home
+                  </button>
+                  <button
+                    className="UserLanding-sidebar-channel-user-logout"
+                    onClick={goLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  );
 }

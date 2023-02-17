@@ -21,6 +21,7 @@ export default function MemberPage({
 	serverId,
 	channelId,
 	onChange,
+	theme
 }) {
 	const dispatch = useDispatch();
 	const [role, setRole] = useState(member.role);
@@ -152,11 +153,11 @@ export default function MemberPage({
 
 	return (
 		<>
-			<div className="member-card">
+			<div className="member-card" id={theme}>
 				<div id="card-header"></div>
 				<div className="card-content">
 					<div className="member-header">
-						<img className="card-img" src={member.display_pic}></img>
+						<img className="card-img" id={theme} src={member.display_pic}></img>
 						{!isFriends && !isUser && (
 							<button
 							type="submit"
@@ -176,9 +177,9 @@ export default function MemberPage({
 						</button>
 						)}
 					</div>
-					<div className="card-member-info">
+					<div className="card-member-info" id={theme}>
 						<div className="card-member-inner-div">
-							<div className="member-nickName-div">
+							<div className="member-nickName-div" id={theme}>
 								{userIsOwner && (
 									<div className="member-nickname-div-container">
 										{editNickName ? (
@@ -190,10 +191,14 @@ export default function MemberPage({
 												endEditNickName={
 													endEditNickName
 												}
+												theme={theme}
 											/>
 										) : (
 											<div className="member-nickname-container">
-												<h4 className="member-nickname">
+												<h4
+													className="member-nickname"
+													id={theme}
+												>
 													{member.nickname}
 												</h4>
 												<h4
@@ -217,10 +222,14 @@ export default function MemberPage({
 												endEditNickName={
 													endEditNickName
 												}
+												theme={theme}
 											/>
 										) : (
 											<div className="member-nickname-container">
-												<h4 className="member-nickname">
+												<h4
+													className="member-nickname"
+													id={theme}
+												>
 													{member.nickname}
 												</h4>
 												<h4
@@ -235,7 +244,10 @@ export default function MemberPage({
 								) : (
 									<>
 										{!userIsOwner && (
-											<h4 className="member-nickname">
+											<h4
+												className="member-nickname"
+												id={theme}
+											>
 												{member.nickname}
 											</h4>
 										)}
@@ -243,16 +255,16 @@ export default function MemberPage({
 								)}
 							</div>
 							<div className="member-since-section">
-								<h4 className="member-h4">Member Since</h4>
-								<p className="card-text">{date}</p>
+								<h4 className="member-h4" id={theme}>Member Since</h4>
+								<p className="card-text" id={theme}>{date}</p>
 							</div>
 							<div className="role-section">
-								<h4 className="member-h4">Role</h4>
+								<h4 className="member-h4" id={theme}>Role</h4>
 								{!isNotOwner ? (
-									<div id="owner" className="member-role-div">
-										<div className="member-role-container">
+									<div id={`owner ${theme}`} className="member-role-div">
+										<div className="member-role-container" id={theme}>
 											<div id="owner" className="member-role-circle"></div>
-											<p className="member-role">
+											<p className="member-role" id={theme}>
 												{member.role}
 											</p>
 										</div>
@@ -272,13 +284,17 @@ export default function MemberPage({
 													/>
 												) : (
 													<div className="member-role-div">
-														<div className="member-role-container">
+														<div
+															className="member-role-container"
+															id={theme}
+														>
 															<div id={member.role} className="member-role-circle"></div>
-															<p className="member-role">
+															<p className="member-role" id={theme}>
 																{member.role}
 															</p>
 														</div>
 														<p
+															id={theme}
 															className="role-edit-button"
 															onClick={
 																startEditRole
@@ -291,9 +307,12 @@ export default function MemberPage({
 											</>
 										) : (
 											<div id={member.role} className="member-role-div">
-												<div className="member-role-container">
+												<div
+													id={theme}
+													className="member-role-container"
+												>
 													<div id={member.role} className="member-role-circle"></div>
-													<p className="member-role">
+													<p className="member-role" id={theme}>
 														{member.role}
 													</p>
 												</div>

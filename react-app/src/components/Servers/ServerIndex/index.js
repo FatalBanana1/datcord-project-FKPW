@@ -56,7 +56,9 @@ const ServerIndex = ({ theme }) => {
             <img className="explorer-img" src={explorerBanner} />
           </div>
 
-          <div className="explorer-banner-header">Featured Communities</div>
+          <div className="explorer-banner-header" id={theme}>
+            Featured Communities
+          </div>
           <div className="explorer-banner-server-container">
             {servers.map((el) => {
               if (
@@ -71,24 +73,28 @@ const ServerIndex = ({ theme }) => {
                     to={`/channels/${el.id}/${el.channels[0].id}`}
                     key={el.id}
                   >
-                    <div className="explorer-server-container">
-                      <div className="explorer-server-top">
+                    <div className="explorer-server-container" id={theme}>
+                      <div className="explorer-server-top" id={theme}>
                         <div className="explorer-server-img">
                           <img
                             src={el.icon_url}
                             className="servers-icon"
+                            id={theme}
                             alt="server icon"
                           />
                         </div>
                       </div>
-                      <div className="explorer-server-name">
+                      <div className="explorer-server-name" id={theme}>
                         <div className="check">
                           <i className="fa-regular fa-circle-check"></i>
                         </div>
                         <div>{`${el.name}`}</div>
                       </div>
-                      <div className="explorer-server-description">{`${el.description}`}</div>
-                      <div className="already-joined">
+                      <div
+                        className="explorer-server-description"
+                        id={theme}
+                      >{`${el.description}`}</div>
+                      <div className="already-joined" id={theme}>
                         <i className="fa-solid fa-circle-check"></i>
                       </div>
                     </div>
@@ -101,23 +107,27 @@ const ServerIndex = ({ theme }) => {
                       onClick={() => joinServer(el.id, el)}
                       className="pointer"
                     >
-                      <div className="explorer-server-container">
-                        <div className="explorer-server-top">
+                      <div className="explorer-server-container" id={theme}>
+                        <div className="explorer-server-top" id={theme}>
                           <div className="explorer-server-img">
                             <img
                               src={el.icon_url}
                               className="servers-icon"
+                              id={theme}
                               alt="server icon"
                             />
                           </div>
                         </div>
-                        <div className="explorer-server-name">
+                        <div className="explorer-server-name" id={theme}>
                           <div className="check">
                             <i className="fa-regular fa-circle-check"></i>
                           </div>
                           <div>{`${el.name}`}</div>
                         </div>
-                        <div className="explorer-server-description">{`${el.description}`}</div>
+                        <div
+                          className="explorer-server-description"
+                          id={theme}
+                        >{`${el.description}`}</div>
                         <div className="join-server">Join Server</div>
                       </div>
                     </div>

@@ -15,6 +15,10 @@
   object-fit: cover;
 }
 
+#light.servers-icon {
+  border: 5px solid white;
+}
+
 .explorer-img {
   height: auto;
   width: 100%;
@@ -32,6 +36,10 @@
   font-size: 18px;
   font-weight: bold;
   margin: 15px 10px;
+}
+
+#light.explorer-banner-header {
+  color: black;
 }
 
 .exp-link {
@@ -78,10 +86,21 @@
   flex-direction: column;
   align-items: center;
   transition: 0.5s;
+  box-shadow: 10px 10px 15px -15px rgba(0, 0, 0, 0.3);
+}
+
+#light.explorer-server-container {
+  background-color: white;
+  border: 1px solid #e9e9eb;
 }
 
 .explorer-server-container:hover {
-  background-color: #34363b;
+  background-color: rgb(238, 238, 238);
+  box-shadow: 10px 10px 15px -15px rgba(0, 0, 0, 0.75);
+}
+
+#light.explorer-server-container:hover {
+  background-color: rgb(255, 255, 255);
 }
 
 .explorer-server-description {
@@ -106,6 +125,14 @@
   width: 100%;
 }
 
+#light.explorer-server-top {
+  background: linear-gradient(
+    140deg,
+    rgb(199, 236, 218) 0%,
+    rgb(143, 167, 187) 100%
+  );
+}
+
 .explorer-server-img {
   position: absolute;
   bottom: 155px;
@@ -119,6 +146,10 @@
   flex-direction: row;
 }
 
+#light.explorer-server-name {
+  color: #060607;
+}
+
 .check {
   color: green;
   margin-right: 5px;
@@ -129,6 +160,10 @@
   font-size: 12px;
   margin-top: 10px;
   height: 10%;
+}
+
+#light.explorer-server-description {
+  color: #97979c;
 }
 
 .join-server {
@@ -148,6 +183,10 @@
   text-transform: uppercase;
   font-size: 20px;
   margin-top: 50px;
+}
+
+#light.already-joined {
+  color: black;
 }
 
 .pointer {

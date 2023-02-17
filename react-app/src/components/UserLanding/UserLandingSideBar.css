@@ -153,6 +153,24 @@ a.UserLanding-sidebar-channel-name {
   justify-content: space-between;
 }
 
+.UserLanding-sidebar-yingyang {
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: #b9bbbe;
+  text-align: left;
+}
+
+.UserLanding-sidebar-yingyang:hover {
+  width: 100%;
+  background: lightgrey;
+  border: none;
+  color: #2a2b2f;
+  text-align: left;
+  border-radius: 3px;
+}
+
 #light.UserLanding-sidebar-channel-user-info {
   background-color: #ebedef;
 }
@@ -204,6 +222,10 @@ a.UserLanding-sidebar-channel-name {
 
 .user-gear {
   font-size: 16px;
+  cursor: pointer;
+}
+
+.user-ying-yang {
   cursor: pointer;
 }
 
