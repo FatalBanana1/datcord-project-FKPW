@@ -16,16 +16,20 @@ def all_friends():
 
 # THIS VERSION GETS THE DISPLAY PICS AND NICKNAMES
     user = User.query.get(current_user.id)
-    friends = user.friendships
+    friends1 = user.friendships
+    friends2 = user.friendships2
+    # friends2 = list(set(friends1 + friends2))
+    friends = friends1 + friends2
+
 
 #THIS VERSION GETS THE FRIENDSHIPS BOTH WAYS, 
-# BUT DOESN'T GET DISPLAY PIC AND PASSWORD, 
+# BUT DOESN'T GET DISPLAY PIC AND PASSWORD,
 # AND ALSO BREAKS THE SHARED CHANNELS DIV
     # friends1 = Friendship.query.filter(Friendship.friend_id == userId).all()
     # friends2 = Friendship.query.filter(Friendship.user_id == userId).all()
     # friends = friends1 + friends2
 
-    
+
     print("FRIENDSSS IN GET ROUTE --------->", friends)
 
 
@@ -39,14 +43,21 @@ def all_friends():
 def add_friend():
     userId = int(current_user.id)
     newFriendId = request.json["memberId"]
+    newFriend = User.query.get(newFriendId)
     newFriendship = Friendship (
         user_id = userId,
         friend_id = newFriendId,
         role = "pending"
     )
+    # newFriendship2 = Friendship (
+    #     user_id = userId,
+    #     friend_id = newFriendId,
+    #     role = "pending"
+    # )
     db.session.add(newFriendship)
+    # db.session.add(newFriendship2)
     db.session.commit()
-    return {'friendship': newFriendship.to_dict()}
+    return {'friendship': newFriend.to_dict()}
 
 
 # EDIT FRIENDSHIP
@@ -56,7 +67,7 @@ def add_friend():
 def edit_friendship(id):
     userId = int(current_user.id)
     role = request.json["role"]
-    friendship = Friendship.query.filter(Friendship.friend_id == id, Friendship.user_id == userId).all()
+    friendship = Friendship.query.filter(Friendship.friend_id == userId, Friendship.user_id == id).all()
     friendship.role = role
     db.session.commit()
     return {'friendship': friendship.to_dict()}
@@ -71,12 +82,21 @@ def delete_friendship(id):
     print("HITTING THE ROUTE --------->", id)
 
     friendship = Friendship.query.filter(Friendship.friend_id == id, Friendship.user_id == userId).all()
-    print("FRIENDSHIP IN ROUTE --------->", friendship)
-    friendshipId = friendship[0].id
-    temp = friendshipId
-    db.session.delete(friendship[0])
-    db.session.commit()
-    return {'friendship': temp}
+    friendship2 = Friendship.query.filter(Friendship.user_id == id, Friendship.user_id == id).all()
+    # print("FRIENDSHIP IN ROUTE --------->", friendship)
+    # print("FFRIENDSHIP IN ROUTE --------->", friendship2)
+    if len(friendship):
+        friendshipId = friendship[0].id
+        temp = friendshipId
+        db.session.delete(friendship[0])
+        db.session.commit()
+        return {'friendship': temp}
+    if len(friendship2):
+        friendshipId = friendship2[0].id
+        temp = friendshipId
+        db.session.delete(friendship2[0])
+        db.session.commit()
+        return {'friendship': temp}
 
 
 

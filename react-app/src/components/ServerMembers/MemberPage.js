@@ -33,6 +33,7 @@ export default function MemberPage({
 	const [editNickName, setEditNickName] = useState(false);
 	const [editRole, setEditRole] = useState(false);
 	const friendships = useSelector((state) => state.friendships)
+	const [reloadFriend, setReloadFriend] = useState(false)
 
 
 
@@ -125,9 +126,10 @@ export default function MemberPage({
 
 	const addFriend = (e) => {
 		e.preventDefault()
-
-		dispatch(thunkAddFriendship(member.user_id))
-		.then(dispatch(thunkGetFriendships()))
+		dispatch(thunkAddFriendship(member.user_id, member))
+		.then(() => {isFriends=true
+			setReloadFriend(!reloadFriend)})
+		// .then(dispatch(thunkGetFriendships()))
 		.catch(async (res) => {
 			const data = await res.json();
 			if (data && data.errors) setErrors(data.errors);
@@ -136,9 +138,10 @@ export default function MemberPage({
 
 	const deleteFriend = (e) => {
 		e.preventDefault()
-
 		dispatch(thunkDeleteFriendship(member.user_id))
-		.then(dispatch(thunkGetFriendships()))
+		.then(() => {isFriends=false
+			setReloadFriend(!reloadFriend)})
+		// .then(dispatch(thunkGetFriendships()))
 		.catch(async (res) => {
 			const data = await res.json();
 			if (data && data.errors) setErrors(data.errors);

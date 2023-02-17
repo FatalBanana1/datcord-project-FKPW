@@ -153,16 +153,13 @@ export default function friendshipsReducer(state = initialState, action) {
 		}
 		case ADD_FRIENDSHIP: {
 			let newState = { ...state };
-			newState = {
-				...state.friendships,
-				[action.friendship.id]: action.friendship,
-			};
+			newState[action.friendship.id] = action.friendship
 			return newState;
 		}
 		case EDIT_FRIENDSHIP: {
 			let newState = { ...state };
 			// newState = { ...state.friendships, [action.friendship.id]: action.friendship}
-			newState[action.friendship.id] = action.friendship;
+			// newState[action.friendship.id] = action.friendship;
 			return newState;
 		}
 		case DELETE_FRIENDSHIP: {

@@ -21,6 +21,7 @@ class Friendship(db.Model):
         "DirectMessage", back_populates="friendship", cascade="all, delete-orphan"
     )
 
+
     def to_dict(self):
         return {
             "id": self.id,
