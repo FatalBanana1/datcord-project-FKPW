@@ -396,7 +396,7 @@ const CMIndex = ({ theme }) => {
                                   data-id={message.id}
                                   onClick={handleEdit}
                                 >
-                                  <i className="fa-solid fa-pen-to-square"></i>
+                                  Edit
                                 </div>
                                 <div
                                   className="cms-delete"
@@ -404,7 +404,7 @@ const CMIndex = ({ theme }) => {
                                   data-id={message.id}
                                   data-sender={message.sender_id}
                                 >
-                                  <i className="fa-solid fa-trash"></i>
+                                  Delete
                                 </div>
                               </div>
                             ) : null}

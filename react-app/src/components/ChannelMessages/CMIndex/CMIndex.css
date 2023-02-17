@@ -169,6 +169,9 @@
   margin-left: 25px;
 }
 
+.cms-edit {
+}
+
 .cms-edit:hover,
 .cms-delete:hover {
   cursor: pointer;

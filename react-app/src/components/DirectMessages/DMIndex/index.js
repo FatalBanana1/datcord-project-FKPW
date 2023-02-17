@@ -296,7 +296,7 @@ export default function DMIndex({ theme }) {
                                   data-id={message.id}
                                   onClick={handleEdit}
                                 >
-                                  <i className="fa-solid fa-pen-to-square"></i>
+                                  Edit
                                 </div>
                                 <div
                                   className="cms-delete"
@@ -306,7 +306,7 @@ export default function DMIndex({ theme }) {
                                   data-id={message.id}
                                   data-sender={message.sender_id}
                                 >
-                                  <i className="fa-solid fa-trash"></i>
+                                  Delete
                                 </div>
                               </div>
                             ) : null}
@@ -364,7 +364,8 @@ export default function DMIndex({ theme }) {
                         </div>
                       )}
 
-                      {message.id == edit ? // /> // 	onChange={handleEditChange} // 	message={message} // <CMEdit
+                      {message.id == edit ? // 	onChange={handleEditChange} // 	message={message} // <CMEdit
+                      // />
                       null : (
                         <div className="msg-ct">
                           <div className="cms-msg-header">
