@@ -4,7 +4,7 @@ import { thunkEditServerMember } from "../../store/serverMembers";
 import "./RoleEdit.css"
 
 
-const RoleEdit = ({member, onChange, serverId, endEditRole}) => {
+const RoleEdit = ({member, onChange, serverId, endEditRole, theme}) => {
     let dispatch = useDispatch();
     const [errors, setErrors] = useState([])
     let [role, setRole] = useState(member.role)
@@ -33,6 +33,7 @@ const RoleEdit = ({member, onChange, serverId, endEditRole}) => {
 					value={role}
 					onChange={(e) => setRole(e.target.value)}
 					className="role-input"
+                    id={theme}
 				>
                     <option value="admin">admin</option>
                     <option value="member">member</option>
@@ -40,8 +41,8 @@ const RoleEdit = ({member, onChange, serverId, endEditRole}) => {
                 </select>
 		</form>
         <div className="role-button">
-            <button type="submit" className="save-role-button" onClick={changeRole}>Save</button>
-            <button type="submit" className="cancel-role-button" onClick={cancelChange}>Cancel</button>
+            <button type="submit" className="save-role-button" id={theme} onClick={changeRole}>Save</button>
+            <button type="submit" className="cancel-role-button" id={theme} onClick={cancelChange}>Cancel</button>
         </div>
         </div>
     )

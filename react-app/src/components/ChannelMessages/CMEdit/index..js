@@ -6,12 +6,12 @@ import {
   thunkReadAllChannelMessages,
 } from "../../../store/channelMessages";
 
-const CMEdit = ({ message, onChange, channelId, serverId }) => {
-  let dispatch = useDispatch();
-  let params = useParams();
-  if (!serverId) serverId = params.serverId;
-  if (!channelId) channelId = params.channelId;
-  // console.log(`front cm EDIT`, channelId, serverId)
+const CMEdit = ({ message, onChange, channelId, serverId, theme }) => {
+	let dispatch = useDispatch();
+	let params = useParams()
+	if(!serverId) serverId = params.serverId
+	if(!channelId) channelId = params.channelId
+	// console.log(`front cm EDIT`, channelId, serverId)
 
   let [mval, setMval] = useState(message.message);
   const onCancel = () => {
@@ -37,42 +37,47 @@ const CMEdit = ({ message, onChange, channelId, serverId }) => {
     date = message.created_at.slice(0, 22);
   }
 
-  //return
-  return (
-    <div className="msg-ct" key={message.id}>
-      <div className="cms-msg-header">
-        <div className="cms-msg-name">{`${message.sender_nickname}`}</div>
-        <div className="cms-msg-date">{date}</div>
+	//return
+	return (
+		<div className="msg-ct" key={message.id}>
+			<div className="cms-msg-header">
+				<div className="cms-msg-name" id={theme}>{`${message.sender_nickname}`}</div>
+				<div className="cms-msg-date" id={theme}>{date}</div>
 
-        <div className="cms-options">
-          <div
-            className="cms-edit"
-            data-id={message.id}
-            data-sender={message.sender_id}
-            onClick={onSave}
-          >
-            Save
-          </div>
-          <div
-            className="cms-delete"
-            data-id={message.id}
-            data-sender={message.sender_id}
-            onClick={onCancel}
-          >
-            Cancel
-          </div>
-        </div>
-      </div>
+				<div
+					id={theme}
+					className="cms-options"
+				>
+					<div
+						className="cms-edit"
+						data-id={message.id}
+						data-sender={message.sender_id}
+						onClick={onSave}
+					>
+						Save
+					</div>
+					<div
+						className="cms-delete"
+						data-id={message.id}
+						data-sender={message.sender_id}
+						onClick={onCancel}
+					>
+						Cancel
+					</div>
+				</div>
+			</div>
 
-      <form onSubmit={onSave} className="edit">
-        <input
-          value={mval}
-          onChange={(e) => setMval(e.target.value)}
-          className="cm-text-input"
-        />
-      </form>
-    </div>
-  );
+			<form onSubmit={onSave} className="edit">
+				<input
+					id={theme}
+					value={mval}
+					onChange={(e) => setMval(e.target.value)}
+					className="cm-text-input"
+					contenteditable="true"
+				/>
+			</form>
+		</div>
+	);
 };
 
 export default CMEdit;

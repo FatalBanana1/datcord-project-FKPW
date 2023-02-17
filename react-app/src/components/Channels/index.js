@@ -217,22 +217,28 @@ export default function Channels({ theme }) {
         <span className="UserLanding-sidebar-channel-category-name">
           {truncateNames(category)}
         </span>
+        <div className="channels-tooltip-container">
+
         {permissions && (
-          <OpenModalButton
-            buttonText="Create-Channel"
-            theme={theme}
-            onButtonClick={closeMenu}
-            modalComponent={
-              <CreateChannelForm
-                categoryName={category}
-                serverId={serverId}
-                role={serverMemberRole}
-                isLoaded={isLoaded}
-                theme={theme}
-              />
-            }
-          />
+          <div className="channels-tooltip">
+            <OpenModalButton
+              buttonText="Create-Channel"
+              theme={theme}
+              onButtonClick={closeMenu}
+              modalComponent={
+                <CreateChannelForm
+                  categoryName={category}
+                  serverId={serverId}
+                  role={serverMemberRole}
+                  isLoaded={isLoaded}
+                  theme={theme}
+                />
+              }
+            />
+            <span class="channels-tooltiptext">Create Channel</span>
+          </div>
         )}
+        </div>
       </div>
       <div className="UserLanding-sidebar-channel-list">
         {/* map out channels here */}

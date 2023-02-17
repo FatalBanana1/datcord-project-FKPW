@@ -46,8 +46,11 @@
   font-size: 12px;
   font-weight: 500;
   display: flex;
+  flex-direction: row;
   align-items: center;
+  width: 240px;
 }
+
 
 #light.UserLanding-sidebar-channel-category-container {
   color: #5e6772;
@@ -231,7 +234,7 @@ a.UserLanding-sidebar-channel-name {
 .user-gear {
   font-size: 16px;
   cursor: pointer;
-  margin-left: 30px;
+  /* margin-left: 30px; */
 }
 
 .user-ying-yang {
@@ -264,4 +267,103 @@ a.UserLanding-sidebar-channel-name {
 .UserLanding-sidebar-channel-user-logout:hover {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+.settings-tooltip,
+.themes-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.settings-tooltip .settings-tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  background-color: #18191c;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 145%;
+  left: 50%;
+  margin-left: -47px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.themes-tooltip .themes-tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  background-color: #18191c;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 145%;
+  left: 50%;
+  margin-left: -53px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.settings-tooltip .settings-tooltiptext::after,
+.themes-tooltip .themes-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.settings-tooltip:hover .settings-tooltiptext,
+.themes-tooltip:hover .themes-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.friends-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.friends-tooltip .friends-tooltiptext {
+  visibility: hidden;
+  width: 60px;
+  background-color: #18191c;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 145%;
+  left: 50%;
+  margin-left: -37px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.friends-tooltip .friends-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.friends-tooltip:hover .friends-tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }

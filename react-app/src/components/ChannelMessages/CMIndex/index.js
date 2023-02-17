@@ -335,6 +335,7 @@ const CMIndex = ({ theme }) => {
                           onChange={handleEditChange}
                           channelId={channelId}
                           serverId={serverId}
+						  theme={theme}
                         />
                       ) : (
                         <div className="msg-ct">

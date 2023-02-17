@@ -141,6 +141,9 @@
 #light.UserLanding-user-actions {
   background-color: #f2f3f5;
   color: #4f5660;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .UserLanding-header {
@@ -166,4 +169,6 @@
 
 #remove-friend-icon {
   cursor: pointer;
+  font-size: 13px;
+  padding-bottom: 6px;
 }

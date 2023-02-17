@@ -138,7 +138,7 @@ export default function MemberPage({
 	}
 
 	// DELETE Friend
-	
+
 	const deleteFriend = (e) => {
 		e.preventDefault()
 		dispatch(thunkDeleteFriendship(member.user_id))
@@ -299,6 +299,7 @@ export default function MemberPage({
 														endEditRole={
 															endEditRole
 														}
+														theme={theme}
 													/>
 												) : (
 													<div className="member-role-div">
@@ -342,13 +343,17 @@ export default function MemberPage({
 							</div>
 							<div className="leave-server-div">
 								{permission && isNotOwner && (
-									<button
-										type="submit"
-										className="delete-membership-button"
-										onClick={submitDelete}
-									>
-										Got Beef?
-									</button>
+									<div class="delete-tooltip">
+										<button
+											type="submit"
+											className="delete-membership-button"
+											onClick={submitDelete}
+										>
+											Got Beef?
+										</button>
+
+										<span class="delete-tooltiptext">Kick member from server</span>
+									</div>
 								)}
 								{isUser && isNotOwner && (
 									<button

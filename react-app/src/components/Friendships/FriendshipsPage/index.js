@@ -32,7 +32,7 @@ export default function FriendshipsPage({ theme }) {
 
 
 	// DELETE Friend
-	
+
 	const deleteFriend = (friendId) => {
 		dispatch(thunkDeleteFriendship(friendId))
 		.then(() => {setReloadFriend(!reloadFriend)})
@@ -122,7 +122,10 @@ export default function FriendshipsPage({ theme }) {
                       <i className="fa-solid fa-message fa-xs"></i>
                     </div>
                     <div className="UserLanding-user-actions" id={theme}>
-						<i id="remove-friend-icon" className="fa-solid fa-user-xmark" onClick={() => deleteFriend(friend.id)}></i>
+                      <div className="friends-tooltip">
+						            <i id="remove-friend-icon" className="fa-solid fa-user-xmark" onClick={() => deleteFriend(friend.id)}></i>
+                      <span class="friends-tooltiptext">Remove Friend</span>
+                      </div>
                     </div>
                   </div>
                 </div>
