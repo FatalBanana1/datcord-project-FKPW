@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
 	actionResetDirectMessages,
 	thunkDeleteDirectMessage,
@@ -58,7 +57,7 @@ export default function DMIndex({ theme }) {
 		setFriend(fri);
 	}
 
-  //----------------
+	//----------------
 
 	//effects
 
@@ -75,54 +74,54 @@ export default function DMIndex({ theme }) {
 				setIsLoaded(true);
 			});
 
-    return () => {
-      setChatInput("");
-      setMessages([]);
-      setEdit(999999990);
-    };
-  }, [friendId, senderId, image, reload]);
+		return () => {
+			setChatInput("");
+			setMessages([]);
+			setEdit(999999990);
+		};
+	}, [friendId, senderId, image, reload]);
 
-  useEffect(() => {
-    // open socket connection
-    // create websocket
-    socket = io();
-    // socket.emit("join", { channelId: channelId, username: user.username });
+	useEffect(() => {
+		// open socket connection
+		// create websocket
+		socket = io();
+		// socket.emit("join", { channelId: channelId, username: user.username });
 
-    socket.on("direct_message", (direct_message) => {
-      setMessages((messages) => [...messages, direct_message]);
-    });
+		socket.on("direct_message", (direct_message) => {
+			setMessages((messages) => [...messages, direct_message]);
+		});
 
-    // when component unmounts, disconnect
-    return () => {
-      setChatInput("");
-      socket.disconnect();
-      // setMessages([]);
-      dispatch(actionResetDirectMessages());
-    };
-  }, [senderId, friendId]);
+		// when component unmounts, disconnect
+		return () => {
+			setChatInput("");
+			socket.disconnect();
+			// setMessages([]);
+			dispatch(actionResetDirectMessages());
+		};
+	}, [senderId, friendId]);
 
-  // ----------------------
+	// ----------------------
 
 	if (isLoaded && friend.id && theme) {
 		const updateChatInput = (e) => {
 			setChatInput(e.target.value);
 		};
 
-    //send chat messages through the websocket
-    const sendChat = (e) => {
-      e.preventDefault();
-      if (chatInput.length < 1) return null;
-      socket.emit("direct_message", {
-        sender_id: senderId,
-        message: chatInput,
-        friend_id: friendId,
-      });
-      setChatInput("");
-    };
+		//send chat messages through the websocket
+		const sendChat = (e) => {
+			e.preventDefault();
+			if (chatInput.length < 1) return null;
+			socket.emit("direct_message", {
+				sender_id: senderId,
+				message: chatInput,
+				friend_id: friendId,
+			});
+			setChatInput("");
+		};
 
-    // ---------------
+		// ---------------
 
-    // handlers
+		// handlers
 
 		// delete
 		const deleteHandler = (e) => {
@@ -161,12 +160,12 @@ export default function DMIndex({ theme }) {
 				.then(() => setIsLoaded(true));
 		};
 
-    // -------------
+		// -------------
 
-    // edit
-    const handleEdit = (e) => {
-      setEdit(e.target.dataset.id);
-    };
+		// edit
+		const handleEdit = (e) => {
+			setEdit(e.target.dataset.id);
+		};
 
 		// edit child change
 		const handleEditChange = (e) => {
@@ -178,65 +177,65 @@ export default function DMIndex({ theme }) {
 			}
 		};
 
-    // -------------
+		// -------------
 
-    // upload images
-    const imageLinks = {
-      ".pdf": 1,
-      ".png": 1,
-      ".jpg": 1,
-      jpeg: 1,
-      ".gif": 1,
-      ".svg": 1,
-    };
-    const sendImage = async (e) => {
-      e.preventDefault();
-      //img upload
-      const formData = new FormData();
-      formData.append("image", image);
-      setImageLoading(true);
-      const res = await fetch(`/api/dms/images/${friendId}`, {
-        method: "POST",
-        body: formData,
-      });
-      if (res.ok) {
-        await res.json();
-        setImage("");
-        dispatch(thunkReadAllDirectMessages(friendId))
-          .then(() => {
-            setIsLoaded(true);
-            setLoadBottom(true);
-            setImageButton(false);
-            setImageLoading(false);
-          })
-          .then(() => setEdit(999999990));
-      } else {
-        setImageLoading(false);
-        console.log("Error uploading image to AWS!", res);
-      }
-      setChatInput("");
-      setNewImage(false);
-    };
-    const updateImage = (e) => {
-      const file = e.target.files[0];
-      setImage(file);
-    };
+		// upload images
+		const imageLinks = {
+			".pdf": 1,
+			".png": 1,
+			".jpg": 1,
+			jpeg: 1,
+			".gif": 1,
+			".svg": 1,
+		};
+		const sendImage = async (e) => {
+			e.preventDefault();
+			//img upload
+			const formData = new FormData();
+			formData.append("image", image);
+			setImageLoading(true);
+			const res = await fetch(`/api/dms/images/${friendId}`, {
+				method: "POST",
+				body: formData,
+			});
+			if (res.ok) {
+				await res.json();
+				setImage("");
+				dispatch(thunkReadAllDirectMessages(friendId))
+					.then(() => {
+						setIsLoaded(true);
+						setLoadBottom(true);
+						setImageButton(false);
+						setImageLoading(false);
+					})
+					.then(() => setEdit(999999990));
+			} else {
+				setImageLoading(false);
+				console.log("Error uploading image to AWS!", res);
+			}
+			setChatInput("");
+			setNewImage(false);
+		};
+		const updateImage = (e) => {
+			const file = e.target.files[0];
+			setImage(file);
+		};
 
-    const imageClickHandler = (message) => {
-      return (
-        <div>
-          <img src={message.message}></img>
-        </div>
-      );
-    };
+		const imageClickHandler = (message) => {
+			return (
+				<div>
+					<img src={message.message}></img>
+				</div>
+			);
+		};
 
-    // --------------------
-    // date
-    let date = new Date();
+		// --------------------
+		// date
+		let date = new Date();
 
 		// console.log(`front dm index ==========`, friend);
 
-    // return
+		// return
 
 		return (
 			user && (
@@ -288,7 +287,7 @@ export default function DMIndex({ theme }) {
 												</div>
 											)}
 
-											{message.id == edit ? (
+											{+message.id === +edit ? (
 												<DMEdit
 													message={message}
 													onChange={handleEditChange}
@@ -331,11 +330,17 @@ export default function DMIndex({ theme }) {
 																	</div>
 																)}
 
-                                <div className="cms-msg-date" id={theme}>
-                                  {message.created_at.slice(0, 22)}
-                                </div>
-                              </>
-                            )}
+																<div
+																	className="cms-msg-date"
+																	id={theme}
+																>
+																	{message.created_at.slice(
+																		0,
+																		22
+																	)}
+																</div>
+															</>
+														)}
 
 														{user.id ===
 														message.sender_id ? (
@@ -372,32 +377,41 @@ export default function DMIndex({ theme }) {
 														) : null}
 													</div>
 
-                          {message.created_at == message.updated_at &&
-                          !imageLinks[
-                            message.message.slice(message.message.length - 4)
-                          ] ? (
-                            <div className="cms-msg-detail">{`${message.message}`}</div>
-                          ) : imageLinks[
-                              message.message.slice(message.message.length - 4)
-                            ] ? (
-                            <div>
-                              <img
-                                src={message.message}
-                                className="aws-image"
-                                alt={`uploaded by ${message.sender_nickname}`}
-                              ></img>
-                            </div>
-                          ) : (
-                            <div className="row">
-                              <div className="cms-msg-detail">{`${message.message}`}</div>
-                              <div className="cms-msg-detail edited">{`(edited)`}</div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))
-                : null}
+													{message.created_at ==
+														message.updated_at &&
+													!imageLinks[
+														message.message.slice(
+															message.message
+																.length - 4
+														)
+													] ? (
+														<div className="cms-msg-detail">{`${message.message}`}</div>
+													) : imageLinks[
+															message.message.slice(
+																message.message
+																	.length - 4
+															)
+													  ] ? (
+														<div>
+															<img
+																src={
+																	message.message
+																}
+																className="aws-image"
+																alt={`uploaded by ${message.sender_nickname}`}
+															></img>
+														</div>
+													) : (
+														<div className="row">
+															<div className="cms-msg-detail">{`${message.message}`}</div>
+															<div className="cms-msg-detail edited">{`(edited)`}</div>
+														</div>
+													)}
+												</div>
+											)}
+										</div>
+								  ))
+								: null}
 
 							{messages.length > 0
 								? messages.map((message, i) => (
@@ -440,7 +454,14 @@ export default function DMIndex({ theme }) {
 												</div>
 											)}
 
-											{message.id == edit ? null : ( // /> // 	onChange={handleEditChange} // 	message={message} // <CMEdit
+											{+message.id === +edit ? (
+												<DMEdit
+													message={message}
+													onChange={handleEditChange}
+													user={user}
+													friend={friend}
+												/>
+											) : (
 												<div className="msg-ct">
 													<div className="cms-msg-header">
 														{i >= 1 ? (
