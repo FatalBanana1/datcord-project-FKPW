@@ -90,12 +90,12 @@
 }
 
 #light.explorer-server-container {
-  background-color: white;
+  background-color: rgb(243, 243, 243);
   border: 1px solid #e9e9eb;
 }
 
 .explorer-server-container:hover {
-  background-color: rgb(238, 238, 238);
+  background-color: #383b41;
   box-shadow: 10px 10px 15px -15px rgba(0, 0, 0, 0.75);
 }
 

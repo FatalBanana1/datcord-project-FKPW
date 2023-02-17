@@ -53,9 +53,18 @@
   border-radius: 5px;
 }
 
+#light::-webkit-scrollbar-thumb {
+  background: #97a0ad;
+  border-radius: 5px;
+}
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #1b1c1f;
+}
+
+#light::-webkit-scrollbar-thumb:hover {
+  background: #868e99;
 }
 
 .Navigation-display-none {

@@ -394,6 +394,21 @@ def seed_channel_messages():
         channel_id=21,
         message="Checked my cave, wasnt there...sorry!",
     )
+    cm89 = ChannelMessage(
+        sender_id=91,
+        channel_id=21,
+        message="Didn't find your dog in Qatar, but I found something else.",
+    )
+    cm90 = ChannelMessage(
+        sender_id=91,
+        channel_id=2,
+        message="I wish I was back in Barcelona.",
+    )
+    cm91 = ChannelMessage(
+        sender_id=66,
+        channel_id=21,
+        message="Was in Krypton earlier, not there. Sorry.",
+    )
 
     db.session.add_all(
         [
@@ -487,6 +502,9 @@ def seed_channel_messages():
             cm86,
             cm87,
             cm88,
+            cm89,
+            cm90,
+            cm91
         ]
     )
     db.session.commit()

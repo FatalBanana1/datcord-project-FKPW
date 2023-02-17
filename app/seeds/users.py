@@ -118,9 +118,17 @@ def seed_users():
 
     main = User(
         email="discord@discord.com",
-        username="Discord",
+        username="John Wick",
         password="password123",
         display_pic="https://avatarfiles.alphacoders.com/203/203174.jpg",
+        theme="dark",
+    )
+
+    Messi = User(
+        email="Messi@goat.com",
+        username="Lionel Messi",
+        password="Ba4celona",
+        display_pic="https://i.dailymail.co.uk/1s/2023/02/16/00/67737607-11756461-image-a-1_1676506718526.jpg",
         theme="dark",
     )
 
@@ -142,7 +150,8 @@ def seed_users():
             pending2,
             m1,
             m2,
-            main
+            main,
+            Messi
         ]
     )
     db.session.commit()

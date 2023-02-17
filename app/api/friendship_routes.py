@@ -7,7 +7,7 @@ from app.models import db, Server, ServerMember, Friendship, User
 friendship_routes = Blueprint("friendships", __name__)
 
 
-# GET SERVER MEMBERS
+# GET friendships
 # @friendship_routes.route("/<int:id>")
 @friendship_routes.route("/")
 @login_required
@@ -16,23 +16,19 @@ def all_friends():
 
 # THIS VERSION GETS THE DISPLAY PICS AND NICKNAMES
     user = User.query.get(current_user.id)
+    friendship = Friendship.query.filter(Friendship.user_id == current_user.id)
     friends1 = user.friendships
     friends2 = user.friendships2
     # friends2 = list(set(friends1 + friends2))
     friends = friends1 + friends2
+    # friends["friendships"] = friendship
 
-
-#THIS VERSION GETS THE FRIENDSHIPS BOTH WAYS, 
+#THIS VERSION GETS THE FRIENDSHIPS BOTH WAYS,
 # BUT DOESN'T GET DISPLAY PIC AND PASSWORD,
 # AND ALSO BREAKS THE SHARED CHANNELS DIV
     # friends1 = Friendship.query.filter(Friendship.friend_id == userId).all()
     # friends2 = Friendship.query.filter(Friendship.user_id == userId).all()
     # friends = friends1 + friends2
-
-
-    print("FRIENDSSS IN GET ROUTE --------->", friends)
-
-
     return {"friendships": [fr.to_dict() for fr in friends]}
 
 
@@ -47,15 +43,9 @@ def add_friend():
     newFriendship = Friendship (
         user_id = userId,
         friend_id = newFriendId,
-        role = "pending"
+        role = "friend"
     )
-    # newFriendship2 = Friendship (
-    #     user_id = userId,
-    #     friend_id = newFriendId,
-    #     role = "pending"
-    # )
     db.session.add(newFriendship)
-    # db.session.add(newFriendship2)
     db.session.commit()
     return {'friendship': newFriend.to_dict()}
 
@@ -82,9 +72,11 @@ def delete_friendship(id):
     print("HITTING THE ROUTE --------->", id)
 
     friendship = Friendship.query.filter(Friendship.friend_id == id, Friendship.user_id == userId).all()
-    friendship2 = Friendship.query.filter(Friendship.user_id == id, Friendship.user_id == id).all()
+    friendship2 = Friendship.query.filter(Friendship.friend_id == userId, Friendship.user_id == id).all()
     # print("FRIENDSHIP IN ROUTE --------->", friendship)
     # print("FFRIENDSHIP IN ROUTE --------->", friendship2)
+    print("BACKEND DELETE  ONE------------>", friendship, friendship2)
+    print("BACKEND DELETE  TWO------------>", friendship2)
     if len(friendship):
         friendshipId = friendship[0].id
         temp = friendshipId

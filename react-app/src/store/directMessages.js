@@ -46,8 +46,8 @@ export const actionResetDirectMessages = () => ({
 
 // GET: Get All direct messages by user id
 // Route: /api/dms
-export const thunkReadAllDirectMessages = () => async (dispatch) => {
-	let response = await fetch(`/api/dms`);
+export const thunkReadAllDirectMessages = (friendId) => async (dispatch) => {
+	let response = await fetch(`/api/dms/${friendId}`);
 
 	if (response.ok) {
 		const data = await response.json();
@@ -147,7 +147,8 @@ const dmReducer = (state = defaultState(), action) => {
 
 	switch (action.type) {
 		case READ_ALL_DIRECT_MESSAGES:
-			// console.log(`reducer-----`, action.directMessages.direct_message);
+			console.log(`reducer-----`, action.directMessages);
+			console.log(`reducer-----`, action.directMessages.direct_message);
 			newState = { ...state };
 			action.directMessages.direct_message.forEach(
 				(el) => (newState[el.id] = el)
