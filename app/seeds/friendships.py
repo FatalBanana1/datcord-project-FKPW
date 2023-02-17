@@ -24,8 +24,35 @@ def seed_friendships():
     f20 = Friendship(user_id=17, friend_id=16, role="friend")
     f21 = Friendship(user_id=17, friend_id=18, role="friend")
     f22 = Friendship(user_id=3, friend_id=18, role="friend")
+    f23 = Friendship(user_id=3, friend_id=14, role="friend")
 
-    db.session.add_all([f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, f20, f21, f22])
+    db.session.add_all(
+        [
+            f23,
+            f1,
+            f2,
+            f3,
+            f4,
+            f5,
+            f6,
+            f7,
+            f8,
+            f9,
+            f10,
+            f11,
+            f12,
+            f13,
+            f14,
+            f15,
+            f16,
+            f17,
+            f18,
+            f19,
+            f20,
+            f21,
+            f22,
+        ]
+    )
     db.session.commit()
 
 

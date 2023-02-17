@@ -5,6 +5,7 @@ import peter from "../../assets/peter-banner.png";
 import keenly from "../../assets/keenly-banner.png";
 import fahd from "../../assets/fahd-banner.png";
 import wasiq from "../../assets/wasiq-banner.png";
+import NotFound from "../NotFound";
 
 function FadeInSection(props) {
   const [isVisible, setVisible] = React.useState(false);
@@ -33,6 +34,7 @@ function FadeInSection(props) {
 }
 
 export default function SplashBody() {
+
   return (
     <>
       <FadeInSection>

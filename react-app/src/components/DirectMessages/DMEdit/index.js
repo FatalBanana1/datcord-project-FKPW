@@ -12,6 +12,7 @@ const DMEdit = ({ message, onChange, friend, user }) => {
 	// if (!serverId) serverId = params.serverId;
 	// if (!channelId) channelId = params.channelId;
 
+	console.log(`dm edit ---->`, friend, user);
 	let [mval, setMval] = useState(message.message);
 	const onCancel = () => {
 		onChange(999999999);

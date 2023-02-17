@@ -169,10 +169,14 @@
   margin-left: 25px;
 }
 
+.cms-edit {
+}
+
 .cms-edit:hover,
 .cms-delete:hover {
   cursor: pointer;
-  text-decoration: underline;
+  color: white;
+  /* text-decoration: underline; */
 }
 
 .row {
@@ -328,6 +332,6 @@
   position: relative;
 }
 
-/* .loading-cms {
-	width: calc(100% - 240px);
-} */
+.loading-cms {
+  width: calc(100% - 240px);
+}
