@@ -46,6 +46,10 @@
   font-size: 12px;
 }
 
+#light.UserLanding-status > h2 {
+  color: #535963;
+}
+
 .UserLanding-people-list-container {
   display: flex;
   flex-direction: column;
@@ -59,9 +63,17 @@
   margin: 0px 26px;
 }
 
+#light.UserLanding-people-list {
+  border-top: 1px solid #dbdee1;
+}
+
 .UserLanding-people-list:hover {
   background-color: #3f434a;
   border-radius: 5px;
+}
+
+#light.UserLanding-people-list:hover {
+  background-color: #e7e9eb;
 }
 
 .UserLanding-user-info-container {
@@ -93,9 +105,17 @@
   font-size: 15px;
 }
 
+#light.UserLanding-user-name {
+  color: #0d0d0e;
+}
+
 .UserLanding-user-status {
   color: rgb(177, 177, 177);
   font-size: 13px;
+}
+
+#light.UserLanding-user-status {
+  color: #8e9298;
 }
 
 .UserLanding-user-actions-container {
@@ -115,6 +135,11 @@
   width: 32px;
   text-align: center;
   border-radius: 50%;
+}
+
+#light.UserLanding-user-actions {
+  background-color: #f2f3f5;
+  color: #4f5660;
 }
 
 .UserLanding-header {
