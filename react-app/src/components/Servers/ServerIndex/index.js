@@ -44,6 +44,17 @@ const ServerIndex = ({ theme }) => {
       );
   };
 
+  function getRandomPastelGradient() {
+    const hue = Math.floor(Math.random() * 360); // Hue value for the gradient
+    const pastel1 = `hsl(${hue}, 100%, 80%)`; // First pastel color
+    const pastel2 = `hsl(${hue + 40}, 100%, 80%)`; // Second pastel color
+    return `linear-gradient(to right, ${pastel1}, ${pastel2})`;
+  }
+
+  const style = {
+    background: getRandomPastelGradient(),
+  };
+
   if (isLoaded) {
     let servers = Object.values(allServers);
 
@@ -74,7 +85,11 @@ const ServerIndex = ({ theme }) => {
                     key={el.id}
                   >
                     <div className="explorer-server-container" id={theme}>
-                      <div className="explorer-server-top" id={theme}>
+                      <div
+                        className="explorer-server-top"
+                        style={style}
+                        id={theme}
+                      >
                         <div className="explorer-server-img">
                           <img
                             src={el.icon_url}
