@@ -47,15 +47,9 @@ def add_friend():
     newFriendship = Friendship (
         user_id = userId,
         friend_id = newFriendId,
-        role = "pending"
+        role = "friend"
     )
-    # newFriendship2 = Friendship (
-    #     user_id = userId,
-    #     friend_id = newFriendId,
-    #     role = "pending"
-    # )
     db.session.add(newFriendship)
-    # db.session.add(newFriendship2)
     db.session.commit()
     return {'friendship': newFriend.to_dict()}
 
