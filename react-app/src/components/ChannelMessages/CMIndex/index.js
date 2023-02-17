@@ -223,11 +223,9 @@ const CMIndex = ({ theme }) => {
     const sendChat = (e) => {
       e.preventDefault();
       if (chatInput.length < 1) return null;
-      const curr = Object.values(allMembers).find(
-        (el) => el.user_id === user.id
-      );
+      const curr = user.id
       socket.emit("channel_message", {
-        sender_id: curr.id,
+        sender_id: curr,
         message: chatInput,
         channelId,
       });
@@ -290,7 +288,7 @@ const CMIndex = ({ theme }) => {
     let date = new Date();
     let role;
     const currMbr = user.server_members.find(
-      (el) => +el.server_id === +serverId && +user.id === +el.user_id
+      (el) => Number(el.server_id) === Number(serverId) && Number(user.id) === Number(el.user_id)
     );
 
     if (currMbr) {
@@ -313,7 +311,7 @@ const CMIndex = ({ theme }) => {
                       {i - 1 >= 0 &&
                       cms[i - 1] &&
                       message.sender_id &&
-                      message.sender_id === cms[i - 1].sender_id ? (
+                      Number(message.sender_id) === Number(cms[i - 1].sender_id) ? (
                         <div className="cm-spacer"></div>
                       ) : (
                         <div
@@ -331,7 +329,7 @@ const CMIndex = ({ theme }) => {
                         </div>
                       )}
 
-                      {message.id == edit ? (
+                      {Number(message.id) === Number(edit) ? (
                         <CMEdit
                           message={message}
                           onChange={handleEditChange}
@@ -346,7 +344,7 @@ const CMIndex = ({ theme }) => {
                             cms.length &&
                             cms[i - 1] &&
                             message.sender_id &&
-                            message.sender_id === cms[i - 1].sender_id ? (
+                            Number(message.sender_id) === Number(cms[i - 1].sender_id) ? (
                               <div className="cm-spacer2"></div>
                             ) : (
                               <>
@@ -384,7 +382,7 @@ const CMIndex = ({ theme }) => {
                               </>
                             )}
 
-                            {currMbr.id === message.sender_id ||
+                            {Number(currMbr.id) === Number(message.sender_id) ||
                             role === "admin" ||
                             role === "owner" ? (
                               <div
@@ -410,7 +408,7 @@ const CMIndex = ({ theme }) => {
                             ) : null}
                           </div>
 
-                          {message.created_at == message.updated_at &&
+                          {message.created_at === message.updated_at &&
                           !imageLinks[
                             message.message.slice(message.message.length - 4)
                           ] ? (
@@ -443,15 +441,10 @@ const CMIndex = ({ theme }) => {
                       {i >= 1 ? (
                         <div>
                           {message.sender_id &&
-                          message.sender_id === messages[i - 1].sender_id ? (
+                          Number(message.sender_id) === Number(messages[i - 1].sender_id) ? (
                             <div className="cm-spacer"></div>
                           ) : null}
                         </div>
-                      ) : i >= 1 &&
-                        cms &&
-                        cms.length - 1 &&
-                        cms[cms.length - 1].sender_id === message.sender_id ? (
-                        <div className="cm-spacer"></div>
                       ) : (
                         <div className="img-link">
                           <img
@@ -462,7 +455,7 @@ const CMIndex = ({ theme }) => {
                         </div>
                       )}
 
-                      {message.id == edit ? (
+                      {Number(message.id) === Number(edit) ? (
                         <CMEdit message={message} onChange={handleEditChange} />
                       ) : (
                         <div className="msg-ct">
@@ -470,16 +463,16 @@ const CMIndex = ({ theme }) => {
                             {i >= 1 ? (
                               <div>
                                 {message.sender_id &&
-                                message.sender_id ===
-                                  messages[i - 1].sender_id ? (
+                                Number(message.sender_id) ===
+                                  Number(messages[i - 1].sender_id) ? (
                                   <div className="cm-spacer2"></div>
                                 ) : null}
                               </div>
                             ) : i >= 1 &&
                               cms &&
                               cms.length - 1 &&
-                              cms[cms.length - 1].sender_id ===
-                                message.sender_id ? (
+                              Number(cms[cms.length - 1].sender_id) ===
+                                Number(message.sender_id) ? (
                               <div className="cm-spacer2"></div>
                             ) : (
                               <>
@@ -516,7 +509,7 @@ const CMIndex = ({ theme }) => {
                               </>
                             )}
 
-                            {+currMbr.id === +message.sender_id ||
+                            {Number(currMbr.id) === Number(message.sender_id) ||
                             role === "admin" ||
                             role === "owner" ? (
                               <div

@@ -257,11 +257,11 @@ export default function DMIndex({ theme }) {
 											{i - 1 >= 0 &&
 											dms[i - 1] &&
 											message.sender_id &&
-											message.sender_id ===
-												dms[i - 1].sender_id ? (
+											Number(message.sender_id) ===
+												Number(dms[i - 1].sender_id) ? (
 												<div className="cm-spacer"></div>
-											) : message.sender_id ==
-											  senderId ? (
+											) : Number(message.sender_id) ===
+											  Number(senderId) ? (
 												<div
 													className="img-link"
 													data-id={message.id}
@@ -287,7 +287,7 @@ export default function DMIndex({ theme }) {
 												</div>
 											)}
 
-											{+message.id === +edit ? (
+											{Number(message.id) === Number(edit) ? (
 												<DMEdit
 													message={message}
 													onChange={handleEditChange}
@@ -304,15 +304,15 @@ export default function DMIndex({ theme }) {
 														dms &&
 														dms.length &&
 														dms[i - 1] &&
-														message.sender_id &&
-														message.sender_id ===
+														Number(message.sender_id) &&
+														Number(message.sender_id) ===
 															dms[i - 1]
 																.sender_id ? (
 															<div className="cm-spacer2"></div>
 														) : (
-															<>
-																{message.sender_id ===
-																user.id ? (
+															<div>
+																{Number(message.sender_id) ===
+																Number(user.id) ? (
 																	<div
 																		id={
 																			theme
@@ -339,11 +339,11 @@ export default function DMIndex({ theme }) {
 																		22
 																	)}
 																</div>
-															</>
+															</div>
 														)}
 
-														{user.id ===
-														message.sender_id ? (
+														{Number(user.id) ===
+														Number(message.sender_id) ? (
 															<div
 																id={theme}
 																className="cms-options absolute-op"
@@ -377,7 +377,7 @@ export default function DMIndex({ theme }) {
 														) : null}
 													</div>
 
-													{message.created_at ==
+													{message.created_at ===
 														message.updated_at &&
 													!imageLinks[
 														message.message.slice(
@@ -423,20 +423,14 @@ export default function DMIndex({ theme }) {
 											{i >= 1 ? (
 												<div>
 													{message.sender_id &&
-													message.sender_id ===
-														messages[i - 1]
-															.sender_id ? (
+													Number(message.sender_id) ===
+													Number(messages[i - 1]
+															.sender_id) ? (
 														<div className="cm-spacer"></div>
 													) : null}
 												</div>
-											) : i >= 1 &&
-											  dms &&
-											  dms.length - 1 &&
-											  dms[dms.length - 1].sender_id ===
-													message.sender_id ? (
-												<div className="cm-spacer"></div>
-											) : message.sender_id ==
-											  senderId ? (
+											) : Number(message.sender_id) ===
+											  Number(senderId) ? (
 												<div className="img-link">
 													<img
 														src={user.display_pic}
@@ -454,7 +448,7 @@ export default function DMIndex({ theme }) {
 												</div>
 											)}
 
-											{+message.id === +edit ? (
+											{Number(message.id) === Number(edit) ? (
 												<DMEdit
 													message={message}
 													onChange={handleEditChange}
@@ -466,26 +460,19 @@ export default function DMIndex({ theme }) {
 													<div className="cms-msg-header">
 														{i >= 1 ? (
 															<div>
-																{message.sender_id &&
-																message.sender_id ===
-																	messages[
+																{Number(message.sender_id) &&
+																Number(message.sender_id) ===
+																	Number(messages[
 																		i - 1
 																	]
-																		.sender_id ? (
+																		.sender_id) ? (
 																	<div className="cm-spacer2"></div>
 																) : null}
 															</div>
-														) : i >= 1 &&
-														  dms &&
-														  dms.length - 1 &&
-														  dms[dms.length - 1]
-																.sender_id ===
-																message.sender_id ? (
-															<div className="cm-spacer2"></div>
 														) : (
-															<>
-																{message.sender_id ===
-																user.id ? (
+															<div>
+																{Number(message.sender_id) ===
+																Number(user.id) ? (
 																	<div
 																		id={
 																			theme
@@ -510,11 +497,11 @@ export default function DMIndex({ theme }) {
 																			22
 																		)}
 																</div>
-															</>
+															</div>
 														)}
 
-														{+senderId ===
-														+message.sender_id ? (
+														{Number(senderId) ===
+														Number(message.sender_id) ? (
 															<div
 																id={theme}
 																className="cms-options absolute-op"
