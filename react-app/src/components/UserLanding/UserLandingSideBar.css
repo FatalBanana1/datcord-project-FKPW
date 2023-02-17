@@ -71,6 +71,10 @@
   font-size: 15px;
 }
 
+#light.align-right {
+  color: red;
+}
+
 .UserLanding-sidebar-channel-list {
   width: 100%;
   box-sizing: border-box;

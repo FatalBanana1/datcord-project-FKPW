@@ -220,6 +220,7 @@ export default function Channels({ theme }) {
         {permissions && (
           <OpenModalButton
             buttonText="Create-Channel"
+            theme={theme}
             onButtonClick={closeMenu}
             modalComponent={
               <CreateChannelForm
