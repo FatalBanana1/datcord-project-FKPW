@@ -6,7 +6,7 @@ import {
 	thunkReadAllChannelMessages,
 } from "../../../store/channelMessages";
 
-const CMEdit = ({ message, onChange, channelId, serverId }) => {
+const CMEdit = ({ message, onChange, channelId, serverId, theme }) => {
 	let dispatch = useDispatch();
 	let params = useParams()
 	if(!serverId) serverId = params.serverId
@@ -43,10 +43,13 @@ const CMEdit = ({ message, onChange, channelId, serverId }) => {
 	return (
 		<div className="msg-ct" key={message.id}>
 			<div className="cms-msg-header">
-				<div className="cms-msg-name">{`${message.sender_nickname}`}</div>
-				<div className="cms-msg-date">{date}</div>
+				<div className="cms-msg-name" id={theme}>{`${message.sender_nickname}`}</div>
+				<div className="cms-msg-date" id={theme}>{date}</div>
 
-				<div className="cms-options">
+				<div
+					id={theme}
+					className="cms-options"
+				>
 					<div
 						className="cms-edit"
 						data-id={message.id}
@@ -68,9 +71,11 @@ const CMEdit = ({ message, onChange, channelId, serverId }) => {
 
 			<form onSubmit={onSave} className="edit">
 				<input
+					id={theme}
 					value={mval}
 					onChange={(e) => setMval(e.target.value)}
 					className="cm-text-input"
+					contenteditable="true"
 				/>
 			</form>
 		</div>

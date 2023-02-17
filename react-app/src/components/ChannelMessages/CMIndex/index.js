@@ -337,6 +337,7 @@ const CMIndex = ({ theme }) => {
                           onChange={handleEditChange}
                           channelId={channelId}
                           serverId={serverId}
+						  theme={theme}
                         />
                       ) : (
                         <div className="msg-ct">
@@ -463,7 +464,7 @@ const CMIndex = ({ theme }) => {
                       )}
 
                       {message.id == edit ? (
-                        <CMEdit message={message} onChange={handleEditChange} />
+                        <CMEdit message={message} onChange={handleEditChange} theme={theme} />
                       ) : (
                         <div className="msg-ct">
                           <div className="cms-msg-header">

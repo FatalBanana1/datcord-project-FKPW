@@ -26,7 +26,6 @@
 .cm-text-input {
   width: calc(100% - 45px);
   /* max-width: 90%; */
-  color: rgb(211, 212, 214);
   border: 0;
   border-radius: 5px;
   text-decoration: none;
@@ -34,10 +33,12 @@
 }
 
 #dark.cm-text-input {
+  color: rgb(211, 212, 214);
   background-color: rgb(64, 68, 75);
 }
 
 #light.cm-text-input {
+  color: #060607;
   background-color: #eeeef1;
 }
 
