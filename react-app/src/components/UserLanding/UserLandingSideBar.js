@@ -6,21 +6,32 @@ import { useDispatch } from "react-redux";
 import Channels from "../Channels";
 import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { logout } from "../../store/session";
+import { logout, thunkSetTheme } from "../../store/session";
 import { NavLink, useHistory } from "react-router-dom";
 
 export default function UserLandingSideBar({ page, isLoaded, theme }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const userSettingsRef = useRef();
+  const userThemeRef = useRef();
   const [showMenu, setShowMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showThemeMenu, setShowThemeMenu] = useState(false);
   const history = useHistory();
   // console.log("user", user)
 
   const openUserMenu = () => {
     if (showUserMenu) return;
     setShowUserMenu(true);
+  };
+
+  const openThemeMenu = () => {
+    if (showThemeMenu) return;
+    setShowThemeMenu(true);
+  };
+
+  const handleChangeTheme = (theme) => {
+    return dispatch(thunkSetTheme(user.id, theme)).then();
   };
 
   useEffect(() => {
@@ -41,6 +52,9 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 
   const userSettingsClass =
     "UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
+
+  const userThemeClass =
+    "UserLanding-Sidebar-user-dropdown" + (showThemeMenu ? "" : " hidden");
 
   const goLogout = (e) => {
     e.preventDefault();
@@ -74,8 +88,21 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
               </div>
             </div>
             <div className="UserLanding-sidebar-channel-user-actions">
-              <i className="fa-solid fa-microphone"></i>
-              <i className="fa-solid fa-headphones"></i>
+              <i className="fa-solid fa-yin-yang" onClick={openThemeMenu}></i>
+                <div className={userThemeClass} ref={userThemeRef}>
+                  <div className="dropdown-wrapper">
+                    <button
+                      className="UserLanding-sidebar-channel-user-home"
+                      onClick={() =>
+                        handleChangeTheme(
+                          user.theme === "dark" ? "light" : "dark"
+                        )
+                      }
+                    >
+                      {user.theme === "dark" ? "light" : "dark"}
+                    </button>
+                  </div>
+                </div>
               <i
                 className="fa-solid fa-gear user-gear"
                 onClick={openUserMenu}

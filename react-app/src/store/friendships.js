@@ -13,21 +13,21 @@ export const actionGetFriendships = (friendships) => ({
 });
 
 // CREATE
-export const actionAddFriendship = (serverMember) => ({
+export const actionAddFriendship = (friendship) => ({
 	type: ADD_FRIENDSHIP,
-	serverMember,
+	friendship,
 });
 
 // EDIT
-export const actionEditFriendship = (serverMember) => ({
+export const actionEditFriendship = (friendship) => ({
 	type: EDIT_FRIENDSHIP,
-	serverMember,
+	friendship,
 });
 
 // DELETE
-export const actionDeleteFriendship = (memberId) => ({
+export const actionDeleteFriendship = (friendshipId) => ({
 	type: DELETE_FRIENDSHIP,
-	memberId,
+	friendshipId,
 });
 
 // RESET
@@ -56,13 +56,15 @@ export const thunkGetFriendships = () => async (dispatch) => {
 };
 
 // CREATE
-export const thunkAddFriendship = (payload) => async (dispatch) => {
+export const thunkAddFriendship = (memberId) => async (dispatch) => {
 	const res = await fetch(`/api/friendships/`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(payload),
+		body: JSON.stringify({
+			memberId
+		}),
 	});
 	if (res.ok) {
 		const data = await res.json();
@@ -79,21 +81,21 @@ export const thunkAddFriendship = (payload) => async (dispatch) => {
 };
 
 // EDIT
-export const thunkEditFriendship = (friendshipId) => async (dispatch) => {
-	// console.log("pre-Fetch ----->", friendshipId);
-	const res = await fetch(`/api/friendships/${friendshipId}`, {
+export const thunkEditFriendship = (friendId, role) => async (dispatch) => {
+	// console.log("pre-Fetch ----->", friendId);
+	const res = await fetch(`/api/friendships/${friendId}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-			friendshipId,
+			role,
 		}),
 	});
 	if (res.ok) {
 		const data = await res.json();
-		dispatch(actionEditFriendship(data.server_member));
-		return data.server_member;
+		dispatch(actionEditFriendship(data.friendship));
+		return data.friendship;
 	} else if (res.status < 500) {
 		const data = await res.json();
 		if (data.errors) {
@@ -106,23 +108,19 @@ export const thunkEditFriendship = (friendshipId) => async (dispatch) => {
 
 // DELETE
 export const thunkDeleteFriendship =
-	(friendshipId, permission, role) => async (dispatch) => {
+	(friendId) => async (dispatch) => {
 		// console.log("Pre-Fetch ------>", serverId, serverMemberId, permission);
-		const res = await fetch(`/api/friendships/${friendshipId}`, {
+		const res = await fetch(`/api/friendships/${friendId}`, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({
-				permission,
-				role,
-			}),
 		});
 		// console.log("Post-Fetch ------>", res);
 		if (res.ok) {
 			const data = await res.json();
-			dispatch(actionDeleteFriendship(friendshipId));
-			return data.server_member;
+			dispatch(actionDeleteFriendship(friendId));
+			return data.friendship;
 		} else if (res.status < 500) {
 			const data = await res.json();
 			if (data.errors) {
@@ -135,7 +133,7 @@ export const thunkDeleteFriendship =
 
 const normalize = (data) => {
 	const newData = {};
-	if (data === "No current members in this server") {
+	if (data === "You do not have friends") {
 		return {};
 	}
 	if (data) {
@@ -149,23 +147,19 @@ const initialState = {};
 export default function friendshipsReducer(state = initialState, action) {
 	switch (action.type) {
 		case GET_FRIENDSHIPS: {
-			// console.log(`action in reducer FRIend >>>>>>>>>>>>`, action);
 			let newState = { ...state };
 			newState = normalize(action.friendships);
 			return newState;
 		}
 		case ADD_FRIENDSHIP: {
 			let newState = { ...state };
-			newState = {
-				...state.friendships,
-				[action.friendship.id]: action.friendship,
-			};
+			newState[action.friendship.id] = action.friendship
 			return newState;
 		}
 		case EDIT_FRIENDSHIP: {
 			let newState = { ...state };
 			// newState = { ...state.friendships, [action.friendship.id]: action.friendship}
-			newState[action.friendship.id] = action.friendship;
+			// newState[action.friendship.id] = action.friendship;
 			return newState;
 		}
 		case DELETE_FRIENDSHIP: {

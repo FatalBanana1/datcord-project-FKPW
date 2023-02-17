@@ -16,11 +16,11 @@ class Friendship(db.Model):
     )
     role = db.Column(db.String(64), nullable=False)
 
-    # friends = db.relationship("User", back_populates="friendships")
-
+    # friendships = db.relationship("User", back_populates="friendships")
     direct_messages = db.relationship(
         "DirectMessage", back_populates="friendship", cascade="all, delete-orphan"
     )
+
 
     def to_dict(self):
         return {
@@ -28,6 +28,6 @@ class Friendship(db.Model):
             "user_id": self.user_id,
             "friend_id": self.friend_id,
             "role": self.role,
-            "friend": self.friends.username,
-            "friend_pic": self.friends.display_pic,
+            # "friend": self.friendships.username,
+            # "friend_pic": self.friendships.display_pic,
         }
