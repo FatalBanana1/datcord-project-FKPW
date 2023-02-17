@@ -132,3 +132,42 @@ a.UserLanding-sidebar-channel-user-home {
 .hidden {
   display: none;
 }
+
+/* tooltip */
+.edit-channel-tooltip {
+  position: absolute;
+  display: inline-block;
+}
+
+.edit-channel-tooltip .edit-channel-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  font-size: 12px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 999;
+  bottom: 155%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.edit-channel-tooltip:hover .edit-channel-tooltiptext {
+  visibility: visible;
+}
+
+.edit-channel-tooltip .edit-channel-tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}

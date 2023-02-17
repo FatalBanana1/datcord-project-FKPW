@@ -119,12 +119,13 @@
     rgba(145, 173, 159, 1) 0%,
     rgba(60, 70, 78, 1) 100%
   ) */
-  background: linear-gradient(
+  /* background: linear-gradient(
     to right,
     rgba(236, 206, 206, 0.8),
     rgba(182, 170, 214, 0.8),
     rgba(145, 140, 170, 0.8)
-  );
+  ); */
+  background: linear-gradient(to right, #f6d365, #fda085);
   margin-bottom: 30px;
   height: 100px;
   width: 100%;

@@ -7,7 +7,7 @@ function OpenModalButton({
   buttonText, // text of the button that opens the modal
   onButtonClick, // optional: callback function that will be called once the button that opens the modal is clicked
   onModalClose, // optional: callback function that will be called once the modal is closed
-  theme
+  theme,
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 

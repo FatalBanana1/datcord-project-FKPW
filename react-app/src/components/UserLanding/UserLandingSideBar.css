@@ -97,6 +97,7 @@
 }
 
 .UserLanding-sidebar-channel-name {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -137,6 +138,8 @@ a.UserLanding-sidebar-channel-name {
 
 .UserLanding-sidebar-channel-buttons {
   display: flex;
+  align-items: center;
+  padding-right: 20px;
   /* gap: 8px; */
 }
 
@@ -220,6 +223,7 @@ a.UserLanding-sidebar-channel-name {
 .UserLanding-sidebar-channel-user-actions {
   color: #96989d;
   display: flex;
+  align-items: center;
   gap: 14px;
   padding-right: 14px;
 }
@@ -227,6 +231,7 @@ a.UserLanding-sidebar-channel-name {
 .user-gear {
   font-size: 16px;
   cursor: pointer;
+  margin-left: 30px;
 }
 
 .user-ying-yang {

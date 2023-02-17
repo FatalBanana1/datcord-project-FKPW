@@ -73,10 +73,3 @@ def create_message_image(id):
     db.session.commit()
     return data.to_dict()
 
-
-# get messages by user id
-# @channel_message_routes.route("/<int:id>")
-# @login_required
-# def server(id):
-#     data = ChannelMessage.query.get(id)
-#     return data.to_dict()

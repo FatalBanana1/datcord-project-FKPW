@@ -169,15 +169,15 @@
 .cms-delete {
   margin-left: 25px;
 }
-
 .cms-edit {
+  height: 100%;
+  width: 100%;
 }
 
 .cms-edit:hover,
 .cms-delete:hover {
   cursor: pointer;
-  color: white;
-  /* text-decoration: underline; */
+  text-decoration: underline;
 }
 
 .row {
