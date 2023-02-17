@@ -17,9 +17,9 @@ class Friendship(db.Model):
     role = db.Column(db.String(64), nullable=False)
 
     # friendships = db.relationship("User", back_populates="friendships")
-    direct_messages = db.relationship(
-        "DirectMessage", back_populates="friendship", cascade="all, delete-orphan"
-    )
+    # direct_messages = db.relationship(
+    #     "DirectMessage", back_populates="friendship", cascade="all, delete-orphan"
+    # )
 
 
     def to_dict(self):

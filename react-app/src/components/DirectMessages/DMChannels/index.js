@@ -17,7 +17,7 @@ export default function DMChannels({ theme }) {
 	let { senderId, friendId } = useParams();
 	const dms = useSelector((state) => state.directMessages);
 
-	console.log(`front dm index========>>>>>>`, dms);
+	// console.log(`front dm index========>>>>>>`, dms);
 
 	// const channel = channels[channelId];
 
@@ -34,7 +34,7 @@ export default function DMChannels({ theme }) {
 			return names;
 		};
 
-		console.log(`inside DM channels comp --------front========`, friends);
+		// console.log(`inside DM channels comp --------front========`, friends);
 
 		// return
 		return (

@@ -46,8 +46,8 @@ export const actionResetDirectMessages = () => ({
 
 // GET: Get All direct messages by user id
 // Route: /api/dms
-export const thunkReadAllDirectMessages = () => async (dispatch) => {
-	let response = await fetch(`/api/dms`);
+export const thunkReadAllDirectMessages = (friendId) => async (dispatch) => {
+	let response = await fetch(`/api/dms/${friendId}`);
 
 	if (response.ok) {
 		const data = await response.json();
