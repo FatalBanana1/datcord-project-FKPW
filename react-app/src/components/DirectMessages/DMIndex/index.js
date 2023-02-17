@@ -4,9 +4,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import {
 	actionResetDirectMessages,
+	thunkDeleteDirectMessage,
 	thunkReadAllDirectMessages,
 } from "../../../store/directMessages";
 import { io } from "socket.io-client";
+import "./DMIndex.css";
+import DMEdit from "../DMEdit";
 
 let socket;
 
@@ -26,12 +29,12 @@ export default function DMIndex({ theme }) {
 	const [image, setImage] = useState(null);
 	const [newImage, setNewImage] = useState(false);
 	const [imageLoading, setImageLoading] = useState(false);
+	const [friend, setFriend] = useState("");
 
 	//selectors
-	const alldms = useSelector((state) => state.channelMessages);
+	const alldms = useSelector((state) => state.directMessages);
 	let dms = Object.values(alldms);
 	const user = useSelector((state) => state.session.user);
-
 	// -------------
 
 	// scroll
@@ -46,17 +49,31 @@ export default function DMIndex({ theme }) {
 
 	//----------------
 
+	// let friend;
+	async function getfriend() {
+		// let friend = await fetch(`/api/users/${friendId}`).then((data) =>
+		let fri = await fetch(`/api/users/${friendId}`).then((data) =>
+			data.json()
+		);
+		setFriend(fri);
+	}
+
+	//----------------
+
 	//effects
+
 	useEffect(() => {
 		scrollToBottom();
 	}, [loadBottom, messages, dms, newImage]);
 
 	useEffect(() => {
 		scrollToBottom();
-		dispatch(thunkReadAllDirectMessages(friendId)).then(() => {
-			setIsLoaded(true);
-			setLoadBottom(true);
-		});
+		dispatch(thunkReadAllDirectMessages(friendId))
+			.then(() => setFriend(getfriend()))
+			.then(() => {
+				setLoadBottom(true);
+				setIsLoaded(true);
+			});
 
 		return () => {
 			setChatInput("");
@@ -86,7 +103,7 @@ export default function DMIndex({ theme }) {
 
 	// ----------------------
 
-	if (isLoaded && friendId && user && theme) {
+	if (isLoaded && friend.id && theme) {
 		const updateChatInput = (e) => {
 			setChatInput(e.target.value);
 		};
@@ -108,45 +125,41 @@ export default function DMIndex({ theme }) {
 		// handlers
 
 		// delete
-		// const deleteHandler = (e) => {
-		// 	setIsLoaded(false);
-		// 	const payload = {
-		// 		serverId,
-		// 		channelId,
-		// 		id: e.target.dataset.id,
-		// 		sender_id: e.target.dataset.sender,
-		// 	};
-		// 	// return
-		// 	return dispatch(thunkDeleteChannelMessage(payload)).then(() =>
-		// 		setIsLoaded(true)
-		// 	);
-		// };
+		const deleteHandler = (e) => {
+			setIsLoaded(false);
+			const payload = {
+				id: e.target.dataset.id,
+				sender_id: e.target.dataset.sender,
+			};
+			// return
+			return dispatch(thunkDeleteDirectMessage(payload)).then(() =>
+				setIsLoaded(true)
+			);
+		};
 
-		// // delete
-		// const deleteHandlerCurr = (e) => {
-		// 	setIsLoaded(false);
-		// 	const payload = {
-		// 		serverId,
-		// 		channelId,
-		// 		id: e.target.dataset.id,
-		// 		sender_id: e.target.dataset.sender,
-		// 	};
-		// 	const msg = messages.filter(
-		// 		(el) => el.message !== e.target.dataset.msg
-		// 	);
-		// 	setMessages(msg);
-		// 	// console.log(`find message in delete`, msg);
+		// delete
+		const deleteHandlerCurr = (e) => {
+			setIsLoaded(false);
+			const payload = {
+				id: e.target.dataset.id,
+				sender_id: e.target.dataset.sender,
+			};
+			const msg = messages.filter(
+				(el) => el.message !== e.target.dataset.msg
+			);
+			setMessages(msg);
+			// console.log(`find message in delete`, msg);
 
-		// 	// return
-		// 	return dispatch(thunkDeleteChannelMessage(payload))
-		// 		.then(() => {
-		// 			setChatInput("");
-		// 			setMessages([]);
-		// 			dispatch(thunkReadAllChannelMessages(serverId, channelId));
-		// 		})
-		// 		.then(() => setEdit(999999990))
-		// 		.then(() => setIsLoaded(true));
-		// };
+			// return
+			return dispatch(thunkDeleteDirectMessage(payload))
+				.then(() => {
+					setChatInput("");
+					setMessages([]);
+					dispatch(thunkReadAllDirectMessages(friend.id));
+				})
+				.then(() => setEdit(999999990))
+				.then(() => setIsLoaded(true));
+		};
 
 		// -------------
 
@@ -159,7 +172,6 @@ export default function DMIndex({ theme }) {
 		const handleEditChange = (e) => {
 			setEdit(e);
 			if (e === 0) {
-				// console.log(`front CM index`, e, edit);
 				setChatInput("");
 				setMessages([]);
 				setLoadBottom(true);
@@ -222,7 +234,7 @@ export default function DMIndex({ theme }) {
 		// date
 		let date = new Date();
 
-		console.log(`front dm index ==========`, messages);
+		// console.log(`front dm index ==========`, friend);
 
 		// return
 
@@ -232,11 +244,11 @@ export default function DMIndex({ theme }) {
 					<div
 						className="cms-ch-name"
 						id={theme}
-					>{`# ${friendId}`}</div>
+					>{`# ${friend.username}`}</div>
 
 					<div className="cms-ct">
 						<div className="cm-overflow" id={theme}>
-							{dms.length
+							{dms.length > 0
 								? dms.map((message, i) => (
 										<div
 											id={theme}
@@ -249,26 +261,41 @@ export default function DMIndex({ theme }) {
 											message.sender_id ===
 												dms[i - 1].sender_id ? (
 												<div className="cm-spacer"></div>
-											) : (
+											) : message.sender_id ==
+											  senderId ? (
 												<div
-													// to="#"
 													className="img-link"
 													data-id={message.id}
-													// onClick={memberClickHandler}
 												>
 													<img
-														src={
-															message.display_pic
-														}
-														alt="crown"
+														src={user.display_pic}
+														alt="Display Picture"
+														className="pic-icon"
+														data-id={message.id}
+													/>
+												</div>
+											) : (
+												<div
+													className="img-link"
+													data-id={message.id}
+												>
+													<img
+														src={friend.display_pic}
+														alt="Display Picture"
 														className="pic-icon"
 														data-id={message.id}
 													/>
 												</div>
 											)}
 
-											{message.id == edit ? // /> // 	serverId={serverId} // 	channelId={channelId} // 	onChange={handleEditChange} // 	message={message} // <CMEdit
-											null : (
+											{message.id == edit ? (
+												<DMEdit
+													message={message}
+													onChange={handleEditChange}
+													user={user}
+													friend={friend}
+												/>
+											) : (
 												<div className="msg-ct">
 													<div
 														className="cms-msg-header"
@@ -285,22 +312,22 @@ export default function DMIndex({ theme }) {
 															<div className="cm-spacer2"></div>
 														) : (
 															<>
-																{senderId ===
+																{message.sender_id ===
 																user.id ? (
 																	<div
 																		id={
 																			theme
 																		}
-																		className="cms-admin"
-																	>{`${message.sender_nickname}`}</div>
+																		className="dms-admin"
+																	>{`${user.username}`}</div>
 																) : (
 																	<div
 																		id={
 																			theme
 																		}
-																		className="cms-member"
+																		className="dms-member"
 																	>
-																		{`${message.sender_nickname}`}{" "}
+																		{`${friend.username}`}
 																	</div>
 																)}
 
@@ -335,9 +362,9 @@ export default function DMIndex({ theme }) {
 																</div>
 																<div
 																	className="cms-delete"
-																	// onClick={
-																	// 	deleteHandler
-																	// }
+																	onClick={
+																		deleteHandler
+																	}
 																	data-id={
 																		message.id
 																	}
@@ -409,23 +436,26 @@ export default function DMIndex({ theme }) {
 											  dms[dms.length - 1].sender_id ===
 													message.sender_id ? (
 												<div className="cm-spacer"></div>
+											) : message.sender_id ==
+											  senderId ? (
+												<div className="img-link">
+													<img
+														src={user.display_pic}
+														alt="display picture"
+														className="pic-icon"
+													/>
+												</div>
 											) : (
 												<div className="img-link">
 													<img
-														src={
-															message.display_pic
-														}
-														alt="crown"
+														src={friend.display_pic}
+														alt="display picture"
 														className="pic-icon"
 													/>
 												</div>
 											)}
 
-											{message.id ==
-											edit ? // 	message={message} // <CMEdit
-											// 	onChange={handleEditChange}
-											// />
-											null : (
+											{message.id == edit ? null : ( // /> // 	onChange={handleEditChange} // 	message={message} // <CMEdit
 												<div className="msg-ct">
 													<div className="cms-msg-header">
 														{i >= 1 ? (
@@ -448,48 +478,23 @@ export default function DMIndex({ theme }) {
 															<div className="cm-spacer2"></div>
 														) : (
 															<>
-																{message.role ===
-																"owner" ? (
-																	<>
-																		<div
-																			id={
-																				theme
-																			}
-																			className="cms-admin"
-																		>{`${message.sender_nickname}`}</div>
-																		{/* <img
-																			src={
-																				crown
-																			}
-																			alt="crown"
-																			className="icon"
-																		/> */}
-																	</>
-																) : message.role ===
-																  "admin" ? (
+																{message.sender_id ===
+																user.id ? (
 																	<div
 																		id={
 																			theme
 																		}
-																		className="cms-admin"
-																	>{`${message.sender_nickname}`}</div>
-																) : message.role ===
-																  "member" ? (
-																	<div
-																		id={
-																			theme
-																		}
-																		className="cms-member"
-																	>
-																		{`${message.sender_nickname}`}{" "}
-																	</div>
+																		className="dms-admin"
+																	>{`${user.username}`}</div>
 																) : (
 																	<div
 																		id={
 																			theme
 																		}
-																		className="cms-pending"
-																	>{`${message.sender_nickname}`}</div>
+																		className="dms-member"
+																	>
+																		{`${friend.username}`}
+																	</div>
 																)}
 																<div className="cms-msg-date">
 																	{date
@@ -502,7 +507,7 @@ export default function DMIndex({ theme }) {
 															</>
 														)}
 
-														{+user.id ===
+														{+senderId ===
 														+message.sender_id ? (
 															<div
 																id={theme}
@@ -524,9 +529,9 @@ export default function DMIndex({ theme }) {
 																</div>
 																<div
 																	className="cms-delete"
-																	// onClick={
-																	// 	deleteHandlerCurr
-																	// }
+																	onClick={
+																		deleteHandlerCurr
+																	}
 																	data-id={
 																		message.id
 																	}
@@ -555,7 +560,7 @@ export default function DMIndex({ theme }) {
 																	message.message
 																}
 																className="aws-image"
-																alt={`uploaded by ${message.sender_nickname}`}
+																alt={`Uploaded Image`}
 															></img>
 														</div>
 													) : (
@@ -569,57 +574,52 @@ export default function DMIndex({ theme }) {
 							<div ref={endMsgRef} />
 						</div>
 
-						{friendId ? (
-							<div className="cm-form-container">
-								{!imageButton ? (
-									<button
-										id={theme}
-										className="cm-img-input"
-										onClick={() => setImageButton(true)}
-									>
-										+
-									</button>
-								) : (
-									<button
-										id={theme}
-										className="cm-img-input-x"
-										onClick={() => setImageButton(false)}
-									>
-										x
-									</button>
-								)}
+						<div className="cm-form-container">
+							{!imageButton ? (
+								<button
+									id={theme}
+									className="cm-img-input"
+									onClick={() => setImageButton(true)}
+								>
+									+
+								</button>
+							) : (
+								<button
+									id={theme}
+									className="cm-img-input-x"
+									onClick={() => setImageButton(false)}
+								>
+									x
+								</button>
+							)}
 
-								{imageButton ? (
-									// image upload
-									<form
-										onSubmit={sendImage}
-										className="submit-cm"
-									>
-										<input
-											type="file"
-											accept="image/*"
-											onChange={updateImage}
-										/>
-										<button type="submit">Submit</button>
-										{imageLoading && <div>Loading...</div>}
-									</form>
-								) : null}
-								{!imageButton ? (
-									// text input
-									<form
-										onSubmit={sendChat}
-										className="submit-cm"
-									>
-										<input
-											value={chatInput}
-											onChange={updateChatInput}
-											className="cm-text-input"
-											id={theme}
-										/>
-									</form>
-								) : null}
-							</div>
-						) : null}
+							{imageButton ? (
+								// image upload
+								<form
+									onSubmit={sendImage}
+									className="submit-cm"
+								>
+									<input
+										type="file"
+										accept="image/*"
+										onChange={updateImage}
+									/>
+									<button type="submit">Submit</button>
+									{imageLoading && <div>Loading...</div>}
+								</form>
+							) : null}
+							{!imageButton ? (
+								// text input
+								<form onSubmit={sendChat} className="submit-cm">
+									<input
+										value={chatInput}
+										onChange={updateChatInput}
+										className="cm-text-input"
+										id={theme}
+									/>
+								</form>
+							) : null}
+						</div>
 					</div>
 				</div>
 			)
