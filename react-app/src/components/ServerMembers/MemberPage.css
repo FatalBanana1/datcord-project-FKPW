@@ -164,6 +164,7 @@
 .role-section {
     padding: 5px 0;
     height: 75px;
+    flex-grow: 1;
 }
 
 .member-h4  {
@@ -318,12 +319,49 @@
 
 .leave-server-div {
 	padding: 20px 0;
+    padding-top: 60px;
 }
 
 .delete-membership-button {
-    margin-top: 40px;
 	border: none;
 	background-color: red;
 	color: white;
 	border-radius: 5px;
+    padding: 3px 5px;
+}
+
+.delete-tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.delete-tooltip .delete-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.delete-tooltip .delete-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.delete-tooltip:hover .delete-tooltiptext {
+  visibility: visible;
 }
