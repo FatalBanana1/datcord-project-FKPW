@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetFriendships } from "../../../store/friendships";
 
-export default function FriendshipsPage() {
+export default function FriendshipsPage({ theme }) {
 	let dispatch = useDispatch();
 	//states
 	let [isLoaded, setIsLoaded] = useState(false);
@@ -43,7 +43,7 @@ export default function FriendshipsPage() {
 						{/* map HERE------------------------- */}
 						{friends.length ? (
 							friends.map((friend) => (
-								<div key={friend.id} className="UserLanding-people-list">
+								<div key={friend.id} className="UserLanding-people-list" id={theme}>
 									<div className="UserLanding-user-info-container">
 										<div className="UserLanding-user-icon">
 											<img
@@ -52,7 +52,7 @@ export default function FriendshipsPage() {
 											></img>
 										</div>
 										<div className="UserLanding-user-name-status-container">
-											<div className="UserLanding-user-name">
+											<div className="UserLanding-user-name" id={theme}>
 												{friend.username}
 											</div>
 											<div className="UserLanding-user-status">
