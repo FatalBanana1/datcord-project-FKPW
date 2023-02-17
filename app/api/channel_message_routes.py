@@ -53,10 +53,12 @@ def create_message_image(id):
     if "image" not in res:
         return {"errors": "image required"}, 400
     image = res["image"]
+    print("IMAGE channel_messages", image)
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
     image.filename = get_unique_filename(image.filename)
     upload = upload_file_to_s3(image)
+    print("UPLOAD", upload)
 
     if "url" not in upload:
         # if dict doesn't have url key = err when uploading > send back err msg

@@ -93,7 +93,7 @@ export default function ServerNav({ theme }) {
       {/* <i className="fa-solid fa-plus"></i> */}
       <OpenModalButton
         buttonText="Create-Server"
-        id={theme}
+        theme={theme}
         modalComponent={<CreateServerForm onChange={loaded} />}
       />
 

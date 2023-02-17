@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 from .friendship import Friendship
+from .direct_message import DirectMessage
 
 
 class User(db.Model, UserMixin):
@@ -31,23 +32,69 @@ class User(db.Model, UserMixin):
         "ServerMember", back_populates="user", cascade="all, delete-orphan"
     )
 
-    friendships = db.relationship(
-        "User",
-        secondary="friendships_table",
-        primaryjoin=(id == Friendship.user_id),
-        secondaryjoin=(id == Friendship.friend_id),
-    )
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+        friendships = db.relationship(
+            "User",
+            secondary=f"{SCHEMA}.friendships_table",
+            primaryjoin=(id == Friendship.user_id),
+            secondaryjoin=(id == Friendship.friend_id),
+        )
+        friendships2 = db.relationship(
+            "User",
+            secondary=f"{SCHEMA}.friendships_table",
+            primaryjoin=(id == Friendship.friend_id),
+            secondaryjoin=(id == Friendship.user_id),
+        )
 
-    friendships2 = db.relationship(
-        "User",
-        secondary="friendships_table",
-        primaryjoin=(id == Friendship.friend_id),
-        secondaryjoin=(id == Friendship.user_id),
-    )
 
-    direct_messages = db.relationship(
-        "DirectMessage", back_populates="sender", cascade="all, delete-orphan"
-    )
+    if environment != "production":
+        friendships = db.relationship(
+            "User",
+            secondary="friendships_table",
+            primaryjoin=(id == Friendship.user_id),
+            secondaryjoin=(id == Friendship.friend_id),
+        )
+        friendships2 = db.relationship(
+            "User",
+            secondary="friendships_table",
+            primaryjoin=(id == Friendship.friend_id),
+            secondaryjoin=(id == Friendship.user_id),
+        )
+
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+        direct_messages = db.relationship(
+            "User",
+            secondary=f"{SCHEMA}.direct_messages_table",
+            primaryjoin=(id == DirectMessage.sender_id),
+            secondaryjoin=(id == DirectMessage.friend_id),
+        )
+        direct_messages2 = db.relationship(
+            "User",
+            secondary=f"{SCHEMA}.direct_messages_table",
+            primaryjoin=(id == DirectMessage.friend_id),
+            secondaryjoin=(id == DirectMessage.sender_id),
+        )
+
+
+    if environment != "production":
+        direct_messages = db.relationship(
+            "User",
+            secondary="direct_messages_table",
+            primaryjoin=(id == DirectMessage.sender_id),
+            secondaryjoin=(id == DirectMessage.friend_id),
+        )
+        direct_messages2 = db.relationship(
+            "User",
+            secondary="direct_messages_table",
+            primaryjoin=(id == DirectMessage.friend_id),
+            secondaryjoin=(id == DirectMessage.sender_id),
+        )
+
+    # direct_messages = db.relationship(
+    #     "DirectMessage", back_populates="sender", cascade="all, delete-orphan"
+    # )
 
     @property
     def password(self):
