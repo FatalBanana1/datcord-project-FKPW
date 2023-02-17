@@ -76,9 +76,11 @@ def delete_friendship(id):
     print("HITTING THE ROUTE --------->", id)
 
     friendship = Friendship.query.filter(Friendship.friend_id == id, Friendship.user_id == userId).all()
-    friendship2 = Friendship.query.filter(Friendship.user_id == id, Friendship.user_id == id).all()
+    friendship2 = Friendship.query.filter(Friendship.friend_id == userId, Friendship.user_id == id).all()
     # print("FRIENDSHIP IN ROUTE --------->", friendship)
     # print("FFRIENDSHIP IN ROUTE --------->", friendship2)
+    print("BACKEND DELETE  ONE------------>", friendship, friendship2)
+    print("BACKEND DELETE  TWO------------>", friendship2)
     if len(friendship):
         friendshipId = friendship[0].id
         temp = friendshipId

@@ -118,7 +118,7 @@ def seed_server_members():
     m89 = ServerMember(user_id=11, server_id=9, nickname="ChosenOne", role="member")
     m90 = ServerMember(user_id=17, server_id=10, nickname="johnwick", role="owner")
     m91 = ServerMember(user_id=18, server_id=9, nickname="Leo Messi", role="admin")
-    m92 = ServerMember(user_id=18, server_id=2, nickname="Leo Messi", role="member")
+    m92 = ServerMember(user_id=18, server_id=2, nickname="Leo Messi", role="admin")
 
     db.session.add_all(
         [

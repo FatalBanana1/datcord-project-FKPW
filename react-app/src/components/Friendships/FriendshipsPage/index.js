@@ -139,7 +139,7 @@ export default function FriendshipsPage({ theme }) {
 						/> */}
                       </div>
                       <div className="UserLanding-user-status" id={theme}>
-                        {`Keanu is upset you are not friends with him anymore. He will find you, and he will kill you.`}
+                        {`If you're not my friend, then you're my enemy!`}
                       </div>
                     </div>
                   </div>
