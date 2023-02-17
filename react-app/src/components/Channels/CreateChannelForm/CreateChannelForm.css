@@ -76,7 +76,7 @@
     border: none;
     border-radius: 3px;
     /* color: #ffffff; */
-    padding: 10px 10px 10px 8px;
+    padding: 8px 10px 8px 8px;
     align-items: center;
 }
 
@@ -131,8 +131,15 @@
 }
 
 .fa-lock {
-    color: #b9bbbe;
     padding-right: 8px;
+}
+
+#dark.fa-lock {
+    color: #b9bbbe;
+}
+
+#light.fa-lock {
+    color: #777778;
 }
 
 .CreateChannelForm-group-private {
@@ -206,23 +213,46 @@ input:checked + .CreateChannelForm-private-slider-round:before {
     padding: 0px 16px;
 }
 
+#dark.CreateChannelForm-private-text {
+    color: #b9bbbe;
+}
+
+#light.CreateChannelForm-private-text {
+    color: #4e5058;
+}
+
 .CreateChannelForm-buttons-container {
     position: relative;
     bottom: 0;
     display: flex;
     justify-content: right;
-    background-color: #2f3136;
     padding: 16px;
     margin-top: 16px;
 }
 
+#dark.CreateChannelForm-buttons-container {
+    background-color: #2f3136;
+}
+
+#light.CreateChannelForm-buttons-container {
+    background-color: #f3f4f5;
+}
+
 .CreateChannelForm-button-cancel {
-    color: #ffffff;
     font-weight: 600;
     font-size: 13px;
     border: 0;
     background-color: transparent;
     padding: 11px 16px;
+}
+
+#dark.CreateChannelForm-button-cancel {
+    color: #ffffff;
+    color: #82858f;
+}
+
+#light.CreateChannelForm-button-cancel {
+    color: #82858f;
 }
 
 .CreateChannelForm-button-create {

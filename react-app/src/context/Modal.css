@@ -50,6 +50,10 @@
     /* border-radius: 12px; */
 }
 
+#modal-content {
+    background-color: #ffffff;
+}
+
 
 #menu-modal-content {
     height: 100%;
