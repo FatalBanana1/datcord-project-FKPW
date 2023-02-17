@@ -45,6 +45,38 @@
     padding: 12px;
 }
 
+.member-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+    align-items: flex-end;
+}
+
+.add-friend-button {
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    width: 110px;
+    font-size:10px;
+    color: white;
+    background-color: green;
+    margin-bottom: 12px;
+    margin-right: 2px;
+}
+
+.delete-friend-button {
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    width: 110px;
+    font-size:10px;
+    color: white;
+    background-color: red;
+    margin-bottom: 12px;
+    margin-right: 2px;
+}
+
 .card-member-inner-div {
     /* width: calc(100% - 12px); */
     width: 100%;

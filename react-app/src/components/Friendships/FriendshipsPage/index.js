@@ -19,6 +19,8 @@ export default function FriendshipsPage() {
 		{}
 	);
 
+	console.log("FRIENDS ------->", friends)
+
 	useEffect(() => {
 		dispatch(thunkGetFriendships()).then(setIsLoaded(true));
 	}, [dispatch]);

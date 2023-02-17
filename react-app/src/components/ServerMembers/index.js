@@ -12,6 +12,7 @@ import "./ServerMembers.css";
 import crown from "../../assets/crown.png";
 import OpenModalButton from "../OpenModalButton";
 import MemberPage from "./MemberPage";
+import { actionResetFriendship, thunkGetFriendships } from "../../store/friendships";
 
 const ServerMembers = () => {
 	const dispatch = useDispatch();
@@ -36,6 +37,14 @@ const ServerMembers = () => {
 			dispatch(actionResetServerMember());
 		};
 	}, [serverId]);
+
+	useEffect(() => {
+		dispatch(thunkGetFriendships())
+
+		return () => {
+			dispatch(actionResetFriendship())
+		}
+	}, [])
 
 	// Check to see if User owns the server
 	let owner = null;

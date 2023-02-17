@@ -12,34 +12,74 @@ friendship_routes = Blueprint("friendships", __name__)
 @friendship_routes.route("/")
 @login_required
 def all_friends():
+    userId = int(current_user.id)
+
+# THIS VERSION GETS THE DISPLAY PICS AND NICKNAMES
     user = User.query.get(current_user.id)
     friends = user.friendships
+
+#THIS VERSION GETS THE FRIENDSHIPS BOTH WAYS, 
+# BUT DOESN'T GET DISPLAY PIC AND PASSWORD, 
+# AND ALSO BREAKS THE SHARED CHANNELS DIV
+    # friends1 = Friendship.query.filter(Friendship.friend_id == userId).all()
+    # friends2 = Friendship.query.filter(Friendship.user_id == userId).all()
+    # friends = friends1 + friends2
+
+    
+    print("FRIENDSSS IN GET ROUTE --------->", friends)
+
+
     return {"friendships": [fr.to_dict() for fr in friends]}
 
 
-# # ADD SERVER MEMBER
-# @server_routes.route("/<int:server_id>/members", methods=['POST'])
-# @login_required
-# def add_server_member(server_id):
-#     userId = int(current_user.id)
-#     server = Server.query.get(server_id)
-#     role = request.json['role']
-#     if (not server):
-#         return {"errors": ["Server does not exist"]}, 404
+# CREATE FRIENDSHIP
+# @friendship_routes.route("/")
+@friendship_routes.route("/", methods=["POST"])
+@login_required
+def add_friend():
+    userId = int(current_user.id)
+    newFriendId = request.json["memberId"]
+    newFriendship = Friendship (
+        user_id = userId,
+        friend_id = newFriendId,
+        role = "pending"
+    )
+    db.session.add(newFriendship)
+    db.session.commit()
+    return {'friendship': newFriendship.to_dict()}
 
-#     memberIds = [member.user_id for member in server.server_members]
-#     if userId in memberIds:
-#         return {"errors": ["This user is already in the server"]}, 403
-#     else:
-#         new_user = ServerMember(
-#             user_id=userId,
-#             server_id=server_id,
-#             nickname = current_user.username,
-#             role = role
-#             )
-#         db.session.add(new_user)
-#         db.session.commit()
-#         return {'server_member': new_user.to_dict()}
+
+# EDIT FRIENDSHIP
+# @friendship_routes.route("/<int:id>")
+@friendship_routes.route("/<int:id>", methods=["PUT"])
+@login_required
+def edit_friendship(id):
+    userId = int(current_user.id)
+    role = request.json["role"]
+    friendship = Friendship.query.filter(Friendship.friend_id == id, Friendship.user_id == userId).all()
+    friendship.role = role
+    db.session.commit()
+    return {'friendship': friendship.to_dict()}
+
+
+# Delete FRIENDSHIP
+# @friendship_routes.route("/<int:id>")
+@friendship_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_friendship(id):
+    userId = int(current_user.id)
+    print("HITTING THE ROUTE --------->", id)
+
+    friendship = Friendship.query.filter(Friendship.friend_id == id, Friendship.user_id == userId).all()
+    print("FRIENDSHIP IN ROUTE --------->", friendship)
+    friendshipId = friendship[0].id
+    temp = friendshipId
+    db.session.delete(friendship[0])
+    db.session.commit()
+    return {'friendship': temp}
+
+
+
 
 
 # # EDIT SERVER MEMBER

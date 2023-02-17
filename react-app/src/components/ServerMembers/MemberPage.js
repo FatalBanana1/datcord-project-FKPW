@@ -7,6 +7,7 @@ import {
 	thunkGetServerMembers,
 	thunkDeleteServerMember,
 } from "../../store/serverMembers";
+import { thunkAddFriendship, thunkDeleteFriendship, thunkGetFriendships } from "../../store/friendships.js";
 import { thunkReadUserServers } from "../../store/servers";
 import NickNameEdit from "./NickNameForm.js";
 import RoleEdit from "./RoleForm.js";
@@ -31,6 +32,9 @@ export default function MemberPage({
 	const user = useSelector((state) => state.session.user);
 	const [editNickName, setEditNickName] = useState(false);
 	const [editRole, setEditRole] = useState(false);
+	const friendships = useSelector((state) => state.friendships)
+
+
 
 	let userId = user.id;
 
@@ -102,6 +106,45 @@ export default function MemberPage({
 		setEditRole(false);
 	};
 
+	// Friendship
+
+	let allFriends
+	let isFriends
+	if (friendships) {
+		allFriends = Object.values(friendships)
+		let allFriendsIds = allFriends.map(friend => {
+			return friend.id
+		})
+		// console.log("ALL FRIENDS----------->",member, allFriendsIds)
+		if (allFriendsIds.includes(+member.user_id)) {
+			isFriends = true
+		}
+	}
+
+	// Add Friend
+
+	const addFriend = (e) => {
+		e.preventDefault()
+
+		dispatch(thunkAddFriendship(member.user_id))
+		.then(dispatch(thunkGetFriendships()))
+		.catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
+	}
+
+	const deleteFriend = (e) => {
+		e.preventDefault()
+
+		dispatch(thunkDeleteFriendship(member.user_id))
+		.then(dispatch(thunkGetFriendships()))
+		.catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
+	}
+
 	// console.log("PERMISSION ------>", permission)
 
 	return (
@@ -109,7 +152,27 @@ export default function MemberPage({
 			<div className="member-card">
 				<div id="card-header"></div>
 				<div className="card-content">
-					<img className="card-img" src={member.display_pic}></img>
+					<div className="member-header">
+						<img className="card-img" src={member.display_pic}></img>
+						{!isFriends && !isUser && (
+							<button
+							type="submit"
+							className="add-friend-button"
+							onClick={addFriend}
+						>
+							Send Friend Request
+						</button>
+						)}
+						{isFriends && !isUser && (
+							<button
+							type="submit"
+							className="delete-friend-button"
+							onClick={deleteFriend}
+						>
+							Remove Friend
+						</button>
+						)}
+					</div>
 					<div className="card-member-info">
 						<div className="card-member-inner-div">
 							<div className="member-nickName-div">
