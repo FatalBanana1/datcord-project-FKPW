@@ -56,7 +56,7 @@ export default function SignUp() {
                 formData.append("image", display_pic);
 
 
-                return dispatch(signUp(formData))
+                return dispatch(signUp("aws", formData))
                     .then((res) => {
                         if (res.errors) {
                             return setErrors(res.errors);
@@ -95,8 +95,7 @@ export default function SignUp() {
                 //         return setErrors(res.errors);
                 //     }
             }
-
-			return dispatch(signUp({username, email, password, display_pic}))
+			return dispatch(signUp("none", {username, email, password, display_pic}))
 				.then((res) => {
 					if (res.errors) {
 						return setErrors(res.errors);
@@ -105,7 +104,8 @@ export default function SignUp() {
 					}
 				})
 				.catch(async (res) => {
-					const data = await res.json();
+					const data = await res;
+                    console.log("DATA ERRORS", data)
 					if (data && data.errors) setErrors(data.errors);
 				});
 		}

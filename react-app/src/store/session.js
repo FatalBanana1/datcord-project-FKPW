@@ -80,13 +80,31 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp =
-  (formData) => async (dispatch) => {
+  (type, formData) => async (dispatch) => {
+    let response;
 
+    if (type === "aws") {
+      response = await fetch("/api/auth/signup", {
+        method: "POST",
+        body: formData
+      });
+    } else {
+      const { username, email, password, display_pic } = formData;
 
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      body: formData
-    });
+      response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          display_pic
+        })
+      });
+    }
+
 
 
 		if (response.ok) {
