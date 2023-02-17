@@ -22,6 +22,16 @@ export default function UserLanding({ page, theme }) {
         )
       );
     }
+    case "users": {
+      return (
+        theme && (
+          <div className="UserLanding-container" id={theme}>
+            {/* direct messages component goes here */}
+            <CMIndex theme={theme} />
+          </div>
+        )
+      )
+    }
     default: {
       return (
         <div className="UserLanding-container">

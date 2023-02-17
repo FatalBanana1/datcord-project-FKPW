@@ -50,7 +50,7 @@ export default function CreateChannelForm({
 			<div className="CreateChannelForm-container" id={theme}>
 				<div className="CreateChannelForm-header">
 					<div className="CreateChannelForm-title-text">
-						<h1 className="CreateChannelForm-title">
+						<h1 className="CreateChannelForm-title" id={theme}>
 							Create Channel
 						</h1>
 						<p className="CreateChannelForm-subtext" id={theme}>

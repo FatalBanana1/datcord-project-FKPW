@@ -82,12 +82,16 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
   if (page === "channel") {
     return <Channels isLoaded={isLoaded} theme={theme} />;
   }
+
   return (
     theme && (
       <div className="UserLanding-sidebar" id={theme}>
         <div className="UserLanding-sidebar-header" id={theme}>
           {user && user.username}
         </div>
+
+
+        {/* user dm channels component here */}
 
         <div className="UserLanding-sidebar-channel-content">
           <div className="UserLanding-sidebar-channel-user-info" id={theme}>
@@ -103,6 +107,11 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
                 {user && user.username}
               </div>
             </div>
+
+
+
+
+
             <div className="UserLanding-sidebar-channel-user-actions">
               <i className="fa-solid fa-yin-yang" onClick={openThemeMenu}></i>
               <div className={userThemeClass} ref={userThemeRef}>

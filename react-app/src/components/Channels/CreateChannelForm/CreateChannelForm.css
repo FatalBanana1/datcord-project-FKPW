@@ -6,10 +6,12 @@
 
 #dark.CreateChannelForm-container {
     color: #ffffff;
+    background-color: #35393e;
 }
 
 #light.CreateChannelForm-container {
     color: #060607;
+    background-color: #ffffff;
 }
 
 .CreateChannelForm-header {
@@ -38,6 +40,14 @@
 
 .CreateChannelForm-title {
     font-size: 20px;
+}
+
+#dark.CreateChannelForm-title {
+    color: #ffffff;
+}
+
+#light.CreateChannelForm-title {
+    color: #060607;
 }
 
 .CreateChannelForm-subtext, .CreateChannelForm-label {
