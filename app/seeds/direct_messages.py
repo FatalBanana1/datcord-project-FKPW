@@ -12,7 +12,7 @@ def seed_direct_messages():
         sender_id=3, friendship_id=4, message="Hello! How are you doing?"
     )
     d4 = DirectMessage(
-        sender_id=3, friendship_id=5, message="Hello! How are you doing?"
+        sender_id=3, friendship_id=3, message="Hello! How are you doing?"
     )
 
     db.session.add_all([d1, d2, d3, d4])
