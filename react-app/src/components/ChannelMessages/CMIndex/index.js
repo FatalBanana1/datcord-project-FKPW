@@ -324,7 +324,7 @@ const CMIndex = ({ theme }) => {
                         >
                           <img
                             src={message.display_pic}
-                            alt="crown"
+                            alt="Display Picture"
                             className="pic-icon"
                             data-id={message.id}
                           />
@@ -456,7 +456,7 @@ const CMIndex = ({ theme }) => {
                         <div className="img-link">
                           <img
                             src={message.display_pic}
-                            alt="crown"
+                            alt="Display Picture"
                             className="pic-icon"
                           />
                         </div>

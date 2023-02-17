@@ -147,8 +147,7 @@ const dmReducer = (state = defaultState(), action) => {
 
 	switch (action.type) {
 		case READ_ALL_DIRECT_MESSAGES:
-			console.log(`reducer-----`, action.directMessages);
-			console.log(`reducer-----`, action.directMessages.direct_message);
+			// console.log(`reducer-----`, action.directMessages);
 			newState = { ...state };
 			action.directMessages.direct_message.forEach(
 				(el) => (newState[el.id] = el)

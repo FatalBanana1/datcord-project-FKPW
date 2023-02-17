@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 from flask_login import current_user, login_required
 from app.models import DirectMessage, db
 from .channel_routes import channel_routes
@@ -17,8 +17,14 @@ def get_dms(id):
     messages = (
         DirectMessage.query.filter(
             or_(
-                DirectMessage.sender_id == current_user.id,
-                DirectMessage.friend_id == current_user.id,
+                and_(
+                    DirectMessage.sender_id == current_user.id,
+                    DirectMessage.friend_id == id,
+                ),
+                and_(
+                    DirectMessage.sender_id == id,
+                    DirectMessage.friend_id == current_user.id,
+                ),
             )
         )
         .order_by(DirectMessage.created_at.asc())
@@ -54,38 +60,26 @@ def create_message_image(id):
     return data.to_dict()
 
 
+# delete messages by channel id
+@direct_message_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_dms(id):
+    data = DirectMessage.query.get(id)
+    temp = data.to_dict()
+    if data:
+        db.session.delete(data)
+        db.session.commit()
+    return temp
 
 
-
-# # delete messages by channel id
-# @direct_message_routes.route("/<int:id>", methods=["DELETE"])
-# @login_required
-# def delete_cms(id):
-#     data = ChannelMessage.query.get(id)
-#     temp = data.to_dict()
-#     # print("DATA messages ======>>>>>>> ", data)
-#     if data:
-#         db.session.delete(data)
-#         db.session.commit()
-#     return temp
-
-
-# # edit channel message
-# @direct_message_routes.route("/<int:id>", methods=["PUT"])
-# @login_required
-# def update_cms(id):
-#     res = request.get_json()
-#     data = ChannelMessage.query.get(id)
-#     if data:
-#         data.message = res["message"]
-#         db.session.add(data)
-#         db.session.commit()
-#         return data.to_dict()
-
-
-# # get messages by user id
-# # @direct_message_routes.route("/<int:id>")
-# # @login_required
-# # def server(id):
-# #     data = ChannelMessage.query.get(id)
-# #     return data.to_dict()
+# edit channel message
+@direct_message_routes.route("/<int:id>", methods=["PUT"])
+@login_required
+def update_dms(id):
+    res = request.get_json()
+    data = DirectMessage.query.get(id)
+    if data:
+        data.message = res["message"]
+        db.session.add(data)
+        db.session.commit()
+        return data.to_dict()
