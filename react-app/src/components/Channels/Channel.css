@@ -9,6 +9,9 @@
   padding: 7px;
   box-sizing: border-box;
   font-size: 16px;
+  align-items: center;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .server-dropdown-button {
