@@ -14,9 +14,16 @@ export default function DMChannels({ theme }) {
 	let allFriends = useSelector((state) => state.friendships);
 	let friends = Object.values(allFriends);
 	let user = useSelector((state) => state.session.user);
+	let {senderId, friendId} = useParams();
+	const dms = useSelector((state) => state.directMessages);
+
+	console.log(`front dm index========>>>>>>`, dms);
+
+	// const channel = channels[channelId];
 
 	useEffect(() => {
 		dispatch(thunkGetFriendships()).then(setIsLoaded(true));
+		dispatch(thunk)
 	}, [dispatch]);
 
 	if (isLoaded) {
