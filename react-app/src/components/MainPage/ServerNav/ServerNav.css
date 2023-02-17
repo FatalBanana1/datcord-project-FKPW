@@ -133,6 +133,11 @@
   background-color: #3ba55d;
 }
 
+#light.ServerNav-icons:hover {
+  background-color: #3ba55d;
+  color: white;
+}
+
 .ServerNav-icons:hover::before,
 .ServerNav-profile:hover::before,
 .ServerNav-server-icons:hover::before {
