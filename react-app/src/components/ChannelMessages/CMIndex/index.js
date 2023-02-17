@@ -16,7 +16,7 @@ import crown from "../../../assets/crown.png";
 // leave this OUT
 let socket;
 
-const CMIndex = () => {
+const CMIndex = ({ theme }) => {
 	const dispatch = useDispatch();
 	//states
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -40,9 +40,6 @@ const CMIndex = () => {
 	let { serverId, channelId } = useParams();
 	const channels = useSelector((state) => state.channels.channels);
 	const channel = channels[channelId];
-
-	// theme
-	let theme = user.theme;
 
 	const endMsgRef = useRef(null);
 
@@ -219,8 +216,6 @@ const CMIndex = () => {
 
 	// -------------
 
-	console.log("THEME >>>>>>", theme)
-	theme = "light";
 	if (isLoaded && channel && user && theme) {
 		const updateChatInput = (e) => {
 			setChatInput(e.target.value);
