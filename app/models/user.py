@@ -31,19 +31,35 @@ class User(db.Model, UserMixin):
         "ServerMember", back_populates="user", cascade="all, delete-orphan"
     )
 
-    friendships = db.relationship(
-        "User",
-        secondary="friendships_table",
-        primaryjoin=(id == Friendship.user_id),
-        secondaryjoin=(id == Friendship.friend_id),
-    )
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+        friendships = db.relationship(
+            "User",
+            secondary=f"{SCHEMA}.friendships_table",
+            primaryjoin=(id == Friendship.user_id),
+            secondaryjoin=(id == Friendship.friend_id),
+        )
+        friendships2 = db.relationship(
+            "User",
+            secondary=f"{SCHEMA}.friendships_table",
+            primaryjoin=(id == Friendship.friend_id),
+            secondaryjoin=(id == Friendship.user_id),
+        )
 
-    friendships2 = db.relationship(
-        "User",
-        secondary="friendships_table",
-        primaryjoin=(id == Friendship.friend_id),
-        secondaryjoin=(id == Friendship.user_id),
-    )
+
+    if environment != "production":
+        friendships = db.relationship(
+            "User",
+            secondary="friendships_table",
+            primaryjoin=(id == Friendship.user_id),
+            secondaryjoin=(id == Friendship.friend_id),
+        )
+        friendships2 = db.relationship(
+            "User",
+            secondary="friendships_table",
+            primaryjoin=(id == Friendship.friend_id),
+            secondaryjoin=(id == Friendship.user_id),
+        )
 
     direct_messages = db.relationship(
         "DirectMessage", back_populates="sender", cascade="all, delete-orphan"

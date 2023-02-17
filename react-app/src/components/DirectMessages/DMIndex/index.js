@@ -14,5 +14,5 @@ export default function DMIndex() {
 	if (isLoaded) {
 		// return
 		return <div>inside DM Index</div>;
-	} else return <div>Droppin' DMs...</div>
+	} else return <div>Sliding into your DMs...</div>
 }
