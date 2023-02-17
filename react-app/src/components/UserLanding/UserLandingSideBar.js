@@ -114,12 +114,12 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 						</div>
 
             <div className="UserLanding-sidebar-channel-user-actions">
-              <div class="themes-tooltip">
+              <div className="themes-tooltip">
 				<i
 					className="fa-solid fa-yin-yang user-ying-yang"
 					onClick={openThemeMenu}
               	></i>
-				<span class="themes-tooltiptext">Change Theme</span>
+				<span className="themes-tooltiptext">Change Theme</span>
 			  </div>
 
               <div className={userThemeClass} ref={userThemeRef}>
@@ -136,12 +136,12 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
                   </button>
                 </div>
               </div>
-			  <div class="settings-tooltip">
+			  <div className="settings-tooltip">
 				<i
 					className="fa-solid fa-gear user-gear"
 					onClick={openUserMenu}
 				></i>
-				<span class="settings-tooltiptext">User Actions</span>
+				<span className="settings-tooltiptext">User Actions</span>
 			  </div>
               <div className={userSettingsClass} ref={userSettingsRef}>
                 <div className="dropdown-wrapper">

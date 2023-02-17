@@ -73,7 +73,7 @@ const CMEdit = ({ message, onChange, channelId, serverId, theme }) => {
 					value={mval}
 					onChange={(e) => setMval(e.target.value)}
 					className="cm-text-input"
-					contenteditable="true"
+					contentEditable="true"
 				/>
 			</form>
 		</div>

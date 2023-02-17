@@ -254,14 +254,8 @@ export default function DMIndex({ theme }) {
 											className="row justify"
 											key={message.id}
 										>
-											{i - 1 >= 0 &&
-											dms[i - 1] &&
-											message.sender_id &&
-											Number(message.sender_id) ===
-												Number(dms[i - 1].sender_id) ? (
-												<div className="cm-spacer"></div>
-											) : Number(message.sender_id) ===
-											  Number(senderId) ? (
+											{Number(message.sender_id) ===
+											Number(senderId) ? (
 												<div
 													className="img-link"
 													data-id={message.id}
@@ -287,7 +281,8 @@ export default function DMIndex({ theme }) {
 												</div>
 											)}
 
-											{Number(message.id) === Number(edit) ? (
+											{Number(message.id) ===
+											Number(edit) ? (
 												<DMEdit
 													message={message}
 													onChange={handleEditChange}
@@ -300,50 +295,37 @@ export default function DMIndex({ theme }) {
 														className="cms-msg-header"
 														id={theme}
 													>
-														{i - 1 >= 0 &&
-														dms &&
-														dms.length &&
-														dms[i - 1] &&
-														Number(message.sender_id) &&
-														Number(message.sender_id) ===
-															dms[i - 1]
-																.sender_id ? (
-															<div className="cm-spacer2"></div>
+														{Number(
+															message.sender_id
+														) ===
+														Number(user.id) ? (
+															<div
+																id={theme}
+																className="dms-admin"
+															>{`${user.username}`}</div>
 														) : (
-															<div>
-																{Number(message.sender_id) ===
-																Number(user.id) ? (
-																	<div
-																		id={
-																			theme
-																		}
-																		className="dms-admin"
-																	>{`${user.username}`}</div>
-																) : (
-																	<div
-																		id={
-																			theme
-																		}
-																		className="dms-member"
-																	>
-																		{`${friend.username}`}
-																	</div>
-																)}
-
-																<div
-																	className="cms-msg-date"
-																	id={theme}
-																>
-																	{message.created_at.slice(
-																		0,
-																		22
-																	)}
-																</div>
+															<div
+																id={theme}
+																className="dms-member"
+															>
+																{`${friend.username}`}
 															</div>
 														)}
 
+														<div
+															className="cms-msg-date"
+															id={theme}
+														>
+															{message.created_at.slice(
+																0,
+																22
+															)}
+														</div>
+
 														{Number(user.id) ===
-														Number(message.sender_id) ? (
+														Number(
+															message.sender_id
+														) ? (
 															<div
 																id={theme}
 																className="cms-options absolute-op"
@@ -420,17 +402,8 @@ export default function DMIndex({ theme }) {
 											key={`s_${i}`}
 											className="row justify"
 										>
-											{i >= 1 ? (
-												<div>
-													{message.sender_id &&
-													Number(message.sender_id) ===
-													Number(messages[i - 1]
-															.sender_id) ? (
-														<div className="cm-spacer"></div>
-													) : null}
-												</div>
-											) : Number(message.sender_id) ===
-											  Number(senderId) ? (
+											{Number(message.sender_id) ===
+											Number(senderId) ? (
 												<div className="img-link">
 													<img
 														src={user.display_pic}
@@ -448,7 +421,8 @@ export default function DMIndex({ theme }) {
 												</div>
 											)}
 
-											{Number(message.id) === Number(edit) ? (
+											{Number(message.id) ===
+											Number(edit) ? (
 												<DMEdit
 													message={message}
 													onChange={handleEditChange}
@@ -458,50 +432,32 @@ export default function DMIndex({ theme }) {
 											) : (
 												<div className="msg-ct">
 													<div className="cms-msg-header">
-														{i >= 1 ? (
-															<div>
-																{Number(message.sender_id) &&
-																Number(message.sender_id) ===
-																	Number(messages[
-																		i - 1
-																	]
-																		.sender_id) ? (
-																	<div className="cm-spacer2"></div>
-																) : null}
-															</div>
+														{Number(
+															message.sender_id
+														) ===
+														Number(user.id) ? (
+															<div
+																id={theme}
+																className="dms-admin"
+															>{`${user.username}`}</div>
 														) : (
-															<div>
-																{Number(message.sender_id) ===
-																Number(user.id) ? (
-																	<div
-																		id={
-																			theme
-																		}
-																		className="dms-admin"
-																	>{`${user.username}`}</div>
-																) : (
-																	<div
-																		id={
-																			theme
-																		}
-																		className="dms-member"
-																	>
-																		{`${friend.username}`}
-																	</div>
-																)}
-																<div className="cms-msg-date">
-																	{date
-																		.toUTCString()
-																		.slice(
-																			0,
-																			22
-																		)}
-																</div>
+															<div
+																id={theme}
+																className="dms-member"
+															>
+																{`${friend.username}`}
 															</div>
 														)}
+														<div className="cms-msg-date">
+															{date
+																.toUTCString()
+																.slice(0, 22)}
+														</div>
 
 														{Number(senderId) ===
-														Number(message.sender_id) ? (
+														Number(
+															message.sender_id
+														) ? (
 															<div
 																id={theme}
 																className="cms-options absolute-op"
