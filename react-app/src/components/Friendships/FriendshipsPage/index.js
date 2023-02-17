@@ -33,7 +33,11 @@ export default function FriendshipsPage({ theme }) {
 				<div className="UserLanding-header" id={theme}></div>
 				<div className="UserLanding-status" id={theme}>
 					{/* adding 2 as placeholder for now */}
-					<h2>{`Friends - ${friends.length}`}</h2>
+					{friends.length ? (
+						<h2>{`Friends - ${friends.length}`}</h2>
+					) : (
+						<h2>{`Enemies - 1`}</h2>
+					)}
 				</div>
 				{/* making fake friends here :( */}
 				<div className="UserLanding-people-list-parent" id={theme}>
