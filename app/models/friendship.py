@@ -28,6 +28,4 @@ class Friendship(db.Model):
             "user_id": self.user_id,
             "friend_id": self.friend_id,
             "role": self.role,
-            # "friend": self.friendships.username,
-            # "friend_pic": self.friendships.display_pic,
         }
