@@ -15,7 +15,7 @@ import {
 import { thunkAddServerMember } from "../../../store/serverMembers";
 import { authenticate } from "../../../store/session";
 
-const ServerIndex = () => {
+const ServerIndex = ({ theme }) => {
   let dispatch = useDispatch();
   let [isLoaded, setIsLoaded] = useState(false);
   let [joined, setJoined] = useState(false);
@@ -49,8 +49,8 @@ const ServerIndex = () => {
 
     // return
     return (
-      <div className="exp-bk">
-        <ServerNav />
+      <div className="exp-bk" id={theme}>
+        <ServerNav theme={theme} />
         <div className="explorer-container">
           <div className="explorer-banner-container">
             <img className="explorer-img" src={explorerBanner} />
