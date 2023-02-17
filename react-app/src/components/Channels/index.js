@@ -268,6 +268,7 @@ export default function Channels({ theme }) {
                         serverId={serverId}
                         channelId={channel.id}
                         priv={channel.is_private}
+                        theme={theme}
                       />
                     }
                   />

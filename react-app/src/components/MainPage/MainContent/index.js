@@ -16,6 +16,15 @@ export default function MainContent({ page, isLoaded, theme }) {
           </div>
         )
       );
+    case "users":
+      return (
+        theme && (
+          <div className="UserLanding-container" id={theme}>
+            <UserLandingSideBar page={page} isLoaded={isLoaded} theme={theme} />
+            <UserLanding page={page} isLoaded={isLoaded} theme={theme} />
+          </div>
+        )
+      )
     default:
       return (
         theme && (
