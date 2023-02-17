@@ -46,3 +46,34 @@
   font-size: 13px;
   margin-left: 8px;
 }
+
+.edit-channel-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.edit-channel-tooltip {
+  position: absolute;
+  display: inline-block;
+}
+
+.edit-channel-tooltip .edit-channel-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 999;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.edit-channel-tooltip:hover .edit-channel-tooltiptext {
+  visibility: visible;
+}

@@ -255,7 +255,7 @@ export default function Channels({ theme }) {
               </div>
               {permissions && (
                 <div className="UserLanding-sidebar-channel-buttons">
-                  <i className="fa-solid fa-user-plus"></i>
+                  {/* <i className="fa-solid fa-user-plus"></i> */}
                   {/* <NavLink to={`/channels/${serverId}/${channel.id}/edit`}>
                                         <i className="fa-solid fa-gear" onClick={() => setShowEdit(true)}></i>
                                     </NavLink> */}

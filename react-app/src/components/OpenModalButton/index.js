@@ -7,7 +7,7 @@ function OpenModalButton({
   buttonText, // text of the button that opens the modal
   onButtonClick, // optional: callback function that will be called once the button that opens the modal is clicked
   onModalClose, // optional: callback function that will be called once the modal is closed
-  theme
+  theme,
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
@@ -50,12 +50,17 @@ function OpenModalButton({
 
   if (buttonText === "Edit-Channel") {
     return (
-      <button
-        onClick={onClick}
-        className={`OpenModalButton-button ${buttonText}`}
-      >
-        <i className="fa-solid fa-gear"></i>
-      </button>
+      <div>
+        <div className="edit-channel-tooltip">
+          <button
+            onClick={onClick}
+            className={`OpenModalButton-button ${buttonText}`}
+          >
+            <i className="fa-solid fa-gear"></i>
+          </button>
+          <span className="edit-channel-tooltiptext">Hello</span>
+        </div>
+      </div>
     );
   }
 
