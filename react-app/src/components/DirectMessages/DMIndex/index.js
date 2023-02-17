@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { thunkReadAllDirectMessages } from "../../../store/directMessages";
+import { actionResetDirectMessages, thunkReadAllDirectMessages } from "../../../store/directMessages";
+import { io } from "socket.io-client";
+
+let socket;
 
 export default function DMIndex({ theme }) {
 	let dispatch = useDispatch();
@@ -37,42 +40,42 @@ export default function DMIndex({ theme }) {
 	};
 
 	//effects
-	// useEffect(() => {
-	// 	scrollToBottom();
-	// }, [loadBottom, messages, dms, newImage]);
+	useEffect(() => {
+		scrollToBottom();
+	}, [loadBottom, messages, dms, newImage]);
 
-	// useEffect(() => {
-	// 	scrollToBottom();
-	// 	dispatch(thunkReadAllDirectMessages(senderId, friendId)).then(() => {
-	// 		setIsLoaded(true);
-	// 		setLoadBottom(true);
-	// 	});
+	useEffect(() => {
+		scrollToBottom();
+		dispatch(thunkReadAllDirectMessages(senderId, friendId)).then(() => {
+			setIsLoaded(true);
+			setLoadBottom(true);
+		});
 
-	// 	return () => {
-	// 		setChatInput("");
-	// 		setMessages([]);
-	// 		setEdit(999999990);
-	// 	};
-	// }, [friendId, senderId, image, reload]);
+		return () => {
+			setChatInput("");
+			setMessages([]);
+			setEdit(999999990);
+		};
+	}, [friendId, senderId, image, reload]);
 
-	// useEffect(() => {
-	// 	// open socket connection
-	// 	// create websocket
-	// 	socket = io();
-	// 	// socket.emit("join", { channelId: channelId, username: user.username });
+	useEffect(() => {
+		// open socket connection
+		// create websocket
+		socket = io();
+		// socket.emit("join", { channelId: channelId, username: user.username });
 
-	// 	socket.on("direct_message", (direct_message) => {
-	// 		setMessages((messages) => [...messages, direct_message]);
-	// 	});
+		socket.on("direct_message", (direct_message) => {
+			setMessages((messages) => [...messages, direct_message]);
+		});
 
-	// 	// when component unmounts, disconnect
-	// 	return () => {
-	// 		setChatInput("");
-	// 		socket.disconnect();
-	// 		// setMessages([]);
-	// 		dispatch(actionResetChannelMessages());
-	// 	};
-	// }, [senderId, friendId]);
+		// when component unmounts, disconnect
+		return () => {
+			setChatInput("");
+			socket.disconnect();
+			// setMessages([]);
+			dispatch(actionResetDirectMessages());
+		};
+	}, [senderId, friendId]);
 
 	if (isLoaded) {
 		// return
