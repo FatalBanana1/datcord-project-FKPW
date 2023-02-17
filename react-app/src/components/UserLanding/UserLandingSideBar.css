@@ -260,3 +260,46 @@ a.UserLanding-sidebar-channel-name {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+
+.settings-tooltip,
+.themes-tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.settings-tooltip .settings-tooltiptext,
+.themes-tooltip .themes-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #18191c;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -68px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.settings-tooltip .settings-tooltiptext::after,
+.themes-tooltip .themes-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.settings-tooltip:hover .settings-tooltiptext,
+.themes-tooltip:hover .themes-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
