@@ -14,9 +14,9 @@ class DirectMessage(db.Model):
         db.ForeignKey(add_prefix_for_prod("users_table.id")),
         nullable=False,
     )
-    friendship_id = db.Column(
+    friend_id = db.Column(
         db.Integer,
-        db.ForeignKey(add_prefix_for_prod("friendships_table.id")),
+        db.ForeignKey(add_prefix_for_prod("friendships_table.friend_id")),
         nullable=False,
     )
     message = db.Column(db.String(256), nullable=True)
@@ -32,23 +32,16 @@ class DirectMessage(db.Model):
         return {
             "id": self.id,
             "sender_id": self.sender_id,
-            "friendship_id": self.friendship_id,
+            "friend_id": self.friend_id,
             "message": self.message,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            "sender_id": self.sender.id,
-            "sender_nickname": self.sender.username,
-            "role": self.friendship.role,
-            "display_pic": self.sender.display_pic,
         }
 
     def to_dict2(self):
         return {
             "id": self.id,
             "sender_id": self.sender_id,
-            "friendship_id": self.friendship_id,
+            "friend_id": self.friend_id,
             "message": self.message,
-            "sender_id": self.sender.id,
-            "sender_nickname": self.sender.username,
-            "display_pic": self.sender.display_pic,
         }

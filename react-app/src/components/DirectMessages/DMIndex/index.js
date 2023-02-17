@@ -37,13 +37,13 @@ export default function DMIndex({ theme }) {
 	};
 
 	//effects
-	useEffect(() => {
-		scrollToBottom();
-	}, [loadBottom, messages, dms, newImage]);
+	// useEffect(() => {
+	// 	scrollToBottom();
+	// }, [loadBottom, messages, dms, newImage]);
 
 	// useEffect(() => {
 	// 	scrollToBottom();
-	// 	dispatch(thunkReadAllDirectMessages(serverId, channelId)).then(() => {
+	// 	dispatch(thunkReadAllDirectMessages(senderId, friendId)).then(() => {
 	// 		setIsLoaded(true);
 	// 		setLoadBottom(true);
 	// 	});
@@ -72,7 +72,7 @@ export default function DMIndex({ theme }) {
 	// 		// setMessages([]);
 	// 		dispatch(actionResetChannelMessages());
 	// 	};
-	// }, [user.id, serverId, channelId]);
+	// }, [senderId, friendId]);
 
 	if (isLoaded) {
 		// return

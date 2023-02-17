@@ -3,16 +3,16 @@ from app.models import db, DirectMessage, environment, SCHEMA
 
 def seed_direct_messages():
     d1 = DirectMessage(
-        sender_id=3, friendship_id=1, message="Hello! How are you doing?"
+        sender_id=3, friend_id=1, message="Hello! How are you doing?"
     )
     d2 = DirectMessage(
-        sender_id=3, friendship_id=2, message="Hello! How are you doing?"
+        sender_id=3, friend_id=2, message="Hello! How are you doing?"
     )
     d3 = DirectMessage(
-        sender_id=3, friendship_id=4, message="Hello! How are you doing?"
+        sender_id=3, friend_id=4, message="Hello! How are you doing?"
     )
     d4 = DirectMessage(
-        sender_id=3, friendship_id=3, message="Hello! How are you doing?"
+        sender_id=3, friend_id=5, message="Hello! How are you doing?"
     )
 
     db.session.add_all([d1, d2, d3, d4])

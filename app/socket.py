@@ -63,7 +63,7 @@ def handle_direct_message(data):
             **{
                 "sender_id": data["sender_id"],
                 "message": data["message"],
-                "friendship_id": data["friendshipId"],
+                "friend_id": data["friendId"],
             }
         )
         db.session.add(message)

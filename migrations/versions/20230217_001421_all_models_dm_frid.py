@@ -100,13 +100,13 @@ def upgrade():
         "direct_messages_table",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("sender_id", sa.Integer(), nullable=False),
-        sa.Column("friendship_id", sa.Integer(), nullable=False),
+        sa.Column("friend_id", sa.Integer(), nullable=False),
         sa.Column("message", sa.String(length=256), nullable=True),
         sa.Column("created_at", sa.DateTime(), nullable=False),
         sa.Column("updated_at", sa.DateTime(), nullable=False),
         sa.ForeignKeyConstraint(
-            ["friendship_id"],
-            ["friendships_table.id"],
+            ["friend_id"],
+            ["friendships_table.friend_id"],
         ),
         sa.ForeignKeyConstraint(
             ["sender_id"],

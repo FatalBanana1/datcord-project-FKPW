@@ -13,7 +13,7 @@ direct_message_routes = Blueprint("direct_messages", __name__)
 @direct_message_routes.route("/")
 @login_required
 def get_dms():
-    messages = DirectMessage.query.filter(DirectMessage.user_id == current_user.id).all()
+    messages = DirectMessage.query.filter(DirectMessage.sender_id == current_user.id, DirectMessage.friend_id).all()
     return {"direct_message": [el.to_dict() for el in messages]}
 
 
