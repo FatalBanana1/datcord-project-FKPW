@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db, ServerMember
+from app.models import User, db, ServerMember, Friendship
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -77,6 +77,13 @@ def sign_up():
             role="member",
         )
         db.session.add(member)
+        db.session.commit()
+        friend_keanu = Friendship (
+        user_id = user.id,
+        friend_id = 17,
+        role = "friend"
+        )
+        db.session.add(friend_keanu)
         db.session.commit()
 
         login_user(user)
