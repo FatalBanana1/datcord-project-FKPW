@@ -11,7 +11,9 @@ export default function SignUp() {
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [display_pic, setDisplayPic] = useState("");
+	const [display_pic, setDisplayPic] = useState(null);
+    const [imageUrl, setImageUrl] = useState("");
+    const [imageLoading, setImageLoading] = useState(false);
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState({});
 
@@ -42,7 +44,59 @@ export default function SignUp() {
 
 		if (Object.keys(submitErrors).length === 0) {
 
-			return dispatch(signUp(username, email, password, display_pic))
+            console.log("IMAGE URL >>>>>>", imageUrl);
+            console.log("IMAGE URL >>>>>>", display_pic);
+            console.log("IMAGE URL >>>>>>", username);
+
+            if (display_pic) {
+                const formData = new FormData();
+                formData.append("username", username);
+                formData.append("email", email);
+                formData.append("password", password);
+                formData.append("image", display_pic);
+
+
+                return dispatch(signUp(formData))
+                    .then((res) => {
+                        if (res.errors) {
+                            return setErrors(res.errors);
+                        } else {
+                            history.push("/channels/9/19");
+                        }
+                    })
+                    .catch(async (res) => {
+                        const data = await res.json();
+                        if (data && data.errors) setErrors(data.errors);
+                    });
+
+                // const res = await fetch(`/api/auth/signup`, {
+                //     method: "POST",
+                //     body: formData,
+                // });
+                //     if (res.ok) {
+                //         await res.json();
+                //         // setDisplayPic(null);
+                //         setImageLoading(false);
+                //         history.push("/channels/9/19");
+                //         // return dispatch(signUp({username, email, password}))
+                //         //     .then((res) => {
+                //         //         if (res.errors) {
+                //         //             return setErrors(res.errors);
+                //         //         } else {
+                //         //             history.push("/channels/9/19");
+                //         //         }
+                //         //     })
+                //         //     .catch(async (res) => {
+                //         //         const data = await res.json();
+                //         //         if (data && data.errors) setErrors(data.errors);
+                //         //     });
+                //     } else {
+                //         setImageLoading(false);
+                //         return setErrors(res.errors);
+                //     }
+            }
+
+			return dispatch(signUp({username, email, password, display_pic}))
 				.then((res) => {
 					if (res.errors) {
 						return setErrors(res.errors);
@@ -60,6 +114,15 @@ export default function SignUp() {
 	const goLogin = () => {
 		history.push("/login");
 	};
+
+    const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setDisplayPic(file);
+            const url = URL.createObjectURL(file);
+            setImageUrl(url);
+        }
+    }
 
   return (
     <div className="Form-wrapper">
@@ -79,6 +142,19 @@ export default function SignUp() {
             </div>
             <div className="Form-form-container">
             <form className="Form-form" onSubmit={handleSubmit}>
+                <div className="Form-group-profile-pic">
+                    <div className="Form-default-profile-image-container">
+                        <img
+                            src={ imageUrl ? imageUrl : "https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png"}
+                            alt="default-profile-image"
+                            className="Form-default-profile-image"
+                        />
+                    </div>
+                    <label htmlFor="profile-pic-upload" className="SignUpForm-profile-pic-upload clickable">
+                        Add a photo of yourself!
+                    </label>
+                    <input id="profile-pic-upload" type="file" onChange={updateFile} />
+                </div>
                 <div className="Form-form-group">
                 <label htmlFor="email">Email</label>
                 <input
@@ -89,8 +165,8 @@ export default function SignUp() {
                     required
                 />
                 <div className="Form-error-container">
-                    {errors.email && <p className="Form-error">{errors.email}</p>}
-                    {errors.emailAt && <p className="Form-error">{errors.emailAt}</p>}
+                    {errors && errors.email && <p className="Form-error">{errors.email}</p>}
+                    {errors && errors.emailAt && <p className="Form-error">{errors.emailAt}</p>}
                 </div>
                 </div>
                 <div className="Form-form-group">
@@ -103,10 +179,10 @@ export default function SignUp() {
                     required
                 />
                 <div className="Form-error-container">
-                    {errors.username && (
+                    {errors && errors.username && (
                     <p className="Form-error">{errors.username}</p>
                     )}
-                    {errors.usernameLength && (
+                    {errors && errors.usernameLength && (
                     <p className="Form-error">{errors.usernameLength}</p>
                     )}
                 </div>
@@ -134,10 +210,10 @@ export default function SignUp() {
                     required
                 />
                 <div className="Form-error-container">
-                    {errors.password && (
+                    {errors && errors.password && (
                     <p className="Form-error">{errors.password}</p>
                     )}
-                    {errors.passwordLength && (
+                    {errors && errors.passwordLength && (
                         <p className="Form-error">{errors.passwordLength}</p>
                     )}
                 </div>

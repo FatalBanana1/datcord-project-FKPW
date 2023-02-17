@@ -49,8 +49,11 @@
   flex-shrink: 0;
 }
 
-#light.ServerNav-icons,
-#light.ServerNav-profile {
+.ServerNav-profile {
+  background-color: #5765f2;
+}
+
+#light.ServerNav-icons {
   background-color: white;
 }
 

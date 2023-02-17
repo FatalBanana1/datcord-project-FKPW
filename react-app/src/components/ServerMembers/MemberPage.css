@@ -131,7 +131,7 @@
     justify-content: space-between;
     align-items: center;
     text-overflow: ellipsis;
-    width: 100%;
+    width: calc(100% - 40px);
 }
 
 .nickname-edit-button {

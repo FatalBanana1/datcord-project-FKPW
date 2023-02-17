@@ -220,6 +220,7 @@ export default function Channels({ theme }) {
         {permissions && (
           <OpenModalButton
             buttonText="Create-Channel"
+            theme={theme}
             onButtonClick={closeMenu}
             modalComponent={
               <CreateChannelForm
@@ -325,6 +326,7 @@ export default function Channels({ theme }) {
                 <div
                   className="server-dropdown-button"
                   onClick={openServerMenu}
+                  id={theme}
                 >
                   <i className="fa-solid fa-angle-down big-angle-down"></i>
                 </div>
