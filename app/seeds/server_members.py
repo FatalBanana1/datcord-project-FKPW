@@ -1,4 +1,8 @@
 from app.models import db, ServerMember, environment, SCHEMA
+from faker import Faker
+from random import choice
+
+faker = Faker()
 
 
 def seed_server_members():
@@ -214,10 +218,22 @@ def seed_server_members():
             m80,
             m90,
             m91,
-            m92
+            m92,
         ]
     )
     db.session.commit()
+
+    servers = list(range(1, 10))
+    for server in servers:
+        for i in range(20,35):
+            temp = ServerMember(
+                user_id=i,
+                server_id=server,
+                nickname=faker.sentence(nb_words=2)[:-1],
+                role=faker.word(ext_word_list=["member", "pending"]),
+            )
+            db.session.add(temp)
+    db.session.commit
 
 
 def undo_server_members():

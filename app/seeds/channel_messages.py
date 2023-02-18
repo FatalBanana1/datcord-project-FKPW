@@ -1,4 +1,8 @@
 from app.models import db, ChannelMessage, environment, SCHEMA
+from faker import Faker
+from random import choice
+
+faker = Faker()
 
 
 def seed_channel_messages():
@@ -508,6 +512,9 @@ def seed_channel_messages():
         ]
     )
     db.session.commit()
+
+    
+
 
 
 def undo_channel_messages():

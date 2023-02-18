@@ -1,5 +1,8 @@
 from app.models import db, DirectMessage, environment, SCHEMA
+from faker import Faker
+from random import choice
 
+faker = Faker()
 
 def seed_direct_messages():
     d1 = DirectMessage(

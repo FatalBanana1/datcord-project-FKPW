@@ -239,6 +239,13 @@ export default function DMIndex({ theme }) {
 				if (yourMemberships[server.server_id]) return server.nickname;
 			})
 		);
+
+		const truncateNames = (names) => {
+			if (names.length > 18) {
+				return `${names.substring(0, 18)}...`;
+			}
+			return names;
+		};
 		// console.log(`front dm index ==========`, otherNicknames);
 
 		// return
@@ -250,16 +257,18 @@ export default function DMIndex({ theme }) {
 						<div className="row overfl-wid">
 							<div className="dm-aka">{`AKA`}</div>
 							<div className="mleft-10 row">
-								{[...otherNicknames].map((el, i) => {
-									if (el) {
-										return (
-											<div
-												className="mleft-10"
-												key={i}
-											>{`@${el}`}</div>
-										);
-									} else return null;
-								})}
+								{[...otherNicknames]
+									.slice(0, 8)
+									.map((el, i) => {
+										if (el) {
+											return (
+												<div
+													className="mleft-10"
+													key={i}
+												>{`@${truncateNames(el)}`}</div>
+											);
+										} else return null;
+									})}
 							</div>
 						</div>
 					</div>

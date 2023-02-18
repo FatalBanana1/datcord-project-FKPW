@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import {
 	actionResetFriendship,
 	thunkAddFriendship,
@@ -19,6 +19,7 @@ export default function FriendshipsPage({ theme }) {
 	//selectors
 	let friendships = useSelector((state) => state.friendships);
 	let friends = Object.values(friendships);
+	let servers = useSelector((state) => state.servers);
 	let user = useSelector((state) => state.session.user);
 	let yourMemberships = Object.values(user.server_members).reduce(
 		(acc, val) => {
@@ -64,9 +65,9 @@ export default function FriendshipsPage({ theme }) {
 		history.push(`/users/${user.id}/${friendId}`);
 	};
 
-	// console.log(friends)
+	if (isLoaded && servers) {
+		console.log(`friendship ---- user .....`, servers[9]);
 
-	if (isLoaded) {
 		// return
 		return (
 			<div className="UserLanding-main-content" id={theme}>
@@ -143,6 +144,16 @@ export default function FriendshipsPage({ theme }) {
 										className="UserLanding-user-actions-container"
 										id={theme}
 									>
+										{Number(friend.id) === 17 && servers[9] ? (
+											<NavLink
+												to="/channels/9/21"
+												className="UserLanding-user-actions clickable"
+												id={theme}
+											>
+												<i className="fa-solid fa-dog"></i>
+											</NavLink>
+										) : null}
+
 										<div
 											className="UserLanding-user-actions clickable"
 											id={theme}
@@ -220,12 +231,16 @@ export default function FriendshipsPage({ theme }) {
 										className="UserLanding-user-actions-container"
 										id={theme}
 									>
-										<div
-											className="UserLanding-user-actions"
-											id={theme}
-										>
-											<i className="fa-solid fa-dog"></i>
-										</div>
+										{servers[9] ? (
+											<NavLink
+												to="/channels/9/21"
+												className="UserLanding-user-actions clickable"
+												id={theme}
+											>
+												<i className="fa-solid fa-dog"></i>
+											</NavLink>
+										) : null}
+
 										<div
 											className="UserLanding-user-actions clickable"
 											id={theme}
