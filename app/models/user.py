@@ -22,6 +22,7 @@ class User(db.Model, UserMixin):
         default="https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png",
     )
     theme = db.Column(db.String, nullable=False, default="dark")
+    mootro = db.Column(db.String, nullable=False, default="regular")
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
