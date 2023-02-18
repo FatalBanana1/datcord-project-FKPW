@@ -12,7 +12,10 @@ import { Modal, useModal } from "../../context/Modal";
 import EditChannelForm from "./EditDeleteChannelModal";
 import EditServer from "../Servers/EditServer";
 import DeleteServer from "../Servers/DeleteServer";
-import { thunkGetServerMembers } from "../../store/serverMembers";
+import {
+	thunkDeleteServerMember,
+	thunkGetServerMembers,
+} from "../../store/serverMembers";
 import { logout, thunkSetTheme } from "../../store/session";
 import { thunkReadUserServers } from "../../store/servers";
 import UserLanding from "../UserLanding";
@@ -172,6 +175,14 @@ export default function Channels({ theme }) {
 	} else {
 		permissions = false;
 	}
+
+	const leaveHandler = () => {
+		let permission = true;
+
+		dispatch(thunkDeleteServerMember(serverId, serverMember.id, permission))
+			.then(() => dispatch(thunkReadUserServers()))
+			.then(() => history.push("/gotMilk"));
+	};
 
 	if (channels.length > 0) {
 		for (let i = 0; i < channels.length; i++) {
@@ -373,6 +384,17 @@ export default function Channels({ theme }) {
 								</div>
 							</div>
 							<div className="UserLanding-sidebar-channel-user-actions">
+								<div
+									className="themes-tooltip red"
+									onClick={leaveHandler}
+								>
+									<i className="fa-solid fa-person-walking-arrow-right"></i>
+									<i className="fa-solid fa-door-open"></i>
+									<span className="themes-tooltiptext">
+										Leave Server
+									</span>
+								</div>
+
 								<div className="themes-tooltip">
 									<i
 										className="fa-solid fa-yin-yang user-ying-yang"
@@ -438,13 +460,5 @@ export default function Channels({ theme }) {
 				</div>
 			)
 		);
-	} else
-		return (
-			<div className="loader-container">
-				<div className="loader-header" id={theme}>
-					Monkeys are hard at work...
-				</div>
-				<div className="loader" id={theme}></div>
-			</div>
-		);
+	} else return null;
 }

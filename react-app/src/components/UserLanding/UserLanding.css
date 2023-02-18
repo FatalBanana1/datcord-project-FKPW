@@ -26,7 +26,6 @@
   /* width: 1186px; */
   width: 100%;
     overflow-y: scroll;
-
 }
 
 .UserLanding-server-members {
@@ -55,7 +54,6 @@
 .UserLanding-people-list-container {
   display: flex;
   flex-direction: column;
-  /* overflow-y: scroll; */
 }
 
 .UserLanding-people-list {
