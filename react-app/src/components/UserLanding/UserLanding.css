@@ -113,6 +113,7 @@
 .UserLanding-user-status {
   color: rgb(177, 177, 177);
   font-size: 13px;
+  padding-top: 2px;
 }
 
 #light.UserLanding-user-status {

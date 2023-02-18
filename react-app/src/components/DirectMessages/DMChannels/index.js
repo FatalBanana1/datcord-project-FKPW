@@ -83,7 +83,7 @@ export default function DMChannels({ theme }) {
 						? friends.map((friend) => (
 								<NavLink
 									to={`/users/${user.id}/${friend.id}`}
-									className="UserLanding-sidebar-channel-name"
+									className="UserLanding-sidebar-channel-name extra-pad"
 									id={theme}
 									key={friend.id}
 								>
