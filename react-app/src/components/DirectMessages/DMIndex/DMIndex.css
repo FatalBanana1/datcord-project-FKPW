@@ -9,3 +9,8 @@
 .cms-container.dms {
 	width: 100%;
 }
+
+.cm-form-container.dms {
+	box-sizing: border-box;
+	width: 100%;
+}

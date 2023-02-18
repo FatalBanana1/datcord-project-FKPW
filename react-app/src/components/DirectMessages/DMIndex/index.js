@@ -523,7 +523,7 @@ export default function DMIndex({ theme }) {
 							<div ref={endMsgRef} />
 						</div>
 
-						<div className="cm-form-container">
+						<div className="cm-form-container dms">
 							{!imageButton ? (
 								<button
 									id={theme}
