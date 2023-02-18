@@ -110,6 +110,7 @@ def seed_users():
         password="password4",
         display_pic="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2022/10/20/16662224157675.jpg",
         theme="dark",
+        mootro="mootro"
     )
     m2 = User(
         email="darkknight@gmail.com",
@@ -177,13 +178,26 @@ def seed_users():
         "https://images.prestigeonline.com/wp-content/uploads/sites/8/2022/12/06162509/famous-people-celebrities-david-beckham-born-year-of-the-rabbit.jpeg",
     ]
     opt = list(range(99))
-    for _ in range(20):
+    for _ in range(12):
         temp = User(
             email=f"{faker.text(max_nb_chars=6)}{choice(opt)}@{faker.text(max_nb_chars=5)}com",
             username=f"{faker.text(max_nb_chars=10)[:-1]}{choice(opt)}",
             password="password",
             display_pic=choice(pics),
             theme="dark",
+        )
+        db.session.add(temp)
+    db.session.commit
+
+    opt = list(range(99))
+    for _ in range(9):
+        temp = User(
+            email=f"{faker.text(max_nb_chars=6)}{choice(opt)}@{faker.text(max_nb_chars=5)}com",
+            username=f"{faker.text(max_nb_chars=10)[:-1]}{choice(opt)}",
+            password="password",
+            display_pic=choice(pics),
+            theme="dark",
+            mootro="mootro"
         )
         db.session.add(temp)
     db.session.commit
