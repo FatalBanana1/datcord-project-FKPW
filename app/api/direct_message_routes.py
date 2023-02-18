@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from sqlalchemy import or_, and_
 from flask_login import current_user, login_required
-from app.models import DirectMessage, db
+from app.models import DirectMessage, db, User
 from .channel_routes import channel_routes
 from datetime import datetime
 from app.aws_s3_upload import upload_file_to_s3, allowed_file, get_unique_filename

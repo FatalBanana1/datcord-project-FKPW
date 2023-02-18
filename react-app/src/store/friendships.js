@@ -2,7 +2,7 @@ const GET_FRIENDSHIPS = "friendships/GET_FRIENDSHIPS";
 const ADD_FRIENDSHIP = "friendships/ADD_FRIENDSHIPS";
 const EDIT_FRIENDSHIP = "friendships/EDIT_FRIENDSHIP";
 const DELETE_FRIENDSHIP = "friendships/DELETE_FRIENDSHIP";
-const RESET_FRIENDSHIPS = "friendships/RESET_SEREVERMEMBER";
+const RESET_FRIENDSHIPS = "friendships/RESET_FRIENDSHIPS";
 
 // Actions
 
@@ -63,7 +63,7 @@ export const thunkAddFriendship = (memberId) => async (dispatch) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-			memberId
+			memberId,
 		}),
 	});
 	if (res.ok) {
@@ -107,29 +107,28 @@ export const thunkEditFriendship = (friendId, role) => async (dispatch) => {
 };
 
 // DELETE
-export const thunkDeleteFriendship =
-	(friendId) => async (dispatch) => {
-		// console.log("Pre-Fetch ------>", serverId, serverMemberId, permission);
-		const res = await fetch(`/api/friendships/${friendId}`, {
-			method: "DELETE",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-		// console.log("Post-Fetch ------>", res);
-		if (res.ok) {
-			const data = await res.json();
-			dispatch(actionDeleteFriendship(friendId));
-			return data.friendship;
-		} else if (res.status < 500) {
-			const data = await res.json();
-			if (data.errors) {
-				return data.errors;
-			}
-		} else {
-			return ["An error occurred. Please try again."];
+export const thunkDeleteFriendship = (friendId) => async (dispatch) => {
+	// console.log("Pre-Fetch ------>", serverId, serverMemberId, permission);
+	const res = await fetch(`/api/friendships/${friendId}`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	// console.log("Post-Fetch ------>", res);
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(actionDeleteFriendship(friendId));
+		return data.friendship;
+	} else if (res.status < 500) {
+		const data = await res.json();
+		if (data.errors) {
+			return data.errors;
 		}
-	};
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
 
 const normalize = (data) => {
 	const newData = {};
@@ -153,7 +152,7 @@ export default function friendshipsReducer(state = initialState, action) {
 		}
 		case ADD_FRIENDSHIP: {
 			let newState = { ...state };
-			newState[action.friendship.id] = action.friendship
+			newState[action.friendship.id] = action.friendship;
 			return newState;
 		}
 		case EDIT_FRIENDSHIP: {
@@ -170,7 +169,7 @@ export default function friendshipsReducer(state = initialState, action) {
 			return newState;
 		}
 		case RESET_FRIENDSHIPS: {
-			return initialState;
+			return {};
 		}
 		default:
 			return state;

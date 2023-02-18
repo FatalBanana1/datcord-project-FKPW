@@ -118,7 +118,7 @@ def seed_users():
 
     main = User(
         email="discord@discord.com",
-        username="John Wick",
+        username="JohnWick",
         password="password123",
         display_pic="https://avatarfiles.alphacoders.com/203/203174.jpg",
         theme="dark",
@@ -126,7 +126,7 @@ def seed_users():
 
     Messi = User(
         email="Messi@goat.com",
-        username="Lionel Messi",
+        username="LionelMessi",
         password="Ba4celona",
         display_pic="https://i.dailymail.co.uk/1s/2023/02/16/00/67737607-11756461-image-a-1_1676506718526.jpg",
         theme="dark",

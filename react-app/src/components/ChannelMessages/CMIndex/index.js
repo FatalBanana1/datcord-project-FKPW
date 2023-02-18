@@ -84,6 +84,7 @@ const CMIndex = ({ theme }) => {
 		// when component unmounts, disconnect
 		return () => {
 			setChatInput("");
+			setErrors([])
 			socket.disconnect();
 			dispatch(actionResetChannelMessages());
 		};
@@ -96,6 +97,7 @@ const CMIndex = ({ theme }) => {
 	// delete
 	const deleteHandler = (e) => {
 		setIsLoaded(false);
+		setErrors([])
 		const payload = {
 			serverId,
 			channelId,
@@ -111,6 +113,7 @@ const CMIndex = ({ theme }) => {
 	// delete
 	const deleteHandlerCurr = (e) => {
 		setIsLoaded(false);
+		setErrors([])
 		const payload = {
 			serverId,
 			channelId,
@@ -138,11 +141,13 @@ const CMIndex = ({ theme }) => {
 
 	// edit
 	const handleEdit = (e) => {
+		setErrors([])
 		setEdit(e.target.dataset.id);
 	};
 
 	// edit child change
 	const handleEditChange = (e) => {
+		setErrors([])
 		setEdit(e);
 		if (e === 0) {
 			// console.log(`front CM index`, e, edit);

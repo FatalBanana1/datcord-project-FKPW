@@ -25,7 +25,7 @@ export default function FriendCard({friend}) {
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
         return "#" + randomColor;
     };
-    
+
     // Set the inline CSS style object with the background color property set to a random color
     const inlineStyles = {
         backgroundColor: getRandomColor(),
@@ -46,7 +46,7 @@ export default function FriendCard({friend}) {
             isFriends = true
 		}
 	}
-    console.log("ISFRIEND ------->", isFriends)
+    // console.log("ISFRIEND ------->", isFriends)
 
 	// Add Friend
 

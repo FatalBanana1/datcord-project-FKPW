@@ -29,12 +29,17 @@ export default function DMIndex({ theme }) {
 	const [image, setImage] = useState(null);
 	const [newImage, setNewImage] = useState(false);
 	const [imageLoading, setImageLoading] = useState(false);
-	const [friend, setFriend] = useState("");
+	// const [friend, setFriend] = useState("");
 
 	//selectors
 	const alldms = useSelector((state) => state.directMessages);
 	let dms = Object.values(alldms);
 	const user = useSelector((state) => state.session.user);
+	const servers = useSelector((state) => state.servers);
+	const friends = useSelector((state) => state.friendships);
+	let friend = friends[friendId];
+	// console.log(`friendships >>> friend`, servers);
+
 	// -------------
 
 	// scroll
@@ -49,17 +54,6 @@ export default function DMIndex({ theme }) {
 
 	//----------------
 
-	// let friend;
-	async function getfriend() {
-		// let friend = await fetch(`/api/users/${friendId}`).then((data) =>
-		let fri = await fetch(`/api/users/${friendId}`).then((data) =>
-			data.json()
-		);
-		setFriend(fri);
-	}
-
-	//----------------
-
 	//effects
 
 	useEffect(() => {
@@ -68,12 +62,10 @@ export default function DMIndex({ theme }) {
 
 	useEffect(() => {
 		scrollToBottom();
-		dispatch(thunkReadAllDirectMessages(friendId))
-			.then(() => setFriend(getfriend()))
-			.then(() => {
-				setLoadBottom(true);
-				setIsLoaded(true);
-			});
+		dispatch(thunkReadAllDirectMessages(friendId)).then(() => {
+			setLoadBottom(true);
+			setIsLoaded(true);
+		});
 
 		return () => {
 			setChatInput("");
@@ -91,6 +83,7 @@ export default function DMIndex({ theme }) {
 		});
 		return () => {
 			setChatInput("");
+			setErrors([]);
 			socket.disconnect();
 			dispatch(actionResetDirectMessages());
 		};
@@ -98,7 +91,7 @@ export default function DMIndex({ theme }) {
 
 	// ----------------------
 
-	if (isLoaded && friend.id && theme) {
+	if (isLoaded && friend && servers && theme) {
 		const updateChatInput = (e) => {
 			if (chatInput.length > 0 && chatInput.length < 255) setErrors([]);
 			setChatInput(e.target.value);
@@ -118,7 +111,7 @@ export default function DMIndex({ theme }) {
 					friend_id: friendId,
 				});
 				setChatInput("");
-				setEdit(999999999)
+				setEdit(999999999);
 			}
 		};
 
@@ -129,6 +122,7 @@ export default function DMIndex({ theme }) {
 		// delete
 		const deleteHandler = (e) => {
 			setIsLoaded(false);
+			setErrors([]);
 			const payload = {
 				id: e.target.dataset.id,
 				sender_id: e.target.dataset.sender,
@@ -142,6 +136,7 @@ export default function DMIndex({ theme }) {
 		// delete
 		const deleteHandlerCurr = (e) => {
 			setIsLoaded(false);
+			setErrors([]);
 			const payload = {
 				id: e.target.dataset.id,
 				sender_id: e.target.dataset.sender,
@@ -150,9 +145,6 @@ export default function DMIndex({ theme }) {
 				(el) => el.message !== e.target.dataset.msg
 			);
 			setMessages(msg);
-			// console.log(`find message in delete`, msg);
-
-			// return
 			return dispatch(thunkDeleteDirectMessage(payload))
 				.then(() => {
 					setChatInput("");
@@ -167,11 +159,13 @@ export default function DMIndex({ theme }) {
 
 		// edit
 		const handleEdit = (e) => {
+			setErrors([]);
 			setEdit(e.target.dataset.id);
 		};
 
 		// edit child change
 		const handleEditChange = (e) => {
+			setErrors([]);
 			setEdit(e);
 			if (e === 0) {
 				setChatInput("");
@@ -233,20 +227,42 @@ export default function DMIndex({ theme }) {
 		};
 
 		// --------------------
-		// date
-		let date = new Date();
 
-		// console.log(`front dm index ==========`, friend);
+		let date = new Date();
+		// your memberships
+		let yourMemberships = Object.values(servers).reduce((acc, val) => {
+			acc[val.id] = 1;
+			return acc;
+		}, {});
+		let otherNicknames = new Set(
+			friend.server_members.map((server) => {
+				if (yourMemberships[server.server_id]) return server.nickname;
+			})
+		);
+		// console.log(`front dm index ==========`, otherNicknames);
 
 		// return
-
 		return (
 			user && (
 				<div className="cms-container dms">
-					<div
-						className="cms-ch-name"
-						id={theme}
-					>{`@ ${friend.username}`}</div>
+					<div className="cms-ch-name" id={theme}>
+						{`@${friend.username}`}
+						<div className="row">
+							<div className="dm-aka">{`AKA`}</div>
+							<div className="mleft-10 row">
+								{[...otherNicknames].map((el, i) => {
+									if (el) {
+										return (
+											<div
+												className="mleft-10"
+												key={i}
+											>{`@${el}`}</div>
+										);
+									} else return null;
+								})}
+							</div>
+						</div>
+					</div>
 
 					<div className="cms-ct">
 						<div className="cm-overflow" id={theme}>
@@ -582,5 +598,13 @@ export default function DMIndex({ theme }) {
 				</div>
 			)
 		);
-	} else return <div>Sliding into your DMs...</div>;
+	} else
+		return (
+			<div className="loader-container">
+				<div className="loader-header" id={theme}>
+					# Sliding into your DMs...
+				</div>
+				<div className="loader" id={theme}></div>
+			</div>
+		);
 }

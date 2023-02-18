@@ -19,7 +19,7 @@ def seed_direct_messages():
     d9 = DirectMessage(
         sender_id=14,
         friend_id=3,
-        message="bro my eyes......wtf",
+        message="omg my eyes......",
     )
     d10 = DirectMessage(
         sender_id=3,

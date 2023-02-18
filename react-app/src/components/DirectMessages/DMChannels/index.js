@@ -23,8 +23,7 @@ export default function DMChannels({ theme }) {
 
 	useEffect(() => {
 		dispatch(thunkGetFriendships()).then(setIsLoaded(true));
-		// dispatch(thunk)
-	}, [dispatch]);
+	}, []);
 
 	if (isLoaded) {
 		const truncateNames = (names) => {
@@ -40,21 +39,20 @@ export default function DMChannels({ theme }) {
 		return (
 			<div>
 				<div className="DMChannels-header">
-
-				<NavLink
-					to={`/channels/@me`}
-					className="UserLanding-sidebar-channel-name dmchannels"
-					id={theme}
-				>
-					<div
-						className="UserLanding-sidebar-channel-name-label mleft-15"
+					<NavLink
+						to={`/channels/@me`}
+						className="UserLanding-sidebar-channel-name dmchannels"
 						id={theme}
 					>
-						<span className="hash">#</span>
-						{` `}
-						Friends
-					</div>
-				</NavLink>
+						<div
+							className="UserLanding-sidebar-channel-name-label mleft-15"
+							id={theme}
+						>
+							<span className="hash">#</span>
+							{` `}
+							Friends
+						</div>
+					</NavLink>
 				</div>
 
 				{/* Mootro goes here */}
@@ -81,38 +79,47 @@ export default function DMChannels({ theme }) {
 
 				<div className="UserLanding-sidebar-channel-list">
 					{/* map out channels here */}
-					{friends.length &&
-						friends.map((friend) => (
-							<NavLink
-								to={`/users/${user.id}/${friend.id}`}
-								className="UserLanding-sidebar-channel-name"
-								id={theme}
-								key={friend.id}
-							>
-								<div
-									className="UserLanding-sidebar-channel-name-label dm-icon-name-ct"
+					{friends.length
+						? friends.map((friend) => (
+								<NavLink
+									to={`/users/${user.id}/${friend.id}`}
+									className="UserLanding-sidebar-channel-name"
 									id={theme}
+									key={friend.id}
 								>
-									<div className="dm-channel-user-icon">
-										<img
-											src={friend.display_pic}
-											alt="direct messages user icon"
-											className="dm-channel-user-icon"
-										></img>
-									</div>{" "}
-									<div className="dm-username">
-										{friend.username &&
-											truncateNames(friend.username)}
+									<div
+										className="UserLanding-sidebar-channel-name-label dm-icon-name-ct"
+										id={theme}
+									>
+										<div className="dm-channel-user-icon">
+											<img
+												src={friend.display_pic}
+												alt="direct messages user icon"
+												className="dm-channel-user-icon"
+											></img>
+										</div>{" "}
+										<div className="dm-username">
+											{friend.username &&
+												truncateNames(friend.username)}
+										</div>
 									</div>
-								</div>
 
-								{/* <div className="UserLanding-sidebar-channel-buttons">
+									{/* <div className="UserLanding-sidebar-channel-buttons">
 									<i className="fa-solid fa-user-plus"></i>
 								</div> */}
-							</NavLink>
-						))}
+								</NavLink>
+						  ))
+						: null}
 				</div>
 			</div>
 		);
-	} else return <div>Cinnamon buns are being glazed....</div>;
+	} else
+		return (
+			<div className="loader-container">
+				<div className="loader-header" id={theme}>
+					Cinnamon buns are being glazed....
+				</div>
+				<div className="loader" id={theme}></div>
+			</div>
+		);
 }

@@ -154,7 +154,14 @@ const ServerIndex = ({ theme }) => {
         </div>
       </div>
     );
-  } else return <div>Loading...</div>;
+  } else return (
+		<div className="loader-container">
+			<div className="loader-header" id={theme}>
+				# Sliding into your DMs...
+			</div>
+			<div className="loader" id={theme}></div>
+		</div>
+	);
 };
 
 export default ServerIndex;
