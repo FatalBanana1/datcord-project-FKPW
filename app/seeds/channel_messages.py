@@ -504,7 +504,7 @@ def seed_channel_messages():
     db.session.add_all([cm86, cm87, cm88, cm89, cm90, cm91])
     db.session.commit()
 
-    users = list(range(120))
+    users = list(range(1,120))
     chans = list(range(24,44))
     for _ in range(300):
         temp = ChannelMessage(
