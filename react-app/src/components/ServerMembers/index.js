@@ -12,7 +12,10 @@ import "./ServerMembers.css";
 import crown from "../../assets/crown.png";
 import OpenModalButton from "../OpenModalButton";
 import MemberPage from "./MemberPage";
-import { actionResetFriendship, thunkGetFriendships } from "../../store/friendships";
+import {
+	actionResetFriendship,
+	thunkGetFriendships,
+} from "../../store/friendships";
 
 const ServerMembers = ({ theme }) => {
 	const dispatch = useDispatch();
@@ -39,12 +42,12 @@ const ServerMembers = ({ theme }) => {
 	}, [serverId]);
 
 	useEffect(() => {
-		dispatch(thunkGetFriendships())
+		dispatch(thunkGetFriendships());
 
 		return () => {
-			dispatch(actionResetFriendship())
-		}
-	}, [])
+			dispatch(actionResetFriendship());
+		};
+	}, []);
 
 	// Check to see if User owns the server
 	let owner = null;
@@ -103,7 +106,8 @@ const ServerMembers = ({ theme }) => {
 	};
 
 	return (
-		user && theme &&
+		user &&
+		theme &&
 		membersArray.length > 0 && (
 			<div id={theme} className="ServerMember-sidebar">
 				{!isMember && (
@@ -117,11 +121,19 @@ const ServerMembers = ({ theme }) => {
 				{/* <div className="UserLanding-sidebar-header"></div> */}
 				<div className="server-members-header"></div>
 				<div className="ServerMember-content" id={theme}>
-					<h1 className="total-members" id={theme}>{`Total Members - ${membersArray.length}`}</h1>
+					<h1
+						className="total-members"
+						id={theme}
+					>{`Total Members - ${membersArray.length}`}</h1>
 					{owners.length > 0 && (
 						<div className="owner-div section">
-							<h2 className="ServerMembers-headers" id={theme}>Owner</h2>
-							<div id={`owner ${theme}`} className="individual-person">
+							<h2 className="ServerMembers-headers" id={theme}>
+								Owner
+							</h2>
+							<div
+								id={`owner ${theme}`}
+								className="individual-person"
+							>
 								<img
 									className="member-img"
 									src={owners[0].display_pic}
@@ -154,13 +166,15 @@ const ServerMembers = ({ theme }) => {
 					)}
 					{admins.length > 0 && (
 						<div className="admin-div section">
-							<h2 className="ServerMembers-headers" id={theme}>{`Admins`}</h2>
+							<h2
+								className="ServerMembers-headers"
+								id={theme}
+							>{`Admins - ${admins.length}`}</h2>
 							{admins.map((admin) => (
 								<div
 									key={admin.id}
 									id={`admin ${theme}`}
 									className="individual-person"
-
 								>
 									<img
 										className="member-img"
@@ -190,7 +204,10 @@ const ServerMembers = ({ theme }) => {
 					)}
 					{members.length > 0 && (
 						<div className="regular-members-div section">
-							<h2 className="ServerMembers-headers" id={theme}>{`Members`}</h2>
+							<h2
+								className="ServerMembers-headers"
+								id={theme}
+							>{`Members - ${members.length}`}</h2>
 							{members.map((member) => (
 								<div
 									key={member.id}
@@ -226,7 +243,10 @@ const ServerMembers = ({ theme }) => {
 					)}
 					{pending.length > 0 && (
 						<div className="pending-div section">
-							<h2 className="ServerMembers-headers" id={theme}>{`Pending - ${pending.length}`}</h2>
+							<h2
+								className="ServerMembers-headers"
+								id={theme}
+							>{`Pending - ${pending.length}`}</h2>
 							{pending.map((pending) => (
 								<div
 									key={pending.id}

@@ -247,7 +247,7 @@ export default function DMIndex({ theme }) {
 				<div className="cms-container dms">
 					<div className="cms-ch-name" id={theme}>
 						{`@${friend.username}`}
-						<div className="row">
+						<div className="row overfl-wid">
 							<div className="dm-aka">{`AKA`}</div>
 							<div className="mleft-10 row">
 								{[...otherNicknames].map((el, i) => {

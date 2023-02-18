@@ -25,3 +25,11 @@
 	padding: 4px 7px;
 	font-size: 12px;
 }
+
+.overfl-wid {
+	width: auto;
+	max-width: 65%;
+	padding-left: 25px;
+	border-left: solid 1px rgba(0, 0, 0, 0.13);
+	overflow-x: hidden;
+}

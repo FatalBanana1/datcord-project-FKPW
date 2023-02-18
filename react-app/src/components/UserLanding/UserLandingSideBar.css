@@ -376,16 +376,16 @@ a.UserLanding-sidebar-channel-name {
 
 .surrender-tooltip .surrender-tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 80px;
   background-color: #18191c;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 8px;
+  padding: 3px 0;
   position: absolute;
   z-index: 1;
-  bottom: 145%;
-  left: 50%;
+  bottom: 155%;
+  left: 34px;
   margin-left: -68px;
   opacity: 0;
   transition: opacity 0.3s;
