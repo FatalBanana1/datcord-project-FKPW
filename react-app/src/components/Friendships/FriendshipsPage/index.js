@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetFriendships } from "../../../store/friendships";
-import OpenModalButton from "../../OpenModalButton";
-import FriendCard from "./FriendCard";
+import { NavLink, useHistory } from "react-router-dom";
+import { thunkAddFriendship, thunkGetFriendships } from "../../../store/friendships";
+// import OpenModalButton from "../../OpenModalButton";
+// import FriendCard from "./FriendCard";
 import { thunkDeleteFriendship } from "../../../store/friendships";
 
 export default function FriendshipsPage({ theme }) {
@@ -11,6 +12,7 @@ export default function FriendshipsPage({ theme }) {
 	let [isLoaded, setIsLoaded] = useState(false);
 	const [reloadFriend, setReloadFriend] = useState(false)
 	const [errors, setErrors] = useState([]);
+	const history = useHistory();
 
 	//selectors
 	let friendships = useSelector((state) => state.friendships);
@@ -43,6 +45,14 @@ export default function FriendshipsPage({ theme }) {
 		});
 	}
 
+	// REDIRECT TO MESSAGE CHANNEL
+
+	const slideInToDms = (friendId) => {
+		history.push(`/users/${user.id}/${friendId}`)
+	}
+
+	console.log(friends)
+
 	if (isLoaded) {
 		// return
 		return (
@@ -53,7 +63,7 @@ export default function FriendshipsPage({ theme }) {
 					{friends.length ? (
 						<h2>{`Friends - ${friends.length}`}</h2>
 					) : (
-						<h2>{`Enemies - 1`}</h2>
+						<h2>{`Enemies - 2`}</h2>
 					)}
 				</div>
 				{/* making fake friends here :( */}
@@ -118,12 +128,15 @@ export default function FriendshipsPage({ theme }) {
                     className="UserLanding-user-actions-container"
                     id={theme}
                   >
-                    <div className="UserLanding-user-actions" id={theme}>
-                      <i className="fa-solid fa-message fa-xs"></i>
+                    <div className="UserLanding-user-actions clickable" id={theme} onClick={() => slideInToDms(friend.id)}>
+					            <div className="sliding-tooltip">
+                        <i className="fa-solid fa-message fa-xs"></i>
+					            <span class="sliding-tooltiptext">Slide Into Dms</span>
+                      </div>
                     </div>
-                    <div className="UserLanding-user-actions" id={theme}>
+                    <div className="UserLanding-user-actions clickable" id={theme} onClick={() => deleteFriend(friend.id)}>
                       <div className="friends-tooltip">
-						            <i id="remove-friend-icon" className="fa-solid fa-user-xmark" onClick={() => deleteFriend(friend.id)}></i>
+						            <i id="remove-friend-icon" className="fa-solid fa-user-xmark"></i>
                       <span class="friends-tooltiptext">Remove Friend</span>
                       </div>
                     </div>
@@ -132,6 +145,7 @@ export default function FriendshipsPage({ theme }) {
               ))
             ) : (
             //   <div>You will die alone...</div>
+			<div>
 			<div
                   key={"Keanu"}
                   className="UserLanding-people-list"
@@ -150,17 +164,6 @@ export default function FriendshipsPage({ theme }) {
                     >
                       <div className="UserLanding-user-name" id={theme}>
                         Keanu Reeves
-						{/* <OpenModalButton
-									id="memberModalButton"
-									className="owner nicknames"
-									buttonText={friend.username}
-									// onButtonClick={closeMenu}
-									modalComponent={
-										<FriendCard
-											friend={friend}
-										/>
-									}
-						/> */}
                       </div>
                       <div className="UserLanding-user-status" id={theme}>
                         {`If you're not my friend, then you're my enemy!`}
@@ -173,14 +176,65 @@ export default function FriendshipsPage({ theme }) {
                     className="UserLanding-user-actions-container"
                     id={theme}
                   >
-                    <div className="UserLanding-user-actions" id={theme}>
-                      <i className="fa-solid fa-message fa-xs"></i>
+                    <div className="UserLanding-user-actions clickable" id={theme} >
+					            <div className="surrender-tooltip">
+                        <i className="fa-regular fa-flag"></i>
+					            <span class="surrender-tooltiptext">Surrender yourself and add as friend</span>
+                      </div>
                     </div>
                     <div className="UserLanding-user-actions" id={theme}>
-                      <i className="fa-solid fa-ellipsis-vertical"></i>
+						<i className="fa-solid fa-dog"></i>
+                    </div>
+                    <div className="UserLanding-user-actions" id={theme}>
+						<i className="fa-solid fa-person-rifle"></i>
                     </div>
                   </div>
                 </div>
+							<div
+							key={"Liam Neeson"}
+							className="UserLanding-people-list"
+							id={theme}
+						  >
+							<div className="UserLanding-user-info-container" id={theme}>
+							  <div className="UserLanding-user-icon">
+								<img
+								  src={"https://cdn.mos.cms.futurecdn.net/mFHiTRBzkjfjE7iAgJfYhJ.jpg"}
+								  alt="user landing user icon"
+								></img>
+							  </div>
+							  <div
+								className="UserLanding-user-name-status-container"
+								id={theme}
+							  >
+								<div className="UserLanding-user-name" id={theme}>
+								  Liam Neeson
+								</div>
+								<div className="UserLanding-user-status" id={theme}>
+								  {`I will find you, and I will kill you.`}
+								</div>
+							  </div>
+							</div>
+
+							{/* this holds the message and vertical ellipsis icons for actions */}
+							<div
+							  className="UserLanding-user-actions-container"
+							  id={theme}
+							>
+                <div className="UserLanding-user-actions clickable" id={theme} >
+                  <div className="surrender-tooltip">
+                    <i className="fa-regular fa-flag"></i>
+                  <span class="surrender-tooltiptext">Surrender yourself and add as friend</span>
+                  </div>
+                </div>
+							  <div className="UserLanding-user-actions" id={theme}>
+							  <i className="fa-solid fa-gun"></i>
+							  </div>
+							  <div className="UserLanding-user-actions" id={theme}>
+								  <i className="fa-solid fa-person-rifle"></i>
+							  </div>
+							</div>
+						  </div>
+						  </div>
             )}
           </div>
         </div>

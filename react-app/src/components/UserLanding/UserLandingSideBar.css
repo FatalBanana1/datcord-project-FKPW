@@ -367,3 +367,63 @@ a.UserLanding-sidebar-channel-name {
   visibility: visible;
   opacity: 1;
 }
+
+.sliding-tooltip,
+.surrender-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.surrender-tooltip .surrender-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #18191c;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 145%;
+  left: 50%;
+  margin-left: -68px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.sliding-tooltip .sliding-tooltiptext {
+  visibility: hidden;
+  width: max-content;
+  background-color: #18191c;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 145%;
+  left: 50%;
+  margin-left: -52px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.sliding-tooltip .sliding-tooltiptext::after,
+.surrender-tooltip .surrender-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.sliding-tooltip:hover .sliding-tooltiptext,
+.surrender-tooltip:hover .surrender-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

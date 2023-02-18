@@ -39,9 +39,11 @@ export default function DMChannels({ theme }) {
 		// return
 		return (
 			<div>
+				<div className="DMChannels-header">
+
 				<NavLink
 					to={`/channels/@me`}
-					className="UserLanding-sidebar-channel-name"
+					className="UserLanding-sidebar-channel-name dmchannels"
 					id={theme}
 				>
 					<div
@@ -53,6 +55,7 @@ export default function DMChannels({ theme }) {
 						Friends
 					</div>
 				</NavLink>
+				</div>
 
 				{/* Mootro goes here */}
 				{/* <div className="UserLanding-sidebar-channel-name" id={theme}>

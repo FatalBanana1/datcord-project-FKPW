@@ -242,7 +242,7 @@ export default function DMIndex({ theme }) {
 
 		return (
 			user && (
-				<div className="cms-container">
+				<div className="cms-container dms">
 					<div
 						className="cms-ch-name"
 						id={theme}
@@ -526,7 +526,7 @@ export default function DMIndex({ theme }) {
 							<div ref={endMsgRef} />
 						</div>
 
-						<div className="cm-form-container">
+						<div className="cm-form-container dms">
 							{!imageButton ? (
 								<button
 									id={theme}
