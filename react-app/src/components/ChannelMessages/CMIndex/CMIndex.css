@@ -42,6 +42,11 @@
 	background-color: #eeeef1;
 }
 
+#dark.cm-text-input {
+	color: #c2528b;
+	background-color: #965252;
+}
+
 /* .cms-ch-name {
 	color: rgb(211, 212, 214);
 	padding-bottom: 12px;
