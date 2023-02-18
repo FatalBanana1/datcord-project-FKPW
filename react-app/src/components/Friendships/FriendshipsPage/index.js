@@ -128,15 +128,15 @@ export default function FriendshipsPage({ theme }) {
                     className="UserLanding-user-actions-container"
                     id={theme}
                   >
-                    <div className="UserLanding-user-actions" id={theme}>
+                    <div className="UserLanding-user-actions clickable" id={theme} onClick={() => slideInToDms(friend.id)}>
 					<div className="friends-tooltip">
-                      <i className="fa-solid fa-message fa-xs" onClick={() => slideInToDms(friend.id)}></i>
+                      <i className="fa-solid fa-message fa-xs"></i>
 					  <span class="friends-tooltiptext">Slide Into Dms</span>
                       </div>
                     </div>
-                    <div className="UserLanding-user-actions" id={theme}>
+                    <div className="UserLanding-user-actions clickable" id={theme} onClick={() => deleteFriend(friend.id)}>
                       <div className="friends-tooltip">
-						<i id="remove-friend-icon" className="fa-solid fa-user-xmark" onClick={() => deleteFriend(friend.id)}></i>
+						<i id="remove-friend-icon" className="fa-solid fa-user-xmark"></i>
                       <span class="friends-tooltiptext">Remove Friend</span>
                       </div>
                     </div>
@@ -208,7 +208,7 @@ export default function FriendshipsPage({ theme }) {
 								</div>
 							  </div>
 							</div>
-		  
+
 							{/* this holds the message and vertical ellipsis icons for actions */}
 							<div
 							  className="UserLanding-user-actions-container"

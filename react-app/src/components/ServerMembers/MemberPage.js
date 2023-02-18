@@ -182,7 +182,7 @@ export default function MemberPage({
 							className="add-friend-button"
 							onClick={addFriend}
 						>
-							Send Friend Request
+							Add Friend
 						</button>
 						)}
 						{isFriends && !isUser && (
