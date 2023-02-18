@@ -10,7 +10,6 @@ import {
 import CMEdit from "../CMEdit/index.";
 import "./CMIndex.css";
 import crown from "../../../assets/crown.png";
-import { error } from "jquery";
 // import OpenModalButton from "../../OpenModalButton";
 // import MemberPage from "../../ServerMembers/MemberPage";
 
