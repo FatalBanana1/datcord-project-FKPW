@@ -4,6 +4,7 @@ from random import choice
 
 faker = Faker()
 
+
 def seed_friendships():
     f1 = Friendship(user_id=3, friend_id=1, role="friend")
     f22 = Friendship(user_id=3, friend_id=14, role="friend")
@@ -58,8 +59,8 @@ def seed_friendships():
     )
     db.session.commit()
 
-    for us in range(1,10):
-        for fr in range(20,35):
+    for us in range(1, 10):
+        for fr in range(20, 35):
             if us != 14:
                 temp = Friendship(
                     user_id=us,
@@ -67,11 +68,7 @@ def seed_friendships():
                     role="friend",
                 )
                 db.session.add(temp)
-        db.session.commit
-
-    f1 = Friendship(user_id=3, friend_id=1, role="friend")
-
-
+        db.session.commit()
 
 
 def undo_friendships():

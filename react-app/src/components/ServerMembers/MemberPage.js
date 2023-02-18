@@ -343,7 +343,7 @@ export default function MemberPage({
 							</div>
 							<div className="leave-server-div">
 								{permission && isNotOwner && (
-									<div class="delete-tooltip">
+									<div className="delete-tooltip">
 										<button
 											type="submit"
 											className="delete-membership-button"
@@ -352,7 +352,7 @@ export default function MemberPage({
 											Got Beef?
 										</button>
 
-										<span class="delete-tooltiptext">Kick member from server</span>
+										<span className="delete-tooltiptext">Kick member from server</span>
 									</div>
 								)}
 								{isUser && isNotOwner && (

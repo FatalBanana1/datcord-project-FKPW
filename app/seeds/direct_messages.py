@@ -4,6 +4,7 @@ from random import choice
 
 faker = Faker()
 
+
 def seed_direct_messages():
     d1 = DirectMessage(
         sender_id=3, friend_id=1, message="eeeeeeeeeeeeeeeeeyyyyyyyyyyyy, whats up?"
@@ -91,6 +92,19 @@ def seed_direct_messages():
         ]
     )
     db.session.commit()
+
+    for _ in range(3):
+        for us in range(1, 5):
+            for fr in range(20, 35):
+                if us != 14 or fr !=14:
+                    temp1 = DirectMessage(
+                        sender_id=us, friend_id=fr, message=faker.text(max_nb_chars=150)
+                    )
+                    temp2 = DirectMessage(
+                        sender_id=fr, friend_id=us, message=faker.text(max_nb_chars=150)
+                    )
+                    db.session.add_all([temp1, temp2])
+            db.session.commit()
 
 
 def undo_direct_messages():

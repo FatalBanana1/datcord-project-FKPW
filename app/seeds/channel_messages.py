@@ -501,20 +501,19 @@ def seed_channel_messages():
     )
     db.session.commit()
 
-    db.session.add_all(
-        [
-            cm86,
-            cm87,
-            cm88,
-            cm89,
-            cm90,
-            cm91
-        ]
-    )
+    db.session.add_all([cm86, cm87, cm88, cm89, cm90, cm91])
     db.session.commit()
 
-    
-
+    users = list(range(120))
+    chans = list(range(24,44))
+    for _ in range(300):
+        temp = ChannelMessage(
+            sender_id=choice(users),
+            channel_id=choice(chans),
+            message=faker.text(max_nb_chars=160),
+        )
+        db.session.add(temp)
+    db.session.commit()
 
 
 def undo_channel_messages():

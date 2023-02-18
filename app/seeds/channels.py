@@ -142,7 +142,7 @@ def seed_channels():
             is_private=False,
         )
         db.session.add(temp)
-    db.session.commit
+    db.session.commit()
 
 
 def undo_channels():

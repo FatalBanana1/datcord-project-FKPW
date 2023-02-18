@@ -233,7 +233,7 @@ def seed_server_members():
                 role=faker.word(ext_word_list=["member", "pending"]),
             )
             db.session.add(temp)
-    db.session.commit
+    db.session.commit()
 
 
 def undo_server_members():
