@@ -263,7 +263,7 @@ export default function DMIndex({ theme }) {
 										if (el) {
 											return (
 												<div
-													className="mleft-10"
+													className="mleft-10 dm-names"
 													key={i}
 												>{`@${truncateNames(el)}`}</div>
 											);

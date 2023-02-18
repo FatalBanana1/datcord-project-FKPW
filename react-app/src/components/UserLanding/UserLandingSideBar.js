@@ -7,8 +7,9 @@ import Channels from "../Channels";
 import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { logout, thunkSetTheme } from "../../store/session";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import DMChannels from "../DirectMessages/DMChannels";
+import { thunkDeleteFriendship } from "../../store/friendships";
 
 export default function UserLandingSideBar({ page, isLoaded, theme }) {
 	const dispatch = useDispatch();
@@ -18,6 +19,8 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 	const [showUserMenu, setShowUserMenu] = useState(false);
 	const [showThemeMenu, setShowThemeMenu] = useState(false);
 	const history = useHistory();
+	const params = useParams()
+	console.log(`params---`, params)
 
 	const openUserMenu = () => {
 		if (showUserMenu) return;
@@ -65,11 +68,18 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 		return () => document.removeEventListener("click", closeMenu);
 	}, [showThemeMenu]);
 
+	const deleteFriend = () => {
+		dispatch(thunkDeleteFriendship(params.friendId)).then(() =>
+			history.push(`/channels/@me`)
+		);
+	};
+
 	const userSettingsClass =
 		"UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
-  const userThemeClass =
-    "UserLanding-Sidebar-yingyang-dropdown" + (showThemeMenu ? "" : " hidden");
+	const userThemeClass =
+		"UserLanding-Sidebar-yingyang-dropdown" +
+		(showThemeMenu ? "" : " hidden");
 
 	const goLogout = (e) => {
 		e.preventDefault();
@@ -91,7 +101,7 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 
 				{/* user dm channels component */}
 				<div className="UserLanding-sidebar-channel-content">
-				<DMChannels theme={theme} />
+					<DMChannels theme={theme} />
 
 					<div
 						className="UserLanding-sidebar-channel-user-info"
@@ -113,56 +123,83 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 							</div>
 						</div>
 
-            <div className="UserLanding-sidebar-channel-user-actions">
-              <div className="themes-tooltip">
-				<i
-					className="fa-solid fa-yin-yang user-ying-yang"
-					onClick={openThemeMenu}
-              	></i>
-				<span className="themes-tooltiptext">Change Theme</span>
-			  </div>
+						<div className="UserLanding-sidebar-channel-user-actions">
+							<div
+								className="UserLanding-user-actions clickable"
+								id={theme}
+								onClick={deleteFriend}
+							>
+								<div className="friends-tooltip">
+									<i
+										id="remove-friend-icon"
+										className="fa-solid fa-user-xmark"
+									></i>
+									<span className="friends-tooltiptext">
+										Remove Friend
+									</span>
+								</div>
+							</div>
 
-              <div className={userThemeClass} ref={userThemeRef}>
-                <div className="dropdown-wrapper">
-                  <button
-                    className="UserLanding-sidebar-yingyang"
-                    onClick={() =>
-                      handleChangeTheme(
-                        user.theme === "dark" ? "light" : "dark"
-                      )
-                    }
-                  >
-                    {user.theme === "dark" ? "light" : "dark"}
-                  </button>
-                </div>
-              </div>
-			  <div className="settings-tooltip">
-				<i
-					className="fa-solid fa-gear user-gear"
-					onClick={openUserMenu}
-				></i>
-				<span className="settings-tooltiptext">User Actions</span>
-			  </div>
-              <div className={userSettingsClass} ref={userSettingsRef}>
-                <div className="dropdown-wrapper">
-                  <button
-                    className="UserLanding-sidebar-channel-user-home"
-                    onClick={() => history.push("/")}
-                  >
-                    Home
-                  </button>
-                  <button
-                    className="UserLanding-sidebar-channel-user-logout"
-                    onClick={goLogout}
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  );
+							<div className="themes-tooltip">
+								<i
+									className="fa-solid fa-yin-yang user-ying-yang"
+									onClick={openThemeMenu}
+								></i>
+								<span className="themes-tooltiptext">
+									Change Theme
+								</span>
+							</div>
+
+							<div className={userThemeClass} ref={userThemeRef}>
+								<div className="dropdown-wrapper">
+									<button
+										className="UserLanding-sidebar-yingyang"
+										onClick={() =>
+											handleChangeTheme(
+												user.theme === "dark"
+													? "light"
+													: "dark"
+											)
+										}
+									>
+										{user.theme === "dark"
+											? "light"
+											: "dark"}
+									</button>
+								</div>
+							</div>
+							<div className="settings-tooltip">
+								<i
+									className="fa-solid fa-gear user-gear"
+									onClick={openUserMenu}
+								></i>
+								<span className="settings-tooltiptext">
+									User Actions
+								</span>
+							</div>
+							<div
+								className={userSettingsClass}
+								ref={userSettingsRef}
+							>
+								<div className="dropdown-wrapper">
+									<button
+										className="UserLanding-sidebar-channel-user-home"
+										onClick={() => history.push("/")}
+									>
+										Home
+									</button>
+									<button
+										className="UserLanding-sidebar-channel-user-logout"
+										onClick={goLogout}
+									>
+										Logout
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	);
 }
