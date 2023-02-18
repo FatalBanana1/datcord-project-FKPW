@@ -5,3 +5,7 @@
 .dms-member{
 	color: rgb(196, 122, 228);
 }
+
+.cms-container.dms {
+	width: 100%;
+}

@@ -90,9 +90,9 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 				</div>
 
 				{/* user dm channels component */}
+				<div className="UserLanding-sidebar-channel-content">
 				<DMChannels theme={theme} />
 
-				<div className="UserLanding-sidebar-channel-content">
 					<div
 						className="UserLanding-sidebar-channel-user-info"
 						id={theme}

@@ -239,7 +239,7 @@ export default function DMIndex({ theme }) {
 
 		return (
 			user && (
-				<div className="cms-container">
+				<div className="cms-container dms">
 					<div
 						className="cms-ch-name"
 						id={theme}
