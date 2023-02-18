@@ -19,8 +19,8 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 	const [showUserMenu, setShowUserMenu] = useState(false);
 	const [showThemeMenu, setShowThemeMenu] = useState(false);
 	const history = useHistory();
-	const params = useParams()
-	console.log(`params---`, params)
+	const params = useParams();
+	console.log(`params---`, params);
 
 	const openUserMenu = () => {
 		if (showUserMenu) return;
@@ -124,21 +124,23 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 						</div>
 
 						<div className="UserLanding-sidebar-channel-user-actions">
-							<div
-								className="UserLanding-user-actions clickable"
-								id={theme}
-								onClick={deleteFriend}
-							>
-								<div className="friends-tooltip">
-									<i
-										id="remove-friend-icon"
-										className="fa-solid fa-user-xmark"
-									></i>
-									<span className="friends-tooltiptext">
-										Remove Friend
-									</span>
+							{params && params.friendId && (
+								<div
+									className="UserLanding-user-actions clickable"
+									id={theme}
+									onClick={deleteFriend}
+								>
+									<div className="friends-tooltip">
+										<i
+											id="remove-friend-icon"
+											className="fa-solid fa-user-xmark"
+										></i>
+										<span className="friends-tooltiptext">
+											Remove Friend
+										</span>
+									</div>
 								</div>
-							</div>
+							)}
 
 							<div className="themes-tooltip">
 								<i
