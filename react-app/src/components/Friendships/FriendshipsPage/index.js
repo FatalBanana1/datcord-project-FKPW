@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
-import { thunkGetFriendships } from "../../../store/friendships";
+import { thunkAddFriendship, thunkGetFriendships } from "../../../store/friendships";
 // import OpenModalButton from "../../OpenModalButton";
 // import FriendCard from "./FriendCard";
 import { thunkDeleteFriendship } from "../../../store/friendships";
@@ -129,14 +129,14 @@ export default function FriendshipsPage({ theme }) {
                     id={theme}
                   >
                     <div className="UserLanding-user-actions clickable" id={theme} onClick={() => slideInToDms(friend.id)}>
-					<div className="friends-tooltip">
-                      <i className="fa-solid fa-message fa-xs"></i>
-					  <span class="friends-tooltiptext">Slide Into Dms</span>
+					            <div className="sliding-tooltip">
+                        <i className="fa-solid fa-message fa-xs"></i>
+					            <span class="sliding-tooltiptext">Slide Into Dms</span>
                       </div>
                     </div>
                     <div className="UserLanding-user-actions clickable" id={theme} onClick={() => deleteFriend(friend.id)}>
                       <div className="friends-tooltip">
-						<i id="remove-friend-icon" className="fa-solid fa-user-xmark"></i>
+						            <i id="remove-friend-icon" className="fa-solid fa-user-xmark"></i>
                       <span class="friends-tooltiptext">Remove Friend</span>
                       </div>
                     </div>
@@ -176,6 +176,12 @@ export default function FriendshipsPage({ theme }) {
                     className="UserLanding-user-actions-container"
                     id={theme}
                   >
+                    <div className="UserLanding-user-actions clickable" id={theme} >
+					            <div className="surrender-tooltip">
+                        <i className="fa-regular fa-flag"></i>
+					            <span class="surrender-tooltiptext">Surrender yourself and add as friend</span>
+                      </div>
+                    </div>
                     <div className="UserLanding-user-actions" id={theme}>
 						<i className="fa-solid fa-dog"></i>
                     </div>
@@ -214,6 +220,12 @@ export default function FriendshipsPage({ theme }) {
 							  className="UserLanding-user-actions-container"
 							  id={theme}
 							>
+                <div className="UserLanding-user-actions clickable" id={theme} >
+                  <div className="surrender-tooltip">
+                    <i className="fa-regular fa-flag"></i>
+                  <span class="surrender-tooltiptext">Surrender yourself and add as friend</span>
+                  </div>
+                </div>
 							  <div className="UserLanding-user-actions" id={theme}>
 							  <i className="fa-solid fa-gun"></i>
 							  </div>
