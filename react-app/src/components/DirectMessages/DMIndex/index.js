@@ -20,6 +20,7 @@ export default function DMIndex({ theme }) {
 	const [edit, setEdit] = useState(999999990);
 	const [reload, setReload] = useState(0);
 	const [loadBottom, setLoadBottom] = useState(false);
+	const [errors, setErrors] = useState([]);
 	// controlled form input
 	const [chatInput, setChatInput] = useState("");
 	const [messages, setMessages] = useState([]);
@@ -78,24 +79,19 @@ export default function DMIndex({ theme }) {
 			setChatInput("");
 			setMessages([]);
 			setEdit(999999990);
+			setErrors([]);
 		};
 	}, [friendId, senderId, image, reload]);
 
 	useEffect(() => {
-		// open socket connection
-		// create websocket
+		// open socket
 		socket = io();
-		// socket.emit("join", { channelId: channelId, username: user.username });
-
 		socket.on("direct_message", (direct_message) => {
 			setMessages((messages) => [...messages, direct_message]);
 		});
-
-		// when component unmounts, disconnect
 		return () => {
 			setChatInput("");
 			socket.disconnect();
-			// setMessages([]);
 			dispatch(actionResetDirectMessages());
 		};
 	}, [senderId, friendId]);
@@ -104,19 +100,26 @@ export default function DMIndex({ theme }) {
 
 	if (isLoaded && friend.id && theme) {
 		const updateChatInput = (e) => {
+			if (chatInput.length > 0 && chatInput.length < 255) setErrors([]);
 			setChatInput(e.target.value);
 		};
 
-		//send chat messages through the websocket
+		//send chat messages - websocket
 		const sendChat = (e) => {
 			e.preventDefault();
-			if (chatInput.length < 1) return null;
-			socket.emit("direct_message", {
-				sender_id: senderId,
-				message: chatInput,
-				friend_id: friendId,
-			});
-			setChatInput("");
+
+			if (chatInput.length > 255 || chatInput.length < 1) {
+				setErrors([`error: Message length must be between 1 and 255.`]);
+				return null;
+			} else {
+				socket.emit("direct_message", {
+					sender_id: senderId,
+					message: chatInput,
+					friend_id: friendId,
+				});
+				setChatInput("");
+				setEdit(999999999)
+			}
 		};
 
 		// ---------------
@@ -560,6 +563,12 @@ export default function DMIndex({ theme }) {
 							{!imageButton ? (
 								// text input
 								<form onSubmit={sendChat} className="submit-cm">
+									{errors.length > 0 ? (
+										<div className="cms-err">
+											Error : Message length must be
+											between 1 and 255 characters!
+										</div>
+									) : null}
 									<input
 										value={chatInput}
 										onChange={updateChatInput}

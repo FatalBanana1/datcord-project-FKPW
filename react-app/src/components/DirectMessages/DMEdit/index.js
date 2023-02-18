@@ -8,6 +8,7 @@ import {
 
 const DMEdit = ({ message, onChange, friend, user }) => {
 	let dispatch = useDispatch();
+	const [errors, setErrors] = useState([]);
 	let params = useParams();
 	let friendId = friend.id;
 	if (!friendId) friendId = params.friendId;
@@ -15,19 +16,30 @@ const DMEdit = ({ message, onChange, friend, user }) => {
 	let [mval, setMval] = useState(message.message);
 	const onCancel = () => {
 		onChange(999999999);
+		setErrors([]);
 	};
 
 	// edit
 	const onSave = (e) => {
 		e.preventDefault();
-		if (message.message !== mval) {
-			let payload = { id: message.id, message: mval };
-			dispatch(thunkEditDirectMessage(payload))
-				.then(() => dispatch(thunkReadAllDirectMessages(friendId)))
-				.then(onChange(0));
+		if (mval.length > 255 || mval.length < 1) {
+			setErrors([`error: Message length must be between 1 and 255.`]);
+			return null;
 		} else {
-			onChange(999999999);
+			if (message.message !== mval) {
+				let payload = { id: message.id, message: mval };
+				dispatch(thunkEditDirectMessage(payload))
+					.then(() => dispatch(thunkReadAllDirectMessages(friendId)))
+					.then(onChange(0));
+			} else {
+				onChange(999999999);
+			}
 		}
+	};
+
+	const updateChatInput = (e) => {
+		if (mval.length > 0 && mval.length < 255) setErrors([]);
+		setMval(e.target.value);
 	};
 
 	let date = new Date();
@@ -67,9 +79,15 @@ const DMEdit = ({ message, onChange, friend, user }) => {
 			<form onSubmit={onSave} className="edit">
 				<input
 					value={mval}
-					onChange={(e) => setMval(e.target.value)}
+					onChange={updateChatInput}
 					className="cm-text-input"
 				/>
+				{errors.length > 0 ? (
+					<div className="cms-err-edit">
+						Error : Message length must be between 1 and 255
+						characters!
+					</div>
+				) : null}
 			</form>
 		</div>
 	);

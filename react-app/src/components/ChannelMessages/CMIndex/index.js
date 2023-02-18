@@ -10,6 +10,7 @@ import {
 import CMEdit from "../CMEdit/index.";
 import "./CMIndex.css";
 import crown from "../../../assets/crown.png";
+import { error } from "jquery";
 // import OpenModalButton from "../../OpenModalButton";
 // import MemberPage from "../../ServerMembers/MemberPage";
 
@@ -23,6 +24,7 @@ const CMIndex = ({ theme }) => {
 	const [reload, setReload] = useState(0);
 	const [loadBottom, setLoadBottom] = useState(false);
 	const [edit, setEdit] = useState(999999990);
+	const [errors, setErrors] = useState([]);
 	// controlled form input
 	const [chatInput, setChatInput] = useState("");
 	const [messages, setMessages] = useState([]);
@@ -67,15 +69,14 @@ const CMIndex = ({ theme }) => {
 			setChatInput("");
 			setMessages([]);
 			setEdit(999999990);
+			setErrors([]);
 		};
 	}, [channelId, user.id, image, serverId, reload]);
 
 	useEffect(() => {
 		// open socket connection
-		// create websocket
 		socket = io();
 		// socket.emit("join", { channelId: channelId, username: user.username });
-
 		socket.on("channel_message", (channel_message) => {
 			setMessages((messages) => [...messages, channel_message]);
 		});
@@ -84,7 +85,6 @@ const CMIndex = ({ theme }) => {
 		return () => {
 			setChatInput("");
 			socket.disconnect();
-			// setMessages([]);
 			dispatch(actionResetChannelMessages());
 		};
 	}, [user.id, serverId, channelId]);
@@ -154,87 +154,30 @@ const CMIndex = ({ theme }) => {
 
 	// -------------
 
-	// mbr modal
-
-	// const [visible, setVisible] = useState("hidden");
-	// const [showMenu, setShowMenu] = useState(false);
-
-	// const closeMenu = () => setShowMenu(false);
-
-	// const makeVisible = (e) => {
-	// 	e.preventDefault();
-	// 	setVisible("visible");
-	// };
-	// const handleOnChange = (e) => {
-	// 	setIsLoaded(e);
-	// };
-
-	// const memberClickHandler = (e) => {
-	// 	const message = cms.find((el) => +el.id === +e.target.dataset.id);
-	// 	// console.log(`message in cm index ====`, e.target.dataset);
-	// 	console.log(`message in cm index ====`, message);
-	// 	let member = true;
-	// 	let owner = true;
-	// 	let admin = true;
-
-	// 	return (
-	// 		<MemberPage
-	// 			member={member}
-	// 			isOwner={owner}
-	// 			isAdmin={admin}
-	// 			serverId={serverId}
-	// 			channelId={member.channelId}
-	// 			onChange={handleOnChange}
-	// 		/>
-
-	// <div
-	// 	key={message.sender_id}
-	// 	className="individual-person"
-	// 	onClick={makeVisible}
-	// >
-	// 	<img className="member-img" src={message.display_pic}></img>
-	// 	{/* <p className="regular-member nicknames">{member.nickname}</p> */}
-	// 	<OpenModalButton
-	// 		id="memberModalButton"
-	// 		className="member nicknames"
-	// 		buttonText={message.nickname}
-	// 		onButtonClick={closeMenu}
-	// 		modalComponent={
-	// 			<MemberPage
-	// 				member={member}
-	// 				isOwner={owner}
-	// 				isAdmin={admin}
-	// 				serverId={serverId}
-	// 				channelId={member.channelId}
-	// 				onChange={handleOnChange}
-	// 			/>
-	// 		}
-	// 	/>
-	// </div>
-	// 	);
-	// };
-
-	// -------------
-
 	if (isLoaded && channel && user && theme) {
 		const updateChatInput = (e) => {
+			if (chatInput.length > 0 && chatInput.length < 255) setErrors([]);
 			setChatInput(e.target.value);
 		};
 
-		//send chat messages through the websocket
+		//send chat messages - socket
 		const sendChat = (e) => {
 			e.preventDefault();
-			if (chatInput.length < 1) return null;
-			const curr = Object.values(allMembers).find(
-				(el) => Number(el.user_id) === Number(user.id)
-			);
-
-			socket.emit("channel_message", {
-				sender_id: Number(curr.id),
-				message: chatInput,
-				channelId,
-			});
-			setChatInput("");
+			if (chatInput.length > 255 || chatInput.length < 1) {
+				setErrors([`error: Message length must be between 1 and 255.`]);
+				return null;
+			} else {
+				const curr = Object.values(allMembers).find(
+					(el) => Number(el.user_id) === Number(user.id)
+				);
+				socket.emit("channel_message", {
+					sender_id: Number(curr.id),
+					message: chatInput,
+					channelId,
+				});
+				setChatInput("");
+				setEdit(999999999);
+			}
 		};
 
 		// -----------
@@ -297,14 +240,11 @@ const CMIndex = ({ theme }) => {
 				Number(el.server_id) === Number(serverId) &&
 				Number(user.id) === Number(el.user_id)
 		);
-
 		if (currMbr) {
 			role = currMbr.role;
 		}
-		// console.log(`role ===`, role, serverId, currMbr);
 		// console.log(`msg ===`, messages);
 
-		// print the username and message for each chat
 		return (
 			user && (
 				<div className="cms-container">
@@ -660,6 +600,12 @@ const CMIndex = ({ theme }) => {
 										onSubmit={sendChat}
 										className="submit-cm"
 									>
+										{errors.length > 0 ? (
+											<div className="cms-err">
+												Error : Message length must be
+												between 1 and 255 characters!
+											</div>
+										) : null}
 										<input
 											value={chatInput}
 											onChange={updateChatInput}
