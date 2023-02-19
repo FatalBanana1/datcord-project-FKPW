@@ -27,6 +27,10 @@
 	color: #060607;
 }
 
+#purple.server-dropdown-button {
+	color: #393065;
+}
+
 .hidden {
 	display: none;
 }

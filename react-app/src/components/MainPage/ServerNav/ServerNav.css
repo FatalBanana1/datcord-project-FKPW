@@ -12,13 +12,20 @@
   padding: 12px 8px;
   box-sizing: border-box;
   overflow: hidden auto;
-  background-color: #1f2225;
   flex-shrink: 0;
   user-select: none;
 }
 
+#dark.ServerNav-container {
+  background-color: #1f2225;
+}
+
 #light.ServerNav-container {
   background-color: #e3e5e8;
+}
+
+#purple.ServerNav-container {
+  background-color: #5F50A9;
 }
 
 .ServerNav-divider {

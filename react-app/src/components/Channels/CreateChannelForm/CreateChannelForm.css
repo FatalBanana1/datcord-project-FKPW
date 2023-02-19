@@ -14,13 +14,19 @@
   background-color: #ffffff;
 }
 
+#purple.CreateChannelForm-container {
+  color: #5F50A9;
+  background-color: #dfdcee;
+}
+
 .CreateChannelForm-header {
   padding: 16px;
   display: flex;
   justify-content: space-between;
 }
 
-#dark.fa-xmark {
+#dark.fa-xmark,
+#light.fa-xmark {
   color: #b9bbbe;
   transition: ease 0.2s;
 }
@@ -36,6 +42,14 @@
 
 #light.fa-xmark:hover {
   color: #060707;
+}
+
+#purple.fa-xmark {
+  color: #5F50A9;
+}
+
+#purple.fa-xmark:hover {
+  color: #bfb9dd;
 }
 
 .CreateChannelForm-title {
@@ -66,6 +80,11 @@
 #light.CreateChannelForm-label {
   font-size: 12px;
   color: #4e5058;
+}
+
+#purple.CreateChannelForm-subtext,
+#purple.CreateChannelForm-label {
+  color: #7f73ba;
 }
 
 .CreateChannelForm-label {
@@ -102,6 +121,11 @@
   background-color: #e9eaed;
 }
 
+#purple.CreateChannelForm-group-channel-input,
+#purple#channel-name input {
+  background-color: #e9eaed;
+}
+
 .CreateChannelForm-group-channel-input > input {
   width: 100%;
   background-color: transparent;
@@ -114,6 +138,10 @@
 
 #light.CreateChannelForm-group-channel-input > input::placeholder {
   color: #060607;
+}
+
+#purple.CreateChannelForm-group-channel-input > input::placeholder {
+  color: #bfb9dd;
 }
 
 .hashtag {
@@ -142,6 +170,10 @@
   color: #060607;
 }
 
+#purple.CreateChannelForm-group-private-span {
+  color: #5F50A9;
+}
+
 .fa-lock {
   padding-right: 8px;
 }
@@ -152,6 +184,10 @@
 
 #light.fa-lock {
   color: #777778;
+}
+
+#purple.fa-lock {
+  color: #5F50A9;
 }
 
 .CreateChannelForm-group-private {
@@ -234,6 +270,10 @@ input:checked + .CreateChannelForm-private-slider-round:before {
   color: #4e5058;
 }
 
+#purple.CreateChannelForm-private-text {
+  color: #4e5058;
+}
+
 .CreateChannelForm-buttons-container {
   position: relative;
   bottom: 0;
@@ -249,6 +289,10 @@ input:checked + .CreateChannelForm-private-slider-round:before {
 
 #light.CreateChannelForm-buttons-container {
   background-color: #f3f4f5;
+}
+
+#purple.CreateChannelForm-buttons-container {
+  background-color: #bfb9dd;
 }
 
 .CreateChannelForm-button-cancel {
@@ -268,6 +312,10 @@ input:checked + .CreateChannelForm-private-slider-round:before {
   color: #82858f;
 }
 
+#purple.CreateChannelForm-button-cancel {
+  color: #ffffff;
+}
+
 .CreateChannelForm-button-create {
   color: #ffffff;
   font-weight: 600;
@@ -278,8 +326,16 @@ input:checked + .CreateChannelForm-private-slider-round:before {
   border-radius: 4px;
 }
 
+#purple.CreateChannelForm-button-create {
+  background-color: #7f73ba;
+}
+
 .CreateChannelForm-button-create:hover {
   background-color: #3c4beb;
+}
+
+#purple.CreateChannelForm-button-create:hover {
+  background-color: #4c4087;
 }
 
 .CreateChannelForm-button-delete {
@@ -324,6 +380,10 @@ input:checked + .CreateChannelForm-private-slider-round:before {
   padding: 5px;
   border-radius: 9999px;
   pointer-events: none;
+}
+
+#purple.CreateChannelForm-switch {
+  background-color: #7f73ba;
 }
 
 .CreateChannelForm-checkbox:checked ~ .CreateChannelForm-switch {

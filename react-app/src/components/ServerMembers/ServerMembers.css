@@ -26,6 +26,7 @@
 	background-color: #ffffff;
 }
 
+
 .ServerMember-content {
 	margin-top: 1px;
 	display: flex;
@@ -42,6 +43,10 @@
 
 #light.ServerMember-content {
 	background-color: #eeeff1;
+}
+
+#purple.ServerMember-content {
+	background-color: #7f73ba;
 }
 
 .join-server-div {

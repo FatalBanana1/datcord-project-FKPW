@@ -116,7 +116,7 @@ export default function CreateChannelForm({
 								checked={isPrivate}
 								onChange={() => setIsPrivate(!isPrivate)}
 							/>
-							<div className="CreateChannelForm-switch">
+							<div className="CreateChannelForm-switch" id={theme}>
 								<div></div>
 							</div>
 						</div>
@@ -136,6 +136,7 @@ export default function CreateChannelForm({
 						<button
 							type="submit"
 							className="CreateChannelForm-button-create"
+							id={theme}
 						>
 							Create Channel
 						</button>

@@ -43,8 +43,8 @@
 }
 
 #purple.cm-text-input {
-	color: #c2528b;
-	background-color: #965252;
+	color: #C2528B;
+	background-color: #dfdcee;
 }
 
 /* .cms-ch-name {
@@ -73,6 +73,10 @@
 
 #light.cms-ch-name {
 	color: #060607;
+}
+
+#purple.cms-ch-name {
+	color: #393065;
 }
 
 .submit-cm {
@@ -112,6 +116,10 @@
 	color: #313338;
 }
 
+#purple.cm-overflow {
+	color: #9b426f;
+}
+
 .msg-ct {
 	display: flex;
 	flex-direction: column;
@@ -140,6 +148,10 @@
 	color: #7d7f85;
 }
 
+#purple.cms-msg-date {
+	color: #ffffff;
+}
+
 .cms-options {
 	margin-left: auto;
 	display: flex;
@@ -157,6 +169,10 @@
 	color: #7d7f85;
 }
 
+#purple.cms-options {
+	color: #ffffff;
+}
+
 #dark.justify:hover {
 	background-color: rgba(43, 45, 49, 0.781);
 	border: 0;
@@ -164,6 +180,11 @@
 
 #light.justify:hover {
 	background-color: #f8f8f8;
+	border: 0;
+}
+
+#purple.justify:hover {
+	background-color: #9F96CB;
 	border: 0;
 }
 
@@ -233,6 +254,18 @@
 	color: #5c5e66;
 }
 
+#purple.cms-member {
+	color: #6b5ac0;
+}
+
+#purple.cms-admin {
+	color: rgb(42, 129, 95);
+}
+
+#purple.cms-pending {
+	color: #5c5e66;
+}
+
 .cms-member:hover,
 .cms-pending:hover,
 .cms-admin:hover {
@@ -274,6 +307,12 @@
 	color: #eeeef1;
 }
 
+#purple.cm-img-input,
+#purple.cm-img-input-x  {
+	background-color: #7f73ba;
+	color: #dfdcee;
+}
+
 .cm-img-input-x {
 	width: 30px;
 	height: 30px;
@@ -303,6 +342,12 @@
 #light.cm-img-input:hover,
 #light.cm-img-input-x:hover {
 	background-color: #313338;
+}
+
+#purple.cm-img-input:hover,
+#purple.cm-img-input-x:hover {
+	background-color: #c2528b;
+	color: #fff;
 }
 
 .image-input {

@@ -134,7 +134,7 @@ export default function EditChannelForm({
 								value={channelName}
 								onChange={(e) => setChannelName(e.target.value)}
 								required
-								placeholder="new-channel"
+								placeholder="edit-channel"
 							/>
 						</div>
 					</div>
@@ -150,7 +150,7 @@ export default function EditChannelForm({
 								checked={isPrivate}
 								onChange={() => setIsPrivate(!isPrivate)}
 							/>
-							<div className="CreateChannelForm-switch">
+							<div className="CreateChannelForm-switch" id={theme}>
 								<div></div>
 							</div>
 						</div>
@@ -184,6 +184,7 @@ export default function EditChannelForm({
 						<button
 							type="submit"
 							className="CreateChannelForm-button-create"
+							id={theme}
 						>
 							Edit Channel
 						</button>
