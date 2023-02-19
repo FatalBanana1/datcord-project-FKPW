@@ -66,16 +66,17 @@ def sign_up():
 
     res = request.files
 
-    print("RES >>>", request.form)
+    print("RES >>>>>>>>>>", request.form)
+    print("RES >>>>>>>>>>", form)
+    print("RES >>>>>>>>>>", form.data)
 
-    if request.files.get("image") == None:
-        print("HIT NONE")
-        if form.validate_on_submit():
+    if form.validate_on_submit():
                 user = User(
                     username=form.data["username"],
                     email=form.data["email"],
                     password=form.data["password"],
-                    display_pic="https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png"
+                    display_pic=form.data["display_pic"]
+                    # display_pic="https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png"
                 )
                 db.session.add(user)
                 db.session.commit()
@@ -97,56 +98,92 @@ def sign_up():
 
                 login_user(user)
                 return user.to_dict()
-    else:
-        image = request.files["image"]
-        print("image>>>>", image)
-
-        if not allowed_file(image.filename):
-            return {"errors": "file type not permitted"}, 400
-
-        image.filename = get_unique_filename(image.filename)
-
-        upload = upload_file_to_s3(image)
-
-        print("upload>>>>", upload)
-
-        if "url" not in upload:
-            # if the dictionary doesn't have a url key
-            # it means that there was an error when we tried to upload
-            # so we send back that error message
-            print("THIS 400")
-            return upload, 400
-
-        url = upload["url"]
-
-        if form.validate_on_submit():
-            user = User(
-                username=form.data["username"],
-                email=form.data["email"],
-                password=form.data["password"],
-                display_pic=url
-            )
-            db.session.add(user)
-            db.session.commit()
-            member = ServerMember(
-                user_id=user.id,
-                server_id=9,
-                nickname=user.username,
-                role="member",
-            )
-            db.session.add(member)
-            db.session.commit()
-            friend_keanu = Friendship (
-            user_id = user.id,
-            friend_id = 17,
-            role = "friend"
-            )
-            db.session.add(friend_keanu)
-            db.session.commit()
-
-            login_user(user)
-            return user.to_dict()
     return {"errors": validation_errors_to_error_messages(form.errors)}, 401
+    
+
+
+#  AWS
+
+    # if request.files.get("image") == None:
+    #     print("HIT NONE")
+    #     if form.validate_on_submit():
+    #             user = User(
+    #                 username=form.data["username"],
+    #                 email=form.data["email"],
+    #                 password=form.data["password"],
+    #                 display_pic=form.data["display_pic"]
+    #                 # display_pic="https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png"
+    #             )
+    #             db.session.add(user)
+    #             db.session.commit()
+    #             member = ServerMember(
+    #                 user_id=user.id,
+    #                 server_id=9,
+    #                 nickname=user.username,
+    #                 role="member",
+    #             )
+    #             db.session.add(member)
+    #             db.session.commit()
+    #             friend_keanu = Friendship (
+    #             user_id = user.id,
+    #             friend_id = 17,
+    #             role = "friend"
+    #             )
+    #             db.session.add(friend_keanu)
+    #             db.session.commit()
+
+    #             login_user(user)
+    #             return user.to_dict()
+    # else:
+    #     image = request.files["image"]
+    #     print("image>>>>", image)
+
+    #     if not allowed_file(image.filename):
+    #         return {"errors": "file type not permitted"}, 400
+
+    #     image.filename = get_unique_filename(image.filename)
+
+    #     upload = upload_file_to_s3(image)
+
+    #     print("upload>>>>", upload)
+
+    #     if "url" not in upload:
+    #         # if the dictionary doesn't have a url key
+    #         # it means that there was an error when we tried to upload
+    #         # so we send back that error message
+    #         print("THIS 400")
+    #         return upload, 400
+
+    #     url = upload["url"]
+
+    #     if form.validate_on_submit():
+    #         user = User(
+    #             username=form.data["username"],
+    #             email=form.data["email"],
+    #             password=form.data["password"],
+    #             display_pic=url
+    #         )
+    #         db.session.add(user)
+    #         db.session.commit()
+    #         member = ServerMember(
+    #             user_id=user.id,
+    #             server_id=9,
+    #             nickname=user.username,
+    #             role="member",
+    #         )
+    #         db.session.add(member)
+    #         db.session.commit()
+    #         friend_keanu = Friendship (
+    #         user_id = user.id,
+    #         friend_id = 17,
+    #         role = "friend"
+    #         )
+    #         db.session.add(friend_keanu)
+    #         db.session.commit()
+
+    #         login_user(user)
+    #         return user.to_dict()
+    # return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 @auth_routes.route("/update_image", methods=["PUT"])
 def update_profile_image():

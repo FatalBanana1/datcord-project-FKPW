@@ -11,7 +11,7 @@ export default function SignUp() {
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [display_pic, setDisplayPic] = useState(null);
+	const [display_pic, setDisplayPic] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [imageLoading, setImageLoading] = useState(false);
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -45,57 +45,10 @@ export default function SignUp() {
 		if (Object.keys(submitErrors).length === 0) {
 
             console.log("IMAGE URL >>>>>>", imageUrl);
-            console.log("IMAGE URL >>>>>>", display_pic);
-            console.log("IMAGE URL >>>>>>", username);
+            console.log("DIISPLAY_PIC >>>>>>", display_pic);
+            console.log("USERNAME >>>>>>", username);
 
-            if (display_pic) {
-                const formData = new FormData();
-                formData.append("username", username);
-                formData.append("email", email);
-                formData.append("password", password);
-                formData.append("image", display_pic);
-
-
-                return dispatch(signUp("aws", formData))
-                    .then((res) => {
-                        if (res.errors) {
-                            return setErrors(res.errors);
-                        } else {
-                            history.push("/channels/9/19");
-                        }
-                    })
-                    .catch(async (res) => {
-                        const data = await res.json();
-                        if (data && data.errors) setErrors(data.errors);
-                    });
-
-                // const res = await fetch(`/api/auth/signup`, {
-                //     method: "POST",
-                //     body: formData,
-                // });
-                //     if (res.ok) {
-                //         await res.json();
-                //         // setDisplayPic(null);
-                //         setImageLoading(false);
-                //         history.push("/channels/9/19");
-                //         // return dispatch(signUp({username, email, password}))
-                //         //     .then((res) => {
-                //         //         if (res.errors) {
-                //         //             return setErrors(res.errors);
-                //         //         } else {
-                //         //             history.push("/channels/9/19");
-                //         //         }
-                //         //     })
-                //         //     .catch(async (res) => {
-                //         //         const data = await res.json();
-                //         //         if (data && data.errors) setErrors(data.errors);
-                //         //     });
-                //     } else {
-                //         setImageLoading(false);
-                //         return setErrors(res.errors);
-                //     }
-            }
-			return dispatch(signUp("none", {username, email, password, display_pic}))
+            return dispatch(signUp("none", {username, email, password, display_pic}))
 				.then((res) => {
 					if (res.errors) {
 						return setErrors(res.errors);
@@ -108,6 +61,67 @@ export default function SignUp() {
                     console.log("DATA ERRORS", data)
 					if (data && data.errors) setErrors(data.errors);
 				});
+
+            // if (display_pic) {
+            //     const formData = new FormData();
+            //     formData.append("username", username);
+            //     formData.append("email", email);
+            //     formData.append("password", password);
+            //     formData.append("image", display_pic);
+
+
+            //     return dispatch(signUp("aws", formData))
+            //         .then((res) => {
+            //             if (res.errors) {
+            //                 return setErrors(res.errors);
+            //             } else {
+            //                 history.push("/channels/9/19");
+            //             }
+            //         })
+            //         .catch(async (res) => {
+            //             const data = await res.json();
+            //             if (data && data.errors) setErrors(data.errors);
+            //         });
+
+            //     // const res = await fetch(`/api/auth/signup`, {
+            //     //     method: "POST",
+            //     //     body: formData,
+            //     // });
+            //     //     if (res.ok) {
+            //     //         await res.json();
+            //     //         // setDisplayPic(null);
+            //     //         setImageLoading(false);
+            //     //         history.push("/channels/9/19");
+            //     //         // return dispatch(signUp({username, email, password}))
+            //     //         //     .then((res) => {
+            //     //         //         if (res.errors) {
+            //     //         //             return setErrors(res.errors);
+            //     //         //         } else {
+            //     //         //             history.push("/channels/9/19");
+            //     //         //         }
+            //     //         //     })
+            //     //         //     .catch(async (res) => {
+            //     //         //         const data = await res.json();
+            //     //         //         if (data && data.errors) setErrors(data.errors);
+            //     //         //     });
+            //     //     } else {
+            //     //         setImageLoading(false);
+            //     //         return setErrors(res.errors);
+            //     //     }
+            // }
+			// return dispatch(signUp("none", {username, email, password, display_pic}))
+			// 	.then((res) => {
+			// 		if (res.errors) {
+			// 			return setErrors(res.errors);
+			// 		} else {
+			// 			history.push("/channels/9/19");
+			// 		}
+			// 	})
+			// 	.catch(async (res) => {
+			// 		const data = await res;
+            //         console.log("DATA ERRORS", data)
+			// 		if (data && data.errors) setErrors(data.errors);
+			// 	});
 		}
 	};
 
@@ -115,14 +129,14 @@ export default function SignUp() {
 		history.push("/login");
 	};
 
-    const updateFile = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setDisplayPic(file);
-            const url = URL.createObjectURL(file);
-            setImageUrl(url);
-        }
-    }
+    // const updateFile = (e) => {
+    //     const file = e.target.files[0];
+    //     if (file) {
+    //         setDisplayPic(file);
+    //         const url = URL.createObjectURL(file);
+    //         setImageUrl(url);
+    //     }
+    // }
 
   return (
     <div className="Form-wrapper">
@@ -143,7 +157,7 @@ export default function SignUp() {
             <div className="Form-form-container">
             <form className="Form-form" onSubmit={handleSubmit}>
                 <div className="Form-group-profile-pic">
-                    <div className="Form-default-profile-image-container">
+                    {/* <div className="Form-default-profile-image-container">
                         <img
                             src={ imageUrl ? imageUrl : "https://cdn.discordapp.com/attachments/1030261089168015532/1073712325409902632/datcord_logo_png.png"}
                             alt="default-profile-image"
@@ -153,7 +167,7 @@ export default function SignUp() {
                     <label htmlFor="profile-pic-upload" className="SignUpForm-profile-pic-upload clickable">
                         Add a photo of yourself!
                     </label>
-                    <input id="profile-pic-upload" type="file" onChange={updateFile} />
+                    <input id="profile-pic-upload" type="file" onChange={updateFile} /> */}
                 </div>
                 <div className="Form-form-group">
                 <label htmlFor="email">Email</label>
@@ -185,6 +199,20 @@ export default function SignUp() {
                     {errors && errors.usernameLength && (
                     <p className="Form-error">{errors.usernameLength}</p>
                     )}
+                </div>
+                <div className="Form-form-group">
+                <label htmlFor="Image Url">Image Url</label>
+                <input
+                    id="imgurl"
+                    type="text"
+                    value={display_pic}
+                    onChange={(e) => setDisplayPic(e.target.value)}
+                    required
+                />
+                <div className="Form-error-container">
+                    {errors && errors.email && <p className="Form-error">{errors.email}</p>}
+                    {errors && errors.emailAt && <p className="Form-error">{errors.emailAt}</p>}
+                </div>
                 </div>
                 </div>
                 <div className="Form-form-group">
