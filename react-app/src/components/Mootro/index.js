@@ -17,7 +17,6 @@ export default function MootroModal({user}) {
 
     const theme = null
     const userId = user.id
-    console.log("MODAL -------->", user)
 
 
 
@@ -82,7 +81,7 @@ export default function MootroModal({user}) {
 							</div>
 							<div className="member-since-section">
 								<h4 className="mootro-h4" id={theme}>
-									Acess all of our amazing themes!
+									Access all of our amazing themes!
 								</h4>
 							</div>
 							<div className="role-section">

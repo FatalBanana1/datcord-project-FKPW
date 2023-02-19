@@ -52,5 +52,7 @@ def user_mootro(id):
         return {"error": ["User does not exist"]}, 404
     # if form.validate_on_submit():
     user.mootro = res["mootro"]
+    if user.mootro == "regular":
+        user.theme = "dark"
     db.session.commit()
     return user.to_dict()
