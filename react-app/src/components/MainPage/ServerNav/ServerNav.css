@@ -25,19 +25,26 @@
 }
 
 #purple.ServerNav-container {
-  background-color: #5F50A9;
+  background-color: #4c4087;
 }
 
 .ServerNav-divider {
   height: 2px;
   width: 32px;
   border-radius: 1px;
-  background-color: #36393f;
   margin-bottom: 8px;
+}
+
+#dark.ServerNav-divider {
+  background-color: #36393f;
 }
 
 #light.ServerNav-divider {
   background-color: #c5cacf;
+}
+
+#purple.ServerNav-divider {
+  background-color: #bfb9dd;
 }
 
 .ServerNav-icons,
@@ -60,8 +67,16 @@
   background-color: #5765f2;
 }
 
+#purple.ServerNav-profile {
+  background-color: #dfdcee;
+}
+
 #light.ServerNav-icons {
   background-color: white;
+}
+
+#purple.ServerNav-icons {
+  background-color: #dfdcee;
 }
 
 .ServerNav-server-icons {
@@ -103,6 +118,12 @@
   background-color: #3ba55d;
 }
 
+#purple.ServerNav-icons:active,
+#purple.ServerNav-profile:active,
+#purple.ServerNav-server-icons:active {
+  background-color: #f3dce8;
+}
+
 .ServerNav-icons.active::before,
 .ServerNav-profile.active::before,
 .ServerNav-server-icons.active::before {
@@ -121,6 +142,12 @@
   background-color: black;
 }
 
+#purple.ServerNav-icons.active::before,
+#purple.ServerNav-profile.active::before,
+#purple.ServerNav-server-icons.active::before {
+  background-color: black;
+}
+
 .ServerNav-server-icons:hover.active::before {
   position: absolute;
   background-color: white;
@@ -132,6 +159,10 @@
 }
 
 #light.ServerNav-server-icons:hover.active::before {
+  background-color: black;
+}
+
+#purple.ServerNav-server-icons:hover.active::before {
   background-color: black;
 }
 

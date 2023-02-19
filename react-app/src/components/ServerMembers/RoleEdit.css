@@ -21,6 +21,11 @@
     color: #313338;
 }
 
+#purple.role-input {
+    background-color: #bfb9dd;
+    color: #fff;
+}
+
 .role-button {
     padding-top: 14px;
     display: flex;
@@ -63,4 +68,10 @@
 #light.cancel-role-button {
     background-color: #e9eaed;
     color: #313338;
+}
+
+#purple.save-role-button,
+#purple.cancel-role-button {
+    background-color: #bfb9dd;
+    color: #fff;
 }

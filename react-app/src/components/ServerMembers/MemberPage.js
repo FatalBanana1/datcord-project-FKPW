@@ -193,6 +193,7 @@ export default function MemberPage({
 						{!isFriends && !isUser && (
 							<button
 								type="submit"
+								id={theme}
 								className="add-friend-button"
 								onClick={addFriend}
 							>

@@ -47,6 +47,7 @@ const NickNameEdit = ({
 					value={nickName}
 					onChange={(e) => setnickName(e.target.value)}
 					className="nickname-input"
+					id={theme}
 				/>
 			</form>
 			<div>

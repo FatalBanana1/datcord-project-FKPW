@@ -15,6 +15,11 @@
     height: 28px;
 }
 
+#purple.nickname-input {
+    color: #7f73ba;
+    background-color: #e9eaed;
+}
+
 .save-nickName-button {
     border: none;
     font-family: "Roboto";
@@ -28,6 +33,11 @@
 #light.save-nickName-button {
     background-color: #ffffff;
     color: #060607;
+}
+
+#purple.save-nickName-button {
+    background-color: #ffffff;
+    color: #5F50A9;
 }
 
 .save-nickName-button {
