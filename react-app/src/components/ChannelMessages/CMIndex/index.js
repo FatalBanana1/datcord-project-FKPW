@@ -452,7 +452,7 @@ const CMIndex = ({ theme }) => {
 												) : (
 													<div className="row">
 														<div className="cms-msg-detail">{`${message.message}`}</div>
-														<div className="cms-msg-detail edited">{`(edited)`}</div>
+														<div className="cms-msg-detail edited" id={theme}>{`(edited)`}</div>
 													</div>
 												)}
 											</div>
