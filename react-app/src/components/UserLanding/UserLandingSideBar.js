@@ -157,16 +157,26 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 									<button
 										className="UserLanding-sidebar-yingyang"
 										onClick={() =>
-											handleChangeTheme(
-												user.theme === "dark"
-													? "light"
-													: "dark"
-											)
+											handleChangeTheme("dark")
 										}
 									>
-										{user.theme === "dark"
-											? "light"
-											: "dark"}
+										Dark
+									</button>
+									<button
+										className="UserLanding-sidebar-yingyang"
+										onClick={() =>
+											handleChangeTheme("light")
+										}
+									>
+										Light
+									</button>
+									<button
+										className="UserLanding-sidebar-yingyang"
+										onClick={() =>
+											handleChangeTheme("purple")
+										}
+									>
+										Purple
 									</button>
 								</div>
 							</div>
