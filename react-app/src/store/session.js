@@ -83,6 +83,8 @@ export const signUp =
   (type, formData) => async (dispatch) => {
     let response;
 
+	// console.log("TPE AND FORMDATA ----->", type, formData)
+
     if (type === "aws") {
       response = await fetch("/api/auth/signup", {
         method: "POST",
