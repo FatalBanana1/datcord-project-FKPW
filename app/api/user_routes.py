@@ -39,3 +39,18 @@ def user_theme(id):
         db.session.commit()
         return user.to_dict()
     return {"error": "Could not find user..."}
+
+
+@user_routes.route('/<int:id>/mootro', methods=["PUT"])
+@login_required
+def user_mootro(id):
+    res = request.get_json()
+    user = User.query.get(id)
+    # form = ThemeForm()
+    # form["csrf_token"].data = request.cookies["csrf_token"]
+    if (user == None):
+        return {"error": ["User does not exist"]}, 404
+    # if form.validate_on_submit():
+    user.mootro = res["mootro"]
+    db.session.commit()
+    return user.to_dict()
