@@ -265,166 +265,167 @@ const CMIndex = ({ theme }) => {
 
 					<div className="cms-ct">
 						<div className="cm-overflow" id={theme}>
-							{cms.length
-								? cms.map((message) => (
+							{cms.length ? (
+								cms.map((message) => (
+									<div
+										id={theme}
+										className="row justify"
+										key={message.id}
+									>
 										<div
-											id={theme}
-											className="row justify"
-											key={message.id}
+											// to="#"
+											className="img-link"
+											data-id={message.id}
+											// onClick={memberClickHandler}
 										>
-											<div
-												// to="#"
-												className="img-link"
+											<img
+												src={message.display_pic}
+												alt="Display Picture"
+												className="pic-icon"
 												data-id={message.id}
-												// onClick={memberClickHandler}
-											>
-												<img
-													src={message.display_pic}
-													alt="Display Picture"
-													className="pic-icon"
-													data-id={message.id}
-												/>
-											</div>
+											/>
+										</div>
 
-											{Number(message.id) ===
-											Number(edit) ? (
-												<CMEdit
-													message={message}
-													onChange={handleEditChange}
-													channelId={channelId}
-													serverId={serverId}
-													theme={theme}
-												/>
-											) : (
-												<div className="msg-ct">
-													<div
-														className="cms-msg-header"
-														id={theme}
-													>
-														<>
-															{message.role ===
-															"owner" ? (
-																<div className="row">
-																	<div
-																		id={
-																			theme
-																		}
-																		className="cms-admin"
-																	>{`${message.sender_nickname}`}</div>
-																	<img
-																		src={
-																			crown
-																		}
-																		alt="crown"
-																		className="icon"
-																	/>
-																</div>
-															) : message.role ===
-															  "admin" ? (
+										{Number(message.id) === Number(edit) ? (
+											<CMEdit
+												message={message}
+												onChange={handleEditChange}
+												channelId={channelId}
+												serverId={serverId}
+												theme={theme}
+											/>
+										) : (
+											<div className="msg-ct">
+												<div
+													className="cms-msg-header"
+													id={theme}
+												>
+													<>
+														{message.role ===
+														"owner" ? (
+															<div className="row">
 																<div
 																	id={theme}
 																	className="cms-admin"
 																>{`${message.sender_nickname}`}</div>
-															) : message.role ===
-															  "member" ? (
-																<div
-																	id={theme}
-																	className="cms-member"
-																>
-																	{`${message.sender_nickname}`}{" "}
-																</div>
-															) : (
-																<div
-																	id={theme}
-																	className="cms-pending"
-																>{`${message.sender_nickname}`}</div>
+																<img
+																	src={crown}
+																	alt="crown"
+																	className="icon"
+																/>
+															</div>
+														) : message.role ===
+														  "admin" ? (
+															<div
+																id={theme}
+																className="cms-admin"
+															>{`${message.sender_nickname}`}</div>
+														) : message.role ===
+														  "member" ? (
+															<div
+																id={theme}
+																className="cms-member"
+															>
+																{`${message.sender_nickname}`}{" "}
+															</div>
+														) : (
+															<div
+																id={theme}
+																className="cms-pending"
+															>{`${message.sender_nickname}`}</div>
+														)}
+
+														<div
+															className="cms-msg-date"
+															id={theme}
+														>
+															{message.created_at.slice(
+																0,
+																22
 															)}
+														</div>
+													</>
 
+													{Number(currMbr.id) ===
+														Number(
+															message.sender_id
+														) ||
+													role === "admin" ||
+													role === "owner" ? (
+														<div
+															id={theme}
+															className="cms-options absolute-op"
+														>
 															<div
-																className="cms-msg-date"
-																id={theme}
+																className="cms-edit"
+																data-id={
+																	message.id
+																}
+																onClick={
+																	handleEdit
+																}
 															>
-																{message.created_at.slice(
-																	0,
-																	22
-																)}
+																Edit
 															</div>
-														</>
-
-														{Number(currMbr.id) ===
-															Number(
-																message.sender_id
-															) ||
-														role === "admin" ||
-														role === "owner" ? (
 															<div
-																id={theme}
-																className="cms-options absolute-op"
+																className="cms-delete"
+																onClick={
+																	deleteHandler
+																}
+																data-id={
+																	message.id
+																}
+																data-sender={
+																	message.sender_id
+																}
 															>
-																<div
-																	className="cms-edit"
-																	data-id={
-																		message.id
-																	}
-																	onClick={
-																		handleEdit
-																	}
-																>
-																	Edit
-																</div>
-																<div
-																	className="cms-delete"
-																	onClick={
-																		deleteHandler
-																	}
-																	data-id={
-																		message.id
-																	}
-																	data-sender={
-																		message.sender_id
-																	}
-																>
-																	Delete
-																</div>
+																Delete
 															</div>
-														) : null}
-													</div>
+														</div>
+													) : null}
+												</div>
 
-													{message.created_at ===
-														message.updated_at &&
-													!imageLinks[
+												{message.created_at ===
+													message.updated_at &&
+												!imageLinks[
+													message.message.slice(
+														message.message.length -
+															4
+													)
+												] ? (
+													<div className="cms-msg-detail">{`${message.message}`}</div>
+												) : imageLinks[
 														message.message.slice(
 															message.message
 																.length - 4
 														)
-													] ? (
-														<div className="cms-msg-detail">{`${message.message}`}</div>
-													) : imageLinks[
-															message.message.slice(
+												  ] ? (
+													<div>
+														<img
+															src={
 																message.message
-																	.length - 4
-															)
-													  ] ? (
-														<div>
-															<img
-																src={
-																	message.message
-																}
-																className="aws-image"
-																alt={`uploaded by ${message.sender_nickname}`}
-															></img>
-														</div>
-													) : (
-														<div className="row">
-															<div className="cms-msg-detail">{`${message.message}`}</div>
-															<div className="cms-msg-detail edited">{`(edited)`}</div>
-														</div>
-													)}
-												</div>
-											)}
-										</div>
-								  ))
-								: null}
+															}
+															className="aws-image"
+															alt={`uploaded by ${message.sender_nickname}`}
+														></img>
+													</div>
+												) : (
+													<div className="row">
+														<div className="cms-msg-detail">{`${message.message}`}</div>
+														<div className="cms-msg-detail edited">{`(edited)`}</div>
+													</div>
+												)}
+											</div>
+										)}
+									</div>
+								))
+							) : (
+								<div className="empty-ct">
+									<div className="empty-tag">#</div>
+									<div className="empty-cms-header">{`Welcome to #${channel.name}!`}</div>
+									<div className="empty-cms-body">{`This is the start of the #${channel.name} channel.`}</div>
+								</div>
+							)}
 
 							{messages.length > 0
 								? messages.map((message, i) => (

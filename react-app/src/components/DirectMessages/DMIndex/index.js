@@ -268,7 +268,9 @@ export default function DMIndex({ theme }) {
 													className="mleft-10 dm-names"
 													id={theme}
 													key={i}
-												>{`@${truncateNames(el)}`}</span>
+												>{`@${truncateNames(
+													el
+												)}`}</span>
 											);
 										} else return null;
 									})}
@@ -278,153 +280,161 @@ export default function DMIndex({ theme }) {
 
 					<div className="cms-ct">
 						<div className="cm-overflow" id={theme}>
-							{dms.length > 0
-								? dms.map((message, i) => (
-										<div
-											id={theme}
-											className="row justify"
-											key={message.id}
-										>
-											{Number(message.sender_id) ===
-											Number(senderId) ? (
-												<div
-													className="img-link"
+							{dms.length > 0 ? (
+								dms.map((message, i) => (
+									<div
+										id={theme}
+										className="row justify"
+										key={message.id}
+									>
+										{Number(message.sender_id) ===
+										Number(senderId) ? (
+											<div
+												className="img-link"
+												data-id={message.id}
+											>
+												<img
+													src={user.display_pic}
+													alt="Display Picture"
+													className="pic-icon"
 													data-id={message.id}
-												>
-													<img
-														src={user.display_pic}
-														alt="Display Picture"
-														className="pic-icon"
-														data-id={message.id}
-													/>
-												</div>
-											) : (
-												<div
-													className="img-link"
-													data-id={message.id}
-												>
-													<img
-														src={friend.display_pic}
-														alt="Display Picture"
-														className="pic-icon"
-														data-id={message.id}
-													/>
-												</div>
-											)}
-
-											{Number(message.id) ===
-											Number(edit) ? (
-												<DMEdit
-													message={message}
-													onChange={handleEditChange}
-													user={user}
-													friend={friend}
 												/>
-											) : (
-												<div className="msg-ct">
+											</div>
+										) : (
+											<div
+												className="img-link"
+												data-id={message.id}
+											>
+												<img
+													src={friend.display_pic}
+													alt="Display Picture"
+													className="pic-icon"
+													data-id={message.id}
+												/>
+											</div>
+										)}
+
+										{Number(message.id) === Number(edit) ? (
+											<DMEdit
+												message={message}
+												onChange={handleEditChange}
+												user={user}
+												friend={friend}
+											/>
+										) : (
+											<div className="msg-ct">
+												<div
+													className="cms-msg-header"
+													id={theme}
+												>
+													{Number(
+														message.sender_id
+													) === Number(user.id) ? (
+														<div
+															id={theme}
+															className="dms-admin"
+														>{`${user.username}`}</div>
+													) : (
+														<div
+															id={theme}
+															className="dms-member"
+														>
+															{`${friend.username}`}
+														</div>
+													)}
+
 													<div
-														className="cms-msg-header"
+														className="cms-msg-date"
 														id={theme}
 													>
-														{Number(
-															message.sender_id
-														) ===
-														Number(user.id) ? (
-															<div
-																id={theme}
-																className="dms-admin"
-															>{`${user.username}`}</div>
-														) : (
-															<div
-																id={theme}
-																className="dms-member"
-															>
-																{`${friend.username}`}
-															</div>
+														{message.created_at.slice(
+															0,
+															22
 														)}
-
-														<div
-															className="cms-msg-date"
-															id={theme}
-														>
-															{message.created_at.slice(
-																0,
-																22
-															)}
-														</div>
-
-														{Number(user.id) ===
-														Number(
-															message.sender_id
-														) ? (
-															<div
-																id={theme}
-																className="cms-options absolute-op"
-															>
-																<div
-																	className="cms-edit"
-																	data-id={
-																		message.id
-																	}
-																	onClick={
-																		handleEdit
-																	}
-																>
-																	Edit
-																</div>
-																<div
-																	className="cms-delete"
-																	onClick={
-																		deleteHandler
-																	}
-																	data-id={
-																		message.id
-																	}
-																	data-sender={
-																		message.sender_id
-																	}
-																>
-																	Delete
-																</div>
-															</div>
-														) : null}
 													</div>
 
-													{message.created_at ===
-														message.updated_at &&
-													!imageLinks[
+													{Number(user.id) ===
+													Number(
+														message.sender_id
+													) ? (
+														<div
+															id={theme}
+															className="cms-options absolute-op"
+														>
+															<div
+																className="cms-edit"
+																data-id={
+																	message.id
+																}
+																onClick={
+																	handleEdit
+																}
+															>
+																Edit
+															</div>
+															<div
+																className="cms-delete"
+																onClick={
+																	deleteHandler
+																}
+																data-id={
+																	message.id
+																}
+																data-sender={
+																	message.sender_id
+																}
+															>
+																Delete
+															</div>
+														</div>
+													) : null}
+												</div>
+
+												{message.created_at ===
+													message.updated_at &&
+												!imageLinks[
+													message.message.slice(
+														message.message.length -
+															4
+													)
+												] ? (
+													<div className="cms-msg-detail">{`${message.message}`}</div>
+												) : imageLinks[
 														message.message.slice(
 															message.message
 																.length - 4
 														)
-													] ? (
-														<div className="cms-msg-detail">{`${message.message}`}</div>
-													) : imageLinks[
-															message.message.slice(
+												  ] ? (
+													<div>
+														<img
+															src={
 																message.message
-																	.length - 4
-															)
-													  ] ? (
-														<div>
-															<img
-																src={
-																	message.message
-																}
-																className="aws-image"
-																alt={`uploaded by ${message.sender_nickname}`}
-															></img>
-														</div>
-													) : (
-														<div className="row">
-															<div className="cms-msg-detail">{`${message.message}`}</div>
-															<div className="cms-msg-detail edited">{`(edited)`}</div>
-														</div>
-													)}
-												</div>
-											)}
-										</div>
-								  ))
-								: null}
+															}
+															className="aws-image"
+															alt={`uploaded by ${message.sender_nickname}`}
+														></img>
+													</div>
+												) : (
+													<div className="row">
+														<div className="cms-msg-detail">{`${message.message}`}</div>
+														<div className="cms-msg-detail edited">{`(edited)`}</div>
+													</div>
+												)}
+											</div>
+										)}
+									</div>
+								))
+							) : (
+								<div className="empty-ct">
+									<img
+										src={friend.display_pic}
+										alt="friend avatar"
+										className="empty-friend-pic"
+									/>
+									<div className="empty-cms-header">{`@${friend.username}`}</div>
+									<div className="empty-cms-body">{`This is the beginning of your direct message history with @${friend.username}.`}</div>
+								</div>
+							)}
 
 							{messages.length > 0
 								? messages.map((message, i) => (

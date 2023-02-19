@@ -242,11 +242,13 @@
 	color: white;
 }
 
-#light.cms-member, #light.dms-member {
+#light.cms-member,
+#light.dms-member {
 	color: #9b59b6;
 }
 
-#light.cms-admin, #light.dms-admin {
+#light.cms-admin,
+#light.dms-admin {
 	color: rgb(73, 193, 147);
 }
 
@@ -254,11 +256,13 @@
 	color: #5c5e66;
 }
 
-#purple.cms-member, #purple.dms-member {
+#purple.cms-member,
+#purple.dms-member {
 	color: #6b5ac0;
 }
 
-#purple.cms-admin, #purple.dms-admin {
+#purple.cms-admin,
+#purple.dms-admin {
 	color: rgb(42, 129, 95);
 }
 
@@ -395,4 +399,30 @@
 	padding: 2px 8px 0px 8px;
 	border-radius: 10px;
 	font-size: 15px;
+}
+
+.empty-ct {
+	margin-left: 20px;
+	margin-top: 30px;
+}
+
+.empty-cms-header {
+	font-size: 35px;
+}
+
+.empty-cms-body {
+	margin-top: 15px;
+	margin-left: 10px;
+	font-size: 18px;
+}
+
+.empty-tag {
+	margin-bottom: 20px;
+	font-size: 50px;
+	background-color: rgba(128, 128, 128, 0.123);
+	width: 50px;
+	height: 50px;
+	padding-top: 20px;
+	padding-left: 16px;
+	border-radius: 50%;
 }

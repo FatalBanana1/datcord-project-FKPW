@@ -1,5 +1,6 @@
 import "./ServerNav.css";
 import avatar from "../../../assets/datcord_logo_svg.svg";
+import goldAvatar from "../../../assets/mootro.png";
 import {
 	NavLink,
 	Redirect,
@@ -44,17 +45,31 @@ export default function ServerNav({ theme }) {
 
 	return (
 		<div className="ServerNav-container" id={theme}>
-			<NavLink
-				to="/channels/@me"
-				className="ServerNav-profile"
-				id={theme}
-			>
-				<img
-					src={avatar}
-					className="ServerNav-profile-cow-icon"
-					alt="server-icon"
-				/>
-			</NavLink>
+			{user.mootro === "mootro" ? (
+				<NavLink
+					to="/channels/@me"
+					className="ServerNav-profile-gold"
+					id={theme}
+				>
+					<img
+						src={goldAvatar}
+						className="ServerNav-profile-cow-icon"
+						alt="mootro-server-icon"
+					/>
+				</NavLink>
+			) : (
+				<NavLink
+					to="/channels/@me"
+					className="ServerNav-profile"
+					id={theme}
+				>
+					<img
+						src={avatar}
+						className="ServerNav-profile-cow-icon"
+						alt="server-icon"
+					/>
+				</NavLink>
+			)}
 			<div className="ServerNav-divider" id={theme}></div>
 			{/* // can probably map all the servers icon_url */}
 			{servers.length &&
@@ -94,12 +109,14 @@ export default function ServerNav({ theme }) {
 				))}
 			<div className="ServerNav-divider" id={theme}></div>
 
-      {/* <i className="fa-solid fa-plus"></i> */}
-      <OpenModalButton
-        buttonText="Create-Server"
-        theme={theme}
-        modalComponent={<CreateServerForm onChange={loaded} theme={theme} />}
-      />
+			{/* <i className="fa-solid fa-plus"></i> */}
+			<OpenModalButton
+				buttonText="Create-Server"
+				theme={theme}
+				modalComponent={
+					<CreateServerForm onChange={loaded} theme={theme} />
+				}
+			/>
 
 			<NavLink to={`/gotMilk`} className="ServerNav-icons" id={theme}>
 				<i className="fa-solid fa-compass fa-lg" />

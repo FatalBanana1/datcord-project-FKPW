@@ -129,7 +129,10 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 							</div>
 						</div>
 
-						<div className="UserLanding-sidebar-channel-user-actions">
+						<div
+							className="UserLanding-sidebar-channel-user-actions"
+							id={theme}
+						>
 							{params && params.friendId && (
 								<div
 									className="UserLanding-user-actions clickable"
@@ -148,15 +151,24 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 								</div>
 							)}
 
-							<div className="themes-tooltip">
-								<i
-									className="fa-solid fa-yin-yang user-ying-yang"
-									onClick={openThemeMenu}
-								></i>
-								<span className="themes-tooltiptext">
-									Change Theme
-								</span>
-							</div>
+							{user.mootro === "mootro" ? (
+								<div className="themes-tooltip">
+									<i
+										className="fa-solid fa-yin-yang user-ying-yang"
+										onClick={openThemeMenu}
+									></i>
+									<span className="themes-tooltiptext">
+										Change Theme
+									</span>
+								</div>
+							) : (
+								<div className="themes-tooltip">
+									<i className="fa-solid fa-yin-yang user-ying-yang"></i>
+									<span className="themes-tooltiptext">
+										Mootro Only!!
+									</span>
+								</div>
+							)}
 
 							<div className={userThemeClass} ref={userThemeRef}>
 								<div className="dropdown-wrapper">

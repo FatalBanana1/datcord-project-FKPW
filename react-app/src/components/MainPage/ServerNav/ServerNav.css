@@ -1,224 +1,239 @@
 .ServerNav-container {
-  /* position: fixed; */
-  /* left: 0; */
-  /* top: 0; */
-  width: 72px;
-  height: 100vh;
-  /* border: 5px solid red; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  padding: 12px 8px;
-  box-sizing: border-box;
-  overflow: hidden auto;
-  flex-shrink: 0;
-  user-select: none;
+	/* position: fixed; */
+	/* left: 0; */
+	/* top: 0; */
+	width: 72px;
+	height: 100vh;
+	/* border: 5px solid red; */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* justify-content: center; */
+	padding: 12px 8px;
+	box-sizing: border-box;
+	overflow: hidden auto;
+	flex-shrink: 0;
+	user-select: none;
 }
 
 #dark.ServerNav-container {
-  background-color: #1f2225;
+	background-color: #1f2225;
 }
 
 #light.ServerNav-container {
-  background-color: #e3e5e8;
+	background-color: #e3e5e8;
 }
 
 #purple.ServerNav-container {
-  background-color: #4c4087;
+	background-color: #4c4087;
 }
 
 .ServerNav-divider {
-  height: 2px;
-  width: 32px;
-  border-radius: 1px;
-  margin-bottom: 8px;
+	height: 2px;
+	width: 32px;
+	border-radius: 1px;
+	margin-bottom: 8px;
 }
 
 #dark.ServerNav-divider {
-  background-color: #36393f;
+	background-color: #36393f;
 }
 
 #light.ServerNav-divider {
-  background-color: #c5cacf;
+	background-color: #c5cacf;
 }
 
 #purple.ServerNav-divider {
-  background-color: #bfb9dd;
+	background-color: #bfb9dd;
 }
 
 .ServerNav-icons,
+.ServerNav-profile-gold,
 .ServerNav-profile {
-  color: #3ba55d;
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  background-color: #34363e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  margin-bottom: 8px;
-  transition: all 0.3s ease-in-out;
-  flex-shrink: 0;
+	color: #3ba55d;
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	background-color: #34363e;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	margin-bottom: 8px;
+	transition: all 0.3s ease-in-out;
+	flex-shrink: 0;
 }
 
 #purple.ServerNav-icons,
 #purple.ServerNav-profile {
-  color: #7f73ba;
+	color: #7f73ba;
 }
 
 .ServerNav-profile {
-  background-color: #5765f2;
+	background-color: #5765f2;
 }
 
 #purple.ServerNav-profile {
-  background-color: #dfdcee;
+	background-color: #dfdcee;
 }
 
 #light.ServerNav-icons {
-  background-color: white;
+	background-color: white;
 }
 
 #purple.ServerNav-icons {
-  background-color: #dfdcee;
+	background-color: #dfdcee;
 }
 
 .ServerNav-server-icons {
-  /* color: #3ba55d; */
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  margin-bottom: 8px;
-  flex-shrink: 0;
+	/* color: #3ba55d; */
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	margin-bottom: 8px;
+	flex-shrink: 0;
 }
 
 .ServerNav-icons::before,
 .ServerNav-profile::before,
+.ServerNav-profile-gold::before,
 .ServerNav-server-icons::before {
-  position: absolute;
-  background-color: white;
-  display: block;
-  width: 10px;
-  height: 40px;
-  left: -20px;
-  content: " ";
-  border-radius: 5px;
-  transition: 0.4s;
+	position: absolute;
+	background-color: white;
+	display: block;
+	width: 10px;
+	height: 40px;
+	left: -20px;
+	content: " ";
+	border-radius: 5px;
+	transition: 0.4s;
 }
 
 #light.ServerNav-icons::before,
 #light.ServerNav-profile::before,
 #light.ServerNav-server-icons::before {
-  background-color: black;
+	background-color: black;
 }
 
 .ServerNav-icons:active,
 .ServerNav-profile:active,
 .ServerNav-server-icons:active {
-  background-color: #3ba55d;
+	background-color: #3ba55d;
+}
+.ServerNav-profile-gold:active {
+	background-color: black;
 }
 
 #purple.ServerNav-icons:active,
 #purple.ServerNav-profile:active,
 #purple.ServerNav-server-icons:active {
-  background-color: #f3dce8;
+	background-color: #f3dce8;
 }
 
 .ServerNav-icons.active::before,
+.ServerNav-icons-gold.active::before,
 .ServerNav-profile.active::before,
 .ServerNav-server-icons.active::before {
-  position: absolute;
-  background-color: white;
-  display: block;
-  width: 10px;
-  height: 35px;
-  left: -6px;
-  content: " ";
+	position: absolute;
+	background-color: white;
+	display: block;
+	width: 10px;
+	height: 35px;
+	left: -6px;
+	content: " ";
 }
 
 #light.ServerNav-icons.active::before,
 #light.ServerNav-profile.active::before,
 #light.ServerNav-server-icons.active::before {
-  background-color: black;
+	background-color: black;
 }
 
 #purple.ServerNav-icons.active::before,
 #purple.ServerNav-profile.active::before,
 #purple.ServerNav-server-icons.active::before {
-  background-color: black;
+	background-color: black;
 }
 
 .ServerNav-server-icons:hover.active::before {
-  position: absolute;
-  background-color: white;
-  display: block;
-  width: 10px;
-  height: 35px;
-  left: -6px;
-  content: " ";
+	position: absolute;
+	background-color: white;
+	display: block;
+	width: 10px;
+	height: 35px;
+	left: -6px;
+	content: " ";
 }
 
 #light.ServerNav-server-icons:hover.active::before {
-  background-color: black;
+	background-color: black;
 }
 
 #purple.ServerNav-server-icons:hover.active::before {
-  background-color: black;
+	background-color: black;
 }
 
 .ServerNav-icons:hover,
 .ServerNav-profile:hover {
-  cursor: pointer;
-  border-radius: 16px;
-  color: white;
-  background-color: #3ba55d;
+	cursor: pointer;
+	border-radius: 16px;
+	color: white;
+	background-color: #3ba55d;
+}
+
+.ServerNav-profile-gold:hover {
+	cursor: pointer;
+	border-radius: 16px;
+	color: white;
+	background-color: goldenrod;
 }
 
 #light.ServerNav-icons:hover {
-  background-color: #3ba55d;
-  color: white;
+	background-color: #3ba55d;
+	color: white;
 }
 
 .ServerNav-icons:hover::before,
 .ServerNav-profile:hover::before,
+.ServerNav-profile-gold:hover::before,
 .ServerNav-server-icons:hover::before {
-  position: absolute;
-  background-color: white;
-  display: block;
-  width: 10px;
-  height: 25px;
-  left: -6px;
-  content: " ";
-  /* border-radius: 5px; */
+	position: absolute;
+	background-color: white;
+	display: block;
+	width: 10px;
+	height: 25px;
+	left: -6px;
+	content: " ";
+	/* border-radius: 5px; */
 }
 
 #light.ServerNav-icons:hover::before,
 #light.ServerNav-profile:hover::before,
+#light.ServerNav-profile-gold:hover::before,
 #light.ServerNav-server-icons:hover::before {
-  background-color: black;
+	background-color: black;
 }
 
 .ServerNav-icon {
-  width: 100%;
-  /* aspect-ratio: 1; */
-  height: 50px;
-  width: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-  transition: all 0.3s ease-in-out;
+	width: 100%;
+	/* aspect-ratio: 1; */
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+	transition: all 0.3s ease-in-out;
 }
 
 .ServerNav-profile-cow-icon {
-  object-fit: cover;
-  border-radius: 50%;
-  transition: all 0.3s ease-in-out;
+	object-fit: cover;
+	border-radius: 50%;
+	transition: all 0.3s ease-in-out;
 }
 
 .ServerNav-icon:hover {
-  border-radius: 16px;
+	border-radius: 16px;
 }
