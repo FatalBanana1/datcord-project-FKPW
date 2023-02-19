@@ -207,9 +207,15 @@ export default function Channels({ theme }) {
 		if (names.length > 18) {
 			return `${names.substring(0, 18)}...`;
 		}
-
 		return names;
 	};
+	const truncateNames2 = (names) => {
+		if (names.length > 9) {
+			return `${names.substring(0, 9)}...`;
+		}
+		return names;
+	};
+
 
 	const closeMenu = () => setShowUserMenu(false);
 
@@ -392,7 +398,7 @@ export default function Channels({ theme }) {
 									className="UserLanding-sidebar-channel-user-name"
 									id={theme}
 								>
-									{user && user.username}
+									{user && truncateNames2(user.username)}
 								</div>
 							</div>
 							<div className="UserLanding-sidebar-channel-user-actions" id={theme}>
@@ -423,7 +429,7 @@ export default function Channels({ theme }) {
 									<div className="themes-tooltip">
 										<i className="fa-solid fa-yin-yang user-ying-yang"></i>
 										<span className="themes-tooltiptext">
-											Mootro Only!
+											Mootro Only!!
 										</span>
 									</div>
 								)}
@@ -455,7 +461,7 @@ export default function Channels({ theme }) {
 												handleChangeTheme("purple")
 											}
 										>
-											Purple
+											Purplicious
 										</button>
 									</div>
 								</div>

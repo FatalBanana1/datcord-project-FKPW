@@ -1,213 +1,213 @@
 .UserLanding-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
 }
 
 .UserLanding-container-dm {
-  width: calc(100%-314px);
-  /* height: calc(100%-48px); */
+	width: calc(100%-314px);
+	/* height: calc(100%-48px); */
 }
 
 .UserLanding-container.friend {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 #dark.UserLanding-container {
-  background-color: #36393f;
+	background-color: #36393f;
 }
 
 #light.UserLanding-container {
-  background-color: #ffffff;
+	background-color: #ffffff;
 }
 
 #purple.UserLanding-container {
-  background-color: #bfb9dd;
+	background-color: #bfb9dd;
 }
 
 .reverse {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
 }
 
 .UserLanding-main-content {
-  display: flex;
-  flex-direction: column;
-  /* padding-top: 16px; */
-  /* padding-right: 20px; */
-  /* width: 1186px; */
-  width: 100%;
-    overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	/* padding-top: 16px; */
+	/* padding-right: 20px; */
+	/* width: 1186px; */
+	width: 100%;
+	overflow-y: scroll;
 }
 
 .UserLanding-main-content {
-  height: calc(100% - 48px);
+	height: calc(100% - 48px);
 }
 
 .UserLanding-server-members {
-  display: flex;
-  flex-direction: column;
-  /* height: calc(100% + 5px); */
-  height: 100%;
-  width: 230px;
+	display: flex;
+	flex-direction: column;
+	/* height: calc(100% + 5px); */
+	height: 100%;
+	width: 230px;
 }
 
 .UserLanding-status {
-  margin-bottom: 15px;
-  padding: 0px 26px;
-  padding-top: 16px;
+	margin-bottom: 15px;
+	padding: 0px 26px;
+	padding-top: 16px;
 }
 
 .UserLanding-status > h2 {
-  color: #b9bbbe;
-  text-transform: uppercase;
-  font-size: 12px;
+	color: #b9bbbe;
+	text-transform: uppercase;
+	font-size: 12px;
 }
 
 #light.UserLanding-status > h2 {
-  color: #535963;
+	color: #535963;
 }
 
 #purple.UserLanding-status > h2 {
-  color: #5F50A9;
+	color: #5f50a9;
 }
 
 .UserLanding-people-list-container {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .UserLanding-people-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-top: 1px solid #41454c;
-  margin: 0px 26px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-top: 1px solid #41454c;
+	margin: 0px 26px;
 }
 
 #light.UserLanding-people-list {
-  border-top: 1px solid #dbdee1;
+	border-top: 1px solid #dbdee1;
 }
 
 #purple.UserLanding-people-list {
-  border-top: 1px solid #dbdee1;
+	border-top: 1px solid #dbdee1;
 }
 
 .UserLanding-people-list:hover {
-  background-color: #3f434a;
-  border-radius: 5px;
+	background-color: #3f434a;
+	border-radius: 5px;
 }
 
 #light.UserLanding-people-list:hover {
-  background-color: #e7e9eb;
+	background-color: #e7e9eb;
 }
 
 #purple.UserLanding-people-list:hover {
-  background-color: #9F96CB;
+	background-color: #9f96cb44;
 }
 
 .UserLanding-user-info-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 10px 0px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 10px 0px;
 }
 
 .UserLanding-user-icon {
-  margin-right: 12px;
+	margin-right: 12px;
 }
 
 .UserLanding-user-icon > img {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  object-fit: cover;
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	object-fit: cover;
 }
 
 .UserLanding-user-name-status-container {
-  display: flex;
-  flex-direction: column;
-  line-height: 16px;
+	display: flex;
+	flex-direction: column;
+	line-height: 16px;
 }
 
 .UserLanding-user-name {
-  color: white;
-  font-weight: bold;
-  font-size: 15px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
 }
 
 #light.UserLanding-user-name {
-  color: #060607;
+	color: #060607;
 }
 
-#purpe.UserLanding-user-name {
-  color: #5F50A9;
+#purple.UserLanding-user-name {
+	color: #5f50a9;
 }
 
 .UserLanding-user-status {
-  color: rgb(177, 177, 177);
-  font-size: 13px;
-  padding-top: 2px;
+	color: rgb(177, 177, 177);
+	font-size: 13px;
+	padding-top: 2px;
 }
 
 #light.UserLanding-user-status {
-  color: #8e9298;
+	color: #8e9298;
 }
 
 #purple.UserLanding-user-status {
-  color: #5F50A9;
+	color: #5f50a9;
 }
 
 .UserLanding-user-actions-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .UserLanding-user-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0px 5px;
-  color: #b9bbbe;
-  background-color: #2f3136;
-  height: 32px;
-  width: 32px;
-  text-align: center;
-  border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0px 5px;
+	color: #b9bbbe;
+	background-color: #2f3136;
+	height: 32px;
+	width: 32px;
+	text-align: center;
+	border-radius: 50%;
 }
 
 #light.UserLanding-user-actions {
-  background-color: #f2f3f5;
-  color: #4f5660;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	background-color: #f2f3f5;
+	color: #4f5660;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #purple.UserLanding-user-actions {
-  background-color: #f2f3f5;
-  color: #5F50A9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	background-color: #f2f3f5;
+	color: #5f50a9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .UserLanding-header {
-  width: inherit;
-  height: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 6px;
-  box-sizing: border-box;
-  border-bottom: 1px;
-  color: #ffffff;
-  box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
-    0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
-  /* margin-bottom: 16px; */
+	width: inherit;
+	height: 48px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 6px;
+	box-sizing: border-box;
+	border-bottom: 1px;
+	color: #ffffff;
+	box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
+		0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
+	/* margin-bottom: 16px; */
 }
 
 @media (min-width: 768px) {
@@ -217,7 +217,7 @@
 }
 
 #remove-friend-icon {
-  cursor: pointer;
-  font-size: 13px;
-  padding-bottom: 6px;
+	cursor: pointer;
+	font-size: 13px;
+	padding-bottom: 6px;
 }

@@ -162,6 +162,6 @@ Get access to all of our amazing themes!
 Including:
 
 -Light
--Purple
+-Purplicious
 
 Through ying-yang icon

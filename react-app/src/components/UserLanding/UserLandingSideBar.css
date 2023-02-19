@@ -70,7 +70,7 @@
 }
 
 #purple.UserLanding-sidebar-channel-category-container {
-	color: #393065;
+	color: #c8c7d1;
 }
 
 .UserLanding-sidebar-channel-category-name {
@@ -166,7 +166,7 @@ a.UserLanding-sidebar-channel-name {
 }
 
 #purple.UserLanding-sidebar-channel-name:hover {
-	background-color: #bfb9dd;
+	background-color: #bfb9dd3a;
 }
 
 .UserLanding-sidebar-channel-buttons {

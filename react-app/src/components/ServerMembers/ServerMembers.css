@@ -249,19 +249,16 @@
 #dark .individual-person:hover {
 	background-color: #3f434a;
 	filter: brightness(1);
-	cursor: pointer;
 }
 
 #light .individual-person:hover {
 	background-color: #dddee2;
 	filter: brightness(1);
-	cursor: pointer;
 }
 
 #purple .individual-person:hover {
 	background-color: #4c4087;
 	filter: brightness(1);
-	cursor: pointer;
 }
 
 .member-img {

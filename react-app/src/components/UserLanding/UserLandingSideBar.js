@@ -73,6 +73,12 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 			history.push(`/channels/@me`)
 		);
 	};
+	const truncateNames2 = (names) => {
+		if (names.length > 9) {
+			return `${names.substring(0, 9)}...`;
+		}
+		return names;
+	};
 
 	const userSettingsClass =
 		"UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
@@ -119,7 +125,7 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 								className="UserLanding-sidebar-channel-user-name"
 								id={theme}
 							>
-								{user && user.username}
+								{user && truncateNames2(user.username)}
 							</div>
 						</div>
 
@@ -176,7 +182,7 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 											handleChangeTheme("purple")
 										}
 									>
-										Purple
+										Purplicious
 									</button>
 								</div>
 							</div>

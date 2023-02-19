@@ -43,8 +43,8 @@
 }
 
 #purple.cm-text-input {
-	color: #c2528b;
-	background-color: #dfdcee;
+	color: #e24f99;
+	background-color: #dfdceeab;
 }
 
 /* .cms-ch-name {
@@ -117,7 +117,7 @@
 }
 
 #purple.cm-overflow {
-	color: #9b426f;
+	color: #c7518c;
 }
 
 .msg-ct {
@@ -170,7 +170,7 @@
 }
 
 #purple.cms-options {
-	color: #9b426f;;
+	color: #9e4ea8;
 }
 
 #dark.justify:hover {
@@ -184,7 +184,7 @@
 }
 
 #purple.justify:hover {
-	background-color: #9f96cb42;
+	background-color: #9f96cb2f;
 	border: 0;
 }
 
@@ -242,11 +242,11 @@
 	color: white;
 }
 
-#light.cms-member {
+#light.cms-member, #light.dms-member {
 	color: #9b59b6;
 }
 
-#light.cms-admin {
+#light.cms-admin, #light.dms-admin {
 	color: rgb(73, 193, 147);
 }
 
@@ -254,11 +254,11 @@
 	color: #5c5e66;
 }
 
-#purple.cms-member {
+#purple.cms-member, #purple.dms-member {
 	color: #6b5ac0;
 }
 
-#purple.cms-admin {
+#purple.cms-admin, #purple.dms-admin {
 	color: rgb(42, 129, 95);
 }
 
