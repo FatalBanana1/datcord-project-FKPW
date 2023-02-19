@@ -275,7 +275,10 @@ export default function Channels({ theme }) {
 								{channel.name && truncateNames(channel.name)}
 							</div>
 							{permissions && (
-								<div className="UserLanding-sidebar-channel-buttons" id={theme}>
+								<div
+									className="UserLanding-sidebar-channel-buttons"
+									id={theme}
+								>
 									<div className="edit-channel-tooltip">
 										<OpenModalButton
 											buttonText="Edit-Channel"
@@ -385,7 +388,10 @@ export default function Channels({ theme }) {
 									{user && user.username}
 								</div>
 							</div>
-							<div className="UserLanding-sidebar-channel-user-actions" id={theme}>
+							<div
+								className="UserLanding-sidebar-channel-user-actions"
+								id={theme}
+							>
 								<div
 									className="themes-tooltip red"
 									onClick={leaveHandler}
@@ -397,15 +403,24 @@ export default function Channels({ theme }) {
 									</span>
 								</div>
 
-								<div className="themes-tooltip">
-									<i
-										className="fa-solid fa-yin-yang user-ying-yang"
-										onClick={openThemeMenu}
-									></i>
-									<span className="themes-tooltiptext">
-										Change Theme
-									</span>
-								</div>
+								{user.mootro === "mootro" ? (
+									<div className="themes-tooltip">
+										<i
+											className="fa-solid fa-yin-yang user-ying-yang"
+											onClick={openThemeMenu}
+										></i>
+										<span className="themes-tooltiptext">
+											Change Theme
+										</span>
+									</div>
+								) : (
+									<div className="themes-tooltip">
+										<i className="fa-solid fa-yin-yang user-ying-yang"></i>
+										<span className="themes-tooltiptext">
+											Mootro Only!
+										</span>
+									</div>
+								)}
 
 								<div
 									className={userThemeClass}

@@ -83,7 +83,7 @@ const CMIndex = ({ theme }) => {
 		// when component unmounts, disconnect
 		return () => {
 			setChatInput("");
-			setErrors([])
+			setErrors([]);
 			socket.disconnect();
 			dispatch(actionResetChannelMessages());
 		};
@@ -96,7 +96,7 @@ const CMIndex = ({ theme }) => {
 	// delete
 	const deleteHandler = (e) => {
 		setIsLoaded(false);
-		setErrors([])
+		setErrors([]);
 		const payload = {
 			serverId,
 			channelId,
@@ -112,7 +112,7 @@ const CMIndex = ({ theme }) => {
 	// delete
 	const deleteHandlerCurr = (e) => {
 		setIsLoaded(false);
-		setErrors([])
+		setErrors([]);
 		const payload = {
 			serverId,
 			channelId,
@@ -140,13 +140,13 @@ const CMIndex = ({ theme }) => {
 
 	// edit
 	const handleEdit = (e) => {
-		setErrors([])
+		setErrors([]);
 		setEdit(e.target.dataset.id);
 	};
 
 	// edit child change
 	const handleEditChange = (e) => {
-		setErrors([])
+		setErrors([]);
 		setEdit(e);
 		if (e === 0) {
 			// console.log(`front CM index`, e, edit);
@@ -252,10 +252,16 @@ const CMIndex = ({ theme }) => {
 		return (
 			user && (
 				<div className="cms-container">
-					<div
-						className="cms-ch-name"
-						id={theme}
-					>{`# ${channel.name}`}</div>
+					<div className="cms-ch-name row" id={theme}>
+						<div id={theme}>{`# ${channel.name}`}</div>
+
+						{/* insert mootro */}
+						{user.mootro === "mootro" ? (
+							<div id={theme}>Leave Mootro</div>
+						) : (
+							<div id={theme}>Got Mootro?</div>
+						)}
+					</div>
 
 					<div className="cms-ct">
 						<div className="cm-overflow" id={theme}>
@@ -565,11 +571,12 @@ const CMIndex = ({ theme }) => {
 
 						{role ? (
 							<div className="cm-form-container">
-								{!imageButton ? (
+								{!imageButton || true ? (
 									<button
 										id={theme}
 										className="cm-img-input"
-										onClick={() => setImageButton(true)}
+										// onClick={() => setImageButton(true)}
+										onClick={sendChat}
 									>
 										+
 									</button>
@@ -583,7 +590,7 @@ const CMIndex = ({ theme }) => {
 									</button>
 								)}
 
-								{imageButton ? (
+								{imageButton && false ? (
 									// image upload
 									<form
 										onSubmit={sendImage}
@@ -598,7 +605,7 @@ const CMIndex = ({ theme }) => {
 										{imageLoading && <div>Loading...</div>}
 									</form>
 								) : null}
-								{!imageButton ? (
+								{!imageButton || true ? (
 									// text input
 									<form
 										onSubmit={sendChat}
