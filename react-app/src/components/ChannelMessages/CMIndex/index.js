@@ -16,13 +16,14 @@ import crown from "../../../assets/crown.png";
 // leave this OUT
 let socket;
 
-const CMIndex = () => {
+const CMIndex = ({ theme }) => {
 	const dispatch = useDispatch();
 	//states
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [reload, setReload] = useState(0);
 	const [loadBottom, setLoadBottom] = useState(false);
 	const [edit, setEdit] = useState(999999990);
+	const [errors, setErrors] = useState([]);
 	// controlled form input
 	const [chatInput, setChatInput] = useState("");
 	const [messages, setMessages] = useState([]);
@@ -67,15 +68,14 @@ const CMIndex = () => {
 			setChatInput("");
 			setMessages([]);
 			setEdit(999999990);
+			setErrors([]);
 		};
 	}, [channelId, user.id, image, serverId, reload]);
 
 	useEffect(() => {
 		// open socket connection
-		// create websocket
 		socket = io();
 		// socket.emit("join", { channelId: channelId, username: user.username });
-
 		socket.on("channel_message", (channel_message) => {
 			setMessages((messages) => [...messages, channel_message]);
 		});
@@ -83,8 +83,8 @@ const CMIndex = () => {
 		// when component unmounts, disconnect
 		return () => {
 			setChatInput("");
+			setErrors([]);
 			socket.disconnect();
-			// setMessages([]);
 			dispatch(actionResetChannelMessages());
 		};
 	}, [user.id, serverId, channelId]);
@@ -96,6 +96,7 @@ const CMIndex = () => {
 	// delete
 	const deleteHandler = (e) => {
 		setIsLoaded(false);
+		setErrors([]);
 		const payload = {
 			serverId,
 			channelId,
@@ -111,6 +112,7 @@ const CMIndex = () => {
 	// delete
 	const deleteHandlerCurr = (e) => {
 		setIsLoaded(false);
+		setErrors([]);
 		const payload = {
 			serverId,
 			channelId,
@@ -138,11 +140,13 @@ const CMIndex = () => {
 
 	// edit
 	const handleEdit = (e) => {
+		setErrors([]);
 		setEdit(e.target.dataset.id);
 	};
 
 	// edit child change
 	const handleEditChange = (e) => {
+		setErrors([]);
 		setEdit(e);
 		if (e === 0) {
 			// console.log(`front CM index`, e, edit);
@@ -154,86 +158,30 @@ const CMIndex = () => {
 
 	// -------------
 
-	// mbr modal
-
-	// const [visible, setVisible] = useState("hidden");
-	// const [showMenu, setShowMenu] = useState(false);
-
-	// const closeMenu = () => setShowMenu(false);
-
-	// const makeVisible = (e) => {
-	// 	e.preventDefault();
-	// 	setVisible("visible");
-	// };
-	// const handleOnChange = (e) => {
-	// 	setIsLoaded(e);
-	// };
-
-	// const memberClickHandler = (e) => {
-	// 	const message = cms.find((el) => +el.id === +e.target.dataset.id);
-	// 	// console.log(`message in cm index ====`, e.target.dataset);
-	// 	console.log(`message in cm index ====`, message);
-	// 	let member = true;
-	// 	let owner = true;
-	// 	let admin = true;
-
-	// 	return (
-	// 		<MemberPage
-	// 			member={member}
-	// 			isOwner={owner}
-	// 			isAdmin={admin}
-	// 			serverId={serverId}
-	// 			channelId={member.channelId}
-	// 			onChange={handleOnChange}
-	// 		/>
-
-	// <div
-	// 	key={message.sender_id}
-	// 	className="individual-person"
-	// 	onClick={makeVisible}
-	// >
-	// 	<img className="member-img" src={message.display_pic}></img>
-	// 	{/* <p className="regular-member nicknames">{member.nickname}</p> */}
-	// 	<OpenModalButton
-	// 		id="memberModalButton"
-	// 		className="member nicknames"
-	// 		buttonText={message.nickname}
-	// 		onButtonClick={closeMenu}
-	// 		modalComponent={
-	// 			<MemberPage
-	// 				member={member}
-	// 				isOwner={owner}
-	// 				isAdmin={admin}
-	// 				serverId={serverId}
-	// 				channelId={member.channelId}
-	// 				onChange={handleOnChange}
-	// 			/>
-	// 		}
-	// 	/>
-	// </div>
-	// 	);
-	// };
-
-	// -------------
-
-	if (isLoaded && channel && user) {
+	if (isLoaded && channel && user && theme) {
 		const updateChatInput = (e) => {
+			if (chatInput.length > 0 && chatInput.length < 255) setErrors([]);
 			setChatInput(e.target.value);
 		};
 
-		//send chat messages through the websocket
+		//send chat messages - socket
 		const sendChat = (e) => {
 			e.preventDefault();
-			if (chatInput.length < 1) return null;
-			const curr = Object.values(allMembers).find(
-				(el) => el.user_id === user.id
-			);
-			socket.emit("channel_message", {
-				sender_id: curr.id,
-				message: chatInput,
-				channelId,
-			});
-			setChatInput("");
+			if (chatInput.length > 255 || chatInput.length < 1) {
+				setErrors([`error: Message length must be between 1 and 255.`]);
+				return null;
+			} else {
+				const curr = Object.values(allMembers).find(
+					(el) => Number(el.user_id) === Number(user.id)
+				);
+				socket.emit("channel_message", {
+					sender_id: Number(curr.id),
+					message: chatInput,
+					channelId,
+				});
+				setChatInput("");
+				setEdit(999999999);
+			}
 		};
 
 		// -----------
@@ -292,211 +240,210 @@ const CMIndex = () => {
 		let date = new Date();
 		let role;
 		const currMbr = user.server_members.find(
-			(el) => +el.server_id === +serverId && +user.id === +el.user_id
+			(el) =>
+				Number(el.server_id) === Number(serverId) &&
+				Number(user.id) === Number(el.user_id)
 		);
-
 		if (currMbr) {
 			role = currMbr.role;
 		}
-		// console.log(`role ===`, role, serverId, currMbr);
 		// console.log(`msg ===`, messages);
 
-		// print the username and message for each chat
 		return (
 			user && (
 				<div className="cms-container">
-					<div className="cms-ch-name">{`# ${channel.name}`}</div>
+					<div className="cms-ch-name row" id={theme}>
+						<div id={theme}>{`# ${channel.name}`}</div>
+
+						{/* insert mootro */}
+						{user.mootro === "mootro" ? (
+							<div id={theme}>Leave Mootro</div>
+						) : (
+							<div id={theme}>Got Mootro?</div>
+						)}
+					</div>
 
 					<div className="cms-ct">
-						<div className="cm-overflow">
-							{cms.length
-								? cms.map((message, i) => (
+						<div className="cm-overflow" id={theme}>
+							{cms.length ? (
+								cms.map((message) => (
+									<div
+										id={theme}
+										className="row justify"
+										key={message.id}
+									>
 										<div
-											className="row justify"
-											key={message.id}
+											// to="#"
+											className="img-link"
+											data-id={message.id}
+											// onClick={memberClickHandler}
 										>
-											{i - 1 >= 0 &&
-											cms[i - 1] &&
-											message.sender_id &&
-											message.sender_id ===
-												cms[i - 1].sender_id ? (
-												<div className="cm-spacer"></div>
-											) : (
+											<img
+												src={message.display_pic}
+												alt="Display Picture"
+												className="pic-icon"
+												data-id={message.id}
+											/>
+										</div>
+
+										{Number(message.id) === Number(edit) ? (
+											<CMEdit
+												message={message}
+												onChange={handleEditChange}
+												channelId={channelId}
+												serverId={serverId}
+												theme={theme}
+											/>
+										) : (
+											<div className="msg-ct">
 												<div
-													// to="#"
-													className="img-link"
-													data-id={message.id}
-													// onClick={memberClickHandler}
+													className="cms-msg-header"
+													id={theme}
 												>
-													<img
-														src={
-															message.display_pic
-														}
-														alt="crown"
-														className="pic-icon"
-														data-id={message.id}
-													/>
-												</div>
-											)}
-
-											{message.id == edit ? (
-												<CMEdit
-													message={message}
-													onChange={handleEditChange}
-													channelId={channelId}
-													serverId={serverId}
-												/>
-											) : (
-												<div className="msg-ct">
-													<div className="cms-msg-header">
-														{i - 1 >= 0 &&
-														cms &&
-														cms.length &&
-														cms[i - 1] &&
-														message.sender_id &&
-														message.sender_id ===
-															cms[i - 1]
-																.sender_id ? (
-															<div className="cm-spacer2"></div>
+													<>
+														{message.role ===
+														"owner" ? (
+															<div className="row">
+																<div
+																	id={theme}
+																	className="cms-admin"
+																>{`${message.sender_nickname}`}</div>
+																<img
+																	src={crown}
+																	alt="crown"
+																	className="icon"
+																/>
+															</div>
+														) : message.role ===
+														  "admin" ? (
+															<div
+																id={theme}
+																className="cms-admin"
+															>{`${message.sender_nickname}`}</div>
+														) : message.role ===
+														  "member" ? (
+															<div
+																id={theme}
+																className="cms-member"
+															>
+																{`${message.sender_nickname}`}{" "}
+															</div>
 														) : (
-															<>
-																{message.role ===
-																"owner" ? (
-																	<div className="row">
-																		<div className="cms-admin">{`${message.sender_nickname}`}</div>
-																		<img
-																			src={
-																				crown
-																			}
-																			alt="crown"
-																			className="icon"
-																		/>
-																	</div>
-																) : message.role ===
-																  "admin" ? (
-																	<div className="cms-admin">{`${message.sender_nickname}`}</div>
-																) : message.role ===
-																  "member" ? (
-																	<div className="cms-member">
-																		{`${message.sender_nickname}`}{" "}
-																	</div>
-																) : (
-																	<div className="cms-pending">{`${message.sender_nickname}`}</div>
-																)}
-
-																<div className="cms-msg-date">
-																	{message.created_at.slice(
-																		0,
-																		22
-																	)}
-																</div>
-															</>
+															<div
+																id={theme}
+																className="cms-pending"
+															>{`${message.sender_nickname}`}</div>
 														)}
 
-														{currMbr.id ===
-															message.sender_id ||
-														role === "admin" ||
-														role === "owner" ? (
-															<div className="cms-options absolute-op">
-																<div
-																	className="cms-edit"
-																	data-id={
-																		message.id
-																	}
-																	onClick={
-																		handleEdit
-																	}
-																>
-																	Edit
-																</div>
-																<div
-																	className="cms-delete"
-																	onClick={
-																		deleteHandler
-																	}
-																	data-id={
-																		message.id
-																	}
-																	data-sender={
-																		message.sender_id
-																	}
-																>
-																	Delete
-																</div>
-															</div>
-														) : null}
-													</div>
+														<div
+															className="cms-msg-date"
+															id={theme}
+														>
+															{message.created_at.slice(
+																0,
+																22
+															)}
+														</div>
+													</>
 
-													{message.created_at ==
-														message.updated_at &&
-													!imageLinks[
+													{Number(currMbr.id) ===
+														Number(
+															message.sender_id
+														) ||
+													role === "admin" ||
+													role === "owner" ? (
+														<div
+															id={theme}
+															className="cms-options absolute-op"
+														>
+															<div
+																className="cms-edit"
+																data-id={
+																	message.id
+																}
+																onClick={
+																	handleEdit
+																}
+															>
+																Edit
+															</div>
+															<div
+																className="cms-delete"
+																onClick={
+																	deleteHandler
+																}
+																data-id={
+																	message.id
+																}
+																data-sender={
+																	message.sender_id
+																}
+															>
+																Delete
+															</div>
+														</div>
+													) : null}
+												</div>
+
+												{message.created_at ===
+													message.updated_at &&
+												!imageLinks[
+													message.message.slice(
+														message.message.length -
+															4
+													)
+												] ? (
+													<div className="cms-msg-detail">{`${message.message}`}</div>
+												) : imageLinks[
 														message.message.slice(
 															message.message
 																.length - 4
 														)
-													] ? (
-														<div className="cms-msg-detail">{`${message.message}`}</div>
-													) : imageLinks[
-															message.message.slice(
+												  ] ? (
+													<div>
+														<img
+															src={
 																message.message
-																	.length - 4
-															)
-													  ] ? (
-														<div>
-															<img
-																src={
-																	message.message
-																}
-																className="aws-image"
-																alt={`uploaded by ${message.sender_nickname}`}
-															></img>
-														</div>
-													) : (
-														<div className="row">
-															<div className="cms-msg-detail">{`${message.message}`}</div>
-															<div className="cms-msg-detail edited">{`(edited)`}</div>
-														</div>
-													)}
-												</div>
-											)}
-										</div>
-								  ))
-								: null}
+															}
+															className="aws-image"
+															alt={`uploaded by ${message.sender_nickname}`}
+														></img>
+													</div>
+												) : (
+													<div className="row">
+														<div className="cms-msg-detail">{`${message.message}`}</div>
+														<div className="cms-msg-detail edited">{`(edited)`}</div>
+													</div>
+												)}
+											</div>
+										)}
+									</div>
+								))
+							) : (
+								<div className="empty-ct">
+									<div className="empty-tag">#</div>
+									<div className="empty-cms-header">{`Welcome to #${channel.name}!`}</div>
+									<div className="empty-cms-body">{`This is the start of the #${channel.name} channel.`}</div>
+								</div>
+							)}
 
 							{messages.length > 0
 								? messages.map((message, i) => (
 										<div
+											id={theme}
 											key={`s_${i}`}
 											className="row justify"
 										>
-											{i >= 1 ? (
-												<div>
-													{message.sender_id &&
-													message.sender_id ===
-														messages[i - 1]
-															.sender_id ? (
-														<div className="cm-spacer"></div>
-													) : null}
-												</div>
-											) : i >= 1 &&
-											  cms &&
-											  cms.length - 1 &&
-											  cms[cms.length - 1].sender_id ===
-													message.sender_id ? (
-												<div className="cm-spacer"></div>
-											) : (
-												<div className="img-link">
-													<img
-														src={
-															message.display_pic
-														}
-														alt="crown"
-														className="pic-icon"
-													/>
-												</div>
-											)}
+											<div className="img-link">
+												<img
+													src={message.display_pic}
+													alt="Display Picture"
+													className="pic-icon"
+												/>
+											</div>
 
-											{message.id == edit ? (
+											{Number(message.id) ===
+											Number(edit) ? (
 												<CMEdit
 													message={message}
 													onChange={handleEditChange}
@@ -504,65 +451,64 @@ const CMIndex = () => {
 											) : (
 												<div className="msg-ct">
 													<div className="cms-msg-header">
-														{i >= 1 ? (
-															<div>
-																{message.sender_id &&
-																message.sender_id ===
-																	messages[
-																		i - 1
-																	]
-																		.sender_id ? (
-																	<div className="cm-spacer2"></div>
-																) : null}
-															</div>
-														) : i >= 1 &&
-														  cms &&
-														  cms.length - 1 &&
-														  cms[cms.length - 1]
-																.sender_id ===
-																message.sender_id ? (
-															<div className="cm-spacer2"></div>
-														) : (
-															<>
-																{message.role ===
-																"owner" ? (
-																	<>
-																		<div className="cms-admin">{`${message.sender_nickname}`}</div>
-																		<img
-																			src={
-																				crown
-																			}
-																			alt="crown"
-																			className="icon"
-																		/>
-																	</>
-																) : message.role ===
-																  "admin" ? (
-																	<div className="cms-admin">{`${message.sender_nickname}`}</div>
-																) : message.role ===
-																  "member" ? (
-																	<div className="cms-member">
-																		{`${message.sender_nickname}`}{" "}
-																	</div>
-																) : (
-																	<div className="cms-pending">{`${message.sender_nickname}`}</div>
-																)}
-																<div className="cms-msg-date">
-																	{date
-																		.toUTCString()
-																		.slice(
-																			0,
-																			22
-																		)}
+														<>
+															{message.role ===
+															"owner" ? (
+																<>
+																	<div
+																		id={
+																			theme
+																		}
+																		className="cms-admin"
+																	>{`${message.sender_nickname}`}</div>
+																	<img
+																		src={
+																			crown
+																		}
+																		alt="crown"
+																		className="icon"
+																	/>
+																</>
+															) : message.role ===
+															  "admin" ? (
+																<div
+																	id={theme}
+																	className="cms-admin"
+																>{`${message.sender_nickname}`}</div>
+															) : message.role ===
+															  "member" ? (
+																<div
+																	id={theme}
+																	className="cms-member"
+																>
+																	{`${message.sender_nickname}`}{" "}
 																</div>
-															</>
-														)}
+															) : (
+																<div
+																	id={theme}
+																	className="cms-pending"
+																>{`${message.sender_nickname}`}</div>
+															)}
+															<div className="cms-msg-date">
+																{date
+																	.toUTCString()
+																	.slice(
+																		0,
+																		22
+																	)}
+															</div>
+														</>
 
-														{+currMbr.id ===
-															+message.sender_id ||
+														{Number(currMbr.id) ===
+															Number(
+																message.sender_id
+															) ||
 														role === "admin" ||
 														role === "owner" ? (
-															<div className="cms-options absolute-op">
+															<div
+																id={theme}
+																className="cms-options absolute-op"
+															>
 																<div
 																	className="cms-edit"
 																	data-id={
@@ -626,15 +572,18 @@ const CMIndex = () => {
 
 						{role ? (
 							<div className="cm-form-container">
-								{!imageButton ? (
+								{!imageButton || true ? (
 									<button
+										id={theme}
 										className="cm-img-input"
-										onClick={() => setImageButton(true)}
+										// onClick={() => setImageButton(true)}
+										onClick={sendChat}
 									>
 										+
 									</button>
 								) : (
 									<button
+										id={theme}
 										className="cm-img-input-x"
 										onClick={() => setImageButton(false)}
 									>
@@ -642,7 +591,7 @@ const CMIndex = () => {
 									</button>
 								)}
 
-								{imageButton ? (
+								{imageButton && false ? (
 									// image upload
 									<form
 										onSubmit={sendImage}
@@ -657,16 +606,23 @@ const CMIndex = () => {
 										{imageLoading && <div>Loading...</div>}
 									</form>
 								) : null}
-								{!imageButton ? (
+								{!imageButton || true ? (
 									// text input
 									<form
 										onSubmit={sendChat}
 										className="submit-cm"
 									>
+										{errors.length > 0 ? (
+											<div className="cms-err">
+												Error : Message length must be
+												between 1 and 255 characters!
+											</div>
+										) : null}
 										<input
 											value={chatInput}
 											onChange={updateChatInput}
 											className="cm-text-input"
+											id={theme}
 										/>
 									</form>
 								) : null}
@@ -677,7 +633,14 @@ const CMIndex = () => {
 			)
 		);
 	} else {
-		return <div className="loading-cms"># Loading...</div>;
+		return (
+			<div className="loader-container">
+				<div className="loader-header" id={theme}>
+					# Summoning Pandas...
+				</div>
+				<div className="loader" id={theme}></div>
+			</div>
+		);
 	}
 };
 

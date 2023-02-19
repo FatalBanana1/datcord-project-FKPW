@@ -1,0 +1,100 @@
+.friend-card {
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	background-color: rgb(24, 25, 28);
+	border-radius: 10px;
+	height: 380px;
+	width: 350px;
+}
+
+#friend-card-header {
+	margin: 0;
+	/* background: #000; */
+	border-radius: 10px 10px 0 0;
+	height: 150px;
+	width: 100%;
+}
+
+.friend-card-img {
+	max-width: 130x;
+	max-height: 130px;
+	width: 130px;
+	height: 130px;
+	border-radius: 50%;
+	border: 5px solid #292b2f;
+	object-fit: cover;
+}
+
+.friend-card-content {
+	border-radius: 50%;
+	margin: -80px 20px;
+	width: 80%;
+	height: 80px;
+}
+
+.card-friend-info {
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(24, 25, 28);
+	height: 200px;
+	width: 300px;
+	border-radius: 10px;
+	/* font-family: "Segoe UI Variable"; */
+	font-family: "Roboto";
+	box-sizing: border-box;
+	padding: 7px;
+}
+
+.friend-header {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: space-between; */
+	width: 300px;
+	height: 300px;
+	align-items: center;
+}
+
+#add-friend-button {
+	border: none;
+	border-radius: 3px;
+	height: 40px;
+	width: 110px;
+	font-size: 20px;
+	color: white;
+	background-color: green;
+	margin-bottom: 12px;
+	margin-right: 2px;
+	margin-top: 30px;
+	size: 7px;
+}
+
+#delete-friend-button {
+	border: none;
+	border-radius: 3px;
+	height: 40px;
+	width: 140px;
+	font-size: 15px;
+	color: white;
+	background-color: red;
+	margin-bottom: 12px;
+	margin-right: 2px;
+	margin-top: 30px;
+}
+
+.card-friend-inner-div {
+	/* width: calc(100% - 12px); */
+	width: 100%;
+}
+
+.friend-username {
+	width: calc(100% - 32px);
+	/* height: 28px; */
+	font-weight: 700;
+	font-size: 30px;
+	color: #fff;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+	margin-top: 30px;
+}
+

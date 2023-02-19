@@ -39,7 +39,7 @@
 #modal-content {
     border-radius: 4px;
     position: absolute;
-    background-color: #35393e;
+    /* background-color: #35393e; */
     overflow-y: auto;
     max-height: 90%;
     height: max-content;
@@ -48,6 +48,11 @@
     justify-content: center;
     z-index: 99999;
     /* border-radius: 12px; */
+}
+
+#modal-content {
+    /* background-color: #ffffff; */
+    background-color: none;
 }
 
 

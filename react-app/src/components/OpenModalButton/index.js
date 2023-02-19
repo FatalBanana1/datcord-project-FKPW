@@ -7,10 +7,11 @@ function OpenModalButton({
   buttonText, // text of the button that opens the modal
   onButtonClick, // optional: callback function that will be called once the button that opens the modal is clicked
   onModalClose, // optional: callback function that will be called once the modal is closed
+  theme,
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
-  const buttonClass = buttonText.replace(/\s/g,"");
+  const buttonClass = buttonText.replace(/\s/g, "");
 
   const onClick = () => {
     if (onModalClose) setOnModalClose(onModalClose);
@@ -24,8 +25,11 @@ function OpenModalButton({
       <button
         onClick={onClick}
         className={`OpenModalButton-button ${buttonText}`}
+        id={theme}
       >
-        <i className="fa-solid fa-plus align-right"></i>
+        <div className="plus-container" id={theme}>
+          <i className="fa-solid fa-plus align-right" id={theme}></i>
+        </div>
       </button>
     );
   }
@@ -37,7 +41,7 @@ function OpenModalButton({
         onClick={onClick}
         className={`OpenModaldiv-button ${buttonText}`}
       >
-        <div className="ServerNav-icons">
+        <div className="ServerNav-icons" id={theme}>
           <i className="fa-solid fa-plus"></i>
         </div>
       </div>
@@ -49,6 +53,7 @@ function OpenModalButton({
       <button
         onClick={onClick}
         className={`OpenModalButton-button ${buttonText}`}
+        id={theme}
       >
         <i className="fa-solid fa-gear"></i>
       </button>
@@ -85,7 +90,14 @@ function OpenModalButton({
     );
   }
 
-  return <button onClick={onClick} className={`OpenModalButton-button ${buttonClass}`}>{buttonText}</button>;
+  return (
+    <button
+      onClick={onClick}
+      className={`OpenModalButton-button ${buttonClass}`}
+    >
+      {buttonText}
+    </button>
+  );
 }
 
 export default OpenModalButton;

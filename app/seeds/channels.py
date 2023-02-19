@@ -1,4 +1,8 @@
 from app.models import db, Channel, environment, SCHEMA
+from faker import Faker
+from random import choice
+
+faker = Faker()
 
 
 def seed_channels():
@@ -123,6 +127,21 @@ def seed_channels():
             c23,
         ]
     )
+    db.session.commit()
+
+    # faker - public channels
+    # faker.sentence(nb_words=3)
+    # name=faker.text(max_nb_chars=15)
+    # name=f"{faker.word()}-{faker.word()}-{faker.word()}",
+    opt = list(range(1, 9))
+    for _ in range(20):
+        temp = Channel(
+            name=faker.sentence(nb_words=3)[:-1],
+            server_id=choice(opt),
+            category=faker.word(),
+            is_private=False,
+        )
+        db.session.add(temp)
     db.session.commit()
 
 

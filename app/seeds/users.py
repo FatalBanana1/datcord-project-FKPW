@@ -1,5 +1,8 @@
 from app.models import db, User, environment, SCHEMA
+from faker import Faker
+from random import choice
 
+faker = Faker()
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -107,6 +110,7 @@ def seed_users():
         password="password4",
         display_pic="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2022/10/20/16662224157675.jpg",
         theme="dark",
+        mootro="mootro"
     )
     m2 = User(
         email="darkknight@gmail.com",
@@ -118,9 +122,17 @@ def seed_users():
 
     main = User(
         email="discord@discord.com",
-        username="Discord",
+        username="JohnWick",
         password="password123",
         display_pic="https://avatarfiles.alphacoders.com/203/203174.jpg",
+        theme="dark",
+    )
+
+    Messi = User(
+        email="Messi@goat.com",
+        username="LionelMessi",
+        password="Ba4celona",
+        display_pic="https://i.dailymail.co.uk/1s/2023/02/16/00/67737607-11756461-image-a-1_1676506718526.jpg",
         theme="dark",
     )
 
@@ -142,10 +154,53 @@ def seed_users():
             pending2,
             m1,
             m2,
-            main
+            main,
+            Messi,
         ]
     )
     db.session.commit()
+
+    pics = [
+        "https://pyxis.nymag.com/v1/imgs/e0a/79c/5671d6e6089515f706e9b2288d41d9e824-you-people.2x.rsocial.w600.jpg",
+        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/actor-will-smith-arrives-at-the-los-angeles-world-premiere-news-photo-465783654-1565089503.jpg",
+        "https://zanderm.com/wp-content/uploads/2016/09/Fwd-1zan0-Famous-People-With-Vitiligo-sal-jxtgroup.com-JXT-Group-Mail.png",
+        "https://www.discoverwalks.com/blog/wp-content/uploads/2022/01/776px-tom_hanks_tiff_2019.jpg",
+        "https://people.com/thmb/w0KomSJmqc7XqlwbbsOkD7xKrFw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2)/daniel-radcliffe1-a80672060fc14e188e89f9c1a60bfeea.jpg",
+        "https://www.who.com.au/media/30290/gettyimages-1125335767.jpg",
+        "https://netstorage-briefly.akamaized.net/images/1ba932325b69b595.jpg?imwidth=900",
+        "https://blog.ongig.com/wp-content/uploads/2020/06/Tom_Holland_by_Gage_Skidmore.jpg",
+        "https://media.cnn.com/api/v1/images/stellar/prod/140110093710-louis-ck-0110.jpg?q=w_3000,h_2282,x_0,y_0,c_fill/w_1280",
+        "https://i.iheart.com/v3/re/new_assets/62169ce9e23615b559ea3cd3?ops=contain(1480,0)",
+        "https://cdn.ebaumsworld.com/mediaFiles/picture/604025/86918033.jpg",
+        "https://www.wonderwall.com/wp-content/uploads/sites/2/2021/09/shutterstock_editorial_12241104ao.jpg?h=800",
+        "https://d3itoy3ehuwt5n.cloudfront.net/wp-content/uploads/2014/07/bill-gates.jpg?w=225",
+        "https://www.thefamouspeople.com/cdn-cgi/mirage/608bed817c49109225caf1dc14ffdea6b7fad539a91cd9b212f06f34116d3e8e/1280/https://www.thefamouspeople.com/profiles/thumbs/kobe-bryant-2.jpg",
+        "https://images.prestigeonline.com/wp-content/uploads/sites/8/2022/12/06162509/famous-people-celebrities-david-beckham-born-year-of-the-rabbit.jpeg",
+    ]
+    opt = list(range(99))
+    for _ in range(12):
+        temp = User(
+            email=f"{faker.text(max_nb_chars=6)}{choice(opt)}@{faker.text(max_nb_chars=5)}com",
+            username=f"{faker.text(max_nb_chars=10)[:-1]}{choice(opt)}",
+            password="password",
+            display_pic=choice(pics),
+            theme="dark",
+        )
+        db.session.add(temp)
+    db.session.commit
+
+    opt = list(range(99))
+    for _ in range(9):
+        temp = User(
+            email=f"{faker.text(max_nb_chars=6)}{choice(opt)}@{faker.text(max_nb_chars=5)}com",
+            username=f"{faker.text(max_nb_chars=10)[:-1]}{choice(opt)}",
+            password="password",
+            display_pic=choice(pics),
+            theme="dark",
+            mootro="mootro"
+        )
+        db.session.add(temp)
+    db.session.commit
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

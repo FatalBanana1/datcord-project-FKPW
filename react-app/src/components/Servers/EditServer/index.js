@@ -6,7 +6,7 @@ import { thunkGetChannels } from "../../../store/channels.js";
 import { thunkUpdateServer } from "../../../store/servers.js";
 import "./EditServer.css";
 
-const EditServer = ({ server }) => {
+const EditServer = ({ server, theme }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -42,10 +42,10 @@ const EditServer = ({ server }) => {
 	};
 
 	return (
-		<div className="create-server-container">
+		<div className="create-server-container" id={theme}>
 			<div className="create-server-header-container">
 				<h1 className="create-server-title">Edit Your Server</h1>
-				<div className="create-server-subtext">
+				<div className="create-server-subtext" id={theme}>
 					Your server is where you and your friends hang out. Make
 					yours and start talking.
 				</div>
@@ -54,17 +54,18 @@ const EditServer = ({ server }) => {
 				className="create-server-form-container"
 				onSubmit={handleSubmit}
 			>
-				<div className="create-server-form-title">Server Name</div>
-				<div className="create-server-input">
+				<div className="create-server-form-title" id={theme}>Server Name</div>
+				<div className="create-server-input" id={theme}>
 					<input
 						className="input-fields"
 						type="text"
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 						required
+						id={theme}
 					/>
 				</div>
-				<div className="create-server-form-title">Img Url</div>
+				<div className="create-server-form-title" id={theme}>Img Url</div>
 				<div className="create-server-input">
 					<input
 						className="input-fields"
@@ -72,9 +73,10 @@ const EditServer = ({ server }) => {
 						value={icon_url}
 						onChange={(e) => setIconUrl(e.target.value)}
 						required
+						id={theme}
 					/>
 				</div>
-				<div className="create-server-form-title">Description</div>
+				<div className="create-server-form-title" id={theme}>Description</div>
 				<div className="create-server-text-area">
 					<textarea
 						rows="5"
@@ -83,18 +85,21 @@ const EditServer = ({ server }) => {
 						value={description}
 						onChange={(e) => setDescription(e.target.value)}
 						required
+						id={theme}
 					/>
 				</div>
 				<div className="create-server-buttons-container">
 					<button
 						className="create-server-button-cancel"
 						onClick={closeModal}
+						id={theme}
 					>
 						Cancel
 					</button>
 					<button
 						type="submit"
 						className="create-server-button-submit"
+						id={theme}
 					>
 						Edit
 					</button>

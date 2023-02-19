@@ -1,0 +1,52 @@
+.NotFound-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    gap: 28px;
+}
+
+.NotFound-milk {
+    width: 300px;
+}
+
+.NotFound-header {
+    color: #5865f2;
+    font-size: 28px;
+    text-transform: uppercase;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 900;
+    margin-bottom: 28px;
+}
+
+.NotFound-container-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#NotFound.open-discord-button {
+    width: 400px;
+    align-self: center;
+}
+
+@media (min-width: 1024px) {
+    .NotFound-container {
+        flex-direction: row-reverse;
+    }
+
+    .NotFound-milk {
+        width: 350px;
+    }
+
+    .NotFound-container-right {
+        width: 350px;
+        padding: 0px 100px;
+    }
+
+    .NotFound-container-left {
+        width: calc(100% - 450px);
+    }
+
+}

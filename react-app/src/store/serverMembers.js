@@ -183,7 +183,7 @@ export default function ServerMembers(state = initialState, action) {
 			return newState;
 		}
 		case RESET_SERVERMEMBER: {
-			return initialState;
+			return {};
 		}
 		default:
 			return state;

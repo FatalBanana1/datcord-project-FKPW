@@ -1,4 +1,8 @@
 from app.models import db, ServerMember, environment, SCHEMA
+from faker import Faker
+from random import choice
+
+faker = Faker()
 
 
 def seed_server_members():
@@ -117,6 +121,8 @@ def seed_server_members():
     m88 = ServerMember(user_id=10, server_id=9, nickname="WanAndOnly", role="member")
     m89 = ServerMember(user_id=11, server_id=9, nickname="ChosenOne", role="member")
     m90 = ServerMember(user_id=17, server_id=10, nickname="johnwick", role="owner")
+    m91 = ServerMember(user_id=18, server_id=9, nickname="Leo Messi", role="admin")
+    m92 = ServerMember(user_id=18, server_id=2, nickname="Leo Messi", role="admin")
 
     db.session.add_all(
         [
@@ -211,8 +217,22 @@ def seed_server_members():
             m89,
             m80,
             m90,
+            m91,
+            m92,
         ]
     )
+    db.session.commit()
+
+    servers = list(range(1, 10))
+    for server in servers:
+        for i in range(20,35):
+            temp = ServerMember(
+                user_id=i,
+                server_id=server,
+                nickname=faker.sentence(nb_words=2)[:-1],
+                role=faker.word(ext_word_list=["member", "pending"]),
+            )
+            db.session.add(temp)
     db.session.commit()
 
 

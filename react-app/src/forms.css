@@ -224,6 +224,49 @@
 .Form-demos-button:hover {
   background-color: #696d72;
 }
+
+.Form-group-profile-pic {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.Form-default-profile-image-container {
+  border-radius: 50%;
+  background-color: #5865f2;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Form-default-profile-image {
+    border-radius: 50%;
+    /* width: 100px; */
+    /* aspect-ratio: 1; */
+    object-fit: cover;
+}
+
+.SignUpForm-profile-pic-upload {
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    color: #c4c4c4;
+    font-size: 13px;
+}
+
+.Form-group-profile-pic > input[type="file"] {
+    display: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 @media (min-width: 468px) {
   .Form-logo {
     display: none;

@@ -14,6 +14,7 @@ const NickNameEdit = ({
 	serverId,
 	endEditNickName,
 	channelId,
+	theme
 }) => {
 	let dispatch = useDispatch();
 	let params = useParams();
@@ -34,7 +35,7 @@ const NickNameEdit = ({
 		endEditNickName();
 	};
 
-	const cacnelChange = (e) => {
+	const cancelChange = (e) => {
 		e.preventDefault();
 		endEditNickName();
 	};
@@ -46,17 +47,20 @@ const NickNameEdit = ({
 					value={nickName}
 					onChange={(e) => setnickName(e.target.value)}
 					className="nickname-input"
+					id={theme}
 				/>
 			</form>
 			<div>
 				<button
+					id={theme}
 					type="submit"
 					className="save-nickName-button"
-					onClick={cacnelChange}
+					onClick={cancelChange}
 				>
 					Cancel
 				</button>
 				<button
+					id={theme}
 					type="submit"
 					className="save-nickName-button"
 					onClick={changeNickname}

@@ -1,0 +1,39 @@
+.dm-channel-user-icon {
+  height: 27px;
+  width: 27px;
+  border-radius: 55%;
+  object-fit: cover;
+}
+
+.dm-icon-name-ct {
+  display: flex;
+  flex-direction: row;
+}
+
+.dm-username {
+  margin-left: 15px;
+}
+
+.mleft-15 {
+  margin: 15px;
+}
+
+.UserLanding-sidebar-channel-name.dmchannels {
+  margin-top: 8px;
+}
+
+.DMChannels-header {
+  padding: 8px;
+}
+
+.extra-pad {
+  margin-bottom: 2px;
+}
+
+.friend-icon {
+  margin-left: 2px;
+}
+
+.friends-margin {
+  margin-left: 15px;
+}

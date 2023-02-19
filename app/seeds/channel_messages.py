@@ -1,4 +1,8 @@
 from app.models import db, ChannelMessage, environment, SCHEMA
+from faker import Faker
+from random import choice
+
+faker = Faker()
 
 
 def seed_channel_messages():
@@ -394,6 +398,21 @@ def seed_channel_messages():
         channel_id=21,
         message="Checked my cave, wasnt there...sorry!",
     )
+    cm89 = ChannelMessage(
+        sender_id=91,
+        channel_id=21,
+        message="Didn't find your dog in Qatar, but I found something else.",
+    )
+    cm90 = ChannelMessage(
+        sender_id=91,
+        channel_id=2,
+        message="I wish I was back in Barcelona.",
+    )
+    cm91 = ChannelMessage(
+        sender_id=66,
+        channel_id=21,
+        message="Was in Krypton earlier, not there. Sorry.",
+    )
 
     db.session.add_all(
         [
@@ -482,13 +501,18 @@ def seed_channel_messages():
     )
     db.session.commit()
 
-    db.session.add_all(
-        [
-            cm86,
-            cm87,
-            cm88,
-        ]
-    )
+    db.session.add_all([cm86, cm87, cm88, cm89, cm90, cm91])
+    db.session.commit()
+
+    users = list(range(1,120))
+    chans = list(range(24,44))
+    for _ in range(300):
+        temp = ChannelMessage(
+            sender_id=choice(users),
+            channel_id=choice(chans),
+            message=faker.text(max_nb_chars=160),
+        )
+        db.session.add(temp)
     db.session.commit()
 
 

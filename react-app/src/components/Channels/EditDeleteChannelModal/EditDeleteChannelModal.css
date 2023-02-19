@@ -1,111 +1,114 @@
 #modal-content {
-    border-radius: 12px;
+  border-radius: 12px;
 }
 
 .EditDeleteChannelModal-container {
-    position: absolute;
-    width: calc(100vw + 72px);
-    height: 100vh;
-    z-index: 99999999999;
-    background-color:#36393f;
-    margin-left: -72px;
-    padding-left: 10px;
-    display: flex;
-    color: #96989d;
+  position: absolute;
+  width: calc(100vw + 72px);
+  height: 100vh;
+  z-index: 99999999999;
+  background-color: #36393f;
+  margin-left: -72px;
+  padding-left: 10px;
+  display: flex;
+  color: #96989d;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .EditDeleteChannelModal-left {
-    display: flex;
-    justify-content: flex-end;
-    width: 35%;
-    padding-top: 72px;
+  display: flex;
+  justify-content: flex-end;
+  width: 35%;
+  padding-top: 72px;
 }
 
 .EditDeleteChannelModal-nav {
-    display: flex;
-    flex-direction: column;
-    width: 218px;
+  display: flex;
+  flex-direction: column;
+  width: 218px;
 }
 
 .EditDeleteChannelModal-nav-headers {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
 }
 
 .EditDeleteChannelModal-nav-header {
-    font-size: 11px;
-    color: #96989d;
-    text-transform: uppercase;
-    font-weight: 600;
+  font-size: 11px;
+  color: #96989d;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .EditDeleteChannelModal-right {
-    padding-top: 72px;
+  padding-top: 72px;
 }
 
 .EditDeleteChannelModal-nav-links {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 34px;
-    color: #96989d;
-    cursor: pointer;
-    padding: 7px;
-    box-sizing: border-box;
-    font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 34px;
+  color: #96989d;
+  cursor: pointer;
+  padding: 7px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
 .CreateChannelForm-button-delete:disabled {
-    color: #96989d;
+  color: #96989d;
+}
+
+.CreateChannelForm-button-delete:disabled:hover {
+  color: #bfc2c9;
 }
 
 .CreateChannelForm-button-delete.tooltip {
-    position: relative;
+  position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
 }
 
 .EditChannelForm-button-delete-text {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #18191c;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
+  visibility: hidden;
+  width: 120px;
+  background-color: #18191c;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #18191c transparent transparent transparent;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #18191c transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* .CreateChannelForm-button-delete:hover .EditChannelForm-button-delete-hover {

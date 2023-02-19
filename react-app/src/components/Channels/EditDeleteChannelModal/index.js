@@ -17,6 +17,7 @@ export default function EditChannelForm({
 	serverId,
 	channelId,
 	priv,
+	theme
 }) {
 	const dispatch = useDispatch();
 	const [category, setCategory] = useState(categoryName ? categoryName : "");
@@ -96,13 +97,13 @@ export default function EditChannelForm({
 
 	if (isLoaded && categoryName) {
 		return (
-			<div className="CreateChannelForm-container">
+			<div className="CreateChannelForm-container" id={theme}>
 				<div className="CreateChannelForm-header">
 					<div className="CreateChannelForm-title-text">
-						<h1 className="CreateChannelForm-title">
+						<h1 className="CreateChannelForm-title" id={theme}>
 							Edit Channel
 						</h1>
-						<p className="CreateChannelForm-subtext">
+						<p className="CreateChannelForm-subtext" id={theme}>
 							in {category}
 						</p>
 					</div>
@@ -110,7 +111,7 @@ export default function EditChannelForm({
 						className="CreateChannelForm-close"
 						onClick={closeModal}
 					>
-						<i className="fa-solid fa-xmark"></i>
+						<i className="fa-solid fa-xmark" id={theme}></i>
 					</div>
 				</div>
 				<form
@@ -121,24 +122,25 @@ export default function EditChannelForm({
 						<label
 							htmlFor="channel-name"
 							className="CreateChannelForm-label"
+							id={theme}
 						>
 							Channel Name
 						</label>
-						<div className="CreateChannelForm-group-channel-input">
-							<p className="hashtag">#</p>
+						<div className="CreateChannelForm-group-channel-input" id={theme}>
+							<p className="hashtag" id={theme}>#</p>
 							<input
-								id="channel-name"
+								id={`channel-name ${theme}`}
 								type="text"
 								value={channelName}
 								onChange={(e) => setChannelName(e.target.value)}
 								required
-								placeholder="new-channel"
+								placeholder="edit-channel"
 							/>
 						</div>
 					</div>
 					<div className="CreateChannelForm-group-private">
 						<span>
-							<i className="fa-solid fa-lock"></i>
+							<i className="fa-solid fa-lock" id={theme}></i>
 							Private channel
 						</span>
 						<div className="CreateChannelForm-checkbox-container">
@@ -148,17 +150,18 @@ export default function EditChannelForm({
 								checked={isPrivate}
 								onChange={() => setIsPrivate(!isPrivate)}
 							/>
-							<div className="CreateChannelForm-switch">
+							<div className="CreateChannelForm-switch" id={theme}>
 								<div></div>
 							</div>
 						</div>
 					</div>
-					<p className="CreateChannelForm-private-text">
+					<p className="CreateChannelForm-private-text" id={theme}>
 						Only selected members and roles will be able to view
 						this channel.
 					</p>
-					<div className="CreateChannelForm-buttons-container">
+					<div className="CreateChannelForm-buttons-container" id={theme}>
 						<button
+							id={theme}
 							className="CreateChannelForm-button-delete"
 							disabled={channels.length < 2}
 						>
@@ -181,6 +184,7 @@ export default function EditChannelForm({
 						<button
 							type="submit"
 							className="CreateChannelForm-button-create"
+							id={theme}
 						>
 							Edit Channel
 						</button>

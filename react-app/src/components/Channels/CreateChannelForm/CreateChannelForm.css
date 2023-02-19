@@ -1,62 +1,159 @@
 .CreateChannelForm-container {
-    width: 460px;
-    color: #ffffff;
-    /* padding: 0px 16px; */
-    box-sizing: border-box;
+  width: 460px;
+  /* padding: 0px 16px; */
+  box-sizing: border-box;
+}
+
+#dark.CreateChannelForm-container {
+  color: #ffffff;
+  background-color: #35393e;
+}
+
+#light.CreateChannelForm-container {
+  color: #060607;
+  background-color: #ffffff;
+}
+
+#purple.CreateChannelForm-container {
+  color: #5F50A9;
+  background-color: #dfdcee;
 }
 
 .CreateChannelForm-header {
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.fa-xmark {
-    color: #b9bbbe;
+#dark.fa-xmark,
+#light.fa-xmark {
+  color: #b9bbbe;
+  transition: ease 0.2s;
+}
+
+#dark.fa-xmark:hover {
+  color: #060707;
+}
+
+#light.fa-xmark {
+  color: #acadb0;
+  transition: ease 0.2s;
+}
+
+#light.fa-xmark:hover {
+  color: #060707;
+}
+
+#purple.fa-xmark {
+  color: #5F50A9;
+}
+
+#purple.fa-xmark:hover {
+  color: #bfb9dd;
 }
 
 .CreateChannelForm-title {
-    font-size: 20px;
+  font-size: 20px;
 }
 
-.CreateChannelForm-subtext, .CreateChannelForm-label {
-    font-size: 12px;
-    color: #b9bbbe;
+#dark.CreateChannelForm-title {
+  color: #ffffff;
+}
+
+#light.CreateChannelForm-title {
+  color: #060607;
+}
+
+.CreateChannelForm-subtext,
+.CreateChannelForm-label {
+  font-size: 12px;
+  color: #b9bbbe;
+}
+
+#dark.CreateChannelForm-subtext,
+#dark.CreateChannelForm-label {
+  font-size: 12px;
+  color: #b9bbbe;
+}
+
+#light.CreateChannelForm-subtext,
+#light.CreateChannelForm-label {
+  font-size: 12px;
+  color: #4e5058;
+}
+
+#purple.CreateChannelForm-subtext,
+#purple.CreateChannelForm-label {
+  color: #7f73ba;
 }
 
 .CreateChannelForm-label {
-    font-weight: 600;
-    margin-bottom: 8px;
-    text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
 .CreateChannelForm-group-channel-name {
-    width: calc(100% - 32px);
-    display: flex;
-    flex-direction: column;
-    padding: 0px 16px;
+  width: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  padding: 0px 16px;
 }
 
 .CreateChannelForm-group-channel-input {
-    display: flex;
-    width: calc(100% - 16px);
-    border: none;
-    border-radius: 3px;
-    color: #ffffff;
-    background-color: #202225;
-    padding: 10px 10px 10px 8px;
-    align-items: center;
+  display: flex;
+  width: calc(100% - 16px);
+  border: none;
+  border-radius: 3px;
+  /* color: #ffffff; */
+  padding: 8px 10px 8px 8px;
+  align-items: center;
+}
+
+#dark.CreateChannelForm-group-channel-input,
+#dark.CreateChannelForm-group-channel-input > input {
+  background-color: #202225;
+  color: white;
+}
+
+#light.CreateChannelForm-group-channel-input,
+#light#channel-name input {
+  background-color: #e9eaed;
+}
+
+#purple.CreateChannelForm-group-channel-input,
+#purple#channel-name input {
+  background-color: #e9eaed;
 }
 
 .CreateChannelForm-group-channel-input > input {
-    width: 100%;
-    background-color: #202225;
-    border: 0;
-    color: #ffffff;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+}
+
+#dark.CreateChannelForm-group-channel-input > input::placeholder {
+  color: #7c7f82;
+}
+
+#light.CreateChannelForm-group-channel-input > input::placeholder {
+  color: #060607;
+}
+
+#purple.CreateChannelForm-group-channel-input > input::placeholder {
+  color: #bfb9dd;
 }
 
 .hashtag {
-    margin-right: 8px;
+  margin-right: 8px;
+}
+
+#dark.hashtag {
+  color: #ffffff;
+}
+
+#light.hashtag {
+  color: #060607;
 }
 
 /* .CreateChannelForm-group-channel-name > label::placeholder {
@@ -65,61 +162,84 @@
     color: #7c7f82;
 } */
 
+#dark.CreateChannelForm-group-private-span {
+  color: #060607;
+}
+
+#light.CreateChannelForm-group-private-span {
+  color: #060607;
+}
+
+#purple.CreateChannelForm-group-private-span {
+  color: #5F50A9;
+}
+
 .fa-lock {
-    color: #b9bbbe;
-    padding-right: 8px;
+  padding-right: 8px;
+}
+
+#dark.fa-lock {
+  color: #b9bbbe;
+}
+
+#light.fa-lock {
+  color: #777778;
+}
+
+#purple.fa-lock {
+  color: #5F50A9;
 }
 
 .CreateChannelForm-group-private {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 18px;
-    padding: 0px 16px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 0px 16px;
 }
 
 .CreateChannelForm-private-switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 24px;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
 }
 
 .CreateChannelForm-private-switch input {
-    display: none;
+  display: none;
 }
 
 .CreateChannelForm-private-slider-round {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 30px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 30px;
 }
 
 .CreateChannelForm-private-slider-round:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%;
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
 input:checked + .CreateChannelForm-private-slider-round {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 input:focus + .CreateChannelForm-private-slider-round {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .CreateChannelForm-private-slider-round:before {
@@ -133,112 +253,164 @@ input:checked + .CreateChannelForm-private-slider-round:before {
 }
 
 .slider.round:before {
-  border-radius: 50%;}
+  border-radius: 50%;
+}
 
 .CreateChannelForm-private-text {
-    color: #b9bbbe;
-    font-size: 12px;
-    padding: 0px 16px;
+  color: #b9bbbe;
+  font-size: 12px;
+  padding: 0px 16px;
+}
+
+#dark.CreateChannelForm-private-text {
+  color: #b9bbbe;
+}
+
+#light.CreateChannelForm-private-text {
+  color: #4e5058;
+}
+
+#purple.CreateChannelForm-private-text {
+  color: #4e5058;
 }
 
 .CreateChannelForm-buttons-container {
-    position: relative;
-    bottom: 0;
-    display: flex;
-    justify-content: right;
-    background-color: #2f3136;
-    padding: 16px;
-    margin-top: 16px;
+  position: relative;
+  bottom: 0;
+  display: flex;
+  justify-content: right;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+#dark.CreateChannelForm-buttons-container {
+  background-color: #2f3136;
+}
+
+#light.CreateChannelForm-buttons-container {
+  background-color: #f3f4f5;
+}
+
+#purple.CreateChannelForm-buttons-container {
+  background-color: #bfb9dd;
 }
 
 .CreateChannelForm-button-cancel {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 13px;
-    border: 0;
-    background-color: transparent;
-    padding: 11px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 0;
+  background-color: transparent;
+  padding: 11px 16px;
+}
+
+#dark.CreateChannelForm-button-cancel {
+  color: #ffffff;
+  color: #82858f;
+}
+
+#light.CreateChannelForm-button-cancel {
+  color: #82858f;
+}
+
+#purple.CreateChannelForm-button-cancel {
+  color: #ffffff;
 }
 
 .CreateChannelForm-button-create {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 13px;
-    border: 0;
-    background-color: #5865f2;
-    padding: 11px 16px;
-    border-radius: 4px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13px;
+  border: 0;
+  background-color: #5865f2;
+  padding: 11px 16px;
+  border-radius: 4px;
+}
+
+#purple.CreateChannelForm-button-create {
+  background-color: #7f73ba;
+}
+
+.CreateChannelForm-button-create:hover {
+  background-color: #3c4beb;
+}
+
+#purple.CreateChannelForm-button-create:hover {
+  background-color: #4c4087;
 }
 
 .CreateChannelForm-button-delete {
-    color: red;
-    font-weight: 600;
-    font-size: 13px;
-    border: 0;
-    background-color: transparent;
-    padding: 11px 16px;
-    border-radius: 4px;
+  color: red;
+  font-weight: 600;
+  font-size: 13px;
+  border: 0;
+  background-color: transparent;
+  padding: 11px 16px;
+  border-radius: 4px;
 }
 
 .CreateChannelForm-checkbox-container {
-    display: grid;
-    gap: 8px;
-    grid-template-columns: max-content min-content;
-    grid-template-rows: max-content;
-    align-items: center;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: max-content min-content;
+  grid-template-rows: max-content;
+  align-items: center;
 }
 
 .CreateChannelForm-checkbox-container > input,
 .CreateChannelForm-checkbox-container > div {
-    grid-column: 2/3;
-    grid-row: 1/2;
+  grid-column: 2/3;
+  grid-row: 1/2;
 }
 
 .CreateChannelForm-checkbox {
-    width: 100%;
-    height: 100%;
-    appearance: none;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  margin: 0;
+  padding: 0;
 }
 
 .CreateChannelForm-switch {
-    position: relative;
-    background: #70747a;
-    transition: 0.3s cubic-bezier(0.83, 0, 0.17, 1);
-    font-size: 1em;
-    width: 2em;
-    height: 1em;
-    padding: 5px;
-    border-radius: 9999px;
-    pointer-events: none;
+  position: relative;
+  background: #70747a;
+  transition: 0.3s cubic-bezier(0.83, 0, 0.17, 1);
+  font-size: 1em;
+  width: 2em;
+  height: 1em;
+  padding: 5px;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+#purple.CreateChannelForm-switch {
+  background-color: #7f73ba;
 }
 
 .CreateChannelForm-checkbox:checked ~ .CreateChannelForm-switch {
-    background-color: #44b27e;
+  background-color: #44b27e;
 }
 
 .CreateChannelForm-checkbox ~ .CreateChannelForm-switch > div {
-    position: relative;
-    left: 0;
-    height: 0.65em;
-    width: 0.65em;
-    background: white;
-    pointer-events: none;
-    transition: inherit;
-    border-radius: 9999px;
+  position: relative;
+  left: 0;
+  height: 0.65em;
+  width: 0.65em;
+  background: white;
+  pointer-events: none;
+  transition: inherit;
+  border-radius: 9999px;
 
-    display: grid;
-    justify-items: stretch;
-    align-items: stretch;
-    padding: 0.2em;
+  display: grid;
+  justify-items: stretch;
+  align-items: stretch;
+  padding: 0.2em;
 }
 
 .CreateChannelForm-checkbox:checked ~ .CreateChannelForm-switch > div {
-    left: calc(100%);
-    transform: translateX(-100%);
-    background: white;
-    display: grid;
+  left: calc(100%);
+  transform: translateX(-100%);
+  background: white;
+  display: grid;
 }
 
 .CreateChannelForm-checkbox ~ .CreateChannelForm-switch > div:before,

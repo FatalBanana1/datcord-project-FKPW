@@ -1,84 +1,122 @@
 .server-members-div {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(48, 49, 54);
-  height: calc(100% - 46px);
-  /* height: 100%; */
-  width: 230px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(48, 49, 54);
+	height: calc(100% - 46px);
+	/* height: 100%; */
+	width: 230px;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .ServerMember-sidebar {
-  width: 240px;
-  height: 100vh;
-  box-sizing: border-box;
-  background-color: #36393f;
-  display: flex;
-  flex-direction: column;
-  user-select: none;
+	width: 240px;
+	height: 100vh;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	user-select: none;
+}
+
+#dark.ServerMember-sidebar {
+	background-color: #36393f;
+}
+
+#light.ServerMember-sidebar {
+	background-color: #ffffff;
+}
+
+#purple.ServerMember-sidebar {
+	background-color: #7f73ba;
 }
 
 .ServerMember-content {
-  margin-top: 1px;
-  display: flex;
-  flex-direction: column;
-  background-color: #303136;
-  height: calc(100% - 48px);
-  width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
+	margin-top: 1px;
+	display: flex;
+	flex-direction: column;
+	height: calc(100% - 48px);
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#dark.ServerMember-content {
+	background-color: #303136;
+}
+
+#light.ServerMember-content {
+	background-color: #eeeff1;
+}
+
+#purple.ServerMember-content {
+	background-color: #7f73ba;
 }
 
 .join-server-div {
-  background-color: rgb(60, 68, 165);
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 0;
+	background-color: rgb(60, 68, 165);
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 0;
 }
 
 .join-text {
-  color: white;
-  font-size: 12px;
-  padding-right: 5px;
+	color: white;
+	font-size: 12px;
+	padding-right: 5px;
 }
 
 .join-server-button {
-  background-color: rgb(60, 68, 165);
-  color: white;
-  border: 1.5px solid white;
-  font-size: 12px;
-  padding: 3px 7px;
-  margin: 3px;
-  border-radius: 3px;
-  overflow: hidden;
+	background-color: rgb(60, 68, 165);
+	color: white;
+	border: 1.5px solid white;
+	font-size: 12px;
+	padding: 3px 7px;
+	margin: 3px;
+	border-radius: 3px;
+	overflow: hidden;
 }
 
 .server-members-header {
-  width: 100%;
-  height: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  /* margin-top: 5px; */
-  box-sizing: border-box;
-  border-bottom: 1px;
-  color: #ffffff;
-  box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
-    0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
+	width: 100%;
+	height: 48px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 16px;
+	/* margin-top: 5px; */
+	box-sizing: border-box;
+	border-bottom: 1px;
+	color: #ffffff;
+	box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
+		0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
 }
 
 .total-members {
-  font-size: 12px;
-  text-transform: uppercase;
-  color: rgba(211, 212, 214, 0.8);
-  margin-top: 20px;
-  margin-left: 10px;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin-top: 20px;
+	margin-left: 10px;
+
+	margin-top: 0px;
+	padding-top: 0px;
+	visibility: hidden;
 }
+
+#dark.total-members {
+	color: rgba(211, 212, 214, 0.8);
+}
+
+#light.total-members {
+	color: #5c5e66;
+}
+
+#purple.total-members {
+	color: #fff;
+}
+
 
 /* h2 {
 	width: 230px;
@@ -105,129 +143,173 @@
 } */
 
 .nicknames {
-  font-size: 15px;
+	font-size: 15px;
 }
 
 .individual-person button {
-  /* font-size: 15px; */
-  color: rgb(25, 188, 155);
-  border: none;
+	/* font-size: 15px; */
+	color: rgb(25, 188, 155);
+	border: none;
 }
 
-#owner.individual-person button {
-  /* color: rgb(103, 223, 147); */
-  color: rgb(25, 188, 155);
+#dark #owner.individual-person button {
+	/* color: rgb(103, 223, 147); */
+	color: rgb(25, 188, 155);
 }
 
-#admin.individual-person button {
-  /* color: rgb(103, 223, 147); */
-  color: rgb(25, 188, 155);
+#dark #admin.individual-person button {
+	/* color: rgb(103, 223, 147); */
+	color: rgb(25, 188, 155);
 }
 
-#member.individual-person button {
-  color: rgb(196, 122, 228);
+#light #owner.individual-person button {
+	color: #49c193;
 }
 
-#pending.individual-person button {
-  color: white;
+#light #admin.individual-person button {
+	color: #49c193;
 }
 
-#owner.individual-person button:hover {
-  /* color: rgb(103, 223, 147); */
-  color: rgb(25, 188, 155);
+#purple #owner.individual-person button,
+#purple #admin.individual-person button {
+	color: rgb(42, 129, 95);
+}
+
+#dark #member.individual-person button {
+	color: rgb(196, 122, 228);
+}
+
+#light #member.individual-person button {
+	color: #9b59b6;
+}
+
+#purple #member.individual-person button {
+	color: #bfb9dd;
+}
+
+#dark #pending.individual-person button {
+	color: white;
+}
+
+#light #pending.individual-person button {
+	color: #5c5e66;
+}
+
+#purple #pending.individual-person button {
+	color: #5c5e66;
+}
+
+/* #owner.individual-person button:hover {
   background-color: #3f434a;
 }
 
 #admin.individual-person button:hover {
-  /* color: rgb(103, 223, 147); */
-  color: rgb(25, 188, 155);
   background-color: #3f434a;
 }
 
 #member.individual-person button:hover {
-  color: rgb(196, 122, 228);
   background-color: #3f434a;
 }
 
 #pending.individual-person button:hover {
-  color: white;
   background-color: #3f434a;
-}
+} */
 
-.individual-person button:hover {
+/* #dddee2 */
+/* .individual-person button:hover {
   background-color: #3f434a;
   filter: brightness(1);
   cursor: pointer;
-}
+} */
 
 .visible {
-  position: absolute;
-  right: 100px;
+	position: absolute;
+	right: 100px;
 }
 
 .hidden {
-  display: none;
+	display: none;
 }
 
 .section {
-  padding: 5px 0;
+	padding: 5px 0;
 }
 
 .individual-person {
-  /* padding: 5px 0; */
-  padding: 5px 10px;
-  margin-left: 2px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-radius: 5px;
-  width: 205px;
+	/* padding: 5px 0; */
+	padding: 5px 10px;
+	margin-left: 2px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-radius: 5px;
+	width: 205px;
 }
 
-.individual-person:hover {
-  background-color: #3f434a;
-  filter: brightness(1);
-  cursor: pointer;
+#dark .individual-person:hover {
+	background-color: #3f434a;
+	filter: brightness(1);
+}
+
+#light .individual-person:hover {
+	background-color: #dddee2;
+	filter: brightness(1);
+}
+
+#purple .individual-person:hover {
+	background-color: #4c4087;
+	filter: brightness(1);
 }
 
 .member-img {
-  border-radius: 50%;
-  height: 35px;
-  width: 35px;
-  object-fit: cover;
+	border-radius: 50%;
+	height: 35px;
+	width: 35px;
+	object-fit: cover;
 }
 
 .pending {
-  filter: brightness(0.5);
+	filter: brightness(0.5);
 }
 
 .server-owner-crown {
-  height: 12px;
-  padding-top: 2px;
-  padding-left: 5px;
+	height: 12px;
+	padding-top: 2px;
+	padding-left: 5px;
 }
 
 .owner-div.section,
 .admin-div.section,
 .regular-members-div.section,
 .pending-div.section {
-  padding-left: 5px;
-  width: calc(100% - 10px);
+	padding-left: 5px;
+	width: calc(100% - 10px);
 }
 
 .ServerMembers-headers {
-  /* width: 100%; */
-  margin-left: 12px;
-  margin-bottom: 3px;
-  /* padding-left: 5px;
+	/* width: 100%; */
+	margin-left: 12px;
+	margin-bottom: 3px;
+	/* padding-left: 5px;
   padding-bottom: 3px; */
-  font-weight: normal;
-  text-transform: uppercase;
-  font-size: 11px;
-  color: rgb(211, 212, 214, 0.8);
+	font-weight: normal;
+	text-transform: uppercase;
+	font-size: 11px;
+}
+
+#dark.ServerMembers-headers {
+	color: rgb(211, 212, 214, 0.8);
+}
+
+#light.ServerMembers-headers {
+	color: #5c5e66;
+}
+
+#purple.ServerMembers-headers {
+	color: #fff;
 }
 
 h2 {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }

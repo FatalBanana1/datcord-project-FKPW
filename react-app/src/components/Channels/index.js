@@ -12,11 +12,15 @@ import { Modal, useModal } from "../../context/Modal";
 import EditChannelForm from "./EditDeleteChannelModal";
 import EditServer from "../Servers/EditServer";
 import DeleteServer from "../Servers/DeleteServer";
-import { thunkGetServerMembers } from "../../store/serverMembers";
-import { logout } from "../../store/session";
+import {
+	thunkDeleteServerMember,
+	thunkGetServerMembers,
+} from "../../store/serverMembers";
+import { logout, thunkSetTheme } from "../../store/session";
 import { thunkReadUserServers } from "../../store/servers";
+import UserLanding from "../UserLanding";
 
-export default function Channels() {
+export default function Channels({ theme }) {
 	const { serverId, channelId } = useParams();
 	const history = useHistory();
 	//   console.log("Channels - serverId, channelId:", serverId, channelId);
@@ -42,12 +46,26 @@ export default function Channels() {
 	)[0];
 	// console.log("channels - serverMembers", serverMember);
 	const userSettingsRef = useRef();
+	const userThemeRef = useRef();
 	const [showMenu, setShowMenu] = useState(false);
 	const [showUserMenu, setShowUserMenu] = useState(false);
+	const [showThemeMenu, setShowThemeMenu] = useState(false);
+	const [selectTheme, setSelectTheme] = useState(
+		user.theme ? user.theme : "dark"
+	);
 
 	const openUserMenu = () => {
 		if (showUserMenu) return;
 		setShowUserMenu(true);
+	};
+
+	const openThemeMenu = () => {
+		if (showThemeMenu) return;
+		setShowThemeMenu(true);
+	};
+
+	const handleChangeTheme = (theme) => {
+		return dispatch(thunkSetTheme(user.id, theme)).then();
 	};
 
 	useEffect(() => {
@@ -65,6 +83,24 @@ export default function Channels() {
 
 		return () => document.removeEventListener("click", closeMenu);
 	}, [showUserMenu]);
+
+	useEffect(() => {
+		if (!showThemeMenu) return;
+
+		const closeMenu = (e) => {
+			if (userThemeRef.current) {
+				if (!userThemeRef.current.contains(e.target)) {
+					setShowThemeMenu(false);
+				}
+			}
+		};
+
+		document.addEventListener("click", closeMenu);
+
+		return () => document.removeEventListener("click", closeMenu);
+	}, [showThemeMenu]);
+
+	useEffect(() => {});
 
 	let serverMemberRole;
 
@@ -140,6 +176,21 @@ export default function Channels() {
 		permissions = false;
 	}
 
+	// LEAVE SERVER HANDLER AND CONDITIONAL
+
+	const leaveHandler = () => {
+		let permission = true;
+
+		dispatch(thunkDeleteServerMember(serverId, serverMember.id, permission))
+			.then(() => dispatch(thunkReadUserServers()))
+			.then(() => history.push("/gotMilk"));
+	};
+
+
+
+
+	//
+
 	if (channels.length > 0) {
 		for (let i = 0; i < channels.length; i++) {
 			const channel = channels[i];
@@ -156,9 +207,15 @@ export default function Channels() {
 		if (names.length > 18) {
 			return `${names.substring(0, 18)}...`;
 		}
-
 		return names;
 	};
+	const truncateNames2 = (names) => {
+		if (names.length > 9) {
+			return `${names.substring(0, 9)}...`;
+		}
+		return names;
+	};
+
 
 	const closeMenu = () => setShowUserMenu(false);
 
@@ -173,27 +230,43 @@ export default function Channels() {
 	const userSettingsClass =
 		"UserLanding-Sidebar-user-dropdown" + (showUserMenu ? "" : " hidden");
 
+	const userThemeClass =
+		"UserLanding-Sidebar-yingyang-dropdown" +
+		(showThemeMenu ? "" : " hidden");
+
 	const categoriesMap = Object.keys(categories).map((category, idx) => (
 		<div className="UserLanding-Sidebar-category-container" key={idx}>
-			<div className="UserLanding-sidebar-channel-category-container">
+			<div
+				className="UserLanding-sidebar-channel-category-container"
+				id={theme}
+			>
 				<i className="fa-solid fa-angle-down"></i>
 				<span className="UserLanding-sidebar-channel-category-name">
 					{truncateNames(category)}
 				</span>
-				{permissions && (
-					<OpenModalButton
-						buttonText="Create-Channel"
-						onButtonClick={closeMenu}
-						modalComponent={
-							<CreateChannelForm
-								categoryName={category}
-								serverId={serverId}
-								role={serverMemberRole}
-								isLoaded={isLoaded}
+				<div className="channels-tooltip-container">
+					{permissions && (
+						<div className="channels-tooltip">
+							<OpenModalButton
+								buttonText="Create-Channel"
+								theme={theme}
+								onButtonClick={closeMenu}
+								modalComponent={
+									<CreateChannelForm
+										categoryName={category}
+										serverId={serverId}
+										role={serverMemberRole}
+										isLoaded={isLoaded}
+										theme={theme}
+									/>
+								}
 							/>
-						}
-					/>
-				)}
+							<span className="channels-tooltiptext">
+								Create Channel
+							</span>
+						</div>
+					)}
+				</div>
 			</div>
 			<div className="UserLanding-sidebar-channel-list">
 				{/* map out channels here */}
@@ -204,31 +277,41 @@ export default function Channels() {
 						<NavLink
 							to={`/channels/${serverId}/${channel.id}`}
 							className="UserLanding-sidebar-channel-name"
+							id={theme}
 							key={channel.id}
 						>
-							<div className="UserLanding-sidebar-channel-name-label">
+							<div
+								className="UserLanding-sidebar-channel-name-label"
+								id={theme}
+							>
 								<span className="hash">#</span>{" "}
 								{channel.name && truncateNames(channel.name)}
 							</div>
 							{permissions && (
-								<div className="UserLanding-sidebar-channel-buttons">
-									<i className="fa-solid fa-user-plus"></i>
-									{/* <NavLink to={`/channels/${serverId}/${channel.id}/edit`}>
-                                        <i className="fa-solid fa-gear" onClick={() => setShowEdit(true)}></i>
-                                    </NavLink> */}
-									<OpenModalButton
-										buttonText="Edit-Channel"
-										onButtonClick={closeMenu}
-										modalComponent={
-											<EditChannelForm
-												categoryName={category}
-												prevName={channel.name}
-												serverId={serverId}
-												channelId={channel.id}
-												priv={channel.is_private}
-											/>
-										}
-									/>
+								<div
+									className="UserLanding-sidebar-channel-buttons"
+									id={theme}
+								>
+									<div className="edit-channel-tooltip">
+										<OpenModalButton
+											buttonText="Edit-Channel"
+											onButtonClick={closeMenu}
+											modalComponent={
+												<EditChannelForm
+													categoryName={category}
+													prevName={channel.name}
+													serverId={serverId}
+													channelId={channel.id}
+													priv={channel.is_private}
+													theme={theme}
+												/>
+											}
+											theme={theme}
+										/>
+										<span className="edit-channel-tooltiptext">
+											Edit Channel
+										</span>
+									</div>
 								</div>
 							)}
 						</NavLink>
@@ -237,136 +320,184 @@ export default function Channels() {
 		</div>
 	));
 
-	// console.log("CATEGORIES", categories)
-
-	// if (!channels.length || !server) {
-	// 	return (
-	// 		<div className="UserLanding-sidebar">
-	// 			<div className="UserLanding-sidebar-header">
-	// 				{/* <p>{server.name}</p> */}
-	// 				<i className="fa-solid fa-angle-down big-angle-down"></i>
-	// 			</div>
-	// 			<div className="UserLanding-sidebar-channel-content">
-	// 				<div className="UserLanding-sidebar-channel-user-info">
-	// 					<div className="UserLanding-sidebar-channel-user-container">
-	// 						<div className="UserLanding-sidebar-channel-user-icons">
-	// 							<img
-	// 								src={logo}
-	// 								className="UserLanding-sidebar-channel-user-icon"
-	// 								alt="User profile image"
-	// 							/>
-	// 						</div>
-	// 						<div className="UserLanding-sidebar-channel-user-name">
-	// 							{user && user.username}
-	// 						</div>
-	// 					</div>
-	// 					<div className="UserLanding-sidebar-channel-user-actions">
-	// 						<i className="fa-solid fa-microphone"></i>
-	// 						<i className="fa-solid fa-headphones"></i>
-	// 						<i className="fa-solid fa-gear user-gear"></i>
-	// 					</div>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
-
 	if (isLoaded && server2) {
 		return (
-			<div className="UserLanding-sidebar">
-				<div className="UserLanding-sidebar-header">
-					<p>{server2.name}</p>
-					{isOwner && (
-						<>
-							<div
-								className="server-dropdown-button"
-								onClick={openServerMenu}
-							>
-								<i className="fa-solid fa-angle-down big-angle-down"></i>
-							</div>
-							<div className={menuClassName} ref={menuRef}>
-								<div className="dropdown-wrapper">
-									<div className="server-dropdown-edit">
-										{/* <span>Edit Server</span>
+			theme && (
+				<div className="UserLanding-sidebar" id={theme}>
+					<div className="UserLanding-sidebar-header" id={theme}>
+						<p>{server2.name}</p>
+						{isOwner && (
+							<>
+								<div
+									className="server-dropdown-button"
+									onClick={openServerMenu}
+									id={theme}
+								>
+									<i className="fa-solid fa-angle-down big-angle-down"></i>
+								</div>
+								<div className={menuClassName} ref={menuRef}>
+									<div className="dropdown-wrapper">
+										<div className="server-dropdown-edit">
+											{/* <span>Edit Server</span>
                     <span>
                       <i className="fa-solid fa-pencil"></i>
                     </span> */}
-										<OpenModalButton
-											buttonText="Edit-Server"
-											modalComponent={
-												<EditServer server={server2} />
-											}
-										/>
-									</div>
-									<div className="server-dropdown-delete">
-										{/* <span>Delete Server</span>
+											<OpenModalButton
+												buttonText="Edit-Server"
+												modalComponent={
+													<EditServer
+														server={server2}
+														theme={theme}
+													/>
+												}
+											/>
+										</div>
+										<div className="server-dropdown-delete">
+											{/* <span>Delete Server</span>
                     <span>
                       <i className="fa-solid fa-trash"></i>
                     </span> */}
-										<OpenModalButton
-											buttonText="Delete-Server"
-											modalComponent={
-												<DeleteServer
-													server={server2}
-												/>
-											}
-										/>
+											<OpenModalButton
+												buttonText="Delete-Server"
+												modalComponent={
+													<DeleteServer
+														server={server2}
+														theme={theme}
+													/>
+												}
+											/>
+										</div>
 									</div>
 								</div>
-							</div>
-						</>
-					)}
-				</div>
-				<div className="UserLanding-sidebar-channel-content">
-					{channels.length > 0 && categoriesMap.length ? (
-						categoriesMap
-					) : (
-						<div className="UserLanding-sidebar-channel-category-container"></div>
-					)}
-
-					<div className="UserLanding-sidebar-channel-user-info">
-						<div className="UserLanding-sidebar-channel-user-container">
-							<div className="UserLanding-sidebar-channel-user-icons">
-								<img
-									src={user && user.display_pic}
-									className="UserLanding-sidebar-channel-user-icon"
-									alt="User profile image"
-								/>
-							</div>
-							<div className="UserLanding-sidebar-channel-user-name">
-								{user && user.username}
-							</div>
-						</div>
-						<div className="UserLanding-sidebar-channel-user-actions">
-							<i className="fa-solid fa-microphone"></i>
-							<i className="fa-solid fa-headphones"></i>
-							<i
-								className="fa-solid fa-gear user-gear"
-								onClick={openUserMenu}
-							></i>
+							</>
+						)}
+					</div>
+					<div className="UserLanding-sidebar-channel-content">
+						{channels.length > 0 && categoriesMap.length ? (
+							categoriesMap
+						) : (
 							<div
-								className={userSettingsClass}
-								ref={userSettingsRef}
-							>
-								<div className="dropdown-wrapper">
-									<button
-										className="UserLanding-sidebar-channel-user-home"
-										onClick={() => history.push("/")}
-									>
-										Home
-									</button>
-									<button
-										className="UserLanding-sidebar-channel-user-logout"
-										onClick={goLogout}
-									>
-										Logout
-									</button>
+								className="UserLanding-sidebar-channel-category-container"
+								id={theme}
+							></div>
+						)}
+
+						<div
+							className="UserLanding-sidebar-channel-user-info"
+							id={theme}
+						>
+							<div className="UserLanding-sidebar-channel-user-container">
+								<div className="UserLanding-sidebar-channel-user-icons">
+									<img
+										src={user && user.display_pic}
+										className="UserLanding-sidebar-channel-user-icon"
+										alt="User profile image"
+									/>
+								</div>
+								<div
+									className="UserLanding-sidebar-channel-user-name"
+									id={theme}
+								>
+									{user && truncateNames2(user.username)}
+								</div>
+							</div>
+							<div className="UserLanding-sidebar-channel-user-actions" id={theme}>
+								{!isOwner && (
+								<div
+									className="themes-tooltip red"
+									onClick={leaveHandler}
+								>
+									<i className="fa-solid fa-person-walking-arrow-right"></i>
+									<i className="fa-solid fa-door-open"></i>
+									<span className="themes-tooltiptext">
+										Leave Server
+									</span>
+								</div>
+								)}
+
+								{user.mootro === "mootro" ? (
+									<div className="themes-tooltip">
+										<i
+											className="fa-solid fa-yin-yang user-ying-yang"
+											onClick={openThemeMenu}
+										></i>
+										<span className="themes-tooltiptext">
+											Change Theme
+										</span>
+									</div>
+								) : (
+									<div className="themes-tooltip">
+										<i className="fa-solid fa-yin-yang user-ying-yang"></i>
+										<span className="themes-tooltiptext">
+											Mootro Only!!
+										</span>
+									</div>
+								)}
+
+								<div
+									className={userThemeClass}
+									ref={userThemeRef}
+								>
+									<div className="dropdown-wrapper">
+										<button
+											className="UserLanding-sidebar-yingyang"
+											onClick={() =>
+												handleChangeTheme("dark")
+											}
+										>
+											Dark
+										</button>
+										<button
+											className="UserLanding-sidebar-yingyang"
+											onClick={() =>
+												handleChangeTheme("light")
+											}
+										>
+											Light
+										</button>
+										<button
+											className="UserLanding-sidebar-yingyang"
+											onClick={() =>
+												handleChangeTheme("purple")
+											}
+										>
+											Purplicious
+										</button>
+									</div>
+								</div>
+								<div className="settings-tooltip">
+									<i
+										className="fa-solid fa-gear user-gear"
+										onClick={openUserMenu}
+									></i>
+									<span className="settings-tooltiptext">
+										User Actions
+									</span>
+								</div>
+								<div
+									className={userSettingsClass}
+									ref={userSettingsRef}
+								>
+									<div className="dropdown-wrapper">
+										<button
+											className="UserLanding-sidebar-channel-user-home"
+											onClick={() => history.push("/")}
+										>
+											Home
+										</button>
+										<button
+											className="UserLanding-sidebar-channel-user-logout"
+											onClick={goLogout}
+										>
+											Logout
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			)
 		);
-	} else return <div>Loading...</div>;
+	} else return null;
 }

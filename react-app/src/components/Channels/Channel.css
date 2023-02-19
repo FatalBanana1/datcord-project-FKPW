@@ -1,108 +1,234 @@
 .UserLanding-sidebar-channel-name {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 34px;
-  color: #96989d;
-  cursor: pointer;
-  padding: 7px;
-  box-sizing: border-box;
-  font-size: 16px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 34px;
+	color: #96989d;
+	cursor: pointer;
+	padding: 7px;
+	box-sizing: border-box;
+	font-size: 16px;
+	align-items: center;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 
 .server-dropdown-button {
-  border: none;
-  background-color: transparent;
-  color: white;
+	border: none;
+	background-color: transparent;
+}
+
+#dark.server-dropdown-button {
+	color: white;
+}
+
+#light.server-dropdown-button {
+	color: #060607;
+}
+
+#purple.server-dropdown-button {
+	color: #393065;
 }
 
 .hidden {
-  display: none;
+	display: none;
 }
 
 .server-menu-dropdown {
-  z-index: 1;
-  background-color: black;
-  position: absolute;
-  top: 55px;
-  left: 82px;
-  box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
-  border-radius: 3px;
-  width: 200px;
-  padding: 10px;
+	z-index: 1;
+	background-color: black;
+	position: absolute;
+	top: 55px;
+	left: 82px;
+	box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
+	border-radius: 3px;
+	width: 200px;
+	padding: 10px;
 }
 
 .server-dropdown-button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .dropdown-wrapper {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .server-dropdown-edit {
-  font-size: 14px;
-  color: #b9bbbe;
-  margin-bottom: 10px;
+	font-size: 14px;
+	color: #b9bbbe;
+	margin-bottom: 10px;
 }
 
 .server-dropdown-edit:hover {
-  color: white;
+	color: white;
 }
 
 .OpenModaldiv-edit-button {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .OpenModaldiv-delete-button {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .OpenModaldiv-edit-button:hover,
 .OpenModaldiv-delete-button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .server-dropdown-delete {
-  font-size: 14px;
-  color: rgb(255, 107, 107);
+	font-size: 14px;
+	color: rgb(255, 107, 107);
 }
 
 .server-dropdown-delete:hover {
-  color: red;
+	color: red;
 }
 
 .UserLanding-Sidebar-user-dropdown {
-  z-index: 1;
-  background-color: black;
-  position: absolute;
-  top: -60px;
-  left: 158px;
-  box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
-  border-radius: 3px;
-  width: 120px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 14px;
-  color: #b9bbbe;
+	z-index: 1;
+	background-color: black;
+	position: absolute;
+	top: -60px;
+	left: 158px;
+	box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
+	border-radius: 3px;
+	width: 120px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	font-size: 14px;
+	color: #b9bbbe;
+}
+
+.UserLanding-Sidebar-yingyang-dropdown {
+	z-index: 1;
+	background-color: black;
+	position: absolute;
+	top: -95px;
+	left: 125px;
+	box-shadow: 0 2px 16px rgb(0 0 0 / 12%);
+	border-radius: 3px;
+	width: 120px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	font-size: 14px;
+	color: #b9bbbe;
 }
 
 .UserLanding-Sidebar-user-dropdown-user-logout {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 a.UserLanding-sidebar-channel-user-home {
-  text-decoration: none;
-  font-size: 14px;
-  color: #b9bbbe;
-  cursor: pointer;
+	text-decoration: none;
+	font-size: 14px;
+	color: #b9bbbe;
+	cursor: pointer;
 }
 
 .hidden {
-  display: none;
+	display: none;
 }
+
+/* tooltip */
+.edit-channel-tooltip {
+	position: absolute;
+	display: inline-block;
+}
+
+.edit-channel-tooltip .edit-channel-tooltiptext {
+	visibility: hidden;
+	width: max-content;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px;
+	font-size: 13px;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 999;
+	bottom: 155%;
+	left: 50%;
+	margin-left: -46px;
+}
+
+.edit-channel-tooltip:hover .edit-channel-tooltiptext {
+	visibility: visible;
+}
+
+.edit-channel-tooltip .edit-channel-tooltiptext::after {
+	content: " ";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: black transparent transparent transparent;
+}
+
+.channels-tooltip-container {
+	padding-bottom: 18px;
+	padding-right: 42.5px;
+	text-transform: none;
+}
+
+.channels-tooltip {
+	position: absolute;
+	display: inline-block;
+}
+
+.channels-tooltip .channels-tooltiptext {
+	visibility: hidden;
+	width: max-content;
+	background-color: #18191c;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px;
+	font-size: 13px;
+
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -52px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.channels-tooltip .channels-tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: black transparent transparent transparent;
+}
+
+.channels-tooltip:hover .channels-tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+.red {
+	color: rgb(255, 106, 106);
+	margin-right: 3px;
+	cursor: pointer;
+}
+
+.mootro-only {
+	margin-left: -453px;
+}
+

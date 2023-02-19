@@ -7,6 +7,11 @@ import {
 	thunkGetServerMembers,
 	thunkDeleteServerMember,
 } from "../../store/serverMembers";
+import {
+	thunkAddFriendship,
+	thunkDeleteFriendship,
+	thunkGetFriendships,
+} from "../../store/friendships.js";
 import { thunkReadUserServers } from "../../store/servers";
 import NickNameEdit from "./NickNameForm.js";
 import RoleEdit from "./RoleForm.js";
@@ -20,6 +25,7 @@ export default function MemberPage({
 	serverId,
 	channelId,
 	onChange,
+	theme,
 }) {
 	const dispatch = useDispatch();
 	const [role, setRole] = useState(member.role);
@@ -31,6 +37,8 @@ export default function MemberPage({
 	const user = useSelector((state) => state.session.user);
 	const [editNickName, setEditNickName] = useState(false);
 	const [editRole, setEditRole] = useState(false);
+	const friendships = useSelector((state) => state.friendships);
+	const [reloadFriend, setReloadFriend] = useState(false);
 
 	let userId = user.id;
 
@@ -102,17 +110,124 @@ export default function MemberPage({
 		setEditRole(false);
 	};
 
+	// Friendship
+
+	let allFriends;
+	let isFriends;
+	if (friendships) {
+		allFriends = Object.values(friendships);
+		let allFriendsIds = allFriends.map((friend) => {
+			return friend.id;
+		});
+		// console.log("ALL FRIENDS----------->",member, allFriendsIds)
+		if (allFriendsIds.includes(+member.user_id)) {
+			isFriends = true;
+		}
+	}
+
+	// Add Friend
+
+	const addFriend = (e) => {
+		e.preventDefault();
+		dispatch(thunkAddFriendship(member.user_id, member))
+			.then(() => {
+				isFriends = true;
+				setReloadFriend(!reloadFriend);
+			})
+			// .then(dispatch(thunkGetFriendships()))
+			.catch(async (res) => {
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			});
+	};
+
+	// DELETE Friend
+
+	const deleteFriend = (e) => {
+		e.preventDefault();
+		dispatch(thunkDeleteFriendship(member.user_id))
+			.then(() => {
+				isFriends = false;
+				setReloadFriend(!reloadFriend);
+			})
+			// .then(dispatch(thunkGetFriendships()))
+			.catch(async (res) => {
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			});
+	};
+
+	const slideInToDms = () => {
+		closeModal();
+		history.push(`/users/${user.id}/${Number(member.user_id)}`);
+	};
+
 	// console.log("PERMISSION ------>", permission)
+
+	// RANDOM COLORS
+	function getRandomColor() {
+		const r = Math.floor(Math.random() * 256);
+		const g = Math.floor(Math.random() * 256);
+		const b = Math.floor(Math.random() * 256);
+		const a = Math.random().toFixed(2);
+		return `rgba(${r}, ${g}, ${b}, ${a})`;
+	}
+
+	const randomColor = getRandomColor();
+
+	const style = {
+		backgroundColor: randomColor,
+	};
 
 	return (
 		<>
-			<div className="member-card">
-				<div id="card-header"></div>
+			<div className="member-card" id={theme}>
+				<div id="card-header" style={style}></div>
 				<div className="card-content">
-					<img className="card-img" src={member.display_pic}></img>
-					<div className="card-member-info">
+					<div className="member-header">
+						<img
+							className="card-img"
+							id={theme}
+							src={member.display_pic}
+						></img>
+						{!isFriends && !isUser && (
+							<button
+								type="submit"
+								id={theme}
+								className="add-friend-button"
+								onClick={addFriend}
+							>
+								Add Friend
+							</button>
+						)}
+						{isFriends && !isUser && (
+							<div className="row">
+								<div
+									className="UserLanding-user-actions clickable"
+									id={theme}
+									onClick={slideInToDms}
+								>
+									<div className="sliding-tooltip">
+										<i className="fa-solid fa-message fa-xs"></i>
+										<span className="sliding-tooltiptext">
+											Slide Into DMs
+										</span>
+									</div>
+								</div>
+
+								<button
+									type="submit"
+									className="delete-friend-button"
+									onClick={deleteFriend}
+								>
+									Remove Friend
+								</button>
+							</div>
+						)}
+					</div>
+					<div className="card-member-info" id={theme}>
 						<div className="card-member-inner-div">
-							<div className="member-nickName-div">
+							<div className="member-nickName-div" id={theme}>
 								{userIsOwner && (
 									<div className="member-nickname-div-container">
 										{editNickName ? (
@@ -124,10 +239,14 @@ export default function MemberPage({
 												endEditNickName={
 													endEditNickName
 												}
+												theme={theme}
 											/>
 										) : (
 											<div className="member-nickname-container">
-												<h4 className="member-nickname">
+												<h4
+													className="member-nickname"
+													id={theme}
+												>
 													{member.nickname}
 												</h4>
 												<h4
@@ -151,10 +270,14 @@ export default function MemberPage({
 												endEditNickName={
 													endEditNickName
 												}
+												theme={theme}
 											/>
 										) : (
 											<div className="member-nickname-container">
-												<h4 className="member-nickname">
+												<h4
+													className="member-nickname"
+													id={theme}
+												>
 													{member.nickname}
 												</h4>
 												<h4
@@ -169,7 +292,10 @@ export default function MemberPage({
 								) : (
 									<>
 										{!userIsOwner && (
-											<h4 className="member-nickname">
+											<h4
+												className="member-nickname"
+												id={theme}
+											>
 												{member.nickname}
 											</h4>
 										)}
@@ -177,16 +303,34 @@ export default function MemberPage({
 								)}
 							</div>
 							<div className="member-since-section">
-								<h4 className="member-h4">Member Since</h4>
-								<p className="card-text">{date}</p>
+								<h4 className="member-h4" id={theme}>
+									Member Since
+								</h4>
+								<p className="card-text" id={theme}>
+									{date}
+								</p>
 							</div>
 							<div className="role-section">
-								<h4 className="member-h4">Role</h4>
+								<h4 className="member-h4" id={theme}>
+									Role
+								</h4>
 								{!isNotOwner ? (
-									<div id="owner" className="member-role-div">
-										<div className="member-role-container">
-											<div id="owner" className="member-role-circle"></div>
-											<p className="member-role">
+									<div
+										id={`owner ${theme}`}
+										className="member-role-div"
+									>
+										<div
+											className="member-role-container"
+											id={theme}
+										>
+											<div
+												id="owner"
+												className="member-role-circle"
+											></div>
+											<p
+												className="member-role"
+												id={theme}
+											>
 												{member.role}
 											</p>
 										</div>
@@ -203,16 +347,27 @@ export default function MemberPage({
 														endEditRole={
 															endEditRole
 														}
+														theme={theme}
 													/>
 												) : (
 													<div className="member-role-div">
-														<div className="member-role-container">
-															<div id={member.role} className="member-role-circle"></div>
-															<p className="member-role">
+														<div
+															className="member-role-container"
+															id={theme}
+														>
+															<div
+																id={member.role}
+																className="member-role-circle"
+															></div>
+															<p
+																className="member-role"
+																id={theme}
+															>
 																{member.role}
 															</p>
 														</div>
 														<p
+															id={theme}
 															className="role-edit-button"
 															onClick={
 																startEditRole
@@ -224,10 +379,22 @@ export default function MemberPage({
 												)}
 											</>
 										) : (
-											<div id={member.role} className="member-role-div">
-												<div className="member-role-container">
-													<div id={member.role} className="member-role-circle"></div>
-													<p className="member-role">
+											<div
+												id={member.role}
+												className="member-role-div"
+											>
+												<div
+													id={theme}
+													className="member-role-container"
+												>
+													<div
+														id={member.role}
+														className="member-role-circle"
+													></div>
+													<p
+														className="member-role"
+														id={theme}
+													>
 														{member.role}
 													</p>
 												</div>
@@ -239,13 +406,19 @@ export default function MemberPage({
 							</div>
 							<div className="leave-server-div">
 								{permission && isNotOwner && (
-									<button
-										type="submit"
-										className="delete-membership-button"
-										onClick={submitDelete}
-									>
-										Got Beef?
-									</button>
+									<div className="delete-tooltip">
+										<button
+											type="submit"
+											className="delete-membership-button"
+											onClick={submitDelete}
+										>
+											Got Beef?
+										</button>
+
+										<span className="delete-tooltiptext">
+											Kick member from server
+										</span>
+									</div>
 								)}
 								{isUser && isNotOwner && (
 									<button

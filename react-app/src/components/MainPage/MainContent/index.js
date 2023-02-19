@@ -1,42 +1,40 @@
-import { useLocation } from "react-router-dom";
-import ProtectedRoute from "../../auth/ProtectedRoute";
-import GuildDiscovery from "../../GuildDiscovery";
 import UserLanding from "../../UserLanding";
+import { useSelector } from "react-redux";
 import UserLandingSideBar from "../../UserLanding/UserLandingSideBar";
 import "./MainContent.css";
 
-export default function MainContent({ page, isLoaded }) {
-    switch(page) {
-        case "channel":
-            // console.log("hit switch case in MainContent - channel")
-                // <div className="MainContent-container">
-                // </div>
-            return (
-                    <div className="UserLanding-container">
-                        <UserLandingSideBar page={page} isLoaded={isLoaded} />
-                        <UserLanding page={page} isLoaded={isLoaded} />
-                    </div>
-            )
-        default:
-            return (
-                <div className="MainContent-container">
-                    <div className="UserLanding-container">
-                        <UserLandingSideBar page={page} />
-                        <UserLanding />
-                    </div>
-                </div>
-            )
-    }
-    return (
-        <div className="MainContent-container">
-            {/* <ol>
-                <li>welcome page when first logging in</li>
-                <li>messages if on server page</li>
-                <li>members list if on server page</li>
-            </ol> */}
-            <ProtectedRoute path="/guild-discovery" exact={true}>
-                <GuildDiscovery />
-            </ProtectedRoute>
-        </div>
-    )
+export default function MainContent({ page, isLoaded, theme }) {
+  const user = useSelector((state) => state.session.user);
+
+  switch (page) {
+    case "channel":
+      return (
+        theme && (
+          <div className="UserLanding-container" id={theme}>
+            <UserLandingSideBar page={page} isLoaded={isLoaded} theme={theme} />
+            <UserLanding page={page} isLoaded={isLoaded} theme={theme} />
+          </div>
+        )
+      );
+    case "users":
+      return (
+        theme && (
+          <div className="UserLanding-container" id={theme}>
+            <UserLandingSideBar page={page} isLoaded={isLoaded} theme={theme} />
+            <UserLanding page={page} isLoaded={isLoaded} theme={theme} />
+          </div>
+        )
+      )
+    default:
+      return (
+        theme && (
+          <div className="MainContent-container" id={theme}>
+            <div className="UserLanding-container" id={theme}>
+              <UserLandingSideBar page={page} theme={theme} />
+              <UserLanding theme={theme} />
+            </div>
+          </div>
+        )
+      );
+  }
 }

@@ -5,6 +5,7 @@ import peter from "../../assets/peter-banner.png";
 import keenly from "../../assets/keenly-banner.png";
 import fahd from "../../assets/fahd-banner.png";
 import wasiq from "../../assets/wasiq-banner.png";
+import NotFound from "../NotFound";
 
 function FadeInSection(props) {
   const [isVisible, setVisible] = React.useState(false);
@@ -33,6 +34,7 @@ function FadeInSection(props) {
 }
 
 export default function SplashBody() {
+
   return (
     <>
       <FadeInSection>
@@ -64,7 +66,7 @@ export default function SplashBody() {
                 <img src={wasiq} className="developer-card-img"></img>
                 <div className="developer-card-info">
                   <span>
-                    <a href="https://www.linkedin.com/in/wasiq-rashid-3164b2258/">
+                    <a href="https://www.linkedin.com/in/wasiq-rashid-fsd/">
                       LinkedIn
                     </a>
                   </span>

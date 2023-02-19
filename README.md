@@ -89,7 +89,6 @@ Datcord is a full-stack web application cloned and inspired by Discord. The buil
 
 7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [javascript-shield]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
@@ -120,4 +119,4 @@ Datcord is a full-stack web application cloned and inspired by Discord. The buil
 
 ![datcord-dbdiagram]
 
-[datcord-dbdiagram]: ./datcords-schema.png
+[datcord-dbdiagram]: ./datcord-schema.png

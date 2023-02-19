@@ -6,29 +6,33 @@ import cmReducer from "./channelMessages";
 import channels from "./channels";
 import serverMembers from "./serverMembers";
 import allServerReducer from "./allServers";
+import friendshipsReducer from "./friendships";
+import dmReducer from "./directMessages";
 
 const rootReducer = combineReducers({
-	session,
-	servers: serverReducer,
-	channels,
-	serverMembers,
-	channelMessages: cmReducer,
-	allServers: allServerReducer,
+  session,
+  servers: serverReducer,
+  channels,
+  serverMembers,
+  channelMessages: cmReducer,
+  allServers: allServerReducer,
+  friendships: friendshipsReducer,
+  directMessages: dmReducer,
 });
 
 let enhancer;
 
 if (process.env.NODE_ENV === "production") {
-	enhancer = applyMiddleware(thunk);
+  enhancer = applyMiddleware(thunk);
 } else {
-	const logger = require("redux-logger").default;
-	const composeEnhancers =
-		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-	enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+  const logger = require("redux-logger").default;
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
 const configureStore = (preloadedState) => {
-	return createStore(rootReducer, preloadedState, enhancer);
+  return createStore(rootReducer, preloadedState, enhancer);
 };
 
 export default configureStore;

@@ -6,31 +6,45 @@ import {
 	thunkReadAllChannelMessages,
 } from "../../../store/channelMessages";
 
-const CMEdit = ({ message, onChange, channelId, serverId }) => {
+const CMEdit = ({ message, onChange, channelId, serverId, theme }) => {
 	let dispatch = useDispatch();
-	let params = useParams()
-	if(!serverId) serverId = params.serverId
-	if(!channelId) channelId = params.channelId
+	let params = useParams();
+	if (!serverId) serverId = params.serverId;
+	if (!channelId) channelId = params.channelId;
+	const [errors, setErrors] = useState([]);
+
 	// console.log(`front cm EDIT`, channelId, serverId)
 
 	let [mval, setMval] = useState(message.message);
 	const onCancel = () => {
 		onChange(999999999);
+		setErrors([]);
 	};
 
 	// edit
 	const onSave = (e) => {
 		e.preventDefault();
-		if (message.message !== mval) {
-			let payload = { id: message.id, message: mval };
-			dispatch(thunkEditChannelMessage(payload))
-				.then(() =>
-					dispatch(thunkReadAllChannelMessages(serverId, channelId))
-				)
-				.then(onChange(0));
+		if (mval.length > 255 || mval.length < 1) {
+			setErrors([`error: Message length must be between 1 and 255.`]);
+			return null;
 		} else {
-			onChange(999999999);
+			if (message.message !== mval) {
+				let payload = { id: message.id, message: mval };
+				dispatch(thunkEditChannelMessage(payload))
+					.then(() =>
+						dispatch(
+							thunkReadAllChannelMessages(serverId, channelId)
+						)
+					)
+					.then(onChange(0));
+			} else {
+				onChange(999999999);
+			}
 		}
+	};
+	const updateChatInput = (e) => {
+		if (mval.length > 0 && mval.length < 255) setErrors([]);
+		setMval(e.target.value);
 	};
 
 	let date = new Date();
@@ -43,10 +57,15 @@ const CMEdit = ({ message, onChange, channelId, serverId }) => {
 	return (
 		<div className="msg-ct" key={message.id}>
 			<div className="cms-msg-header">
-				<div className="cms-msg-name">{`${message.sender_nickname}`}</div>
-				<div className="cms-msg-date">{date}</div>
+				<div
+					className="cms-msg-name"
+					id={theme}
+				>{`${message.sender_nickname}`}</div>
+				<div className="cms-msg-date" id={theme}>
+					{date}
+				</div>
 
-				<div className="cms-options">
+				<div id={theme} className="cms-options">
 					<div
 						className="cms-edit"
 						data-id={message.id}
@@ -68,67 +87,21 @@ const CMEdit = ({ message, onChange, channelId, serverId }) => {
 
 			<form onSubmit={onSave} className="edit">
 				<input
+					id={theme}
 					value={mval}
-					onChange={(e) => setMval(e.target.value)}
+					onChange={updateChatInput}
 					className="cm-text-input"
+					contentEditable="true"
 				/>
+				{errors.length > 0 ? (
+					<div className="cms-err-edit">
+						Error : Message length must be between 1 and 255
+						characters!
+					</div>
+				) : null}
 			</form>
 		</div>
 	);
 };
 
 export default CMEdit;
-
-/*
-<div
-	className="msg-ct"
-	key={message.id}
->
-	<div className="cms-msg-header">
-		<div className="cms-msg-name">{`${message.sender_nickname}`}</div>
-		<div className="cms-msg-date">
-			{message.created_at.slice(
-				0,
-				22
-			)}
-		</div>
-
-		{user.id ==
-			message.sender_id ||
-		role === "admin" ||
-		role === "owner" ? (
-			<div className="cms-options">
-				<div
-					className="cms-edit"
-					data-id={
-						message.id
-					}
-					data-sender={
-						message.sender_id
-					}
-					onClick={
-						handleEdit
-					}
-				>
-					Edit
-				</div>
-				<div
-					className="cms-delete"
-					onClick={
-						deleteHandler
-					}
-					data-id={
-						message.id
-					}
-					data-sender={
-						message.sender_id
-					}
-				>
-					Delete
-				</div>
-			</div>
-		) : null}
-	</div>
-	<div className="cms-msg-detail">{`${message.message}`}</div>
-</div>
-*/

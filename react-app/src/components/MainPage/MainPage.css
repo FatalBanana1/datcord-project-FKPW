@@ -3,7 +3,18 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-	background-color: #36393f;
   /* overflow-y: hidden; */
   /* box-sizing: border-box; */
+}
+
+#dark.MainPage-container {
+  background-color: #36393f;
+}
+
+#light.MainPage-container {
+  background-color: white;
+}
+
+#purple.MainPage-container {
+  background-color: #b5a9f0;
 }

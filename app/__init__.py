@@ -12,6 +12,8 @@ from .api import (
     channel_routes,
     channel_message_routes,
     server_member_routes,
+    friendship_routes,
+    direct_message_routes,
 )
 from .seeds import seed_commands
 from .config import Config
@@ -40,6 +42,8 @@ app.register_blueprint(server_routes, url_prefix="/api/servers")
 app.register_blueprint(server_member_routes, url_prefix="/api/sms")
 app.register_blueprint(channel_routes, url_prefix="/api/channels")
 app.register_blueprint(channel_message_routes, url_prefix="/api/cms")
+app.register_blueprint(friendship_routes, url_prefix="/api/friendships")
+app.register_blueprint(direct_message_routes, url_prefix="/api/dms")
 db.init_app(app)
 Migrate(app, db)
 

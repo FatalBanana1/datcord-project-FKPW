@@ -60,7 +60,7 @@ def seed_servers():
     )
 
     server9 = Server(
-        name="Welcome",
+        name="Welcome to Datcord!",
         owner_id=17,
         icon_url="https://media.discordapp.net/attachments/1072663876040146944/1075539563784704060/favicon.png",
         description="Official Datcord Welcome Server",

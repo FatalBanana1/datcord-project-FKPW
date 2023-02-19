@@ -11,6 +11,7 @@ export default function CreateChannelForm({
 	serverId,
 	role,
 	isLoaded,
+	theme
 }) {
 	const dispatch = useDispatch();
 	const [category, setCategory] = useState(categoryName ? categoryName : "");
@@ -46,13 +47,13 @@ export default function CreateChannelForm({
 
 	if (isLoaded && categoryName) {
 		return (
-			<div className="CreateChannelForm-container">
+			<div className="CreateChannelForm-container" id={theme}>
 				<div className="CreateChannelForm-header">
 					<div className="CreateChannelForm-title-text">
-						<h1 className="CreateChannelForm-title">
+						<h1 className="CreateChannelForm-title" id={theme}>
 							Create Channel
 						</h1>
-						<p className="CreateChannelForm-subtext">
+						<p className="CreateChannelForm-subtext" id={theme}>
 							in {category}
 						</p>
 					</div>
@@ -60,7 +61,7 @@ export default function CreateChannelForm({
 						className="CreateChannelForm-close"
 						onClick={closeModal}
 					>
-						<i className="fa-solid fa-xmark"></i>
+						<i className="fa-solid fa-xmark" id={theme}></i>
 					</div>
 				</div>
 				<form
@@ -71,13 +72,14 @@ export default function CreateChannelForm({
 						<label
 							htmlFor="channel-name"
 							className="CreateChannelForm-label"
+							id={theme}
 						>
 							Channel Name
 						</label>
-						<div className="CreateChannelForm-group-channel-input">
-							<p className="hashtag">#</p>
+						<div className="CreateChannelForm-group-channel-input" id={theme}>
+							<p className="hashtag" id={theme}>#</p>
 							<input
-								id="channel-name"
+								id={`channel-name ${theme}`}
 								type="text"
 								value={channelName}
 								onChange={(e) => {
@@ -90,8 +92,8 @@ export default function CreateChannelForm({
 						</div>
 					</div>
 					<div className="CreateChannelForm-group-private">
-						<span>
-							<i className="fa-solid fa-lock"></i>
+						<span className="CreateChannelForm-group-private-span">
+							<i className="fa-solid fa-lock" id={theme}></i>
 							Private channel
 						</span>
 						{/* <label
@@ -114,17 +116,18 @@ export default function CreateChannelForm({
 								checked={isPrivate}
 								onChange={() => setIsPrivate(!isPrivate)}
 							/>
-							<div className="CreateChannelForm-switch">
+							<div className="CreateChannelForm-switch" id={theme}>
 								<div></div>
 							</div>
 						</div>
 					</div>
-					<p className="CreateChannelForm-private-text">
+					<p className="CreateChannelForm-private-text" id={theme}>
 						Only selected members and roles will be able to view
 						this channel.
 					</p>
-					<div className="CreateChannelForm-buttons-container">
+					<div className="CreateChannelForm-buttons-container" id={theme}>
 						<button
+							id={theme}
 							className="CreateChannelForm-button-cancel"
 							onClick={closeModal}
 						>
@@ -133,6 +136,7 @@ export default function CreateChannelForm({
 						<button
 							type="submit"
 							className="CreateChannelForm-button-create"
+							id={theme}
 						>
 							Create Channel
 						</button>

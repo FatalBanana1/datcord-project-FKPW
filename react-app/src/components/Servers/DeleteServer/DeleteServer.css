@@ -7,12 +7,20 @@
   background-color: #36393f;
 }
 
+#light.delete-container {
+  background-color: white;
+}
+
 .delete-header {
   font-weight: 600;
   font-size: 16px;
   color: white;
   padding: 20px;
   margin-bottom: 5px;
+}
+
+#light.delete-header {
+  color: black;
 }
 
 .delete-subtext {
@@ -37,6 +45,10 @@
   padding: 18px 0px;
 }
 
+#light.delete-buttons {
+  background-color: #f3f4f5;
+}
+
 .delete-delete-button {
   margin-right: 20px;
   margin-left: 10px;
@@ -48,9 +60,21 @@
   border: none;
 }
 
+.delete-delete-button:hover {
+  background-color: #da2a2c;
+}
+
 .delete-cancel-button {
   background: transparent;
   border: none;
   color: white;
   font-size: 13px;
+}
+
+#light.delete-cancel-button {
+  color: #a5a7af;
+}
+
+#light.delete-cancel-button:hover {
+  color: #8e9096;
 }

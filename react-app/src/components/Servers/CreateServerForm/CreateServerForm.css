@@ -8,6 +8,11 @@
   box-sizing: border-box;
 }
 
+#purple.create-server-container {
+  color: #5F50A9;
+  background-color: #dfdcee;
+}
+
 .create-server-header-container {
   display: flex;
   flex-direction: column;
@@ -27,6 +32,10 @@
   color: #50565f;
 }
 
+#purple.create-server-subtext {
+  color: #7f73ba;
+}
+
 .create-server-form-container {
   width: 430px;
 }
@@ -39,7 +48,9 @@
   margin-bottom: 5px;
 }
 
-.create-server-input {
+
+#purple.create-server-form-title {
+  color: #5F50A9;
 }
 
 .input-fields {
@@ -51,6 +62,10 @@
   background-color: #e3e5e8;
   margin-bottom: 10px;
   resize: none;
+}
+
+#purple.input-fields {
+  background-color: #e9eaed;
 }
 
 .input-fields:focus {
@@ -69,8 +84,13 @@
   border: none;
   background-color: transparent;
   font-weight: bold;
+  color: rgb(34, 34, 34);
   text-align: left;
   line-height: initial;
+}
+
+#purple.create-server-button-cancel {
+  color: #5F50A9;
 }
 
 .create-server-button-submit {
@@ -79,4 +99,24 @@
   color: white;
   padding: 12px 25px;
   border-radius: 3px;
+}
+
+.create-server-button-submit:hover {
+  background-color: #3c4beb;
+}
+
+#purple.create-server-button-submit {
+  background-color: #7f73ba;
+}
+
+#purple.create-server-button-submit:hover {
+  background-color: #4c4087;
+}
+
+.create-server-button-cancel:hover {
+  color: black;
+}
+
+#purple.create-server-button-cancel:hover {
+  color: #bfb9dd;
 }

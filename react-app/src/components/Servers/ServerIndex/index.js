@@ -15,7 +15,7 @@ import {
 import { thunkAddServerMember } from "../../../store/serverMembers";
 import { authenticate } from "../../../store/session";
 
-const ServerIndex = () => {
+const ServerIndex = ({ theme }) => {
 	let dispatch = useDispatch();
 	let [isLoaded, setIsLoaded] = useState(false);
 	let [joined, setJoined] = useState(false);
@@ -44,19 +44,30 @@ const ServerIndex = () => {
 			);
 	};
 
+	function getRandomPastelGradient() {
+		const hue = Math.floor(Math.random() * 360); // Hue value for the gradient
+		const pastel1 = `hsl(${hue}, 100%, 80%)`; // First pastel color
+		const pastel2 = `hsl(${hue + 40}, 100%, 80%)`; // Second pastel color
+		return `linear-gradient(to right, ${pastel1}, ${pastel2})`;
+	}
+
+	const style = {
+		background: getRandomPastelGradient(),
+	};
+
 	if (isLoaded) {
 		let servers = Object.values(allServers);
 
 		// return
 		return (
-			<div className="exp-bk">
-				<ServerNav />
+			<div className="exp-bk" id={theme}>
+				<ServerNav theme={theme} />
 				<div className="explorer-container">
 					<div className="explorer-banner-container">
 						<img className="explorer-img" src={explorerBanner} />
 					</div>
 
-					<div className="explorer-banner-header">
+					<div className="explorer-banner-header" id={theme}>
 						Featured Communities
 					</div>
 					<div className="explorer-banner-server-container">
@@ -75,24 +86,48 @@ const ServerIndex = () => {
 										to={`/channels/${el.id}/${el.channels[0].id}`}
 										key={el.id}
 									>
-										<div className="explorer-server-container">
-											<div className="explorer-server-top">
+										<div
+											className="explorer-server-container"
+											id={theme}
+										>
+											<div
+												className="explorer-server-top"
+												style={style}
+												id={theme}
+											>
 												<div className="explorer-server-img">
 													<img
 														src={el.icon_url}
 														className="servers-icon"
+														id={theme}
 														alt="server icon"
 													/>
 												</div>
 											</div>
-											<div className="explorer-server-name">
-												<div className="check">
+											<div
+												className="explorer-server-name"
+												id={theme}
+											>
+												<div className="check" id={theme}>
 													<i className="fa-regular fa-circle-check"></i>
 												</div>
 												<div>{`${el.name}`}</div>
 											</div>
-											<div className="explorer-server-description">{`${el.description}`}</div>
-											<div className="already-joined">
+											<div
+												className="explorer-server-description"
+												id={theme}
+											>{`${el.description}`}</div>
+											<div
+												className="explorer-server-description"
+												id={theme}
+											>{`${
+												Object.keys(el.server_members)
+													.length
+											} Member(s)`}</div>
+											<div
+												className="already-joined"
+												id={theme}
+											>
 												<i className="fa-solid fa-circle-check"></i>
 											</div>
 										</div>
@@ -107,24 +142,45 @@ const ServerIndex = () => {
 											}
 											className="pointer"
 										>
-											<div className="explorer-server-container">
-												<div className="explorer-server-top">
+											<div
+												className="explorer-server-container"
+												id={theme}
+											>
+												<div
+													className="explorer-server-top"
+													id={theme}
+												>
 													<div className="explorer-server-img">
 														<img
 															src={el.icon_url}
 															className="servers-icon"
+															id={theme}
 															alt="server icon"
 														/>
 													</div>
 												</div>
-												<div className="explorer-server-name">
-													<div className="check">
+												<div
+													className="explorer-server-name"
+													id={theme}
+												>
+													<div className="check" id={theme}>
 														<i className="fa-regular fa-circle-check"></i>
 													</div>
 													<div>{`${el.name}`}</div>
 												</div>
-												<div className="explorer-server-description">{`${el.description}`}</div>
-												<div className="join-server">
+												<div
+													className="explorer-server-description"
+													id={theme}
+												>{`${el.description}`}</div>
+												<div
+													className="explorer-server-description"
+													id={theme}
+												>{`${
+													Object.keys(
+														el.server_members
+													).length
+												} Member(s)`}</div>
+												<div className="join-server" id={theme}>
 													Join Server
 												</div>
 											</div>
@@ -137,7 +193,15 @@ const ServerIndex = () => {
 				</div>
 			</div>
 		);
-	} else return <div>Loading...</div>;
+	} else
+		return (
+			<div className="loader-container">
+				<div className="loader-header" id={theme}>
+					# Sliding into your DMs...
+				</div>
+				<div className="loader" id={theme}></div>
+			</div>
+		);
 };
 
 export default ServerIndex;
