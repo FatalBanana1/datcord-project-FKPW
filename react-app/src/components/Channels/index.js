@@ -176,6 +176,8 @@ export default function Channels({ theme }) {
 		permissions = false;
 	}
 
+	// LEAVE SERVER HANDLER AND CONDITIONAL
+
 	const leaveHandler = () => {
 		let permission = true;
 
@@ -183,6 +185,11 @@ export default function Channels({ theme }) {
 			.then(() => dispatch(thunkReadUserServers()))
 			.then(() => history.push("/gotMilk"));
 	};
+
+
+
+
+	//
 
 	if (channels.length > 0) {
 		for (let i = 0; i < channels.length; i++) {
@@ -388,10 +395,8 @@ export default function Channels({ theme }) {
 									{user && user.username}
 								</div>
 							</div>
-							<div
-								className="UserLanding-sidebar-channel-user-actions"
-								id={theme}
-							>
+							<div className="UserLanding-sidebar-channel-user-actions" id={theme}>
+								{!isOwner && (
 								<div
 									className="themes-tooltip red"
 									onClick={leaveHandler}
@@ -402,6 +407,7 @@ export default function Channels({ theme }) {
 										Leave Server
 									</span>
 								</div>
+								)}
 
 								{user.mootro === "mootro" ? (
 									<div className="themes-tooltip">
