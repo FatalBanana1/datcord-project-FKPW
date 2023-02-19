@@ -438,4 +438,13 @@
 	border-radius: 20px;
 	padding: 5px;
 	background-color: rgb(218, 165, 32, 0.9);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+.mootro-ct:hover {
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+	background-color: rgb(228, 173, 35);
+}
+
+#purple.edited{
+	color: #a0356a99;
 }
