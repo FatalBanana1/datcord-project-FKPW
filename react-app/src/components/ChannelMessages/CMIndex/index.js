@@ -10,8 +10,8 @@ import {
 import CMEdit from "../CMEdit/index.";
 import "./CMIndex.css";
 import crown from "../../../assets/crown.png";
-// import OpenModalButton from "../../OpenModalButton";
 // import MemberPage from "../../ServerMembers/MemberPage";
+import OpenModalButton from "../../OpenModalButton";
 
 // leave this OUT
 let socket;
