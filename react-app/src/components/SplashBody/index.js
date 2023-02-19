@@ -66,7 +66,7 @@ export default function SplashBody() {
                 <img src={wasiq} className="developer-card-img"></img>
                 <div className="developer-card-info">
                   <span>
-                    <a href="https://www.linkedin.com/in/wasiq-rashid-3164b2258/">
+                    <a href="https://www.linkedin.com/in/wasiq-rashid-fsd/">
                       LinkedIn
                     </a>
                   </span>

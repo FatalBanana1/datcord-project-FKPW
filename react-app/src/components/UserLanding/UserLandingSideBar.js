@@ -20,7 +20,7 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 	const [showThemeMenu, setShowThemeMenu] = useState(false);
 	const history = useHistory();
 	const params = useParams();
-	console.log(`params---`, params);
+	// console.log(`params---`, params);
 
 	const openUserMenu = () => {
 		if (showUserMenu) return;

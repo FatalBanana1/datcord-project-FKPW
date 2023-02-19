@@ -66,7 +66,7 @@ export default function FriendshipsPage({ theme }) {
 	};
 
 	if (isLoaded && servers) {
-		console.log(`friendship ---- user .....`, servers[9]);
+		// console.log(`friendship ---- user .....`, servers[9]);
 
 		// return
 		return (
