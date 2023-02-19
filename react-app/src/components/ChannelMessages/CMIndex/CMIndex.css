@@ -426,3 +426,16 @@
 	padding-left: 16px;
 	border-radius: 50%;
 }
+
+.mootroGold {
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+}
+
+.mootro-ct {
+	border: 1px solid rgba(0, 0, 0, 0.592);
+	border-radius: 20px;
+	padding: 5px;
+	background-color: rgb(218, 165, 32, 0.9);
+}

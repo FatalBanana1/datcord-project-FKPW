@@ -114,6 +114,7 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "theme": self.theme,
+            "mootro": self.mootro,
             "display_pic": self.display_pic,
             "created_at": self.created_at,
             "server_members": [sm.to_dict() for sm in self.server_memberships],

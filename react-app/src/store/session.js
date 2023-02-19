@@ -3,6 +3,7 @@ const SET_USER = "session/SET_USER";
 const SET_FRIEND = "session/SET_FRIEND";
 const REMOVE_USER = "session/REMOVE_USER";
 const SET_THEME = "users/SET_THEME";
+const SET_MOOTRO = "users/SET_MOOTRO";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -20,6 +21,11 @@ const removeUser = () => ({
 
 const setTheme = (user) => ({
 	type: SET_THEME,
+	payload: user,
+});
+
+const setMootro = (user) => ({
+	type: SET_MOOTRO,
 	payload: user,
 });
 
@@ -155,6 +161,34 @@ export const thunkSetTheme = (userId, theme) => async (dispatch) => {
 	}
 };
 
+// MOOTRO
+
+export const thunkSetMootro = (userId, mootro) => async (dispatch) => {
+    console.log("THUNK -------->", userId)
+	const response = await fetch(`/api/users/${userId}/mootro`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			mootro,
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(setMootro(data));
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
 // get friend user - DMs
 export const thunkGetUser = (userId) => async (dispatch) => {
 	const response = await fetch(`/api/users/${userId}/`);
@@ -187,6 +221,8 @@ export default function reducer(state = initialState, action) {
 		case REMOVE_USER:
 			return { user: null };
 		case SET_THEME:
+			return { user: action.payload };
+		case SET_MOOTRO:
 			return { user: action.payload };
 		default:
 			return state;

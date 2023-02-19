@@ -5,6 +5,10 @@
 	width: 350px;
 }
 
+.mootro-card {
+    background-color: black;
+}
+
 #dark.mootro-member-card {
 	background: #292b2f;
 }
@@ -14,7 +18,8 @@
 }
 
 #purple.mootro-member-card {
-	background: #dfdcee;
+    background-color: black;
+
 }
 
 #mootro-card-header {
@@ -22,7 +27,33 @@
 	border-radius: 10px 10px 0 0;
 	height: 65px;
 	width: 100%;
-	background: #000;
+	background-color: goldenrod;
+}
+
+.theme-img {
+    height: 65px;
+    border-radius: 10px;
+}
+
+
+
+.mootro-h5 {
+    padding-top: 5px;
+}
+
+.mootro-member-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mootro-button {
+    height: 40px;
+    border: none;
+    background-color: goldenrod;
+    border: 3px solid black;
+    border-radius: 5px;
 }
 
 .card-img {
@@ -45,14 +76,14 @@
 	border: 5px solid #dfdcee;
 }
 
-.card-content {
+.mootro-card-content {
 	border-radius: 50%;
 	margin: -45px 20px;
 	width: 80%;
 	height: 100px;
 }
 
-.card-member-info {
+.mootro-info {
     display: flex;
     flex-direction: column;
     height: 300px;
@@ -62,6 +93,19 @@
     font-family: "Roboto";
     box-sizing: border-box;
     padding: 12px;
+    background-color: goldenrod;
+}
+
+.mootro-features {
+    color: black;
+    font-size: 25px;
+    border-bottom: 1px solid black;
+}
+
+.include.mootro-h4{
+    color: black;
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.518);
+    width: 50%;
 }
 
 #dark.card-member-info {
