@@ -275,7 +275,7 @@ export default function Channels({ theme }) {
 								{channel.name && truncateNames(channel.name)}
 							</div>
 							{permissions && (
-								<div className="UserLanding-sidebar-channel-buttons">
+								<div className="UserLanding-sidebar-channel-buttons" id={theme}>
 									<div className="edit-channel-tooltip">
 										<OpenModalButton
 											buttonText="Edit-Channel"
@@ -290,6 +290,7 @@ export default function Channels({ theme }) {
 													theme={theme}
 												/>
 											}
+											theme={theme}
 										/>
 										<span className="edit-channel-tooltiptext">
 											Edit Channel
@@ -330,6 +331,7 @@ export default function Channels({ theme }) {
 												modalComponent={
 													<EditServer
 														server={server2}
+														theme={theme}
 													/>
 												}
 											/>
@@ -383,7 +385,7 @@ export default function Channels({ theme }) {
 									{user && user.username}
 								</div>
 							</div>
-							<div className="UserLanding-sidebar-channel-user-actions">
+							<div className="UserLanding-sidebar-channel-user-actions" id={theme}>
 								<div
 									className="themes-tooltip red"
 									onClick={leaveHandler}

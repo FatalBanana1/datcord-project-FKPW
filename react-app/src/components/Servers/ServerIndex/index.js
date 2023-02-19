@@ -108,7 +108,7 @@ const ServerIndex = ({ theme }) => {
 												className="explorer-server-name"
 												id={theme}
 											>
-												<div className="check">
+												<div className="check" id={theme}>
 													<i className="fa-regular fa-circle-check"></i>
 												</div>
 												<div>{`${el.name}`}</div>
@@ -163,7 +163,7 @@ const ServerIndex = ({ theme }) => {
 													className="explorer-server-name"
 													id={theme}
 												>
-													<div className="check">
+													<div className="check" id={theme}>
 														<i className="fa-regular fa-circle-check"></i>
 													</div>
 													<div>{`${el.name}`}</div>
@@ -180,7 +180,7 @@ const ServerIndex = ({ theme }) => {
 														el.server_members
 													).length
 												} Member(s)`}</div>
-												<div className="join-server">
+												<div className="join-server" id={theme}>
 													Join Server
 												</div>
 											</div>

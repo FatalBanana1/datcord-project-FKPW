@@ -53,7 +53,8 @@
   border-radius: 5px;
 }
 
-#light::-webkit-scrollbar-thumb {
+#light::-webkit-scrollbar-thumb,
+#purple::-webkit-scrollbar-thumb {
   background: #97a0ad;
   border-radius: 5px;
 }
@@ -63,7 +64,8 @@
   background: #1b1c1f;
 }
 
-#light::-webkit-scrollbar-thumb:hover {
+#light::-webkit-scrollbar-thumb:hover,
+#purple::-webkit-scrollbar-thumb:hover {
   background: #868e99;
 }
 
@@ -97,6 +99,10 @@ input:focus {
   color: black;
 }
 
+#purple.loader-header {
+  color: black;
+}
+
 .loader {
   width: 50px;
   height: 50px;
@@ -115,6 +121,15 @@ input:focus {
 }
 
 #light.loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, #7b72ff);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: s3 1s infinite linear;
+}
+
+#purple.loader {
   width: 50px;
   height: 50px;
   border-radius: 50%;

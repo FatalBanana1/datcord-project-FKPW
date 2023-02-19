@@ -253,19 +253,22 @@ export default function DMIndex({ theme }) {
 			user && (
 				<div className="cms-container dms">
 					<div className="cms-ch-name" id={theme}>
-						{`@${friend.username}`}
+						<div className="cms-friend-name">
+							{`@${friend.username}`}
+						</div>
 						<div className="row overfl-wid">
 							<div className="dm-aka">{`AKA`}</div>
-							<div className="mleft-10 row">
+							<div className="dm-row">
 								{[...otherNicknames]
-									.slice(0, 8)
+									.slice(0, 6)
 									.map((el, i) => {
 										if (el) {
 											return (
-												<div
+												<span
 													className="mleft-10 dm-names"
+													id={theme}
 													key={i}
-												>{`@${truncateNames(el)}`}</div>
+												>{`@${truncateNames(el)}`}</span>
 											);
 										} else return null;
 									})}

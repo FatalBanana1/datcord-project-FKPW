@@ -5,12 +5,26 @@
   flex-direction: row;
 }
 
+.UserLanding-container-dm {
+  width: calc(100%-314px);
+  /* height: calc(100%-48px); */
+}
+
+.UserLanding-container.friend {
+  display: flex;
+  flex-direction: column;
+}
+
 #dark.UserLanding-container {
   background-color: #36393f;
 }
 
 #light.UserLanding-container {
   background-color: #ffffff;
+}
+
+#purple.UserLanding-container {
+  background-color: #bfb9dd;
 }
 
 .reverse {
@@ -28,6 +42,10 @@
     overflow-y: scroll;
 }
 
+.UserLanding-main-content {
+  height: calc(100% - 48px);
+}
+
 .UserLanding-server-members {
   display: flex;
   flex-direction: column;
@@ -39,6 +57,7 @@
 .UserLanding-status {
   margin-bottom: 15px;
   padding: 0px 26px;
+  padding-top: 16px;
 }
 
 .UserLanding-status > h2 {
@@ -49,6 +68,10 @@
 
 #light.UserLanding-status > h2 {
   color: #535963;
+}
+
+#purple.UserLanding-status > h2 {
+  color: #5F50A9;
 }
 
 .UserLanding-people-list-container {
@@ -68,6 +91,10 @@
   border-top: 1px solid #dbdee1;
 }
 
+#purple.UserLanding-people-list {
+  border-top: 1px solid #dbdee1;
+}
+
 .UserLanding-people-list:hover {
   background-color: #3f434a;
   border-radius: 5px;
@@ -75,6 +102,10 @@
 
 #light.UserLanding-people-list:hover {
   background-color: #e7e9eb;
+}
+
+#purple.UserLanding-people-list:hover {
+  background-color: #9F96CB;
 }
 
 .UserLanding-user-info-container {
@@ -111,6 +142,10 @@
   color: #060607;
 }
 
+#purpe.UserLanding-user-name {
+  color: #5F50A9;
+}
+
 .UserLanding-user-status {
   color: rgb(177, 177, 177);
   font-size: 13px;
@@ -119,6 +154,10 @@
 
 #light.UserLanding-user-status {
   color: #8e9298;
+}
+
+#purple.UserLanding-user-status {
+  color: #5F50A9;
 }
 
 .UserLanding-user-actions-container {
@@ -148,6 +187,14 @@
   align-items: center;
 }
 
+#purple.UserLanding-user-actions {
+  background-color: #f2f3f5;
+  color: #5F50A9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .UserLanding-header {
   width: inherit;
   height: 48px;
@@ -160,7 +207,7 @@
   color: #ffffff;
   box-shadow: 0 1px 0 hsl(240 11.1% 1.8% / 0.2),
     0 1.5px 0 hsl(240 7.7% 2.5%/0.05), 0 2px 0 hsl(240 11.1% 1.8%/0.05);
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 @media (min-width: 768px) {

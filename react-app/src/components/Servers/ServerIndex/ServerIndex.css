@@ -42,6 +42,10 @@
 	color: black;
 }
 
+#purple.explorer-banner-header {
+	color: #5F50A9;
+}
+
 .exp-link {
 	/* margin: auto; */
 	cursor: pointer;
@@ -62,6 +66,10 @@
 
 #light.exp-bk {
 	background-color: white;
+}
+
+#purple.exp-bk {
+	background-color: #fff;
 }
 
 .explorer-banner-server-container {
@@ -94,6 +102,11 @@
 	border: 1px solid #e9e9eb;
 }
 
+#purple.explorer-server-container {
+	background-color: #bfb9dd;
+	border: 1px solid #e9e9eb;
+}
+
 .explorer-server-container:hover {
 	background-color: #383b41;
 	box-shadow: 10px 10px 15px -15px rgba(0, 0, 0, 0.75);
@@ -101,6 +114,10 @@
 
 #light.explorer-server-container:hover {
 	background-color: rgb(255, 255, 255);
+}
+
+#purple.explorer-server-container:hover {
+	background-color: #dfdcee;
 }
 
 .explorer-server-description {
@@ -139,6 +156,14 @@
 	);
 }
 
+#purple.explorer-server-top {
+	background: linear-gradient(
+		140deg,
+		rgb(199, 236, 218) 0%,
+		rgb(143, 167, 187) 100%
+	);
+}
+
 .explorer-server-img {
 	position: absolute;
 	bottom: 155px;
@@ -156,9 +181,17 @@
 	color: #060607;
 }
 
+#purple.explorer-server-name {
+	color: #393065;
+}
+
 .check {
 	color: green;
 	margin-right: 5px;
+}
+
+#purple.check {
+	color: lightgreen;
 }
 
 .explorer-server-description {
@@ -172,6 +205,10 @@
 	color: #97979c;
 }
 
+#purple.explorer-server-description {
+	color: #5F50A9;
+}
+
 .join-server {
 	text-transform: uppercase;
 	font-size: 11px;
@@ -181,8 +218,16 @@
 	transition: 0.5s;
 }
 
+#purple.join-server {
+	color: #393065;
+}
+
 .join-server:hover {
 	color: rgb(109, 214, 255);
+}
+
+#purple.join-server:hover {
+	color: #5F50A9;
 }
 
 .already-joined {
@@ -193,6 +238,10 @@
 
 #light.already-joined {
 	color: black;
+}
+
+#purple.already-joined {
+	color: fff;
 }
 
 .pointer {

@@ -69,6 +69,10 @@
 	color: #5e6772;
 }
 
+#purple.UserLanding-sidebar-channel-category-container {
+	color: #393065;
+}
+
 .UserLanding-sidebar-channel-category-name {
 	width: 195px;
 }
@@ -126,6 +130,10 @@
 	font-size: 16px;
 }
 
+#purple.UserLanding-sidebar-channel-name {
+	color: #fff;
+}
+
 a.UserLanding-sidebar-channel-name {
 	text-decoration: none;
 }
@@ -143,6 +151,11 @@ a.UserLanding-sidebar-channel-name {
 	background-color: #d1d5da;
 }
 
+#purple.UserLanding-sidebar-channel-name.active {
+	color: #4c4087;
+	background-color: #bfb9dd;
+}
+
 .UserLanding-sidebar-channel-name:hover {
 	background-color: #3c4045;
 	border-radius: 4px;
@@ -152,11 +165,19 @@ a.UserLanding-sidebar-channel-name {
 	background-color: #d1d5da;
 }
 
+#purple.UserLanding-sidebar-channel-name:hover {
+	background-color: #bfb9dd;
+}
+
 .UserLanding-sidebar-channel-buttons {
 	display: flex;
 	align-items: center;
 	padding-right: 20px;
 	/* gap: 8px; */
+}
+
+#purple.UserLanding-sidebar-channel-buttons {
+	color: #dfdcee;
 }
 
 .fa-user-plus,
@@ -243,12 +264,20 @@ a.UserLanding-sidebar-channel-name {
 	color: #060607;
 }
 
+#purple.UserLanding-sidebar-channel-user-name {
+	color: #fff;
+}
+
 .UserLanding-sidebar-channel-user-actions {
 	color: #96989d;
 	display: flex;
 	align-items: center;
 	gap: 14px;
 	padding-right: 14px;
+}
+
+#purple.UserLanding-sidebar-channel-user-actions {
+	color: #dfdcee;
 }
 
 .user-gear {

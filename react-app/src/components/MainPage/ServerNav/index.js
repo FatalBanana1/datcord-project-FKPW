@@ -94,7 +94,7 @@ export default function ServerNav({ theme }) {
       <OpenModalButton
         buttonText="Create-Server"
         theme={theme}
-        modalComponent={<CreateServerForm onChange={loaded} />}
+        modalComponent={<CreateServerForm onChange={loaded} theme={theme} />}
       />
 
       <NavLink to={`/gotMilk`} className="ServerNav-icons" id={theme}>

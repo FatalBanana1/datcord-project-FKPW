@@ -71,7 +71,7 @@ export default function FriendshipsPage({ theme }) {
 		// return
 		return (
 			<div className="UserLanding-main-content" id={theme}>
-				<div className="UserLanding-header" id={theme}></div>
+				
 				<div className="UserLanding-status" id={theme}>
 					{/* adding 2 as placeholder for now */}
 					{friends.length ? (

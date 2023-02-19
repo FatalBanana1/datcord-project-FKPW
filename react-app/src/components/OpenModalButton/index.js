@@ -53,6 +53,7 @@ function OpenModalButton({
       <button
         onClick={onClick}
         className={`OpenModalButton-button ${buttonText}`}
+        id={theme}
       >
         <i className="fa-solid fa-gear"></i>
       </button>
