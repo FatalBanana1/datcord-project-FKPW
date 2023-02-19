@@ -1,23 +1,24 @@
 .dms-admin {
-	color: rgb(103, 223, 147);
+  color: rgb(103, 223, 147);
 }
 
 .dms-member {
-	color: rgb(196, 122, 228);
+  color: rgb(196, 122, 228);
 }
 
 .cms-friend-name {
-	width: 240px;
+  /* width: 240px; */
+  padding-right: 12px;
 }
 
 .cms-container.dms {
-	width: 100%;
-	/* width: calc(100% - 312px); */
+  width: 100%;
+  /* width: calc(100% - 312px); */
 }
 
 .cm-form-container.dms {
-	box-sizing: border-box;
-	width: 100%;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 /* .mleft-10 {
@@ -25,36 +26,36 @@
 } */
 
 .dm-row {
-	width: 80%;
-	/* display: flex;
+  width: 80%;
+  /* display: flex;
 	flex-direction: row; */
 }
 
 .dm-aka {
-	background-color: rgba(0, 0, 0, 0.096);
-	border-radius: 10px;
-	padding: 3px 7px 0px 7px;
-	font-size: 10px;
+  background-color: rgba(0, 0, 0, 0.096);
+  border-radius: 10px;
+  padding: 3px 7px 0px 7px;
+  font-size: 10px;
 }
 
 .overfl-wid {
-	width: calc(100% - 240px);
-	padding-left: 25px;
-	border-left: solid 1px rgba(0, 0, 0, 0.13);
-	/* overflow-x: hidden; */
-	height: 20px;
-	box-sizing: border-box;
-	white-space: nowrap;
-    overflow: clip;
-	text-overflow: ellipsis;
+  width: calc(100% - 240px);
+  padding-left: 10px;
+  border-left: solid 1px rgba(255, 255, 255, 0.13);
+  /* overflow-x: hidden; */
+  height: 20px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: clip;
+  text-overflow: ellipsis;
 }
 
 .dm-names {
-	color: rgba(255, 255, 255, 0.507);
-	font-size: 14px;
-	padding-left: 10px;
+  color: rgba(255, 255, 255, 0.507);
+  font-size: 14px;
+  padding-left: 10px;
 }
 
 #purple.dm-names {
-	color: #fff;
+  color: #fff;
 }
