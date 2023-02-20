@@ -94,7 +94,7 @@
 	box-sizing: border-box;
 	padding: 12px;
 	background-color: goldenrod;
-    z-index: 10;
+	z-index: 10;
 }
 
 .mootro-features {
@@ -107,6 +107,7 @@
 	color: black;
 	border-bottom: 0.1px solid rgba(0, 0, 0, 0.518);
 	width: 50%;
+	font-size: 14px;
 }
 
 #dark.card-member-info {
