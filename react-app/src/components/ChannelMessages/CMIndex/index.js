@@ -525,7 +525,7 @@ const CMIndex = ({ theme }) => {
 																	className="cms-pending"
 																>{`${message.sender_nickname}`}</div>
 															)}
-															<div className="cms-msg-date">
+															<div className="cms-msg-date" id={theme}>
 																{date
 																	.toUTCString()
 																	.slice(
