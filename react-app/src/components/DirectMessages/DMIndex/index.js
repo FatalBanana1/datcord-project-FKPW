@@ -489,7 +489,7 @@ export default function DMIndex({ theme }) {
 																{`${friend.username}`}
 															</div>
 														)}
-														<div className="cms-msg-date">
+														<div className="cms-msg-date" id={theme}>
 															{date
 																.toUTCString()
 																.slice(0, 22)}
