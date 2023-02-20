@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, request
+from flask import Flask, Blueprint, request, redirect
 from flask_login import login_required, current_user
 from app.models import db, Server, ServerMember, Channel
 from app.forms import ServerForm
@@ -14,6 +14,7 @@ server_routes = Blueprint("servers", __name__)
 @login_required
 def servers():
     servers = Server.query.all()
+    redirect
     return {"servers": [server.to_dict() for server in servers]}, 200
 
 

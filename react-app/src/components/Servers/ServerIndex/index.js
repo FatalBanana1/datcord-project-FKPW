@@ -30,18 +30,24 @@ const ServerIndex = ({ theme }) => {
 			.then(() => thunkReadUserServers())
 			.then(() => setIsLoaded(true));
 
-		return () => actionResetAllServers();
-	}, [dispatch, joined, userId]);
+			return () => actionResetAllServers();
+		}, [dispatch, joined, userId]);
 
-	const joinServer = (serverId, server) => {
-		setIsLoaded(false);
-		// .then(setJoined(!joined))
+		const joinServer = (serverId, server) => {
+			setIsLoaded(false);
+			// .then(setJoined(!joined))
+			// console.log(`insideserver index-------------------------`)
 
 		return dispatch(thunkAddServerMember(serverId, "pending"))
 			.then(() => dispatch(authenticate()))
 			.then(() =>
-				history.push(`/channels/${server.id}/${server.channels[0].id}`)
-			);
+				{ if(allServers[server.id] && server.includes(server.channels[0].id)) history.push(`/channels/${server.id}/${40000}`)}
+			).catch(() => {
+				// console.log(`inside catch for server index>>>>>>>>>>>>>>>>>>>>>>`)
+				// const data = await res;
+				// window.location.replace("/404")
+				history.push("/404")
+			  });
 	};
 
 	function getRandomPastelGradient() {

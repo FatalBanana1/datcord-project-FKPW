@@ -80,14 +80,15 @@ export const thunkReadUserServers = () => async (dispatch) => {
     const servers = await response.json();
     dispatch(actionReadUserServers(servers.servers));
     return servers.servers;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ["An error occurred. Please try again."];
   }
+  // else if (response.status < 500) {
+  //   const data = await response.json();
+  //   if (data.errors) {
+  //     return data.errors;
+  //   }
+  // } else {
+  //   return ["An error occurred. Please try again."];
+  // }
 };
 
 // CREATE

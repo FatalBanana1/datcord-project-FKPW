@@ -81,6 +81,10 @@ function App() {
               <ServerIndex theme={theme} />
             </div>
           </ProtectedRoute>
+          <Route to="/404">
+            {/* <Navigation /> */}
+            <NotFound />
+          </Route>
           <Route>
             {/* <Navigation /> */}
             <NotFound />
