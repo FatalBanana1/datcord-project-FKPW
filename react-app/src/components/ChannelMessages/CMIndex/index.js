@@ -13,7 +13,7 @@ import crown from "../../../assets/crown.png";
 // import MemberPage from "../../ServerMembers/MemberPage";
 import OpenModalButton from "../../OpenModalButton";
 import MootroModal from "../../Mootro";
-import mootroGOLD from "../../../assets/mootro.png"
+import mootroGOLD from "../../../assets/mootro.png";
 
 // leave this OUT
 let socket;
@@ -44,14 +44,9 @@ const CMIndex = ({ theme }) => {
 	const channels = useSelector((state) => state.channels.channels);
 	const channel = channels[channelId];
 
-
-
-
 	/// MODAL
 	const [showMenu, setShowMenu] = useState(false);
 	const closeMenu = () => setShowMenu(false);
-
-
 
 	const endMsgRef = useRef(null);
 
@@ -269,35 +264,33 @@ const CMIndex = ({ theme }) => {
 						{/* insert mootro */}
 						{user.mootro === "mootro" ? (
 							<div className="row mootro-ct">
-								<img className="mootroGold" src={mootroGOLD}></img>
+								<img
+									className="mootroGold"
+									src={mootroGOLD}
+								></img>
 								{/* <div id={theme}>Leave Mootro</div> */}
 								<OpenModalButton
 									id="memberModalButton"
 									className="owner nicknames"
 									buttonText="Leave Mootro"
 									onButtonClick={closeMenu}
-									modalComponent={
-										<MootroModal
-										user = {user}
-										/>
-									}
+									modalComponent={<MootroModal user={user} />}
 								/>
 							</div>
 						) : (
 							// <div id={theme}>Got Mootro?</div>
 							<div className="row mootro-ct">
-								<img className="mootroGold" src={mootroGOLD}></img>
+								<img
+									className="mootroGold"
+									src={mootroGOLD}
+								></img>
 								{/* <div id={theme}>Leave Mootro</div> */}
 								<OpenModalButton
 									id="memberModalButton"
 									className="owner nicknames"
 									buttonText="Got Mootro?"
 									onButtonClick={closeMenu}
-									modalComponent={
-										<MootroModal
-										user = {user}
-										/>
-									}
+									modalComponent={<MootroModal user={user} />}
 								/>
 							</div>
 						)}
@@ -452,7 +445,10 @@ const CMIndex = ({ theme }) => {
 												) : (
 													<div className="row">
 														<div className="cms-msg-detail">{`${message.message}`}</div>
-														<div className="cms-msg-detail edited" id={theme}>{`(edited)`}</div>
+														<div
+															className="cms-msg-detail edited"
+															id={theme}
+														>{`(edited)`}</div>
 													</div>
 												)}
 											</div>
@@ -631,7 +627,8 @@ const CMIndex = ({ theme }) => {
 									</button>
 								)}
 
-								{imageButton && false ? (
+								{/* {imageButton && false ? ( */}
+								{imageButton ? (
 									// image upload
 									<form
 										onSubmit={sendImage}
@@ -646,10 +643,12 @@ const CMIndex = ({ theme }) => {
 										{imageLoading && <div>Loading...</div>}
 									</form>
 								) : null}
-								{!imageButton || true ? (
+								{/* {!imageButton || true ? ( */}
+								{!imageButton ? (
 									// text input
 									<form
-										onSubmit={sendChat}
+										// onSubmit={sendChat}
+										onClick={() => setImageButton(true)}
 										className="submit-cm"
 									>
 										{errors.length > 0 ? (
