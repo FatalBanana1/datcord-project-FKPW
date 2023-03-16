@@ -14,7 +14,6 @@ server_routes = Blueprint("servers", __name__)
 @login_required
 def servers():
     servers = Server.query.all()
-    redirect
     return {"servers": [server.to_dict() for server in servers]}, 200
 
 

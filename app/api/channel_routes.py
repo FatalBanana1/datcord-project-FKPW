@@ -13,16 +13,12 @@ channel_routes = Blueprint("channels", __name__)
 @login_required
 def get_all_channels(serverId):
     server = Server.query.get(serverId)
-    print("server:", server)
-
-    if server == None:
+    if not server:
         return {"error": ["Server does not exist"]}, 404
 
     channels = [channel.to_dict() for channel in server.channels]
-
     if len(channels) == 0:
         return {"channels": "Server has no channels"}, 200
-
     return {"channels": channels, "server": server.to_dict()}, 200
 
 
