@@ -565,12 +565,12 @@ export default function DMIndex({ theme }) {
 						</div>
 
 						<div className="cm-form-container dms">
-							{!imageButton || true ? (
+							{!imageButton ? (
 								<button
 									id={theme}
 									className="cm-img-input"
-									// onClick={() => setImageButton(true)}
-									onClick={sendChat}
+									onClick={() => setImageButton(true)}
+									// onClick={sendChat}
 								>
 									+
 								</button>
@@ -584,7 +584,7 @@ export default function DMIndex({ theme }) {
 								</button>
 							)}
 
-							{imageButton && false ? (
+							{imageButton  ? (
 								// image upload
 								<form
 									onSubmit={sendImage}
@@ -599,7 +599,7 @@ export default function DMIndex({ theme }) {
 									{imageLoading && <div>Loading...</div>}
 								</form>
 							) : null}
-							{!imageButton || true ? (
+							{!imageButton ? (
 								// text input
 								<form onSubmit={sendChat} className="submit-cm">
 									{errors.length > 0 ? (

@@ -612,12 +612,12 @@ const CMIndex = ({ theme }) => {
 
 						{role ? (
 							<div className="cm-form-container">
-								{!imageButton || true ? (
+								{!imageButton ? (
 									<button
 										id={theme}
 										className="cm-img-input"
-										// onClick={() => setImageButton(true)}
-										onClick={sendChat}
+										onClick={() => setImageButton(true)}
+										// onClick={sendChat}
 									>
 										+
 									</button>
@@ -631,7 +631,7 @@ const CMIndex = ({ theme }) => {
 									</button>
 								)}
 
-								{imageButton && false ? (
+								{imageButton ? (
 									// image upload
 									<form
 										onSubmit={sendImage}
@@ -646,7 +646,7 @@ const CMIndex = ({ theme }) => {
 										{imageLoading && <div>Loading...</div>}
 									</form>
 								) : null}
-								{!imageButton || true ? (
+								{!imageButton  ? (
 									// text input
 									<form
 										onSubmit={sendChat}
