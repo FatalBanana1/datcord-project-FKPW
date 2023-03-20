@@ -56,7 +56,7 @@ def create_message_image(id):
     if "image" not in res:
         return {"errors": "image required"}, 400
     image = res["image"]
-    log.info("IMAGE channel_messages", image)
+    log.info("IMAGE channel_messages", image.filename)
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
     image.filename = get_unique_filename(image.filename)
