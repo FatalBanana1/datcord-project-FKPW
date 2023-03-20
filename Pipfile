@@ -29,7 +29,7 @@ eventlet = "==0.33.3"
 flask-socketio = "==5.3.2"
 boto3 = "==1.26.69"
 faker = "==17.0.0"
-psycopg = {extras = ["binary"], version = "*"}
+psycopg2-binary = "==2.9.5"
 
 [dev-packages]
 
