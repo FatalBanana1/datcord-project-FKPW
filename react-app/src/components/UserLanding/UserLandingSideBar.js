@@ -118,7 +118,7 @@ export default function UserLandingSideBar({ page, isLoaded, theme }) {
 								<img
 									src={user && user.display_pic}
 									className="UserLanding-sidebar-channel-user-icon"
-									alt="User profile image"
+									alt="User profile"
 								/>
 							</div>
 							<div

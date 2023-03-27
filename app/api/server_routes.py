@@ -13,6 +13,7 @@ server_routes = Blueprint("servers", __name__)
 @server_routes.route("/")
 @login_required
 def servers():
+    print("CURRENT USER=============>", current_user)
     servers = Server.query.all()
     return {"servers": [server.to_dict() for server in servers]}, 200
 
@@ -35,6 +36,8 @@ def users_servers():
 @server_routes.route("/", methods=["POST"])
 @login_required
 def create_server():
+    print("CREATE SERVER==============>", current_user.to_dict())
+    print("CREATE SERVER==============>", current_user.is_authenticated)
     userId = int(current_user.id)
     form = ServerForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
